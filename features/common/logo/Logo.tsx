@@ -10,9 +10,6 @@ export const TextLogo = () => {
     return (
         <LogoContainer>
             <Logo />
-            <Link href="/">
-                <LogoName>Movie App</LogoName>
-            </Link>
         </LogoContainer>
     );
 };
@@ -25,8 +22,8 @@ const LogoContainer = styled.div`
 const Logo = styled.img.attrs(() => ({
     src: "/image/logo.png",
 }))`
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 
     @media screen and (max-width: 860px) {
         width: 30px;

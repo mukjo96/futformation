@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 const StyledContainer = styled.div`
     width: 150px;
@@ -57,7 +57,7 @@ const StyledContainer = styled.div`
     }
 `;
 
-const SearchBar = () => {
+const Searchbar = () => {
     const [focus, setFocus] = useState(false);
 
     const onFocus = () => {
@@ -65,23 +65,21 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="app">
-            <StyledContainer>
-                <input
-                    type="text"
-                    className={focus ? "focused" : ""}
-                    placeholder="Search"
-                />
-                <button
-                    onClick={onFocus}
-                    id="search-button"
-                    className={focus ? "active" : ""}
-                >
-                    🔍
-                </button>
-            </StyledContainer>
-        </div>
+        <StyledContainer>
+            <input
+                type="text"
+                className={focus ? "focused" : ""}
+                placeholder="Search"
+            />
+            <button
+                onClick={onFocus}
+                id="search-button"
+                className={focus ? "active" : ""}
+            >
+                🔍
+            </button>
+        </StyledContainer>
     );
 };
 
-export default SearchBar;
+export default Searchbar;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const { Footer } = Layout;
 
 const Foot = () => {
-    return <StyledFooter>Movie App ©2020 Created by mukjo96</StyledFooter>;
+    return <StyledFooter>UH Homepage ©2021 Created by mukjo96</StyledFooter>;
 };
 
 export default Foot;

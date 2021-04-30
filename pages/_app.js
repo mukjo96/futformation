@@ -4,17 +4,17 @@ import "../styles/globals.css";
 import moment from "moment";
 
 import Foot from "@features/common/Footer/Foot";
-import TopBar from "@features/Navigation/TopBar";
+import NavBar from "@features/navigation/NavBar";
 
 function MyApp({ Component, pageProps }) {
     moment.locale("ko");
     return (
         <>
             <Head>
-                <title>Movie App</title>
+                <title>Ulsan Hyundai</title>
                 <link rel="shortcut icon" href="/image/favicon.ico" />
             </Head>
-            <TopBar />
+            <NavBar />
             <Component {...pageProps} />
             <Foot />
         </>
