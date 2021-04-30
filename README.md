@@ -1,3 +1,3 @@
-#UH_Football
+# Manchester City Homepage
 
-K league Ulsan Hyundai's Unofficial Homepage
+Premier League Manchester City's Unofficial Homepage
