@@ -65,12 +65,13 @@ export default MainBanner;
 const BannerContainer = styled.div`
     display: flex;
     height: 50vw;
+    max-height: 640px;
     width: 100%;
 `;
 
 const BackFilter = styled.div`
     display: flex;
-
+    max-height: 640px;
     height: 50vw;
     align-items: flex-end;
 
@@ -85,6 +86,7 @@ const BackFilter = styled.div`
 const BannerBackground = styled.div`
     display: flex;
     height: 50vw;
+    max-height: 640px;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -96,10 +98,16 @@ const BannerTitle = styled.h3`
     color: white;
     padding: 0 3vw;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+    }
 `;
 const BannerSource = styled.p`
     font-size: 14px;
     color: white;
     padding: 0 3vw 3vw 3vw;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+    }
 `;

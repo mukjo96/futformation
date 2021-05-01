@@ -6,63 +6,9 @@ import Loading from "@features/common/Loading";
 import styled from "styled-components";
 import Link from "next/link";
 
-function getBeforeDateKey(currentMonth, dateKeys) {
-    let reIndex = 0;
-    dateKeys.map((list, index) => {
-        if (list[0] === currentMonth) {
-            reIndex = index;
-        }
-    });
-    return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
-}
-
-function renderMatchSchedule(match, isPast) {
-    return (
-        <MatchCol span={6} key={match.id}>
-            <div>
-                <MatchScore>
-                    <div>
-                        <TeamLogo
-                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
-                            width="40px"
-                        />
-                        <TeamLogo
-                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
-                            width="40px"
-                        />
-                    </div>
-                    <ScoreCol>
-                        <LiveText>
-                            {match.status.started && !match.status.finished
-                                ? "LIVE"
-                                : ""}
-                        </LiveText>
-                        <ScoreH4>{match.status.scoreStr}</ScoreH4>
-                    </ScoreCol>
-                </MatchScore>
-                <CustomDivider ispast={isPast.toString()} />
-                <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
-                <TournamentName>{match.tournament.name}</TournamentName>
-                <StartDate>
-                    {match.status.startDateStr
-                        ? match.status.startDateStr
-                        : match.status.liveTime.short}
-                    {match.status.startTimeStr &&
-                        ` | ${match.status.startTimeStr}`}
-                </StartDate>
-            </div>
-            <MoreButton>
-                <span>More</span>
-                <span>+</span>
-            </MoreButton>
-        </MatchCol>
-    );
-}
-
 const MatchSchedule = () => {
     const [matchList, setMatchList] = useState([]);
     const [currentMonth, setCurrentMonth] = useState("");
-    // const [beforeMonth, setBeforeMonth] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -71,7 +17,6 @@ const MatchSchedule = () => {
                 if (data) {
                     setCurrentMonth(data.fixturesTab.currentMonth);
                     setMatchList(data.fixturesTab.fixtures);
-                    // setBeforeMonth(pbeforeMonth);
                 }
             })
             .then((_) => {
@@ -84,7 +29,6 @@ const MatchSchedule = () => {
     if (isLoading && beforeMonth !== null) {
         return <Loading />;
     } else {
-        console.log("month", matchList[currentMonth]);
         let match5 = 0;
         return (
             <Container>
@@ -119,10 +63,68 @@ const MatchSchedule = () => {
     }
 };
 
+function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
+    let reIndex = 0;
+    dateKeys.map((list, index) => {
+        if (list[0] === currentMonth) {
+            reIndex = index;
+        }
+    });
+    return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
+}
+
+function renderMatchSchedule(match, isPast) {
+    return (
+        <MatchCol xs={24} md={6} key={match.id}>
+            <div>
+                <MatchScore>
+                    <div>
+                        <TeamLogo
+                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
+                            width="40px"
+                        />
+                        <TeamLogo
+                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
+                            width="40px"
+                        />
+                    </div>
+                    <ScoreCol>
+                        <LiveText>
+                            {match.status.started && !match.status.finished
+                                ? "LIVE"
+                                : ""}
+                        </LiveText>
+                        <ScoreH4>{match.status.scoreStr}</ScoreH4>
+                    </ScoreCol>
+                </MatchScore>
+                <CustomDivider ispast={isPast.toString()} />
+                <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
+                <TournamentName>{match.tournament.name}</TournamentName>
+                <StartDate>
+                    {match.status.startDateStr
+                        ? match.status.startDateStr
+                        : match.status.liveTime.short}
+                    {match.status.startTimeStr &&
+                        ` | ${match.status.startTimeStr}`}
+                </StartDate>
+            </div>
+            <Link href={`/matches/${match.id}`}>
+                <MoreButton>
+                    <span>More</span>
+                    <span>+</span>
+                </MoreButton>
+            </Link>
+        </MatchCol>
+    );
+}
+
 export default MatchSchedule;
 
 const Container = styled.div`
     padding: 2vw;
+    @media screen and (max-width: 768px) {
+        padding: 4vw;
+    }
 `;
 
 const MatchCol = styled(Col)`
@@ -131,6 +133,10 @@ const MatchCol = styled(Col)`
         border-right: 0px solid lightgrey;
     }
     padding: 3vw;
+    @media screen and (max-width: 768px) {
+        border-right: none;
+        padding: 5vw;
+    }
 `;
 
 const MatchScore = styled(Row)`
@@ -202,10 +208,13 @@ const MoreButton = styled.button`
     background: #1c2c5b;
     border: none;
     width: 8vw;
+    min-width: 70px;
+    max-width: 90px;
     display: flex;
     justify-content: space-between;
     margin-top: 1vw;
     padding: 5px 10px;
+    cursor: pointer;
 
     span {
         font-size: 10px;

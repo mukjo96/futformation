@@ -24,7 +24,7 @@ const NavBar = () => {
                     menuClicked={() => setOpen(!open)}
                     width={18}
                     height={15}
-                    color="#2a363b"
+                    color="white"
                     position="absolute"
                 />
             </ToggleBtn>
@@ -49,6 +49,7 @@ const Container = styled.nav`
     }
 
     @media screen and (max-width: 768px) {
+        background: #1c2c5b;
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
@@ -67,11 +68,12 @@ const Hamburger = styled.div`
             flex-direction: column;
             align-items: center;
             width: 100%;
-            border-bottom: 1px solid #d6d6d6;
+            background: #1c2c5b;
             li {
                 width: 100%;
                 text-align: center;
             }
+            padding-bottom: 3vw;
         }
 
         &.hidden {
@@ -97,7 +99,7 @@ const ToggleBtn = styled.section`
     display: none;
     position: absolute;
     right: 32px;
-    top: 20.5px;
+    top: 15.5px;
     font-size: 24px;
 
     @media screen and (max-width: 768px) {
