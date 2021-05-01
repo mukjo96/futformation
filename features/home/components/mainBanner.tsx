@@ -70,7 +70,7 @@ const BannerContainer = styled.div`
 
 const BackFilter = styled.div`
     display: flex;
-    justify-content: center;
+
     height: 50vw;
     align-items: flex-end;
 
@@ -94,12 +94,12 @@ const BannerBackground = styled.div`
 const BannerTitle = styled.h3`
     font-size: 28px;
     color: white;
-    padding: 0 1vw;
+    padding: 0 3vw;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 const BannerSource = styled.p`
     font-size: 14px;
     color: white;
-    padding: 0 1vw 3vw 1vw;
+    padding: 0 3vw 3vw 3vw;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;

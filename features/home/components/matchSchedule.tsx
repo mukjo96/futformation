@@ -4,69 +4,114 @@ import { Row, Col, Divider } from "antd";
 import { getCityFixtures } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import styled from "styled-components";
+import Link from "next/link";
+
+function getBeforeDateKey(currentMonth, dateKeys) {
+    let reIndex = 0;
+    dateKeys.map((list, index) => {
+        if (list[0] === currentMonth) {
+            reIndex = index;
+        }
+    });
+    return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
+}
+
+function renderMatchSchedule(match, isPast) {
+    return (
+        <MatchCol span={6} key={match.id}>
+            <div>
+                <MatchScore>
+                    <div>
+                        <TeamLogo
+                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
+                            width="40px"
+                        />
+                        <TeamLogo
+                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
+                            width="40px"
+                        />
+                    </div>
+                    <ScoreCol>
+                        <LiveText>
+                            {match.status.started && !match.status.finished
+                                ? "LIVE"
+                                : ""}
+                        </LiveText>
+                        <ScoreH4>{match.status.scoreStr}</ScoreH4>
+                    </ScoreCol>
+                </MatchScore>
+                <CustomDivider ispast={isPast.toString()} />
+                <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
+                <TournamentName>{match.tournament.name}</TournamentName>
+                <StartDate>
+                    {match.status.startDateStr
+                        ? match.status.startDateStr
+                        : match.status.liveTime.short}
+                    {match.status.startTimeStr &&
+                        ` | ${match.status.startTimeStr}`}
+                </StartDate>
+            </div>
+            <MoreButton>
+                <span>More</span>
+                <span>+</span>
+            </MoreButton>
+        </MatchCol>
+    );
+}
 
 const MatchSchedule = () => {
     const [matchList, setMatchList] = useState([]);
     const [currentMonth, setCurrentMonth] = useState("");
+    // const [beforeMonth, setBeforeMonth] = useState("");
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log(getCityFixtures());
         getCityFixtures()
-            .then(async (data) => {
+            .then((data) => {
                 if (data) {
                     setCurrentMonth(data.fixturesTab.currentMonth);
                     setMatchList(data.fixturesTab.fixtures);
+                    // setBeforeMonth(pbeforeMonth);
                 }
             })
             .then((_) => {
                 setIsLoading(false);
             });
     }, []);
-    if (isLoading) {
+    const dateKeys = Object.entries(matchList);
+    const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
+
+    if (isLoading && beforeMonth !== null) {
         return <Loading />;
     } else {
-        console.log(matchList[currentMonth]);
+        console.log("month", matchList[currentMonth]);
+        let match5 = 0;
         return (
             <Container>
                 <Col>
                     <Col>
-                        <h2>MATCH SCHEDULE</h2>
-                        <h5>View all matches +</h5>
+                        <Title>MATCH SCHEDULE</Title>
+                        <Link href="/matches">
+                            <MatchLink>View all matches +</MatchLink>
+                        </Link>
                     </Col>
                     <Row>
-                        <MatchCol span={6}>
-                            {matchList[currentMonth].map((match) => {
-                                if (match.lastPlayedMatch) {
-                                    return (
-                                        <div>
-                                            <MatchScore>
-                                                <div>
-                                                    <TeamLogo
-                                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
-                                                        width="40px"
-                                                    />
-                                                    <TeamLogo
-                                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
-                                                        width="40px"
-                                                    />
-                                                </div>
-                                                <ScoreH4>
-                                                    {match.status.scoreStr}
-                                                </ScoreH4>
-                                            </MatchScore>
-                                            <CustomDivider />
-                                            <h3>{`${match.home.name} vs ${match.away.name}`}</h3>
-                                            <h4>{match.tournament.name}</h4>
-                                            <h5>{match.status.startDateStr}</h5>
-                                        </div>
-                                    );
-                                }
-                            })}
-                        </MatchCol>
-                        <MatchCol span={6}>1</MatchCol>
-                        <MatchCol span={6}>1</MatchCol>
-                        <MatchCol span={6}>1</MatchCol>
+                        {[
+                            ...matchList[beforeMonth],
+                            ...matchList[currentMonth],
+                        ].map((match) => {
+                            console.log(match);
+                            if (
+                                match.lastPlayedMatch ||
+                                (!match.isPastMatch && match5 < 4)
+                            ) {
+                                match5 += 1;
+                                return renderMatchSchedule(
+                                    match,
+                                    match.isPastMatch
+                                );
+                            }
+                        })}
                     </Row>
                 </Col>
             </Container>
@@ -77,12 +122,15 @@ const MatchSchedule = () => {
 export default MatchSchedule;
 
 const Container = styled.div`
-    padding: 1vw;
+    padding: 2vw;
 `;
 
 const MatchCol = styled(Col)`
-    border-right: 1px solid grey;
-    padding: 2vw;
+    border-right: 1px solid lightgrey;
+    :nth-child(4) {
+        border-right: 0px solid lightgrey;
+    }
+    padding: 3vw;
 `;
 
 const MatchScore = styled(Row)`
@@ -94,13 +142,72 @@ const TeamLogo = styled.img`
     margin-right: 1vw;
 `;
 
-const ScoreH4 = styled.h4`
-    margin: 0;
-    color: #1c2c5b;
+const ScoreCol = styled(Col)`
+    align-content: space-between;
 `;
 
-const CustomDivider = styled(Divider)`
+const LiveText = styled.h4`
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    color: #ec3325;
+`;
+const ScoreH4 = styled.h4`
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: #6cabdd;
+`;
+
+const TeamName = styled.h3`
+    font-size: 14px;
+    margin: 0;
+    height: 50px;
+`;
+
+const TournamentName = styled.h5`
+    font-size: 10px;
+    color: darkgray;
+    height: 10px;
+`;
+
+const StartDate = styled.span`
+    font-size: 10px;
+    height: 10px;
+`;
+
+const CustomDivider = styled(Divider)<{ ispast: string }>`
     margin: 10px 0;
-    height: 2px;
+    background: ${(props) =>
+        props.ispast === "true" ? "#6CABDD" : "lightgrey"};
+    height: ${(props) => (props.ispast === "true" ? "2px" : "1px")};
+`;
+
+const Title = styled.h2`
+    font-weight: 600;
+    margin: 0;
+`;
+
+const MatchLink = styled.span`
+    color: darkgray;
+    font-size: 12px;
+    :hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+`;
+
+const MoreButton = styled.button`
+    color: white;
     background: #1c2c5b;
+    border: none;
+    width: 8vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+    padding: 5px 10px;
+
+    span {
+        font-size: 10px;
+    }
 `;

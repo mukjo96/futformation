@@ -4,7 +4,7 @@ import moment from "moment";
 export async function getCityNews() {
     try {
         let response = await axios.get(
-            "https://cors-anywhere.herokuapp.com/https://www.fotmob.com/teams?id=8456&tab=news&type=team"
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=news&type=team"
         );
         const news = response;
         return news.data;
@@ -16,8 +16,9 @@ export async function getCityNews() {
 export async function getCityFixtures() {
     try {
         let response = await axios.get(
-            "https://cors-anywhere.herokuapp.com/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team"
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team"
         );
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
