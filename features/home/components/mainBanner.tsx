@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Carousel } from "antd";
+import { Carousel, Typography } from "antd";
 import { getCityNews } from "../api/getCityData.api";
 import styled from "styled-components";
 import Loading from "@features/common/Loading";
+import MoreButton from "@features/common/button/MoreButton";
+import { newsDataTypes } from "../api/cityDataTypes";
+const { Paragraph, Link } = Typography;
 
 const contentStyle = {
     height: "52.5vw",
@@ -12,14 +15,14 @@ const contentStyle = {
 };
 
 const MainBanner = () => {
-    const [bannerList, setBannerList] = useState([]);
+    const [bannerList, setBannerList] = useState<newsDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         console.log(getCityNews());
         getCityNews()
             .then(async (data) => {
                 if (data) {
-                    setBannerList(data.news);
+                    setBannerList(data.news[0]);
                 }
             })
             .then((_) => {
@@ -30,32 +33,28 @@ const MainBanner = () => {
         return <Loading />;
     } else {
         return (
-            <Carousel autoplay autoplaySpeed={5000}>
-                {bannerList.slice(0, 6).map((banner, index) => {
-                    if (banner.title.substr(0, 5) !== "Video") {
-                        return (
-                            <BannerContainer key={index}>
-                                <BannerBackground
-                                    style={{
-                                        backgroundImage: `url(${banner.imageUrl})`,
-                                    }}
-                                >
-                                    <BackFilter>
-                                        <div>
-                                            <BannerTitle>
-                                                {banner.title}
-                                            </BannerTitle>
-                                            <BannerSource>
-                                                {banner.sourceStr}
-                                            </BannerSource>
-                                        </div>
-                                    </BackFilter>
-                                </BannerBackground>
-                            </BannerContainer>
-                        );
-                    }
-                })}
-            </Carousel>
+            <BannerContainer>
+                <BannerBackground
+                    style={{
+                        backgroundImage: `url(${bannerList.imageUrl})`,
+                    }}
+                >
+                    <BackFilter>
+                        <TextContainer>
+                            <NewsHeader>FIRST TEAM NEWS</NewsHeader>
+                            <BannerTitle>{bannerList.title}</BannerTitle>
+                            <BannerSource>{bannerList.sourceStr}</BannerSource>
+                            <Link
+                                style={{ cursor: "pointer" }}
+                                href={`https://www.fotmob.com${bannerList.page.url}`}
+                                target="_blank"
+                            >
+                                <MoreButton value="View Now" size="large" />
+                            </Link>
+                        </TextContainer>
+                    </BackFilter>
+                </BannerBackground>
+            </BannerContainer>
         );
     }
 };
@@ -93,19 +92,30 @@ const BannerBackground = styled.div`
     background-size: cover;
 `;
 
-const BannerTitle = styled.h3`
-    font-size: 28px;
+const TextContainer = styled.div`
+    padding: 3vw;
+    width: 47vw;
+`;
+
+const NewsHeader = styled.h4`
+    font-size: 12px;
     color: white;
-    padding: 0 3vw;
+    margin: 0;
+`;
+
+const BannerTitle = styled.h2`
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    margin: 0;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     @media screen and (max-width: 768px) {
         font-size: 16px;
     }
 `;
 const BannerSource = styled.p`
-    font-size: 14px;
+    font-size: 12px;
     color: white;
-    padding: 0 3vw 3vw 3vw;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     @media screen and (max-width: 768px) {
         font-size: 10px;

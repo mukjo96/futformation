@@ -17,5 +17,5 @@ export default Loading;
 
 const StyledSpin = styled(Spin)`
     margin: 10vw auto;
-    color: #333333;
+    color: #6cabdd;
 `;

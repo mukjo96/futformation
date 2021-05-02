@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import styled from "styled-components";
+import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
 
@@ -12,7 +13,7 @@ const BackColor = styled.div`
     }
 `;
 const BackDiv = styled.div`
-    background-color: black;
+    background-color: white;
     height: 3000px;
 `;
 
@@ -23,8 +24,8 @@ const Home = () => {
                 <MainBanner />
             </BackColor>
             <MatchSchedule />
-
-            <BackDiv>j</BackDiv>
+            <LatestNews />
+            <BackDiv></BackDiv>
         </Fragment>
     );
 };

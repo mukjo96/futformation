@@ -5,6 +5,8 @@ import { getCityFixtures } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import styled from "styled-components";
 import Link from "next/link";
+import MoreButton from "@features/common/button/MoreButton";
+import BlockTitle from "./Title/blockTitle";
 
 const MatchSchedule = () => {
     const [matchList, setMatchList] = useState([]);
@@ -34,10 +36,7 @@ const MatchSchedule = () => {
             <Container>
                 <Col>
                     <Col>
-                        <Title>MATCH SCHEDULE</Title>
-                        <Link href="/matches">
-                            <MatchLink>View all matches +</MatchLink>
-                        </Link>
+                        <BlockTitle title="MATCH SCHEDULE" link="matches" />
                     </Col>
                     <Row>
                         {[
@@ -109,10 +108,7 @@ function renderMatchSchedule(match, isPast) {
                 </StartDate>
             </div>
             <Link href={`/matches/${match.id}`}>
-                <MoreButton>
-                    <span>More</span>
-                    <span>+</span>
-                </MoreButton>
+                <MoreButton value="More" size="medium" />
             </Link>
         </MatchCol>
     );
@@ -187,36 +183,4 @@ const CustomDivider = styled(Divider)<{ ispast: string }>`
     background: ${(props) =>
         props.ispast === "true" ? "#6CABDD" : "lightgrey"};
     height: ${(props) => (props.ispast === "true" ? "2px" : "1px")};
-`;
-
-const Title = styled.h2`
-    font-weight: 600;
-    margin: 0;
-`;
-
-const MatchLink = styled.span`
-    color: darkgray;
-    font-size: 12px;
-    :hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-`;
-
-const MoreButton = styled.button`
-    color: white;
-    background: #1c2c5b;
-    border: none;
-    width: 8vw;
-    min-width: 70px;
-    max-width: 90px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1vw;
-    padding: 5px 10px;
-    cursor: pointer;
-
-    span {
-        font-size: 10px;
-    }
 `;
