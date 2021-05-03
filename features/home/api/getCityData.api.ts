@@ -18,7 +18,30 @@ export async function getCityFixtures() {
         let response = await axios.get(
             "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team"
         );
-        console.log(response.data);
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getCityPlayers() {
+    try {
+        let response = await axios.get(
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=squad&type=team"
+        );
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getPlayerInfo(id: number) {
+    try {
+        let response = await axios.get(
+            `https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/playerData?id=${id}`
+        );
         return response.data;
     } catch (error) {
         console.log(error);

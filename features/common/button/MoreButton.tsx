@@ -4,11 +4,12 @@ import styled, { css } from "styled-components";
 type ButtonProps = {
     value: string;
     size: "large" | "medium" | "small";
+    onClick?: React.MouseEventHandler;
 };
 
-const MoreButton = ({ value, size = "medium" }: ButtonProps) => {
+const MoreButton = ({ value, size = "medium", onClick }: ButtonProps) => {
     return (
-        <Button size={size}>
+        <Button size={size} onClick={onClick}>
             <span>{value}</span>
             <span>+</span>
         </Button>

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row, Col, Divider } from "antd";
+import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
 import { getCityNews } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import { Avatar } from "antd";
 import { IconLogo } from "@features/common/logo/Logo";
+import { useRouter } from "next/dist/client/router";
 
 const LatestNews = () => {
     const [newsList, setNewsList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        console.log(getCityNews());
         getCityNews()
             .then(async (data) => {
                 if (data) {
@@ -29,7 +29,7 @@ const LatestNews = () => {
         return (
             <Container>
                 <Col>
-                    <BlockTitle title="LATEST NEWS" link="news" />
+                    <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
                     <NewsRow>
                         {newsList.slice(1, 5).map((news, index) => {
                             const sourceTitle = news.sourceStr.split(" - ");
@@ -42,7 +42,21 @@ const LatestNews = () => {
                                     md={6}
                                     key={index}
                                 >
-                                    <BackFilter>
+                                    <BackFilter
+                                        onClick={
+                                            sourceTitle[0] === "FotMob"
+                                                ? () =>
+                                                      window.open(
+                                                          `https://www.fotmob.com${news.page.url}`,
+                                                          "_ blank"
+                                                      )
+                                                : () =>
+                                                      window.open(
+                                                          news.page.url,
+                                                          "_ blank"
+                                                      )
+                                        }
+                                    >
                                         <Col style={{ lineHeight: "1.2" }}>
                                             <NewsCategory>
                                                 {sourceTitle[0] === "YouTube"
@@ -101,13 +115,13 @@ const Container = styled.div`
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
+    background-color: black;
 `;
 
 const NewsRow = styled(Row)`
     padding-top: 2vw;
     padding-left: 6vw;
     @media screen and (max-width: 768px) {
-        height: 240px;
         padding: 4vw 0;
     }
 `;
@@ -118,7 +132,7 @@ const NewsBox = styled(Col)`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
+    cursor: pointer;
     @media screen and (max-width: 768px) {
         height: 240px;
     }
@@ -134,13 +148,12 @@ const BackFilter = styled.div`
 
     background-image: linear-gradient(
         to right,
-        rgba(0, 0, 0, 0.6) 50vw,
-        rgba(0, 0, 0, 0.4) 100%
+        rgba(0, 0, 0, 0.5) 50vw,
+        rgba(0, 0, 0, 0.3) 100%
     );
-    padding: 10% 15%;
+    padding: 5% 10%;
 
     @media screen and (max-width: 768px) {
-        padding: 5% 10%;
         height: 240px;
     }
 `;
@@ -148,7 +161,7 @@ const BackFilter = styled.div`
 const NewsCategory = styled.h5`
     font-size: 10px;
     margin-bottom: 4px;
-    color: #6cabdd;
+    color: #ffc659;
 `;
 
 const NewsTitle = styled.h2`

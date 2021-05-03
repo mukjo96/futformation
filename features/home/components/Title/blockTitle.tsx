@@ -5,12 +5,13 @@ import styled from "styled-components";
 type titleTypes = {
     title: string;
     link: string;
+    theme: "light" | "dark";
 };
 
-const BlockTitle = ({ title, link }: titleTypes) => {
+const BlockTitle = ({ title, link, theme = "light" }: titleTypes) => {
     return (
         <>
-            <Title>{title}</Title>
+            <Title theme={theme}>{title}</Title>
             <Link href={`/${link}`}>
                 <MatchLink>View all {link} +</MatchLink>
             </Link>
@@ -20,7 +21,8 @@ const BlockTitle = ({ title, link }: titleTypes) => {
 
 export default BlockTitle;
 
-const Title = styled.h3`
+const Title = styled.h3<{ theme: string }>`
+    color: ${(props) => (props.theme === "dark" ? "white" : "black")};
     font-size: 16px;
     font-weight: 600;
     margin: 0;

@@ -14,7 +14,6 @@ const getHtml = async () => {
 export const getBannerLink = async () => {
     getHtml()
         .then((html) => {
-            console.log(html);
             /* let ulList = [];
             const $ = cheerio.load(html.data);
             const $bodyList = $("div.flexslider ul").children("li");

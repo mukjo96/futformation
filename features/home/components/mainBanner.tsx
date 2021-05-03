@@ -18,7 +18,6 @@ const MainBanner = () => {
     const [bannerList, setBannerList] = useState<newsDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        console.log(getCityNews());
         getCityNews()
             .then(async (data) => {
                 if (data) {
@@ -46,7 +45,12 @@ const MainBanner = () => {
                             <BannerSource>{bannerList.sourceStr}</BannerSource>
                             <Link
                                 style={{ cursor: "pointer" }}
-                                href={`https://www.fotmob.com${bannerList.page.url}`}
+                                href={
+                                    bannerList.sourceStr.slice(0, 6) ===
+                                    "FotMob"
+                                        ? `https://www.fotmob.com${bannerList.page.url}`
+                                        : bannerList.page.url
+                                }
                                 target="_blank"
                             >
                                 <MoreButton value="View Now" size="large" />
@@ -95,6 +99,9 @@ const BannerBackground = styled.div`
 const TextContainer = styled.div`
     padding: 3vw;
     width: 47vw;
+    @media screen and (max-width: 768px) {
+        width: 70vw;
+    }
 `;
 
 const NewsHeader = styled.h4`
@@ -104,13 +111,16 @@ const NewsHeader = styled.h4`
 `;
 
 const BannerTitle = styled.h2`
-    font-size: 32px;
+    font-size: 28px;
     color: white;
     font-weight: bold;
     margin: 0;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media screen and (max-width: 992px) {
+        font-size: 24px;
+    }
     @media screen and (max-width: 768px) {
-        font-size: 16px;
+        font-size: 14px;
     }
 `;
 const BannerSource = styled.p`

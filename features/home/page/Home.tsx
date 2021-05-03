@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
+import TeamPlayers from "../components/teamPlayers";
 
 const BackColor = styled.div`
     height: 50vw;
@@ -25,6 +26,7 @@ const Home = () => {
             </BackColor>
             <MatchSchedule />
             <LatestNews />
+            <TeamPlayers />
             <BackDiv></BackDiv>
         </Fragment>
     );

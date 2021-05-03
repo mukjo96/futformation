@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import MoreButton from "@features/common/button/MoreButton";
 import BlockTitle from "./Title/blockTitle";
+import { useRouter } from "next/dist/client/router";
 
 const MatchSchedule = () => {
     const [matchList, setMatchList] = useState([]);
@@ -16,34 +17,36 @@ const MatchSchedule = () => {
     useEffect(() => {
         getCityFixtures()
             .then((data) => {
-                if (data) {
-                    setCurrentMonth(data.fixturesTab.currentMonth);
-                    setMatchList(data.fixturesTab.fixtures);
-                }
+                setCurrentMonth(data.fixturesTab.currentMonth);
+                setMatchList(data.fixturesTab.fixtures);
             })
             .then((_) => {
                 setIsLoading(false);
             });
     }, []);
+
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
-
     if (isLoading && beforeMonth !== null) {
         return <Loading />;
     } else {
+        const newMatchList = [
+            ...matchList[beforeMonth],
+            ...matchList[currentMonth],
+        ];
         let match5 = 0;
         return (
             <Container>
                 <Col>
                     <Col>
-                        <BlockTitle title="MATCH SCHEDULE" link="matches" />
+                        <BlockTitle
+                            title="MATCH SCHEDULE"
+                            link="matches"
+                            theme="light"
+                        />
                     </Col>
                     <Row>
-                        {[
-                            ...matchList[beforeMonth],
-                            ...matchList[currentMonth],
-                        ].map((match) => {
-                            console.log(match);
+                        {newMatchList.map((match) => {
                             if (
                                 match.lastPlayedMatch ||
                                 (!match.isPastMatch && match5 < 4)
@@ -107,8 +110,10 @@ function renderMatchSchedule(match, isPast) {
                         ` | ${match.status.startTimeStr}`}
                 </StartDate>
             </div>
-            <Link href={`/matches/${match.id}`}>
-                <MoreButton value="More" size="medium" />
+            <Link href={`matches/${match.id}`}>
+                <a style={{ textDecoration: "none" }}>
+                    <MoreButton value="More" size="medium" />
+                </a>
             </Link>
         </MatchCol>
     );
