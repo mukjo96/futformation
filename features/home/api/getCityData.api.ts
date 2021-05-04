@@ -4,7 +4,7 @@ import moment from "moment";
 export async function getCityNews() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=news&type=team"
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=news&type=team&timezone=Asia/Seoul"
         );
         const news = response;
         return news.data;
@@ -16,7 +16,7 @@ export async function getCityNews() {
 export async function getCityFixtures() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team"
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team&timezone=Asia/Seoul"
         );
 
         return response.data;
@@ -31,6 +31,17 @@ export async function getCityPlayers() {
             "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=squad&type=team"
         );
 
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getCityStats() {
+    try {
+        let response = await axios.get(
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=overview&type=team"
+        );
         return response.data;
     } catch (error) {
         console.log(error);
