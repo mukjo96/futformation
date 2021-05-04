@@ -42,7 +42,7 @@ export async function getCityStats() {
         let response = await axios.get(
             "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=overview&type=team"
         );
-        return response.data;
+        return response.data.topPlayers;
     } catch (error) {
         console.log(error);
     }

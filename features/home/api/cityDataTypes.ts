@@ -33,3 +33,25 @@ export type playerInfoDataTypes = {
     relatedNews: any;
     meta: any;
 };
+
+export type playerStatDataTypes = {
+    byRating: Array<statPlayer>;
+    byGoals: Array<statPlayer>;
+    byAssists: Array<statPlayer>;
+};
+
+type statPlayer = {
+    id: 169200;
+    name: string;
+    goals: number;
+    assists: number;
+    rating: number;
+    positionId: number;
+    ccode: string;
+    cname: string;
+    teamId: number;
+    teamName: number;
+    showRole: boolean;
+    showCountryFlag: boolean;
+    showTeamFlag: boolean;
+};
