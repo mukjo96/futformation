@@ -5,15 +5,21 @@ import styled from "styled-components";
 type titleTypes = {
     title: string;
     link: string;
+    linktext?: string;
     theme: "light" | "dark";
 };
 
-const BlockTitle = ({ title, link, theme = "light" }: titleTypes) => {
+const BlockTitle = ({
+    title,
+    link,
+    linktext = link,
+    theme = "light",
+}: titleTypes) => {
     return (
         <>
             <Title theme={theme}>{title}</Title>
             <Link href={`/${link}`}>
-                <MatchLink>View all {link} +</MatchLink>
+                <MatchLink>View all {linktext} +</MatchLink>
             </Link>
         </>
     );

@@ -1,68 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, Divider, Avatar } from "antd";
 import { getPlayerInfo } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import MoreButton from "@features/common/button/MoreButton";
+import Link from "next/link";
+import { playerInfoDataTypes } from "../api/cityDataTypes";
 
 const PlayerInfo = ({ id }) => {
-    const [playerData, setPlayerData] = useState<any>();
+    const [playerData, setPlayerData] = useState<playerInfoDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
+    const [statData, setStatData] = useState({});
+    const [propData, setPropData] = useState({});
 
-    console.log(id);
     useEffect(() => {
         id !== 0 &&
-            getPlayerInfo(id)
-                .then((data) => {
-                    setPlayerData(data);
-                })
-                .then((_) => {
-                    setIsLoading(false);
-                });
-    }, [id]);
+            getPlayerInfo(id).then((data) => {
+                setPlayerData(data);
+            });
+        if (playerData) {
+            propDataToObject();
+            statDataToObject();
+            setIsLoading(false);
+        }
+    }, [id, playerData]);
 
     if (isLoading) {
-        return <Loading />;
-    } else {
-        console.log(playerData);
-        const statData = {};
-        playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
-            (props) => (statData[props[0]] = props[1])
-        );
-        const conversion = Math.floor(
-            (statData["Goals"] /
-                (statData["Shots on target"] + statData["Shots off target"])) *
-                100
-        );
-        const dribbles = Math.floor(
-            (statData["Successful dribbles"] / statData["Attempted dribbles"]) *
-                100
-        );
-        const tackles = Math.floor(
-            (statData["Successful tackles"] / statData["Attempted tackles"]) *
-                100
-        );
         return (
-            <Container>
-                <StyledCol span={12}>
-                    {playerData.playerProps.map((props) => {
-                        return (
-                            props.title === "Shirt" && (
-                                <ShirtDiv>
-                                    <span>#</span>
-                                    <ShirtNumber>{props.value}</ShirtNumber>
-                                </ShirtDiv>
-                            )
-                        );
-                    })}
+            <Col span={24} style={{ textAlign: "center" }}>
+                <Loading />
+            </Col>
+        );
+    } else {
+        return (
+            <Container style={{}}>
+                <StyledCol xs={24} md={12}>
+                    <ShirtDiv>
+                        <span>#</span>
+                        <ShirtNumber>{propData["Shirt"]}</ShirtNumber>
+                    </ShirtDiv>
                     <PlayerName>{playerData.name}</PlayerName>
                     <PlayerPosition>
                         {playerData.origin.positionDesc.primaryPosition}
                     </PlayerPosition>
+                    <Avatar
+                        style={{ margin: "16px 0" }}
+                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${propData["Country"]}.png`}
+                        size={64}
+                    />
+                    <Link href={`players/${playerData.id}`}>
+                        <a style={{ textDecoration: "none" }}>
+                            <MoreButton value="More" size="medium" />
+                        </a>
+                    </Link>
                 </StyledCol>
-                <StyledCol span={12}>
+                <StyledCol xs={24} md={12}>
                     <LeagueName>{`${playerData.careerStatistics[0].seasons[0].name} STATS`}</LeagueName>
-
                     {renderStat(
                         "Games Played",
                         statData["Matches started"] + statData["Subbed in"]
@@ -72,13 +66,56 @@ const PlayerInfo = ({ id }) => {
                     {renderStat("Goals", statData["Goals"])}
                     {renderStat("Assists", statData["Assists"])}
                     <CircularRow>
-                        {renderCircular(conversion, conversion, "Conversion")}
-                        {renderCircular(dribbles, dribbles, "Dribbles")}
-                        {renderCircular(tackles, tackles, "Tackles")}
+                        {renderCircular(
+                            statData["conversion"],
+                            statData["conversion"],
+                            "Conversion"
+                        )}
+                        {renderCircular(
+                            statData["dribbles"],
+                            statData["dribbles"],
+                            "Dribbles"
+                        )}
+                        {renderCircular(
+                            statData["tackles"],
+                            statData["tackles"],
+                            "Tackles"
+                        )}
                     </CircularRow>
                 </StyledCol>
             </Container>
         );
+    }
+
+    function propDataToObject() {
+        const virPropData = {};
+        playerData.playerProps.map((props) => {
+            props.title === "Country"
+                ? (virPropData[props.title] = props.icon.id.toLowerCase())
+                : (virPropData[props.title] = props.value);
+        });
+        setPropData(virPropData);
+    }
+    function statDataToObject() {
+        const virStatData = {};
+        playerData.careerStatistics[0].name === "England - Premier League" &&
+            playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
+                (props) => (virStatData[props[0]] = props[1])
+            );
+        virStatData["conversion"] = Math.floor(
+            (statData["Goals"] /
+                (statData["Shots on target"] + statData["Shots off target"])) *
+                100
+        );
+        virStatData["dribbles"] = Math.floor(
+            (statData["Successful dribbles"] / statData["Attempted dribbles"]) *
+                100
+        );
+        virStatData["tackles"] = Math.floor(
+            (statData["Successful tackles"] / statData["Attempted tackles"]) *
+                100
+        );
+        setStatData(virStatData);
     }
 };
 
@@ -89,7 +126,7 @@ const renderStat = (title: string, data: number) => {
         <>
             <StatList key={title}>
                 <StatTitle>{title}</StatTitle>
-                <StatData>{data}</StatData>
+                <StatData>{data ? data : 0}</StatData>
             </StatList>
             <StyledDivider />
         </>
@@ -100,8 +137,8 @@ const renderCircular = (value: number, text: number, title: string) => {
     return (
         <CircularCol span={6}>
             <CircularProgressbar
-                value={value}
-                text={`${text}%`}
+                value={value ? value : 0}
+                text={text ? `${text}%` : "0%"}
                 strokeWidth={4}
                 styles={buildStyles({
                     // Text size
@@ -134,13 +171,14 @@ const ShirtDiv = styled.div`
     display: flex;
 
     span {
-        color: #1c2c5b;
+        color: #6cabdd;
         margin-top: 4px;
     }
 `;
 
 const ShirtNumber = styled.span`
     font-size: 28px;
+    color: #6cabdd;
     margin-top: 0 !important;
 `;
 

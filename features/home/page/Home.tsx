@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
+import PlayerStats from "../components/playerStats";
 import TeamPlayers from "../components/teamPlayers";
 
 const BackColor = styled.div`
@@ -27,6 +28,7 @@ const Home = () => {
             <MatchSchedule />
             <LatestNews />
             <TeamPlayers />
+            <PlayerStats />
             <BackDiv></BackDiv>
         </Fragment>
     );

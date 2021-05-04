@@ -7,9 +7,10 @@ import Loading from "@features/common/Loading";
 import { Avatar } from "antd";
 import { IconLogo } from "@features/common/logo/Logo";
 import { useRouter } from "next/dist/client/router";
+import { newsDataTypes } from "../api/cityDataTypes";
 
 const LatestNews = () => {
-    const [newsList, setNewsList] = useState([]);
+    const [newsList, setNewsList] = useState<Array<newsDataTypes>>([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         getCityNews()

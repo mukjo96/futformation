@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>Ulsan Hyundai</title>
+                <title>Manchester City Unofficial Site</title>
                 <link rel="shortcut icon" href="/image/favicon.ico" />
             </Head>
             <NavBar />

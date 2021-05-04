@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row, Col, List, Avatar } from "antd";
+import { Row, Col, List, Avatar, Result } from "antd";
+import { SelectOutlined } from "@ant-design/icons";
 import BlockTitle from "./Title/blockTitle";
 import { getCityPlayers } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
+
 import PlayerInfo from "./playerInfo";
+import { playerListDataTypes } from "../api/cityDataTypes";
 
 const TeamPlayers = () => {
-    const [dataList, setDataList] = useState([]);
+    const [dataList, setDataList] = useState<Array<playerListDataTypes>>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
 
@@ -24,28 +27,36 @@ const TeamPlayers = () => {
     const data = [];
 
     if (isLoading) {
-        return <Loading />;
+        return (
+            <Col span={24} style={{ textAlign: "center" }}>
+                <Loading />
+            </Col>
+        );
     } else {
         {
-            dataList.map((players) => {
-                players[0] !== "coach" &&
-                    players[1].map((player) => {
-                        data.push({
-                            id: player.id,
-                            name: player.name,
-                            role: player.role,
-                        });
-                    });
-            });
+            playerDataToObjects();
         }
         return (
             <Container>
-                <BlockTitle title="MCI PLAYERS" link="players" theme="light" />
+                <StyledTitle>
+                    <BlockTitle
+                        title="MCI PLAYERS"
+                        link="players"
+                        theme="light"
+                    />
+                </StyledTitle>
                 <StyledRow>
-                    <Col span={18}>
-                        <PlayerInfo id={selectedId} />
+                    <Col xs={24} md={18} style={{ alignSelf: "center" }}>
+                        {selectedId === 0 ? (
+                            <Result
+                                icon={<SelectOutlined />}
+                                title="Select your player!"
+                            />
+                        ) : (
+                            <PlayerInfo id={selectedId} />
+                        )}
                     </Col>
-                    <ListCol span={6}>
+                    <ListCol xs={24} md={6}>
                         <List
                             dataSource={data.reverse()}
                             size="large"
@@ -90,23 +101,36 @@ const TeamPlayers = () => {
             </Container>
         );
     }
+
+    function playerDataToObjects() {
+        dataList.map((players) => {
+            players[0] !== "coach" &&
+                players[1].map((player) => {
+                    data.push({
+                        id: player.id,
+                        name: player.name,
+                        role: player.role,
+                    });
+                });
+        });
+    }
 };
 
 export default TeamPlayers;
 
-const Container = styled.div`
+const Container = styled.div``;
+
+const StyledTitle = styled.div`
     padding: 2vw;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
 `;
 
-const StyledRow = styled(Row)`
-    height: 360px;
-`;
+const StyledRow = styled(Row)``;
 
 const ListCol = styled(Col)`
-    height: 360px;
+    height: 393px;
     overflow: auto;
 `;
 
