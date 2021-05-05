@@ -6,7 +6,7 @@ type titleTypes = {
     title: string;
     link: string;
     linktext?: string;
-    theme: "light" | "dark";
+    theme?: "light" | "dark";
 };
 
 const BlockTitle = ({

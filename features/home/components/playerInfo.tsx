@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Divider, Avatar } from "antd";
+import { Row, Col, Divider, Avatar, Result } from "antd";
 import { getPlayerInfo } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import styled from "styled-components";
@@ -34,7 +34,7 @@ const PlayerInfo = ({ id }) => {
         );
     } else {
         return (
-            <Container style={{}}>
+            <Container>
                 <StyledCol xs={24} md={12}>
                     <ShirtDiv>
                         <span>#</span>
@@ -55,34 +55,43 @@ const PlayerInfo = ({ id }) => {
                         </a>
                     </Link>
                 </StyledCol>
-                <StyledCol xs={24} md={12}>
-                    <LeagueName>{`${playerData.careerStatistics[0].seasons[0].name} STATS`}</LeagueName>
-                    {renderStat(
-                        "Games Played",
-                        statData["Matches started"] + statData["Subbed in"]
-                    )}
-                    {renderStat("Minutes Played", statData["Minutes played"])}
-                    {renderStat("Starting XI", statData["Matches started"])}
-                    {renderStat("Goals", statData["Goals"])}
-                    {renderStat("Assists", statData["Assists"])}
-                    <CircularRow>
-                        {renderCircular(
-                            statData["conversion"],
-                            statData["conversion"],
-                            "Conversion"
+                {playerData.careerStatistics ? (
+                    <StyledCol xs={24} md={12}>
+                        <LeagueName>{`${playerData.careerStatistics[0].seasons[0].name} STATS`}</LeagueName>
+                        {renderStat(
+                            "Games Played",
+                            playerData.careerStatistics[0].seasons[0].matches
                         )}
-                        {renderCircular(
-                            statData["dribbles"],
-                            statData["dribbles"],
-                            "Dribbles"
+                        {renderStat(
+                            "Minutes Played",
+                            statData["Minutes played"]
                         )}
-                        {renderCircular(
-                            statData["tackles"],
-                            statData["tackles"],
-                            "Tackles"
-                        )}
-                    </CircularRow>
-                </StyledCol>
+                        {renderStat("Starting XI", statData["Matches started"])}
+                        {renderStat("Goals", statData["Goals"])}
+                        {renderStat("Assists", statData["Assists"])}
+                        <CircularRow>
+                            {renderCircular(
+                                statData["conversion"],
+                                statData["conversion"],
+                                "Conversion"
+                            )}
+                            {renderCircular(
+                                statData["dribbles"],
+                                statData["dribbles"],
+                                "Dribbles"
+                            )}
+                            {renderCircular(
+                                statData["tackles"],
+                                statData["tackles"],
+                                "Tackles"
+                            )}
+                        </CircularRow>
+                    </StyledCol>
+                ) : (
+                    <ErrorCol xs={24} md={12}>
+                        <Result status="error" title="Sorry, no data!" />
+                    </ErrorCol>
+                )}
             </Container>
         );
     }
@@ -98,24 +107,33 @@ const PlayerInfo = ({ id }) => {
     }
     function statDataToObject() {
         const virStatData = {};
-        playerData.careerStatistics[0].name === "England - Premier League" &&
-            playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
-                (props) => (virStatData[props[0]] = props[1])
+        if (playerData.careerStatistics) {
+            playerData.careerStatistics[0].name ===
+                "England - Premier League" &&
+                playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
+                    (props) => (virStatData[props[0]] = props[1])
+                );
+            virStatData["conversion"] = Math.floor(
+                (statData["Goals"] /
+                    (statData["Shots on target"] +
+                        statData["Shots off target"])) *
+                    100
             );
-        virStatData["conversion"] = Math.floor(
-            (statData["Goals"] /
-                (statData["Shots on target"] + statData["Shots off target"])) *
-                100
-        );
-        virStatData["dribbles"] = Math.floor(
-            (statData["Successful dribbles"] / statData["Attempted dribbles"]) *
-                100
-        );
-        virStatData["tackles"] = Math.floor(
-            (statData["Successful tackles"] / statData["Attempted tackles"]) *
-                100
-        );
-        setStatData(virStatData);
+            virStatData["dribbles"] = Math.floor(
+                (statData["Successful dribbles"] /
+                    statData["Attempted dribbles"]) *
+                    100
+            );
+            virStatData["tackles"] = Math.floor(
+                (statData["Successful tackles"] /
+                    statData["Attempted tackles"]) *
+                    100
+            );
+            virStatData["Matches started"] =
+                playerData.careerStatistics[0].seasons[0].matches -
+                playerData.careerStatistics[0].seasons[0].subIn;
+            setStatData(virStatData);
+        }
     }
 };
 
@@ -227,4 +245,11 @@ const CircularCol = styled(Col)`
 const CircularTitle = styled.span`
     color: darkgray;
     font-size: 10px;
+`;
+
+const ErrorCol = styled(Col)`
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 393px;
 `;

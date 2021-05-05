@@ -4,6 +4,7 @@ import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
+import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
 
 const BackColor = styled.div`
@@ -16,7 +17,7 @@ const BackColor = styled.div`
 `;
 const BackDiv = styled.div`
     background-color: white;
-    height: 3000px;
+    height: 50px;
 `;
 
 const Home = () => {
@@ -29,6 +30,7 @@ const Home = () => {
             <LatestNews />
             <TeamPlayers />
             <PlayerStats />
+            <Sponsorship />
             <BackDiv></BackDiv>
         </Fragment>
     );
