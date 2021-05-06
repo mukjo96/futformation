@@ -5,16 +5,17 @@ import Link from "next/link";
 const NavLinks = (open) => {
     const navItems = [
         { title: "HOME", route: "/" },
-        { title: "NEWS", route: "news" },
-        { title: "MATCH", route: "match" },
-        { title: "TEAM", route: "team" },
+        { title: "NEWS", route: "/news" },
+        { title: "MATCH", route: "/matches" },
+        { title: "TEAM", route: "/players" },
+        { title: "TICKETS", route: "https://www.mancity.com/matchinfo" },
+        { title: "SHOP", route: "https://shop.mancity.com/" },
     ];
 
     return (
         <Container className={open ? "show" : "hidden"}>
             {navItems.map((item, index) => (
-                // <Link key={index} href={`/${item.route}`}>
-                <Link key={index} href="/">
+                <Link key={index} href={`${item.route}`}>
                     <li>{item.title}</li>
                 </Link>
             ))}

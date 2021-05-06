@@ -10,9 +10,10 @@ const Foot = () => {
         <StyledFooter>
             <StyledRow>
                 <TextLogo />
-                <Text>
-                    Manchester City Unofficial Website ©2021 Created by mukjo96
-                </Text>
+                <Col>
+                    <Text>Manchester City Unofficial Website</Text>
+                    <Text>©2021 Created by mukjo96</Text>
+                </Col>
             </StyledRow>
         </StyledFooter>
     );

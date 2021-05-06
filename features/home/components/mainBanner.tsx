@@ -5,14 +5,7 @@ import styled from "styled-components";
 import Loading from "@features/common/Loading";
 import MoreButton from "@features/common/button/MoreButton";
 import { newsDataTypes } from "../api/cityDataTypes";
-const { Paragraph, Link } = Typography;
-
-const contentStyle = {
-    height: "52.5vw",
-    color: "#fff",
-    lineHeight: "160px",
-    textAlign: "center",
-};
+const { Link } = Typography;
 
 const MainBanner = () => {
     const [bannerList, setBannerList] = useState<newsDataTypes>();

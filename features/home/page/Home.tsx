@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import styled from "styled-components";
+import AdBanner from "../components/adBanner";
 import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
@@ -30,6 +31,7 @@ const Home = () => {
             <LatestNews />
             <TeamPlayers />
             <PlayerStats />
+            <AdBanner />
             <Sponsorship />
             <BackDiv></BackDiv>
         </Fragment>

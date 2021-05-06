@@ -122,11 +122,11 @@ const StyledCol = styled(Col)`
 const HeadRow = styled(Row)`
     justify-content: space-between;
     cursor: pointer;
-    padding: 0 3vw 0 0;
+
     /* border-right: 1px solid lightgrey; */
     @media screen and (max-width: 768px) {
         border-right: none;
-        padding: 0 5vw;
+        padding: 0 0 0 5vw;
     }
 `;
 

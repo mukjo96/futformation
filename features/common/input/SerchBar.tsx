@@ -58,7 +58,7 @@ const StyledContainer = styled.div`
 `;
 
 const Searchbar = () => {
-    const [focus, setFocus] = useState(false);
+    const [focus, setFocus] = useState(true);
 
     const onFocus = () => {
         setFocus(!focus);
