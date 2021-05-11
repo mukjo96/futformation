@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+
 import { Row, Col, Divider } from "antd";
 import { getCityFixtures } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
@@ -7,7 +7,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import MoreButton from "@features/common/button/MoreButton";
 import BlockTitle from "./Title/blockTitle";
-import { useRouter } from "next/dist/client/router";
 import { matchDataTypes } from "../api/cityDataTypes";
 
 const MatchSchedule = () => {
@@ -91,7 +90,6 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
             ? (isCityWin = "draw")
             : (isCityWin = "lose");
     }
-
     return (
         <MatchCol xs={24} md={6} key={match.id}>
             <div>
