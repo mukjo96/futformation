@@ -66,4 +66,9 @@ const JoinButton = styled.div`
     background-color: #ffc659;
     color: #1c2c5b;
     padding: 3% 6%;
+    cursor: pointer;
+
+    :hover {
+        color: white;
+    }
 `;

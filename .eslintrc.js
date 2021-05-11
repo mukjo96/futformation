@@ -8,12 +8,15 @@ module.exports = {
         ecmaFeatures: { jsx: true },
     },
     extends: [
+        "prettier/react",
+        "airbnb",
+        "airbnb/hooks",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
     ],
-    plugins: ["react-hooks"],
+    plugins: ["react-hooks", "@typescript-eslint", "import"],
     rules: {
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/camelcase": "off",

@@ -9,6 +9,53 @@ export type newsDataTypes = {
     };
 };
 
+export type matchDataTypes = {
+    id: number;
+    pageUrl: string;
+    monthYearKey: string;
+    opponent: {
+        id: number;
+        name: string;
+        score: string;
+    };
+    home: {
+        id: number;
+        name: string;
+        score: number;
+    };
+    away: {
+        id: number;
+        name: string;
+        score: number;
+    };
+    displayTournament: boolean;
+    isPastMatch: boolean;
+    lastPlayedMatch: boolean;
+    lnameArr: Array<string>;
+    color: string;
+    notStarted: boolean;
+    tournament: {
+        name: string;
+    };
+    status: {
+        finished: boolean;
+        started: boolean;
+        cancelled: boolean;
+        scoreStr?: string;
+        startTimeStr?: string;
+        startDateStr: string;
+        startDateStrShort: string;
+        liveTime?: {
+            short: string;
+            long: string;
+        };
+        reason?: {
+            short: string;
+            long: string;
+        };
+    };
+};
+
 export type playerListDataTypes = [
     string,
     Array<{

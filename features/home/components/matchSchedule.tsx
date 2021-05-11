@@ -8,6 +8,7 @@ import Link from "next/link";
 import MoreButton from "@features/common/button/MoreButton";
 import BlockTitle from "./Title/blockTitle";
 import { useRouter } from "next/dist/client/router";
+import { matchDataTypes } from "../api/cityDataTypes";
 
 const MatchSchedule = () => {
     const [matchList, setMatchList] = useState([]);
@@ -75,7 +76,22 @@ function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
     return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
 }
 
-function renderMatchSchedule(match, isPast) {
+function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
+    let isCityWin: string;
+    if (match.home.name === "Man City") {
+        match.home.score > match.away.score
+            ? (isCityWin = "win")
+            : match.home.score === match.away.score
+            ? (isCityWin = "draw")
+            : (isCityWin = "lose");
+    } else {
+        match.away.score > match.home.score
+            ? (isCityWin = "win")
+            : match.away.score === match.home.score
+            ? (isCityWin = "draw")
+            : (isCityWin = "lose");
+    }
+
     return (
         <MatchCol xs={24} md={6} key={match.id}>
             <div>
@@ -96,10 +112,15 @@ function renderMatchSchedule(match, isPast) {
                                 ? "LIVE"
                                 : ""}
                         </LiveText>
-                        <ScoreH4>{match.status.scoreStr}</ScoreH4>
+                        <ScoreH4 isCityWin={isCityWin}>
+                            {match.status.scoreStr}
+                        </ScoreH4>
                     </ScoreCol>
                 </MatchScore>
-                <CustomDivider ispast={isPast.toString()} />
+                <CustomDivider
+                    ispast={isPast.toString()}
+                    isCityWin={isCityWin}
+                />
                 <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
                 <TournamentName>{match.tournament.name}</TournamentName>
                 <StartDate>
@@ -159,11 +180,16 @@ const LiveText = styled.h4`
     margin: 0;
     color: #ec3325;
 `;
-const ScoreH4 = styled.h4`
+const ScoreH4 = styled.h4<{ isCityWin: string }>`
     font-size: 14px;
     font-weight: 500;
     margin: 0;
-    color: #6cabdd;
+    color: ${(props) =>
+        props.isCityWin === "win"
+            ? "#6cabdd"
+            : props.isCityWin === "draw"
+            ? "darkgrey"
+            : "#EC3325"};
 `;
 
 const TeamName = styled.h3`
@@ -183,9 +209,15 @@ const StartDate = styled.span`
     height: 10px;
 `;
 
-const CustomDivider = styled(Divider)<{ ispast: string }>`
+const CustomDivider = styled(Divider)<{ ispast: string; isCityWin: string }>`
     margin: 10px 0;
     background: ${(props) =>
-        props.ispast === "true" ? "#6CABDD" : "lightgrey"};
+        props.ispast === "true"
+            ? props.isCityWin === "win"
+                ? "#6cabdd"
+                : props.isCityWin === "draw"
+                ? "lightgrey"
+                : "#EC3325"
+            : "lightgrey"};
     height: ${(props) => (props.ispast === "true" ? "2px" : "1px")};
 `;
