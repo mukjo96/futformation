@@ -8,14 +8,6 @@ import PlayerStats from "../components/playerStats";
 import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
 
-const BackColor = styled.div`
-    height: 50vw;
-    max-height: 640px;
-    margin-top: -68px;
-    @media screen and (max-width: 768px) {
-        margin-top: 0;
-    }
-`;
 const BackDiv = styled.div`
     background-color: white;
     height: 50px;
@@ -24,9 +16,7 @@ const BackDiv = styled.div`
 const Home = () => {
     return (
         <Fragment>
-            <BackColor>
-                <MainBanner />
-            </BackColor>
+            <MainBanner />
             <MatchSchedule />
             <LatestNews />
             <TeamPlayers />

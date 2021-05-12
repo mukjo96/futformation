@@ -110,14 +110,14 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
                                 ? "LIVE"
                                 : ""}
                         </LiveText>
-                        <ScoreH4 isCityWin={isCityWin}>
+                        <ScoreH4 iscitywin={isCityWin}>
                             {match.status.scoreStr}
                         </ScoreH4>
                     </ScoreCol>
                 </MatchScore>
                 <CustomDivider
                     ispast={isPast.toString()}
-                    isCityWin={isCityWin}
+                    iscitywin={isCityWin}
                 />
                 <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
                 <TournamentName>{match.tournament.name}</TournamentName>
@@ -178,14 +178,14 @@ const LiveText = styled.h4`
     margin: 0;
     color: #ec3325;
 `;
-const ScoreH4 = styled.h4<{ isCityWin: string }>`
+const ScoreH4 = styled.h4<{ iscitywin: string }>`
     font-size: 14px;
     font-weight: 500;
     margin: 0;
     color: ${(props) =>
-        props.isCityWin === "win"
+        props.iscitywin === "win"
             ? "#6cabdd"
-            : props.isCityWin === "draw"
+            : props.iscitywin === "draw"
             ? "darkgrey"
             : "#EC3325"};
 `;
@@ -207,13 +207,13 @@ const StartDate = styled.span`
     height: 10px;
 `;
 
-const CustomDivider = styled(Divider)<{ ispast: string; isCityWin: string }>`
+const CustomDivider = styled(Divider)<{ ispast: string; iscitywin: string }>`
     margin: 10px 0;
     background: ${(props) =>
         props.ispast === "true"
-            ? props.isCityWin === "win"
+            ? props.iscitywin === "win"
                 ? "#6cabdd"
-                : props.isCityWin === "draw"
+                : props.iscitywin === "draw"
                 ? "lightgrey"
                 : "#EC3325"
             : "lightgrey"};

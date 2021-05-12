@@ -41,7 +41,7 @@ const Container = styled.nav`
     align-items: center;
     position: relative;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0);
+    background: #1c2c5b;
 
     @media screen and (min-width: 1280px) {
         width: 1280px;
