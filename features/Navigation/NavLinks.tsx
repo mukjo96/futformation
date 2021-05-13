@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { Router, useRouter } from "next/dist/client/router";
 
 const NavLinks = (open) => {
+    const router = useRouter();
+
     const navItems = [
         { title: "HOME", route: "/" },
         { title: "NEWS", route: "/news" },
@@ -16,7 +19,11 @@ const NavLinks = (open) => {
         <Container className={open ? "show" : "hidden"}>
             {navItems.map((item, index) => (
                 <Link key={index} href={`${item.route}`}>
-                    <li>{item.title}</li>
+                    <Titleli
+                        isselected={(router.pathname === item.route).toString()}
+                    >
+                        {item.title}
+                    </Titleli>
                 </Link>
             ))}
         </Container>
@@ -65,4 +72,9 @@ const Container = styled.ul`
             }
         }
     }
+`;
+
+const Titleli = styled.li<{ isselected: string }>`
+    text-decoration: ${(props) =>
+        props.isselected === "true" ? "underline" : "none"};
 `;

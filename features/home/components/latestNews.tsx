@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Slide from "react-reveal/Slide";
 import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
 import { getCityNews } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 import { Avatar } from "antd";
 import { IconLogo } from "@features/common/logo/Logo";
-import { useRouter } from "next/dist/client/router";
 import { newsDataTypes } from "../api/cityDataTypes";
 
 const LatestNews = () => {
@@ -31,77 +31,82 @@ const LatestNews = () => {
             <Container>
                 <Col>
                     <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
-                    <NewsRow>
-                        {newsList.slice(1, 5).map((news, index) => {
-                            const sourceTitle = news.sourceStr.split(" - ");
-                            return (
-                                <NewsBox
-                                    style={{
-                                        backgroundImage: `url(${news.imageUrl})`,
-                                    }}
-                                    xs={24}
-                                    md={6}
-                                    key={index}
-                                >
-                                    <BackFilter
-                                        onClick={
-                                            sourceTitle[0] === "FotMob"
-                                                ? () =>
-                                                      window.open(
-                                                          `https://www.fotmob.com${news.page.url}`,
-                                                          "_ blank"
-                                                      )
-                                                : () =>
-                                                      window.open(
-                                                          news.page.url,
-                                                          "_ blank"
-                                                      )
-                                        }
+                    <Slide right>
+                        <NewsRow>
+                            {newsList.slice(1, 5).map((news, index) => {
+                                const sourceTitle = news.sourceStr.split(" - ");
+                                return (
+                                    <NewsBox
+                                        style={{
+                                            backgroundImage: `url(${news.imageUrl})`,
+                                        }}
+                                        xs={24}
+                                        md={6}
+                                        key={index}
                                     >
-                                        <Col style={{ lineHeight: "1.2" }}>
-                                            <NewsCategory>
-                                                {sourceTitle[0] === "YouTube"
-                                                    ? "VIDEO"
-                                                    : sourceTitle[0] ===
-                                                      "City Xtra"
-                                                    ? "FIRST TEAM"
-                                                    : "MEDIA WATCH"}
-                                            </NewsCategory>
-                                            <NewsTitle>{news.title}</NewsTitle>
-                                            <Row>
-                                                <Avatar
-                                                    size="small"
-                                                    icon={
-                                                        news.sourceIconUrl ===
-                                                        "https://images.fotmob.com/image_resources/news/default.png" ? (
-                                                            <IconLogo />
-                                                        ) : (
-                                                            <img
-                                                                src={
-                                                                    news.sourceIconUrl
-                                                                }
-                                                            />
-                                                        )
-                                                    }
-                                                    style={{
-                                                        marginRight: "4px",
-                                                    }}
-                                                />
-                                                <div>
-                                                    <NewsSource>
-                                                        {sourceTitle[0]}
-                                                    </NewsSource>
-                                                    <NewsLate>
-                                                        {sourceTitle[1]}
-                                                    </NewsLate>
-                                                </div>
-                                            </Row>
-                                        </Col>
-                                    </BackFilter>
-                                </NewsBox>
-                            );
-                        })}
-                    </NewsRow>
+                                        <BackFilter
+                                            onClick={
+                                                sourceTitle[0] === "FotMob"
+                                                    ? () =>
+                                                          window.open(
+                                                              `https://www.fotmob.com${news.page.url}`,
+                                                              "_ blank"
+                                                          )
+                                                    : () =>
+                                                          window.open(
+                                                              news.page.url,
+                                                              "_ blank"
+                                                          )
+                                            }
+                                        >
+                                            <Col style={{ lineHeight: "1.2" }}>
+                                                <NewsCategory>
+                                                    {sourceTitle[0] ===
+                                                    "YouTube"
+                                                        ? "VIDEO"
+                                                        : sourceTitle[0] ===
+                                                          "City Xtra"
+                                                        ? "FIRST TEAM"
+                                                        : "MEDIA WATCH"}
+                                                </NewsCategory>
+                                                <NewsTitle>
+                                                    {news.title}
+                                                </NewsTitle>
+                                                <Row>
+                                                    <Avatar
+                                                        size="small"
+                                                        icon={
+                                                            news.sourceIconUrl ===
+                                                            "https://images.fotmob.com/image_resources/news/default.png" ? (
+                                                                <IconLogo />
+                                                            ) : (
+                                                                <img
+                                                                    src={
+                                                                        news.sourceIconUrl
+                                                                    }
+                                                                />
+                                                            )
+                                                        }
+                                                        style={{
+                                                            marginRight: "4px",
+                                                        }}
+                                                    />
+                                                    <div>
+                                                        <NewsSource>
+                                                            {sourceTitle[0]}
+                                                        </NewsSource>
+                                                        <NewsLate>
+                                                            {sourceTitle[1]}
+                                                        </NewsLate>
+                                                    </div>
+                                                </Row>
+                                            </Col>
+                                        </BackFilter>
+                                    </NewsBox>
+                                );
+                            })}
+                        </NewsRow>
+                    </Slide>
                 </Col>
             </Container>
         );

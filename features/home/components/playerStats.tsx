@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Row, Col, Avatar, Divider } from "antd";
+import Slide from "react-reveal/Slide";
 import BlockTitle from "./Title/blockTitle";
 import { getCityStats } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
@@ -36,19 +37,21 @@ const PlayerStats = () => {
                     linktext="player stats"
                     theme="light"
                 />
-                <ContainRow>
-                    {renderStatList(statList.byRating, "Ratings")}
-                    {renderStatList(statList.byGoals, "Goals")}
-                    {renderStatList(statList.byAssists, "Assists")}
-                    <ImageCol
-                        xs={24}
-                        md={6}
-                        style={{
-                            backgroundImage:
-                                "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
-                        }}
-                    ></ImageCol>
-                </ContainRow>
+                <Slide bottom cascade ssrFadeout>
+                    <ContainRow>
+                        {renderStatList(statList.byRating, "Ratings")}
+                        {renderStatList(statList.byGoals, "Goals")}
+                        {renderStatList(statList.byAssists, "Assists")}
+                        <ImageCol
+                            xs={24}
+                            md={6}
+                            style={{
+                                backgroundImage:
+                                    "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
+                            }}
+                        ></ImageCol>
+                    </ContainRow>
+                </Slide>
             </Container>
         );
     }

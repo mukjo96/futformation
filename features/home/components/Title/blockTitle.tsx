@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Fade from "react-reveal/Fade";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,12 +17,12 @@ const BlockTitle = ({
     theme = "light",
 }: titleTypes) => {
     return (
-        <>
+        <Fade left ssrFadeout>
             <Title theme={theme}>{title}</Title>
             <Link href={`/${link}`}>
                 <MatchLink>View all {linktext} +</MatchLink>
             </Link>
-        </>
+        </Fade>
     );
 };
 

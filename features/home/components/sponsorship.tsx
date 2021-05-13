@@ -9,7 +9,7 @@ const Sponsorship = () => {
         <Container>
             <BlockTitle title="SPONSORSHIP" link="sponsorship" />
             <Row>
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href={"https://www.etihad.com"}>
                         <a target="_blank">
                             <img
@@ -22,7 +22,7 @@ const Sponsorship = () => {
                         </a>
                     </Link>
                 </ImageCol>
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href={"https://puma.com"}>
                         <a target="_blank">
                             <img
@@ -35,7 +35,7 @@ const Sponsorship = () => {
                         </a>
                     </Link>
                 </ImageCol>
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href="https://www.etisalat.ae">
                         <a target="_blank">
                             <img
@@ -49,7 +49,7 @@ const Sponsorship = () => {
                     </Link>
                 </ImageCol>
 
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href="http://www.nexentire.com/">
                         <a target="_blank">
                             <img
@@ -62,7 +62,7 @@ const Sponsorship = () => {
                         </a>
                     </Link>
                 </ImageCol>
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href="http://www2.nissan.co.jp/BRAND/?sclisid=LS_TIJ_99_GO_GLIS_00255174">
                         <a target="_blank">
                             <img
@@ -75,7 +75,7 @@ const Sponsorship = () => {
                         </a>
                     </Link>
                 </ImageCol>
-                <ImageCol span={4}>
+                <ImageCol xs={8} md={4}>
                     <Link href="https://visitabudhabi.ae">
                         <a target="_blank">
                             <img

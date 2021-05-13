@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import Fade from "react-reveal/Fade";
 import { Row, Col, Divider } from "antd";
 import { getCityFixtures } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
@@ -45,20 +45,22 @@ const MatchSchedule = () => {
                             theme="light"
                         />
                     </Col>
-                    <Row>
-                        {newMatchList.map((match) => {
-                            if (
-                                match.lastPlayedMatch ||
-                                (!match.isPastMatch && match5 < 4)
-                            ) {
-                                match5 += 1;
-                                return renderMatchSchedule(
-                                    match,
-                                    match.isPastMatch
-                                );
-                            }
-                        })}
-                    </Row>
+                    <Fade bottom cascade ssrFadeout>
+                        <Row>
+                            {newMatchList.map((match) => {
+                                if (
+                                    match.lastPlayedMatch ||
+                                    (!match.isPastMatch && match5 < 4)
+                                ) {
+                                    match5 += 1;
+                                    return renderMatchSchedule(
+                                        match,
+                                        match.isPastMatch
+                                    );
+                                }
+                            })}
+                        </Row>
+                    </Fade>
                 </Col>
             </Container>
         );
