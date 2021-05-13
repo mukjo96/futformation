@@ -39,7 +39,7 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide }) => {
                     style: {
                         width: 60,
                         height: 60,
-                        minWidth: 60,
+                        minWidth: 40,
                         background: "white",
                         border: "none",
                         alignSelf: "center",
@@ -50,7 +50,7 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide }) => {
                     style: {
                         width: 60,
                         height: 60,
-                        minWidth: 60,
+                        minWidth: 40,
                         background: "white",
                         border: "none",
                         alignSelf: "center",
