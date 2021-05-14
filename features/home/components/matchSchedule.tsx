@@ -168,6 +168,9 @@ const MatchScore = styled(Row)`
 
 const TeamLogo = styled.img`
     margin-right: 1vw;
+    @media screen and (max-width: 768px) {
+        margin-right: 2vw;
+    }
 `;
 
 const ScoreCol = styled(Col)`
