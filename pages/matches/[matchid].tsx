@@ -1,8 +1,13 @@
+import MatchInfoPage from "@features/matches/page/matchInfoPage";
 import React from "react";
 import styled from "styled-components";
 
 const MatchInfo = () => {
-    return <Page></Page>;
+    return (
+        <Page>
+            <MatchInfoPage />
+        </Page>
+    );
 };
 
 export default MatchInfo;

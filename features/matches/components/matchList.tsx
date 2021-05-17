@@ -7,6 +7,7 @@ import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { match } from "assert";
 const { Panel } = Collapse;
 
 const MatchList = () => {
@@ -38,7 +39,6 @@ const MatchList = () => {
                         {Object.keys(matchData).map((key) => (
                             <Panel header={key} key={key}>
                                 <List
-                                    bordered
                                     itemLayout="vertical"
                                     dataSource={matchData[key]}
                                     renderItem={(item: matchDataTypes) => {
@@ -103,7 +103,12 @@ const MatchList = () => {
                                                                     </ScoreH4>
                                                                 </ScoreCol>
                                                             </MatchScore>
-                                                            <CustomDivider />
+                                                            <CustomDivider
+                                                                ispast={item.isPastMatch.toString()}
+                                                                iscitywin={
+                                                                    isCityWin
+                                                                }
+                                                            />
                                                         </>
                                                     }
                                                 />
@@ -207,8 +212,17 @@ const ScoreH4 = styled.h4<{ iscitywin: string }>`
     }
 `;
 
-const CustomDivider = styled(Divider)`
+const CustomDivider = styled(Divider)<{ ispast: string; iscitywin: string }>`
     margin: 10px 0;
+    background: ${(props) =>
+        props.ispast === "true"
+            ? props.iscitywin === "win"
+                ? "#6cabdd"
+                : props.iscitywin === "draw"
+                ? "lightgrey"
+                : "#EC3325"
+            : "lightgrey"};
+    height: ${(props) => (props.ispast === "true" ? "2px" : "0.5px")};
 `;
 
 const MatchDescription = styled.div`

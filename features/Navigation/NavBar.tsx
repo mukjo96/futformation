@@ -5,13 +5,18 @@ import { TextLogo } from "@features/common/logo/Logo";
 import NavLinks from "@features/navigation/NavLinks";
 import Searchbar from "@features/common/input/SerchBar";
 import NavButtons from "@features/navigation/NavButtons";
+import Link from "next/link";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
 
     return (
         <Container>
-            <TextLogo />
+            <Link href="/">
+                <a>
+                    <TextLogo />
+                </a>
+            </Link>
             <Hamburger className={open ? "show" : "hidden"}>
                 <NavLinks open={open} />
                 <GroupBar className={open ? "show" : "hidden"}>

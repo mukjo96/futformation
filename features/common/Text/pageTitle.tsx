@@ -17,6 +17,8 @@ export const PageTitle = ({ text }: titleProps) => {
 const NewsTitle = styled.h1`
     font-family: "Josefin Sans", sans-serif;
     padding: 4vw 0 0 8vw;
+    color: #6cabdd;
+    text-shadow: 1px 1px #1c2c5b;
 
     text-decoration: underline;
     font-size: 36px;

@@ -59,6 +59,7 @@ const StyledContainer = styled.div`
 
 const Searchbar = () => {
     const [focus, setFocus] = useState(true);
+    const [text, setText] = useState("");
 
     const onFocus = () => {
         setFocus(!focus);
@@ -66,11 +67,25 @@ const Searchbar = () => {
 
     return (
         <StyledContainer>
-            <input
-                type="text"
-                className={focus ? "focused" : ""}
-                placeholder="Search"
-            />
+            <form
+                onSubmit={() => {
+                    window.open(
+                        `https://www.fotmob.com/search?q=${text}`,
+                        "_blank"
+                    );
+                    setText("");
+                }}
+            >
+                <input
+                    type="text"
+                    className={focus ? "focused" : ""}
+                    onChange={(e) => {
+                        console.log(e.target.value);
+                        setText(e.target.value);
+                    }}
+                    placeholder="Search"
+                />
+            </form>
             <button
                 onClick={onFocus}
                 id="search-button"
