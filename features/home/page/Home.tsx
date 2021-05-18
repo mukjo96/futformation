@@ -27,14 +27,15 @@ const BackDiv = styled.div`
 `;
 
 const Home = () => {
-    const [matchList, setMatchList] = useState<Array<matchDataTypes>>([]);
+    const [matchList, setMatchList] = useState<Array<matchDataTypes>>();
     const [currentMonth, setCurrentMonth] = useState("");
-    const [newsList, setNewsList] = useState<Array<newsDataTypes>>([]);
-    const [dataList, setDataList] = useState<Array<playerListDataTypes>>([]);
+    const [newsList, setNewsList] = useState<Array<newsDataTypes>>();
+    const [dataList, setDataList] = useState<Array<playerListDataTypes>>();
     const [statList, setStatList] = useState<playerStatDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         getCityApi();
     }, []);
 
@@ -55,15 +56,8 @@ const Home = () => {
     }
 
     if (isLoading) {
-        if (
-            matchList !== [] &&
-            newsList !== [] &&
-            dataList !== [] &&
-            statList
-        ) {
-            console.log("Loading Finished");
-            setIsLoading(false);
-        }
+        matchList && newsList && dataList && statList && setIsLoading(false);
+
         return <Loading />;
     } else {
         return (

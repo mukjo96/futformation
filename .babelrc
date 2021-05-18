@@ -9,7 +9,8 @@
             }
         ],
         "@babel/typescript",
-        "@babel/preset-react"
+        "@babel/preset-react",
+        "next/babel"
     ],
     "plugins": [
         [
@@ -30,7 +31,8 @@
                 "displayName": true,
                 "preprocess": false
             }
-        ]
+        ],
+        ["@babel/plugin-proposal-optional-chaining"]
     ],
 
     "comments": false,
