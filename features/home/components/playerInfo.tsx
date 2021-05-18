@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Row, Col, Divider, Avatar, Result } from "antd";
 import { getPlayerInfo } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
@@ -15,15 +15,28 @@ const PlayerInfo = ({ id }) => {
     const [propData, setPropData] = useState({});
 
     useEffect(() => {
+        let isSubscribed = true;
+
         id !== 0 &&
-            getPlayerInfo(id).then((data) => {
-                setPlayerData(data);
-            });
+            getPlayerInfo(id)
+                .then((data) => {
+                    isSubscribed ? setPlayerData(data) : null;
+                })
+                .catch((error) => {
+                    if (isSubscribed) {
+                        setPlayerData((prevState) => ({
+                            ...prevState,
+                            error,
+                        }));
+                    }
+                });
         if (playerData) {
             propDataToObject();
             statDataToObject();
             setIsLoading(false);
         }
+
+        return () => (isSubscribed = false);
     }, [id, playerData]);
 
     if (isLoading) {

@@ -1,6 +1,7 @@
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "antd";
+import Fade from "react-reveal/Fade";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -25,14 +26,24 @@ const MatchHeader = ({ matchData }) => {
     function renderEvent(data, ishome) {
         if (ishome)
             return data.type === "Goal" ? (
-                <Row
-                    style={{ alignItems: "center", justifyContent: "flex-end" }}
-                >
-                    <EventText>
-                        {` ${data.timeStr}${"\t"}${data.nameStr.toUpperCase()}`}
-                    </EventText>
-                    <FontAwesomeIcon icon={faFutbol} />
-                </Row>
+                <>
+                    <Row
+                        style={{
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                        }}
+                    >
+                        <Col>
+                            <EventText>
+                                {` ${
+                                    data.timeStr
+                                }${"\t"}${data.nameStr.toUpperCase()}`}
+                            </EventText>
+                        </Col>
+                        <FontAwesomeIcon icon={faFutbol} />
+                    </Row>
+                    <Assist>{data.assistStr}</Assist>
+                </>
             ) : (
                 <Row
                     style={{ alignItems: "center", justifyContent: "flex-end" }}
@@ -67,73 +78,81 @@ const MatchHeader = ({ matchData }) => {
 
     console.log(impEvent);
     return (
-        <div>
-            <TournamentName>
-                {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
-            </TournamentName>
-            <Row
-                style={{
-                    justifyContent: "center",
-                }}
-            >
-                <TeamScoreCol span={8}>
-                    <Row>
-                        <TeamNameCol span={12}>
-                            <TeamLogo
-                                src={header.teams[0].imageUrl}
-                                width="100px"
-                            />
-                        </TeamNameCol>
-                        <TeamNameCol span={12}>
-                            <TeamName ishome={true}>
-                                {header.teams[0].name.replace(" ", "\n")}
-                            </TeamName>
-                        </TeamNameCol>
-                    </Row>
-                </TeamScoreCol>
-                <TeamScoreCol span={6}>
-                    <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
-                </TeamScoreCol>
-                <TeamScoreCol span={8}>
-                    <Row>
-                        <TeamNameCol span={12}>
-                            <TeamName ishome={false}>
-                                {header.teams[1].name.replace(" ", "\n")}
-                            </TeamName>
-                        </TeamNameCol>
-                        <TeamNameCol span={12}>
-                            <TeamLogo
-                                src={header.teams[1].imageUrl}
-                                width="100px"
-                            />
-                        </TeamNameCol>
-                    </Row>
-                </TeamScoreCol>
-            </Row>
-            <Row
-                style={{
-                    justifyContent: "center",
-                }}
-            >
-                <Col span={8}>
-                    {impEvent[0].map((data) => renderEvent(data, true))}
-                </Col>
-                <Col
-                    style={{ textAlign: "center", alignSelf: "flex-start" }}
-                    span={6}
+        <Fade bottom cascade ssrFadeout>
+            <div>
+                <TournamentName>
+                    {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
+                </TournamentName>
+                <Row
+                    style={{
+                        justifyContent: "center",
+                    }}
                 >
-                    <StadiumRound>
-                        {infoBox.Stadium.name.toUpperCase()}
-                    </StadiumRound>
-                    <StadiumRound>
-                        {infoBox.Tournament.text.split(" - ")[1].toUpperCase()}
-                    </StadiumRound>
-                </Col>
-                <Col span={8}>
-                    {impEvent[1].map((data) => renderEvent(data, false))}
-                </Col>
-            </Row>
-        </div>
+                    <TeamScoreCol span={8}>
+                        <Row>
+                            <TeamNameCol span={12}>
+                                <TeamLogo
+                                    src={header.teams[0].imageUrl}
+                                    width="100px"
+                                />
+                            </TeamNameCol>
+                            <TeamNameCol span={12}>
+                                <TeamName ishome={true}>
+                                    {header.teams[0].name
+                                        .replace(" ", "\n")
+                                        .toUpperCase()}
+                                </TeamName>
+                            </TeamNameCol>
+                        </Row>
+                    </TeamScoreCol>
+                    <TeamScoreCol span={6}>
+                        <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
+                    </TeamScoreCol>
+                    <TeamScoreCol span={8}>
+                        <Row>
+                            <TeamNameCol span={12}>
+                                <TeamName ishome={false}>
+                                    {header.teams[1].name
+                                        .replace(" ", "\n")
+                                        .toUpperCase()}
+                                </TeamName>
+                            </TeamNameCol>
+                            <TeamNameCol span={12}>
+                                <TeamLogo
+                                    src={header.teams[1].imageUrl}
+                                    width="100px"
+                                />
+                            </TeamNameCol>
+                        </Row>
+                    </TeamScoreCol>
+                </Row>
+                <Row
+                    style={{
+                        justifyContent: "center",
+                    }}
+                >
+                    <Col span={8}>
+                        {impEvent[0].map((data) => renderEvent(data, true))}
+                    </Col>
+                    <Col
+                        style={{ textAlign: "center", alignSelf: "flex-start" }}
+                        span={6}
+                    >
+                        <StadiumRound>
+                            {infoBox.Stadium.name.toUpperCase()}
+                        </StadiumRound>
+                        <StadiumRound>
+                            {infoBox.Tournament.text
+                                .split(" - ")[1]
+                                .toUpperCase()}
+                        </StadiumRound>
+                    </Col>
+                    <Col span={8}>
+                        {impEvent[1].map((data) => renderEvent(data, false))}
+                    </Col>
+                </Row>
+            </div>
+        </Fade>
     );
 };
 export default MatchHeader;
@@ -187,4 +206,10 @@ const StadiumRound = styled.h5`
     margin: 0;
     font-size: 14px;
     font-weight: 400;
+`;
+
+const Assist = styled.h5`
+    font-size: 10px;
+    margin: 0;
+    text-align: end;
 `;

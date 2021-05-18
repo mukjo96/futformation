@@ -9,62 +9,44 @@ import MoreButton from "@features/common/button/MoreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
 
-const MatchSchedule = () => {
-    const [matchList, setMatchList] = useState([]);
-    const [currentMonth, setCurrentMonth] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        getCityFixtures()
-            .then((data) => {
-                setCurrentMonth(data.fixturesTab.currentMonth);
-                setMatchList(data.fixturesTab.fixtures);
-            })
-            .then((_) => {
-                setIsLoading(false);
-            });
-    }, []);
-
+const MatchSchedule = ({ matchList, currentMonth }) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
-    if (isLoading && beforeMonth !== null) {
-        return <Loading />;
-    } else {
-        const newMatchList = [
-            ...matchList[beforeMonth],
-            ...matchList[currentMonth],
-        ];
-        let match5 = 0;
-        return (
-            <Container>
+
+    const newMatchList = [
+        ...matchList[beforeMonth],
+        ...matchList[currentMonth],
+    ];
+    let match5 = 0;
+    return (
+        <Container>
+            <Col>
                 <Col>
-                    <Col>
-                        <BlockTitle
-                            title="MATCH SCHEDULE"
-                            link="matches"
-                            theme="light"
-                        />
-                    </Col>
-                    <Fade bottom cascade ssrFadeout>
-                        <Row>
-                            {newMatchList.map((match) => {
-                                if (
-                                    match.lastPlayedMatch ||
-                                    (!match.isPastMatch && match5 < 4)
-                                ) {
-                                    match5 += 1;
-                                    return renderMatchSchedule(
-                                        match,
-                                        match.isPastMatch
-                                    );
-                                }
-                            })}
-                        </Row>
-                    </Fade>
+                    <BlockTitle
+                        title="MATCH SCHEDULE"
+                        link="matches"
+                        theme="light"
+                    />
                 </Col>
-            </Container>
-        );
-    }
+                <Fade bottom cascade ssrFadeout>
+                    <Row>
+                        {newMatchList.map((match) => {
+                            if (
+                                match.lastPlayedMatch ||
+                                (!match.isPastMatch && match5 < 4)
+                            ) {
+                                match5 += 1;
+                                return renderMatchSchedule(
+                                    match,
+                                    match.isPastMatch
+                                );
+                            }
+                        })}
+                    </Row>
+                </Fade>
+            </Col>
+        </Container>
+    );
 };
 
 function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {

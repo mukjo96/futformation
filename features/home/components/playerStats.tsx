@@ -8,53 +8,32 @@ import Loading from "@features/common/Loading";
 import Link from "next/link";
 import { playerStatDataTypes } from "../api/cityDataTypes";
 
-const PlayerStats = () => {
-    const [statList, setStatList] = useState<playerStatDataTypes>();
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        getCityStats()
-            .then((data) => {
-                setStatList(data);
-            })
-            .then((_) => {
-                setIsLoading(false);
-            });
-    }, []);
-
-    if (isLoading) {
-        return (
-            <Col span={24} style={{ textAlign: "center" }}>
-                <Loading />
-            </Col>
-        );
-    } else {
-        return (
-            <Container>
-                <BlockTitle
-                    title="PLAYER STATS"
-                    link="players"
-                    linktext="player stats"
-                    theme="light"
-                />
-                <Slide bottom cascade ssrFadeout>
-                    <ContainRow>
-                        {renderStatList(statList.byRating, "Ratings")}
-                        {renderStatList(statList.byGoals, "Goals")}
-                        {renderStatList(statList.byAssists, "Assists")}
-                        <ImageCol
-                            xs={24}
-                            md={6}
-                            style={{
-                                backgroundImage:
-                                    "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
-                            }}
-                        ></ImageCol>
-                    </ContainRow>
-                </Slide>
-            </Container>
-        );
-    }
+const PlayerStats = ({ statList }) => {
+    return (
+        <Container>
+            <BlockTitle
+                title="PLAYER STATS"
+                link="players"
+                linktext="player stats"
+                theme="light"
+            />
+            <Slide bottom cascade ssrFadeout>
+                <ContainRow>
+                    {renderStatList(statList.byRating, "Ratings")}
+                    {renderStatList(statList.byGoals, "Goals")}
+                    {renderStatList(statList.byAssists, "Assists")}
+                    <ImageCol
+                        xs={24}
+                        md={6}
+                        style={{
+                            backgroundImage:
+                                "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
+                        }}
+                    ></ImageCol>
+                </ContainRow>
+            </Slide>
+        </Container>
+    );
 };
 
 const renderStatList = (listData, category) => {

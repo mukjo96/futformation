@@ -7,53 +7,35 @@ import MoreButton from "@features/common/button/MoreButton";
 import { newsDataTypes } from "../api/cityDataTypes";
 const { Link } = Typography;
 
-const MainBanner = () => {
-    const [bannerList, setBannerList] = useState<newsDataTypes>();
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        getCityNews()
-            .then(async (data) => {
-                if (data) {
-                    setBannerList(data.news[0]);
-                }
-            })
-            .then((_) => {
-                setIsLoading(false);
-            });
-    }, []);
-    if (isLoading) {
-        return <Loading />;
-    } else {
-        return (
-            <BannerContainer>
-                <BannerBackground
-                    style={{
-                        backgroundImage: `url(${bannerList.imageUrl})`,
-                    }}
-                >
-                    <BackFilter>
-                        <TextContainer>
-                            <NewsHeader>FIRST TEAM NEWS</NewsHeader>
-                            <BannerTitle>{bannerList.title}</BannerTitle>
-                            <BannerSource>{bannerList.sourceStr}</BannerSource>
-                            <Link
-                                style={{ cursor: "pointer" }}
-                                href={
-                                    bannerList.sourceStr.slice(0, 6) ===
-                                    "FotMob"
-                                        ? `https://www.fotmob.com${bannerList.page.url}`
-                                        : bannerList.page.url
-                                }
-                                target="_blank"
-                            >
-                                <MoreButton value="View Now" size="large" />
-                            </Link>
-                        </TextContainer>
-                    </BackFilter>
-                </BannerBackground>
-            </BannerContainer>
-        );
-    }
+const MainBanner = ({ bannerList }) => {
+    return (
+        <BannerContainer>
+            <BannerBackground
+                style={{
+                    backgroundImage: `url(${bannerList.imageUrl})`,
+                }}
+            >
+                <BackFilter>
+                    <TextContainer>
+                        <NewsHeader>FIRST TEAM NEWS</NewsHeader>
+                        <BannerTitle>{bannerList.title}</BannerTitle>
+                        <BannerSource>{bannerList.sourceStr}</BannerSource>
+                        <Link
+                            style={{ cursor: "pointer" }}
+                            href={
+                                bannerList.sourceStr.slice(0, 6) === "FotMob"
+                                    ? `https://www.fotmob.com${bannerList.page.url}`
+                                    : bannerList.page.url
+                            }
+                            target="_blank"
+                        >
+                            <MoreButton value="View Now" size="large" />
+                        </Link>
+                    </TextContainer>
+                </BackFilter>
+            </BannerBackground>
+        </BannerContainer>
+    );
 };
 
 export default MainBanner;

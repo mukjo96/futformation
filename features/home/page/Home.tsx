@@ -1,5 +1,18 @@
-import React, { Fragment } from "react";
+import Loading from "@features/common/Loading";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
+import {
+    matchDataTypes,
+    newsDataTypes,
+    playerListDataTypes,
+    playerStatDataTypes,
+} from "../api/cityDataTypes";
+import {
+    getCityFixtures,
+    getCityNews,
+    getCityPlayers,
+    getCityStats,
+} from "../api/getCityData.api";
 import AdBanner from "../components/adBanner";
 import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
@@ -14,18 +27,61 @@ const BackDiv = styled.div`
 `;
 
 const Home = () => {
-    return (
-        <Fragment>
-            <MainBanner />
-            <MatchSchedule />
-            <LatestNews />
-            <TeamPlayers />
-            <PlayerStats />
-            <AdBanner />
-            <Sponsorship />
-            <BackDiv></BackDiv>
-        </Fragment>
-    );
+    const [matchList, setMatchList] = useState<Array<matchDataTypes>>([]);
+    const [currentMonth, setCurrentMonth] = useState("");
+    const [newsList, setNewsList] = useState<Array<newsDataTypes>>([]);
+    const [dataList, setDataList] = useState<Array<playerListDataTypes>>([]);
+    const [statList, setStatList] = useState<playerStatDataTypes>();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        getCityApi();
+    }, []);
+
+    function getCityApi() {
+        getCityNews().then((data) => {
+            setNewsList(data.news);
+        });
+        getCityFixtures().then((data) => {
+            setCurrentMonth(data.fixturesTab.currentMonth);
+            setMatchList(data.fixturesTab.fixtures);
+        });
+        getCityPlayers().then((data) => {
+            setDataList(data.squad);
+        });
+        getCityStats().then((data) => {
+            setStatList(data);
+        });
+    }
+
+    if (isLoading) {
+        if (
+            matchList !== [] &&
+            newsList !== [] &&
+            dataList !== [] &&
+            statList
+        ) {
+            console.log("Loading Finished");
+            setIsLoading(false);
+        }
+        return <Loading />;
+    } else {
+        return (
+            <Fragment>
+                <MainBanner bannerList={newsList[0]} />
+                <MatchSchedule
+                    matchList={matchList}
+                    currentMonth={currentMonth}
+                />
+                <LatestNews newsList={newsList} />
+                <TeamPlayers dataList={dataList} />
+                <PlayerStats statList={statList} />
+                <AdBanner />
+                <Sponsorship />
+                <BackDiv></BackDiv>
+            </Fragment>
+        );
+    }
 };
 
 export default Home;

@@ -7,100 +7,71 @@ import { getCityPlayers } from "../api/getCityData.api";
 import Loading from "@features/common/Loading";
 
 import PlayerInfo from "./playerInfo";
-import { playerListDataTypes } from "../api/cityDataTypes";
 
-const TeamPlayers = () => {
-    const [dataList, setDataList] = useState<Array<playerListDataTypes>>([]);
-    const [isLoading, setIsLoading] = useState(true);
+const TeamPlayers = ({ dataList }) => {
     const [selectedId, setSelectedId] = useState(0);
-
-    useEffect(() => {
-        getCityPlayers()
-            .then((data) => {
-                setDataList(data.squad);
-            })
-            .then((_) => {
-                setIsLoading(false);
-            });
-    }, []);
 
     const data = [];
 
-    if (isLoading) {
-        return (
-            <Col span={24} style={{ textAlign: "center" }}>
-                <Loading />
-            </Col>
-        );
-    } else {
-        {
-            playerDataToObjects();
-        }
-        return (
-            <Container>
-                <StyledTitle>
-                    <BlockTitle
-                        title="MCI PLAYERS"
-                        link="players"
-                        theme="light"
-                    />
-                </StyledTitle>
-                <StyledRow>
-                    <Col xs={24} md={18} style={{ alignSelf: "center" }}>
-                        {selectedId === 0 ? (
-                            <Result
-                                icon={<SelectOutlined />}
-                                title="Select your player!"
-                            />
-                        ) : (
-                            <PlayerInfo id={selectedId} />
+    playerDataToObjects();
+
+    return (
+        <Container>
+            <StyledTitle>
+                <BlockTitle title="MCI PLAYERS" link="players" theme="light" />
+            </StyledTitle>
+            <StyledRow>
+                <Col xs={24} md={18} style={{ alignSelf: "center" }}>
+                    {selectedId === 0 ? (
+                        <Result
+                            icon={<SelectOutlined />}
+                            title="Select your player!"
+                        />
+                    ) : (
+                        <PlayerInfo id={selectedId} />
+                    )}
+                </Col>
+                <ListCol xs={24} md={6}>
+                    <List
+                        dataSource={data.reverse()}
+                        size="large"
+                        renderItem={(item) => (
+                            <StyledItem
+                                key={item.id}
+                                onClick={() => setSelectedId(item.id)}
+                                id={(selectedId === item.id).toString()}
+                            >
+                                <StyledMeta
+                                    avatar={
+                                        <Avatar
+                                            size={48}
+                                            shape="square"
+                                            src={`https://images.fotmob.com/image_resources/playerimages/${item.id}.png`}
+                                        />
+                                    }
+                                    title={
+                                        <Col>
+                                            <PlayerName>{item.name}</PlayerName>
+                                            <PlayerRole>
+                                                {item.role === "goalkeepers"
+                                                    ? "Goalkeeper"
+                                                    : item.role === "defenders"
+                                                    ? "Defender"
+                                                    : item.role ===
+                                                      "midfielders"
+                                                    ? "Midfielder"
+                                                    : "Forward"}
+                                            </PlayerRole>
+                                        </Col>
+                                    }
+                                />
+                            </StyledItem>
                         )}
-                    </Col>
-                    <ListCol xs={24} md={6}>
-                        <List
-                            dataSource={data.reverse()}
-                            size="large"
-                            renderItem={(item) => (
-                                <StyledItem
-                                    key={item.id}
-                                    onClick={() => setSelectedId(item.id)}
-                                    id={(selectedId === item.id).toString()}
-                                >
-                                    <StyledMeta
-                                        avatar={
-                                            <Avatar
-                                                size={48}
-                                                shape="square"
-                                                src={`https://images.fotmob.com/image_resources/playerimages/${item.id}.png`}
-                                            />
-                                        }
-                                        title={
-                                            <Col>
-                                                <PlayerName>
-                                                    {item.name}
-                                                </PlayerName>
-                                                <PlayerRole>
-                                                    {item.role === "goalkeepers"
-                                                        ? "Goalkeeper"
-                                                        : item.role ===
-                                                          "defenders"
-                                                        ? "Defender"
-                                                        : item.role ===
-                                                          "midfielders"
-                                                        ? "Midfielder"
-                                                        : "Forward"}
-                                                </PlayerRole>
-                                            </Col>
-                                        }
-                                    />
-                                </StyledItem>
-                            )}
-                        ></List>
-                    </ListCol>
-                </StyledRow>
-            </Container>
-        );
-    }
+                    ></List>
+                </ListCol>
+            </StyledRow>
+        </Container>
+    );
 
     function playerDataToObjects() {
         dataList.map((players) => {
