@@ -136,7 +136,8 @@ const MatchHeader = ({ matchData }) => {
                     </Col>
                     <Col
                         style={{ textAlign: "center", alignSelf: "flex-start" }}
-                        span={6}
+                        offset={1}
+                        span={4}
                     >
                         <StadiumRound>
                             {infoBox.Stadium.name.toUpperCase()}
@@ -147,7 +148,7 @@ const MatchHeader = ({ matchData }) => {
                                 .toUpperCase()}
                         </StadiumRound>
                     </Col>
-                    <Col span={8}>
+                    <Col span={8} offset={1}>
                         {impEvent[1].map((data) => renderEvent(data, false))}
                     </Col>
                 </Row>
