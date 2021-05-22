@@ -35,7 +35,7 @@ const AdBanner = () => {
 export default AdBanner;
 
 const Container = styled.div`
-    padding: 4vw;
+    padding: 56px;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
@@ -79,7 +79,7 @@ const BannerContainer = styled.div`
 `;
 
 const CityzenImage = styled.img`
-    padding: 2vw;
+    padding: 28px;
     width: 50%;
 `;
 

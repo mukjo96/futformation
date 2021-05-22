@@ -92,7 +92,7 @@ export default TeamPlayers;
 const Container = styled.div``;
 
 const StyledTitle = styled.div`
-    padding: 2vw;
+    padding: 28px;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }

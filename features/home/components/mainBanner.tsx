@@ -72,8 +72,8 @@ const BannerBackground = styled.div`
 `;
 
 const TextContainer = styled.div`
-    padding: 3vw;
-    width: 47vw;
+    padding: 33px;
+    width: 47%;
     @media screen and (max-width: 768px) {
         width: 70vw;
     }

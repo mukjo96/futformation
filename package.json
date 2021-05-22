@@ -17,6 +17,7 @@
         "@types/node": "^14.14.14",
         "@types/react": "^17.0.0",
         "@types/react-redux": "^7.1.15",
+        "@types/redux-saga": "^0.10.5",
         "@types/styled-components": "^5.1.6",
         "antd": "^4.9.4",
         "axios": "^0.21.1",
@@ -26,6 +27,7 @@
         "cheerio": "^1.0.0-rc.6",
         "moment": "^2.29.1",
         "next": "^10.2.0",
+        "next-redux-saga": "^4.1.2",
         "next-redux-wrapper": "^6.0.2",
         "nookies": "^2.5.2",
         "prettier": "^2.2.1",
@@ -38,8 +40,10 @@
         "react-redux": "^7.2.2",
         "react-reveal": "^1.2.2",
         "react-simply-carousel": "^4.2.0",
+        "reselect": "^4.0.0",
         "styled-components": "^5.2.1",
-        "swr": "^0.4.0"
+        "swr": "^0.4.0",
+        "typesafe-actions": "^5.1.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.10",

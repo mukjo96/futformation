@@ -42,5 +42,5 @@ const MatchDetail = () => {
 export default MatchDetail;
 
 const Container = styled.div`
-    padding: 4vw;
+    padding: 56px;
 `;

@@ -85,7 +85,7 @@ const renderStatList = (listData, category) => {
 export default PlayerStats;
 
 const Container = styled.div`
-    padding: 2vw;
+    padding: 28px;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
@@ -95,7 +95,7 @@ const ContainRow = styled(Row)``;
 
 const StyledCol = styled(Col)`
     padding-top: 16px;
-    padding-left: 3vw;
+    padding-left: 33px;
     @media screen and (max-width: 768px) {
         padding-left: 0;
     }
@@ -142,7 +142,7 @@ const PlayerList = styled.div`
     justify-content: space-between;
 
     cursor: pointer;
-    padding: 12px 3vw 12px 0;
+    padding: 12px 33px 12px 0;
     /* border-right: 1px solid lightgrey; */
 
     @media screen and (max-width: 768px) {
@@ -166,7 +166,7 @@ const PlayerData = styled.span`
 
 const ImageCol = styled(Col)`
     padding-top: 16px;
-    padding-left: 3vw;
+    padding-left: 33px;
     background-position: top;
     background-repeat: no-repeat;
     background-size: contain;

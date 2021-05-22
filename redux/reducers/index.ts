@@ -1,8 +1,15 @@
-import { combineReducers } from "redux"; // 여러 리듀서들을 하나로 합쳐준다.
-import userObj from "./userObj";
+import { combineReducers, Reducer, AnyAction } from "redux";
+import { RootStateInterface } from "../interfaces/ifRootState";
+import rdcExample from "./rdcExample";
+import rdcApiExample from "./rdcApiExample";
 
-const rootReducer = combineReducers({
-    userObj, // 여기에 다른 리듀서들을 더 적으면 된다!
+const rootReducer: Reducer<
+    RootStateInterface,
+    AnyAction
+> = combineReducers<RootStateInterface>({
+    rdcExample,
+    rdcApiExample,
 });
 
-export default rootReducer; // _app.js에서 reducer로 사용된다!
+export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;

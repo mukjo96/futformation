@@ -10,164 +10,139 @@ import styled from "styled-components";
 import { match } from "assert";
 const { Panel } = Collapse;
 
-const MatchList = () => {
-    const [matchData, setMatchData] = useState([]);
-    const [currentMonth, setCurrentMonth] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        getCityFixtures()
-            .then((data) => {
-                setCurrentMonth(data.fixturesTab.currentMonth);
-                setMatchData(data.fixturesTab.fixtures);
-            })
-            .then((_) => {
-                setIsLoading(false);
-            });
-    }, []);
-
-    if (isLoading) {
-        return <Loading />;
-    } else {
-        return (
-            <Container>
-                <Fade bottom cascade ssrFadeout>
-                    <StyledCollapse
-                        bordered={false}
-                        defaultActiveKey={[currentMonth]}
-                    >
-                        {Object.keys(matchData).map((key) => (
-                            <Panel header={key} key={key}>
-                                <List
-                                    itemLayout="vertical"
-                                    dataSource={matchData[key]}
-                                    renderItem={(item: matchDataTypes) => {
-                                        let isCityWin: string;
-                                        if (item.home.name === "Man City") {
-                                            item.home.score > item.away.score
-                                                ? (isCityWin = "win")
-                                                : item.home.score ===
-                                                  item.away.score
-                                                ? (isCityWin = "draw")
-                                                : (isCityWin = "lose");
-                                        } else {
-                                            item.away.score > item.home.score
-                                                ? (isCityWin = "win")
-                                                : item.away.score ===
-                                                  item.home.score
-                                                ? (isCityWin = "draw")
-                                                : (isCityWin = "lose");
-                                        }
-                                        return (
-                                            <List.Item>
-                                                <List.Item.Meta
-                                                    style={{ margin: 0 }}
-                                                    title={
-                                                        <>
-                                                            <MatchScore>
-                                                                <div>
-                                                                    <TeamLogo
-                                                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.home.id}_small.png`}
-                                                                        width="40px"
-                                                                    />
-                                                                    <TeamLogo
-                                                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.away.id}_small.png`}
-                                                                        width="40px"
-                                                                    />
-                                                                </div>
-                                                                <ScoreCol>
-                                                                    <LiveText>
-                                                                        {item
+const MatchList = ({ matchData, currentMonth }) => {
+    return (
+        <Container>
+            <Fade bottom cascade ssrFadeout>
+                <StyledCollapse
+                    bordered={false}
+                    defaultActiveKey={[currentMonth]}
+                >
+                    {Object.keys(matchData).map((key) => (
+                        <Panel header={key} key={key}>
+                            <List
+                                itemLayout="vertical"
+                                dataSource={matchData[key]}
+                                renderItem={(item: matchDataTypes) => {
+                                    let isCityWin: string;
+                                    if (item.home.name === "Man City") {
+                                        item.home.score > item.away.score
+                                            ? (isCityWin = "win")
+                                            : item.home.score ===
+                                              item.away.score
+                                            ? (isCityWin = "draw")
+                                            : (isCityWin = "lose");
+                                    } else {
+                                        item.away.score > item.home.score
+                                            ? (isCityWin = "win")
+                                            : item.away.score ===
+                                              item.home.score
+                                            ? (isCityWin = "draw")
+                                            : (isCityWin = "lose");
+                                    }
+                                    return (
+                                        <List.Item>
+                                            <List.Item.Meta
+                                                style={{ margin: 0 }}
+                                                title={
+                                                    <>
+                                                        <MatchScore>
+                                                            <div>
+                                                                <TeamLogo
+                                                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.home.id}_small.png`}
+                                                                    width="40px"
+                                                                />
+                                                                <TeamLogo
+                                                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.away.id}_small.png`}
+                                                                    width="40px"
+                                                                />
+                                                            </div>
+                                                            <ScoreCol>
+                                                                <LiveText>
+                                                                    {item.status
+                                                                        .started &&
+                                                                    !item.status
+                                                                        .finished
+                                                                        ? "LIVE"
+                                                                        : ""}
+                                                                </LiveText>
+                                                                <ScoreH4
+                                                                    iscitywin={
+                                                                        isCityWin
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        item
                                                                             .status
-                                                                            .started &&
-                                                                        !item
-                                                                            .status
-                                                                            .finished
-                                                                            ? "LIVE"
-                                                                            : ""}
-                                                                    </LiveText>
-                                                                    <ScoreH4
-                                                                        iscitywin={
-                                                                            isCityWin
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            item
-                                                                                .status
-                                                                                .scoreStr
-                                                                        }{" "}
-                                                                        {item
-                                                                            .status
-                                                                            .started &&
-                                                                            isCityWin.toUpperCase()[0]}
-                                                                    </ScoreH4>
-                                                                </ScoreCol>
-                                                            </MatchScore>
-                                                            <CustomDivider
-                                                                ispast={item.isPastMatch.toString()}
-                                                                iscitywin={
-                                                                    isCityWin
-                                                                }
-                                                            />
-                                                        </>
-                                                    }
-                                                />
-                                                <MatchDescription>
-                                                    <div>
-                                                        <TeamName>{`${item.home.name} vs ${item.away.name}`}</TeamName>
-                                                        <TournamentName>
-                                                            {
-                                                                item.tournament
-                                                                    .name
+                                                                            .scoreStr
+                                                                    }{" "}
+                                                                    {item.status
+                                                                        .started &&
+                                                                        isCityWin.toUpperCase()[0]}
+                                                                </ScoreH4>
+                                                            </ScoreCol>
+                                                        </MatchScore>
+                                                        <CustomDivider
+                                                            ispast={item.isPastMatch.toString()}
+                                                            iscitywin={
+                                                                isCityWin
                                                             }
-                                                        </TournamentName>
-                                                        <StartDate>
-                                                            {item.status
-                                                                .startDateStr
-                                                                ? item.status
-                                                                      .startDateStr
-                                                                : item.status
-                                                                      .liveTime
-                                                                      .short}
-                                                            {item.status
-                                                                .startTimeStr &&
-                                                                ` | ${item.status.startTimeStr}`}
-                                                        </StartDate>
-                                                    </div>
-                                                    <Link
-                                                        href={`matches/${item.id}`}
+                                                        />
+                                                    </>
+                                                }
+                                            />
+                                            <MatchDescription>
+                                                <div>
+                                                    <TeamName>{`${item.home.name} vs ${item.away.name}`}</TeamName>
+                                                    <TournamentName>
+                                                        {item.tournament.name}
+                                                    </TournamentName>
+                                                    <StartDate>
+                                                        {item.status
+                                                            .startDateStr
+                                                            ? item.status
+                                                                  .startDateStr
+                                                            : item.status
+                                                                  .liveTime
+                                                                  .short}
+                                                        {item.status
+                                                            .startTimeStr &&
+                                                            ` | ${item.status.startTimeStr}`}
+                                                    </StartDate>
+                                                </div>
+                                                <Link
+                                                    href={`matches/${item.id}`}
+                                                >
+                                                    <a
+                                                        style={{
+                                                            textDecoration:
+                                                                "none",
+                                                            alignSelf:
+                                                                "flex-end",
+                                                        }}
                                                     >
-                                                        <a
-                                                            style={{
-                                                                textDecoration:
-                                                                    "none",
-                                                                alignSelf:
-                                                                    "flex-end",
-                                                            }}
-                                                        >
-                                                            <MoreButton
-                                                                value="More"
-                                                                size="medium"
-                                                            />
-                                                        </a>
-                                                    </Link>
-                                                </MatchDescription>
-                                            </List.Item>
-                                        );
-                                    }}
-                                />
-                            </Panel>
-                        ))}
-                    </StyledCollapse>
-                </Fade>
-            </Container>
-        );
-    }
+                                                        <MoreButton
+                                                            value="More"
+                                                            size="medium"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </MatchDescription>
+                                        </List.Item>
+                                    );
+                                }}
+                            />
+                        </Panel>
+                    ))}
+                </StyledCollapse>
+            </Fade>
+        </Container>
+    );
 };
 export default MatchList;
 
 const Container = styled.div`
-    padding: 4vw;
+    padding: 56px;
 `;
 
 const StyledCollapse = styled(Collapse)`
@@ -180,7 +155,7 @@ const MatchScore = styled(Row)`
 `;
 
 const TeamLogo = styled.img`
-    margin-right: 1vw;
+    margin-right: 12px;
     @media screen and (max-width: 768px) {
         margin-right: 2vw;
     }

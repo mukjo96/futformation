@@ -139,7 +139,7 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide }) => {
 export default NewsCard;
 
 const Container = styled.div`
-    padding: 2vw;
+    padding: 28px;
 `;
 
 const NewsContainer = styled.div`

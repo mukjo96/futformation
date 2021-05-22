@@ -25,7 +25,7 @@ const Button = styled.button<{ size: string }>`
     ${(props) =>
         props.size === "large"
             ? css`
-                  width: 10vw;
+                  width: 112px;
                   min-width: 70px;
                   max-width: 110px;
                   span {
@@ -36,7 +36,7 @@ const Button = styled.button<{ size: string }>`
                   }
               `
             : css`
-                  width: 8vw;
+                  width: 88px;
                   min-width: 70px;
                   max-width: 90px;
                   span {
@@ -47,6 +47,6 @@ const Button = styled.button<{ size: string }>`
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
-    margin-top: 1vw;
+    margin-top: 12px;
     cursor: pointer;
 `;

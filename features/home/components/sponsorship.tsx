@@ -96,7 +96,7 @@ const Sponsorship = () => {
 export default Sponsorship;
 
 const Container = styled.div`
-    padding: 2vw;
+    padding: 28px;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
@@ -107,7 +107,7 @@ const ImageCol = styled(Col)`
     background-repeat: no-repeat;
     align-self: center;
 
-    padding: 3vw;
+    padding: 33px;
     @media screen and (max-width: 768px) {
         border-right: none;
         padding: 5vw;

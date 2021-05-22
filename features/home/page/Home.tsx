@@ -1,18 +1,13 @@
 import Loading from "@features/common/Loading";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
 import {
-    matchDataTypes,
-    newsDataTypes,
-    playerListDataTypes,
-    playerStatDataTypes,
-} from "../api/cityDataTypes";
-import {
-    getCityFixtures,
-    getCityNews,
-    getCityPlayers,
-    getCityStats,
-} from "../api/getCityData.api";
+    actApiInit,
+    actApiRequest,
+} from "../../../redux/actions/actApiExample";
+
 import AdBanner from "../components/adBanner";
 import LatestNews from "../components/latestNews";
 import MainBanner from "../components/mainBanner";
@@ -20,6 +15,10 @@ import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
 import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
+import { loadCitydataRequestAction } from "../../../redux/reducers/cityDataReducer";
+import { RootState } from "../../../redux/reducers";
+import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
+import { createSelector } from "reselect";
 
 const BackDiv = styled.div`
     background-color: white;
@@ -27,49 +26,42 @@ const BackDiv = styled.div`
 `;
 
 const Home = () => {
-    const [matchList, setMatchList] = useState<Array<matchDataTypes>>();
-    const [currentMonth, setCurrentMonth] = useState("");
-    const [newsList, setNewsList] = useState<Array<newsDataTypes>>();
-    const [dataList, setDataList] = useState<Array<playerListDataTypes>>();
-    const [statList, setStatList] = useState<playerStatDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
 
+    const dispatch = useDispatch();
+    const { apiResult, error } = useSelector(
+        (state: RootStateInterface): IApiExampleState => state.rdcApiExample
+    );
+
     useEffect(() => {
-        setIsLoading(true);
-        getCityApi();
+        if (!apiResult) {
+            handleOnClick();
+        }
     }, []);
 
-    function getCityApi() {
-        getCityNews().then((data) => {
-            setNewsList(data.news);
-        });
-        getCityFixtures().then((data) => {
-            setCurrentMonth(data.fixturesTab.currentMonth);
-            setMatchList(data.fixturesTab.fixtures);
-        });
-        getCityPlayers().then((data) => {
-            setDataList(data.squad);
-        });
-        getCityStats().then((data) => {
-            setStatList(data);
-        });
-    }
+    const handleOnClick = () => {
+        dispatch(actApiInit());
+        dispatch(actApiRequest());
+    };
 
     if (isLoading) {
-        matchList && newsList && dataList && statList && setIsLoading(false);
-
-        return <Loading />;
+        apiResult && setIsLoading(false);
+        return (
+            <div>
+                <Loading />;
+            </div>
+        );
     } else {
         return (
             <Fragment>
-                <MainBanner bannerList={newsList[0]} />
+                <MainBanner bannerList={apiResult?.newsList[0]} />
                 <MatchSchedule
-                    matchList={matchList}
-                    currentMonth={currentMonth}
+                    matchList={apiResult?.matchList}
+                    currentMonth={apiResult?.currentMonth}
                 />
-                <LatestNews newsList={newsList} />
-                <TeamPlayers dataList={dataList} />
-                <PlayerStats statList={statList} />
+                <LatestNews newsList={apiResult?.newsList} />
+                <TeamPlayers dataList={apiResult?.playerList} />
+                <PlayerStats statList={apiResult?.statList} />
                 <AdBanner />
                 <Sponsorship />
                 <BackDiv></BackDiv>

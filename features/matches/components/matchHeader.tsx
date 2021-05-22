@@ -189,8 +189,8 @@ const TeamNameCol = styled(Col)`
 `;
 
 const EventText = styled.span`
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin-left: 12px;
+    margin-right: 12px;
 `;
 
 const Card = styled.div<{ color: string }>`

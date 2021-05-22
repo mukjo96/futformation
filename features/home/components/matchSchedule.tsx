@@ -125,7 +125,7 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
 export default MatchSchedule;
 
 const Container = styled.div`
-    padding: 2vw;
+    padding: 28px;
     @media screen and (max-width: 768px) {
         padding: 4vw;
     }
@@ -136,7 +136,7 @@ const MatchCol = styled(Col)`
     :nth-child(4) {
         border-right: 0px solid lightgrey;
     }
-    padding: 3vw;
+    padding: 33px;
     @media screen and (max-width: 768px) {
         border-right: none;
         padding: 5vw;
@@ -149,7 +149,7 @@ const MatchScore = styled(Row)`
 `;
 
 const TeamLogo = styled.img`
-    margin-right: 1vw;
+    margin-right: 12px;
     @media screen and (max-width: 768px) {
         margin-right: 2vw;
     }

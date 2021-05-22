@@ -95,7 +95,7 @@ const LatestNews = ({ newsList }) => {
 export default LatestNews;
 
 const Container = styled.div`
-    padding: 2vw;
+    padding: 28px;
     padding-right: 0;
     @media screen and (max-width: 768px) {
         padding: 4vw;
@@ -104,8 +104,8 @@ const Container = styled.div`
 `;
 
 const NewsRow = styled(Row)`
-    padding-top: 2vw;
-    padding-left: 6vw;
+    padding-top: 28px;
+    padding-left: 84px;
     @media screen and (max-width: 768px) {
         padding: 4vw 0;
     }
