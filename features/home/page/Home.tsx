@@ -15,10 +15,7 @@ import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
 import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
-import { loadCitydataRequestAction } from "../../../redux/reducers/cityDataReducer";
-import { RootState } from "../../../redux/reducers";
 import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
-import { createSelector } from "reselect";
 
 const BackDiv = styled.div`
     background-color: white;
@@ -47,9 +44,9 @@ const Home = () => {
     if (isLoading) {
         apiResult && setIsLoading(false);
         return (
-            <div>
-                <Loading />;
-            </div>
+            <Container>
+                <Loading />
+            </Container>
         );
     } else {
         return (
@@ -71,3 +68,11 @@ const Home = () => {
 };
 
 export default Home;
+
+const Container = styled.div`
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
