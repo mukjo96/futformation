@@ -5,6 +5,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 import MatchHeader from "./matchHeader";
+import MatchLineup from "./matchLineup";
+import MatchStats from "./matchStats";
 
 const MatchDetail = () => {
     const router = useRouter();
@@ -14,7 +16,6 @@ const MatchDetail = () => {
         `https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/matchDetails?matchId=${matchid}`
     );
 
-    console.log(data);
     if (error)
         return (
             <div>
@@ -35,6 +36,10 @@ const MatchDetail = () => {
     return (
         <Container>
             <MatchHeader matchData={data} />
+            <MatchLineup matchData={data} />
+            {data.header.status.started && (
+                <MatchStats statData={data.content.stats} />
+            )}
         </Container>
     );
 };

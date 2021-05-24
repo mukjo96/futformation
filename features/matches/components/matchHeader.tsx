@@ -76,10 +76,9 @@ const MatchHeader = ({ matchData }) => {
         setImpEvent(() => eventClassification(events));
     }, []);
 
-    console.log(impEvent);
     return (
         <Fade bottom cascade ssrFadeout>
-            <div>
+            <>
                 <TournamentName>
                     {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
                 </TournamentName>
@@ -152,7 +151,7 @@ const MatchHeader = ({ matchData }) => {
                         {impEvent[1].map((data) => renderEvent(data, false))}
                     </Col>
                 </Row>
-            </div>
+            </>
         </Fade>
     );
 };
