@@ -1,10 +1,12 @@
-import { faFutbol } from "@fortawesome/free-solid-svg-icons";
+import { faExchangeAlt, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Avatar, Badge, Col, Row } from "antd";
-import React from "react";
+import { Avatar, Badge, Col, Row, Tooltip, Modal, Divider } from "antd";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const MatchLineup = ({ matchData }) => {
+    const [visibleModalNumber, setVisibleModalNumber] = useState("0");
+
     return (
         <Row style={{ marginTop: "48px" }}>
             {matchData.content.lineup.lineup.map((team, index) => {
@@ -13,36 +15,139 @@ const MatchLineup = ({ matchData }) => {
                         ? team.players
                         : team.players.slice(0).reverse();
                 return (
-                    <StyledCol span={12}>
-                        {players.map((position) => (
+                    <StyledCol md={12} xs={24} key={index}>
+                        <BackgroundPitch>
                             <Row justify="space-around">
-                                {position.map((player) => renderPlayer(player))}
+                                <Title>{team.teamName.toUpperCase()}</Title>
+                                <Title>{team.lineup}</Title>
                             </Row>
-                        ))}
+                            {players.map((position, index) => (
+                                <Row justify="space-around" key={index}>
+                                    {position.map((player) => (
+                                        <div key={player.id}>
+                                            {renderPlayer(player, false)}
+                                            <Modal
+                                                title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
+                                                visible={
+                                                    visibleModalNumber ===
+                                                    player.id
+                                                }
+                                                onCancel={() => {
+                                                    setVisibleModalNumber("0");
+                                                }}
+                                                footer={null}
+                                            >
+                                                {tooltipPlayerStat(
+                                                    player.stats
+                                                )}
+                                            </Modal>
+                                        </div>
+                                    ))}
+                                </Row>
+                            ))}
+                        </BackgroundPitch>
+                        {
+                            <Row justify="center">
+                                <StyledDivider
+                                    style={{ borderTopColor: "lightgray" }}
+                                >
+                                    SUBSTITUTES
+                                </StyledDivider>
+                                {team.bench.slice(0, 8).map((player) => (
+                                    <Col span={6} key={player.id}>
+                                        {renderPlayer(player, true)}
+                                        <Modal
+                                            title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
+                                            visible={
+                                                visibleModalNumber === player.id
+                                            }
+                                            onCancel={() => {
+                                                setVisibleModalNumber("0");
+                                            }}
+                                            footer={null}
+                                        >
+                                            {tooltipPlayerStat(player.stats)}
+                                        </Modal>
+                                    </Col>
+                                ))}
+                            </Row>
+                        }
                     </StyledCol>
                 );
             })}
         </Row>
     );
 
-    function renderPlayer(player) {
+    function tooltipPlayerStat(stats) {
         return (
-            <PlayerContainer>
+            <>
+                {stats.map((statList, listIndex) =>
+                    Object.entries(statList).map((map, index) => (
+                        <Row justify="space-between">
+                            {listIndex > 0 && index === 0 && <StyledDivider />}
+                            <StatTitle>
+                                {index === 0 ? (
+                                    <strong>{map[0].toUpperCase()}</strong>
+                                ) : (
+                                    map[0]
+                                )}
+                            </StatTitle>
+                            <StatTitle>
+                                {index === 0 ? (
+                                    <strong>{map[1]}</strong>
+                                ) : (
+                                    map[1]
+                                )}
+                            </StatTitle>
+                        </Row>
+                    ))
+                )}
+            </>
+        );
+    }
+
+    function renderPlayer(player, isBench) {
+        return (
+            <PlayerContainer
+                onClick={() => {
+                    setVisibleModalNumber(player.id);
+                }}
+            >
                 <Badge
                     count={
-                        <Rating background={player.rating.bgcolor}>
-                            {player.rating.num}
-                        </Rating>
+                        player.rating.num ? (
+                            <Rating background={player.rating.bgcolor}>
+                                {player.rating.num}
+                            </Rating>
+                        ) : (
+                            0
+                        )
                     }
                 >
                     <Avatar size={48} shape="square" src={player.imageUrl} />
                 </Badge>
 
-                <Row justify="center" align="middle">
+                <PlayerName justify="center" align="middle">
                     <Shirt>{player.shirt}</Shirt>
-                    <Name>{player.name.lastName}</Name>
-                    {player?.events?.g && <FontAwesomeIcon icon={faFutbol} />}
-                </Row>
+                    <Name isbench={isBench}>{player.name.lastName}</Name>
+                    {player?.events?.g && (
+                        <GoalIcon
+                            icon={faFutbol}
+                            style={{
+                                marginLeft: "4px",
+                            }}
+                        />
+                    )}
+                    {player?.timeSubbedOn && (
+                        <FontAwesomeIcon
+                            icon={faExchangeAlt}
+                            style={{
+                                marginLeft: "4px",
+                                width: "10px",
+                            }}
+                        />
+                    )}
+                </PlayerName>
             </PlayerContainer>
         );
     }
@@ -51,20 +156,58 @@ const MatchLineup = ({ matchData }) => {
 export default MatchLineup;
 
 const StyledCol = styled(Col)`
+    :first-child {
+        border-right: 1px solid white;
+    }
+    margin-bottom: 24px;
+`;
+
+const BackgroundPitch = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    border: 0.5px solid darkgray;
-    padding-top: 12px;
+    padding-top: 8px;
+    background-image: url("http://sharemytactics.com/images/pitch.svg");
+    height: 580px;
 
-    :first-child {
-        border-right: none;
+    @media screen and (max-width: 768px) {
+        height: 500px;
+    }
+`;
+
+const Title = styled.span`
+    color: white;
+
+    text-shadow: 2px 2px 4px #666666;
+`;
+
+const StatTitle = styled.span`
+    color: black;
+    font-size: 14px;
+
+    strong {
+        font-size: 16px;
+    }
+`;
+
+const StyledDivider = styled(Divider)`
+    place-self: center;
+    .ant-divider-with-text {
+        margin: 0 !important;
     }
 `;
 
 const PlayerContainer = styled.div`
     text-align: center;
-    padding: 12px;
+    text-align: -webkit-center;
+    padding: 16px 4px;
+    :hover {
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 8px 0;
+    }
 `;
 
 const Rating = styled.span<{ background: string }>`
@@ -74,13 +217,35 @@ const Rating = styled.span<{ background: string }>`
     padding: 4px;
 `;
 
+const PlayerName = styled(Row)`
+    box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 1px 4px;
+    border-radius: 2px;
+    width: fit-content;
+`;
+
 const Shirt = styled.span`
     font-size: 12px;
     margin-right: 4px;
     color: darkgray;
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+    }
 `;
 
-const Name = styled.span`
+const Name = styled.span<{ isbench: boolean }>`
     font-size: 12px;
-    margin-right: 4px;
+
+    color: ${(props) => (props.isbench ? "black" : "white")};
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+    }
+`;
+
+const GoalIcon = styled(FontAwesomeIcon)`
+    @media screen and (max-width: 768px) {
+        width: 10px !important;
+    }
 `;

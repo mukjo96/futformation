@@ -1,13 +1,11 @@
 import MoreButton from "@features/common/button/MoreButton";
-import Loading from "@features/common/Loading";
+
 import Fade from "react-reveal/Fade";
 import { matchDataTypes } from "@features/home/api/cityDataTypes";
-import { getCityFixtures } from "@features/home/api/getCityData.api";
 import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { match } from "assert";
 const { Panel } = Collapse;
 
 const MatchList = ({ matchData, currentMonth }) => {

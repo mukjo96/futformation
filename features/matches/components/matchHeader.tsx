@@ -1,6 +1,6 @@
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col, Row } from "antd";
+import { Col, Row, Tooltip } from "antd";
 import Fade from "react-reveal/Fade";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -33,14 +33,13 @@ const MatchHeader = ({ matchData }) => {
                             justifyContent: "flex-end",
                         }}
                     >
-                        <Col>
-                            <EventText>
-                                {` ${
-                                    data.timeStr
-                                }${"\t"}${data.nameStr.toUpperCase()}`}
-                            </EventText>
-                        </Col>
-                        <FontAwesomeIcon icon={faFutbol} />
+                        <EventText>
+                            {` ${
+                                data.timeStr
+                            }${"\t"}${data.nameStr.toUpperCase()}`}
+                        </EventText>
+
+                        <GoalIcon icon={faFutbol} />
                     </Row>
                     <Assist>{data.assistStr}</Assist>
                 </>
@@ -57,7 +56,7 @@ const MatchHeader = ({ matchData }) => {
         else
             return data.type === "Goal" ? (
                 <Row style={{ alignItems: "center" }}>
-                    <FontAwesomeIcon icon={faFutbol} />
+                    <GoalIcon icon={faFutbol} />
                     <EventText>
                         {` ${data.timeStr}${"\t"}${data.nameStr.toUpperCase()}`}
                     </EventText>
@@ -87,15 +86,63 @@ const MatchHeader = ({ matchData }) => {
                         justifyContent: "center",
                     }}
                 >
-                    <TeamScoreCol span={8}>
+                    <Col xs={4} md={2}>
+                        {matchData.content.matchFacts.teamForm[0].map(
+                            (match) => (
+                                <Tooltip
+                                    key={match.tooltipText}
+                                    title={
+                                        <>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[0]
+                                                }
+                                            </TooltipText>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[1]
+                                                }
+                                            </TooltipText>
+                                        </>
+                                    }
+                                    color="#f7f7f7"
+                                >
+                                    <Row
+                                        align="middle"
+                                        justify="center"
+                                        style={{ marginBottom: "4px" }}
+                                    >
+                                        <TeamLogo
+                                            src={match.imageUrl}
+                                            width="24px"
+                                        />
+                                        <TeamForm matchresult={match.result}>
+                                            <span>
+                                                {match.result === 1
+                                                    ? "W"
+                                                    : match.result === -1
+                                                    ? "L"
+                                                    : "D"}
+                                            </span>
+                                        </TeamForm>
+                                    </Row>
+                                </Tooltip>
+                            )
+                        )}
+                    </Col>
+                    <TeamScoreCol xs={6} md={7}>
                         <Row>
-                            <TeamNameCol span={12}>
-                                <TeamLogo
+                            <TeamNameCol xs={24} md={10}>
+                                <TitleLogo
                                     src={header.teams[0].imageUrl}
                                     width="100px"
                                 />
                             </TeamNameCol>
-                            <TeamNameCol span={12}>
+                            <TeamNameCol xs={0} md={14}>
                                 <TeamName ishome={true}>
                                     {header.teams[0].name
                                         .replace(" ", "\n")
@@ -104,39 +151,81 @@ const MatchHeader = ({ matchData }) => {
                             </TeamNameCol>
                         </Row>
                     </TeamScoreCol>
-                    <TeamScoreCol span={6}>
+                    <TeamScoreCol xs={4} md={6}>
                         <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
                     </TeamScoreCol>
-                    <TeamScoreCol span={8}>
+                    <TeamScoreCol xs={6} md={7}>
                         <Row>
-                            <TeamNameCol span={12}>
+                            <TeamNameCol xs={0} md={14}>
                                 <TeamName ishome={false}>
                                     {header.teams[1].name
                                         .replace(" ", "\n")
                                         .toUpperCase()}
                                 </TeamName>
                             </TeamNameCol>
-                            <TeamNameCol span={12}>
-                                <TeamLogo
+                            <TeamNameCol xs={24} md={10}>
+                                <TitleLogo
                                     src={header.teams[1].imageUrl}
                                     width="100px"
                                 />
                             </TeamNameCol>
                         </Row>
                     </TeamScoreCol>
+                    <Col xs={4} md={2}>
+                        {matchData.content.matchFacts.teamForm[1].map(
+                            (match) => (
+                                <Tooltip
+                                    key={match.tooltipText}
+                                    title={
+                                        <>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[0]
+                                                }
+                                            </TooltipText>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[1]
+                                                }
+                                            </TooltipText>
+                                        </>
+                                    }
+                                    color="#f7f7f7"
+                                >
+                                    <Row
+                                        align="middle"
+                                        justify="center"
+                                        style={{ marginBottom: "4px" }}
+                                    >
+                                        <TeamForm matchresult={match.result}>
+                                            <span>
+                                                {match.result === 1
+                                                    ? "W"
+                                                    : match.result === -1
+                                                    ? "L"
+                                                    : "D"}
+                                            </span>
+                                        </TeamForm>
+                                        <TeamLogo src={match.imageUrl} />
+                                    </Row>
+                                </Tooltip>
+                            )
+                        )}
+                    </Col>
                 </Row>
                 <Row
                     style={{
                         justifyContent: "center",
                     }}
                 >
-                    <Col span={8}>
-                        {impEvent[0].map((data) => renderEvent(data, true))}
-                    </Col>
                     <Col
                         style={{ textAlign: "center", alignSelf: "flex-start" }}
-                        offset={1}
-                        span={4}
+                        xs={24}
+                        md={0}
                     >
                         <StadiumRound>
                             {infoBox.Stadium.name.toUpperCase()}
@@ -147,8 +236,30 @@ const MatchHeader = ({ matchData }) => {
                                 .toUpperCase()}
                         </StadiumRound>
                     </Col>
-                    <Col span={8} offset={1}>
-                        {impEvent[1].map((data) => renderEvent(data, false))}
+                    <Col md={8} xs={12}>
+                        {impEvent[0].map((data, index) => (
+                            <div key={index}>{renderEvent(data, true)}</div>
+                        ))}
+                    </Col>
+                    <Col
+                        style={{ textAlign: "center", alignSelf: "flex-start" }}
+                        offset={1}
+                        xs={0}
+                        md={4}
+                    >
+                        <StadiumRound>
+                            {infoBox.Stadium.name.toUpperCase()}
+                        </StadiumRound>
+                        <StadiumRound>
+                            {infoBox.Tournament.text
+                                .split(" - ")[1]
+                                .toUpperCase()}
+                        </StadiumRound>
+                    </Col>
+                    <Col md={8} xs={12}>
+                        {impEvent[1].map((data, index) => (
+                            <div key={index}>{renderEvent(data, false)}</div>
+                        ))}
                     </Col>
                 </Row>
             </>
@@ -163,7 +274,62 @@ const TournamentName = styled.h2`
     font-size: 14px;
 `;
 
-const TeamLogo = styled.img``;
+const TeamLogo = styled.img`
+    width: 24px;
+    height: 24px;
+
+    @media screen and (max-width: 768px) {
+        width: 18px;
+        height: 18px;
+    }
+`;
+const TitleLogo = styled.img`
+    width: 100px;
+    height: 100px;
+
+    @media screen and (max-width: 768px) {
+        width: 50px;
+        height: 50px;
+    }
+`;
+
+const TeamForm = styled.div<{ matchresult: number }>`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${(props) =>
+        props.matchresult === 1
+            ? "green"
+            : props.matchresult === -1
+            ? "red"
+            : "darkgray"};
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    color: white;
+    border-radius: 6px;
+    margin-right: 4px;
+    margin-left: 4px;
+
+    span {
+        font-weight: 500;
+        font-size: 12px;
+        margin: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 18px;
+        height: 18px;
+        span {
+            font-size: 10px;
+        }
+    }
+`;
+
+const TooltipText = styled.h5`
+    margin: 0;
+    text-align: center;
+`;
 
 const TeamScoreCol = styled(Col)`
     text-align: center;
@@ -175,11 +341,18 @@ const TeamName = styled.h2<{ ishome: boolean }>`
     font-size: 24px;
     margin: 0;
     text-align: ${(props) => (props.ishome ? "end" : "start")};
+
+    @media screen and (max-width: 768px) {
+        font-size: 18px;
+    }
 `;
 
 const Score = styled.h3`
     margin: 0;
     font-size: 48px;
+    @media screen and (max-width: 768px) {
+        font-size: 24px;
+    }
 `;
 
 const TeamNameCol = styled(Col)`
@@ -190,8 +363,20 @@ const TeamNameCol = styled(Col)`
 const EventText = styled.span`
     margin-left: 12px;
     margin-right: 12px;
+
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 `;
 
+const GoalIcon = styled(FontAwesomeIcon)`
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+        margin: 0 0.2em;
+    }
+`;
 const Card = styled.div<{ color: string }>`
     border-radius: 0.1em;
     align-self: center;
@@ -200,6 +385,12 @@ const Card = styled.div<{ color: string }>`
     width: 0.6em;
     height: 1em;
     margin: 0 0.2em 0 0.2em;
+
+    @media screen and (max-width: 768px) {
+        width: 0.4em;
+        height: 0.8em;
+        margin: 0 0.3em;
+    }
 `;
 
 const StadiumRound = styled.h5`
@@ -212,4 +403,7 @@ const Assist = styled.h5`
     font-size: 10px;
     margin: 0;
     text-align: end;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;

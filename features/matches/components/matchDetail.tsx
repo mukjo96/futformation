@@ -36,9 +36,11 @@ const MatchDetail = () => {
     return (
         <Container>
             <MatchHeader matchData={data} />
-            <MatchLineup matchData={data} />
             {data.header.status.started && (
-                <MatchStats statData={data.content.stats} />
+                <>
+                    <MatchLineup matchData={data} />
+                    <MatchStats statData={data.content.stats} />
+                </>
             )}
         </Container>
     );
@@ -47,5 +49,10 @@ const MatchDetail = () => {
 export default MatchDetail;
 
 const Container = styled.div`
-    padding: 56px;
+    width: 100%;
+    padding: 5%;
+
+    @media screen and (max-width: 768px) {
+        padding: 0;
+    }
 `;
