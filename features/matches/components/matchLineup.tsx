@@ -1,6 +1,7 @@
 import { faExchangeAlt, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Badge, Col, Row, Tooltip, Modal, Divider } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import styled from "styled-components";
 
@@ -26,21 +27,7 @@ const MatchLineup = ({ matchData }) => {
                                     {position.map((player) => (
                                         <div key={player.id}>
                                             {renderPlayer(player, false)}
-                                            <Modal
-                                                title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
-                                                visible={
-                                                    visibleModalNumber ===
-                                                    player.id
-                                                }
-                                                onCancel={() => {
-                                                    setVisibleModalNumber("0");
-                                                }}
-                                                footer={null}
-                                            >
-                                                {tooltipPlayerStat(
-                                                    player.stats
-                                                )}
-                                            </Modal>
+                                            {playerModal(player)}
                                         </div>
                                     ))}
                                 </Row>
@@ -56,18 +43,7 @@ const MatchLineup = ({ matchData }) => {
                                 {team.bench.slice(0, 8).map((player) => (
                                     <Col span={6} key={player.id}>
                                         {renderPlayer(player, true)}
-                                        <Modal
-                                            title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
-                                            visible={
-                                                visibleModalNumber === player.id
-                                            }
-                                            onCancel={() => {
-                                                setVisibleModalNumber("0");
-                                            }}
-                                            footer={null}
-                                        >
-                                            {tooltipPlayerStat(player.stats)}
-                                        </Modal>
+                                        {playerModal(player)}
                                     </Col>
                                 ))}
                             </Row>
@@ -124,7 +100,13 @@ const MatchLineup = ({ matchData }) => {
                         )
                     }
                 >
-                    <Avatar size={48} shape="square" src={player.imageUrl} />
+                    <Avatar
+                        size={48}
+                        shape="circle"
+                        src={player.imageUrl}
+                        icon={<UserOutlined />}
+                        onError={() => true}
+                    />
                 </Badge>
 
                 <PlayerName justify="center" align="middle">
@@ -149,6 +131,21 @@ const MatchLineup = ({ matchData }) => {
                     )}
                 </PlayerName>
             </PlayerContainer>
+        );
+    }
+
+    function playerModal(player) {
+        return (
+            <Modal
+                title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
+                visible={visibleModalNumber === player.id}
+                onCancel={() => {
+                    setVisibleModalNumber("0");
+                }}
+                footer={null}
+            >
+                {tooltipPlayerStat(player.stats)}
+            </Modal>
         );
     }
 };

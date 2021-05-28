@@ -7,6 +7,7 @@ import useSWR from "swr";
 import MatchHeader from "./matchHeader";
 import MatchLineup from "./matchLineup";
 import MatchStats from "./matchStats";
+import MatchTimeline from "./matchTimeline";
 
 const MatchDetail = () => {
     const router = useRouter();
@@ -26,18 +27,14 @@ const MatchDetail = () => {
                 />
             </div>
         );
-    else if (!data || !matchid)
-        return (
-            <div>
-                <Loading />
-            </div>
-        );
+    else if (!data || !matchid) return <Loading />;
 
     return (
         <Container>
             <MatchHeader matchData={data} />
             {data.header.status.started && (
                 <>
+                    <MatchTimeline matchData={data} />
                     <MatchLineup matchData={data} />
                     <MatchStats statData={data.content.stats} />
                 </>
