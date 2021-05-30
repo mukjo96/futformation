@@ -4,9 +4,15 @@ import { Avatar, Badge, Col, Row, Tooltip, Modal, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import styled from "styled-components";
+import Fade from "react-reveal/Fade";
+import { matchDetailTypes, matchPlayerTypes } from "../types/matchDataTypes";
 
-const MatchLineup = ({ matchData }) => {
-    const [visibleModalNumber, setVisibleModalNumber] = useState("0");
+type dataType = {
+    matchData: matchDetailTypes;
+};
+
+const MatchLineup = ({ matchData }: dataType) => {
+    const [visibleModalNumber, setVisibleModalNumber] = useState(0);
 
     return (
         <Row style={{ marginTop: "48px" }}>
@@ -17,23 +23,29 @@ const MatchLineup = ({ matchData }) => {
                         : team.players.slice(0).reverse();
                 return (
                     <StyledCol md={12} xs={24} key={index}>
-                        <BackgroundPitch>
-                            <Row justify="space-around">
-                                <Title>{team.teamName.toUpperCase()}</Title>
-                                <Title>{team.lineup}</Title>
-                            </Row>
-                            {players.map((position, index) => (
-                                <Row justify="space-around" key={index}>
-                                    {position.map((player) => (
-                                        <div key={player.id}>
-                                            {renderPlayer(player, false)}
-                                            {playerModal(player)}
-                                        </div>
-                                    ))}
+                        <Fade
+                            left={index === 0}
+                            right={index === 1}
+                            cascade
+                            ssrFadeout
+                            key={index}
+                        >
+                            <BackgroundPitch>
+                                <Row justify="space-around">
+                                    <Title>{team.teamName.toUpperCase()}</Title>
+                                    <Title>{team.lineup}</Title>
                                 </Row>
-                            ))}
-                        </BackgroundPitch>
-                        {
+                                {players.map((position, index) => (
+                                    <Row justify="space-around" key={index}>
+                                        {position.map((player) => (
+                                            <div key={player.id}>
+                                                {renderPlayer(player, false)}
+                                                {playerModal(player)}
+                                            </div>
+                                        ))}
+                                    </Row>
+                                ))}
+                            </BackgroundPitch>
                             <Row justify="center">
                                 <StyledDivider
                                     style={{ borderTopColor: "lightgray" }}
@@ -47,17 +59,17 @@ const MatchLineup = ({ matchData }) => {
                                     </Col>
                                 ))}
                             </Row>
-                        }
+                        </Fade>
                     </StyledCol>
                 );
             })}
         </Row>
     );
 
-    function tooltipPlayerStat(stats) {
+    function tooltipPlayerStat(stats: Array<Array<object>>) {
         return (
             <>
-                {stats.map((statList, listIndex) =>
+                {stats.map((statList: Array<object>, listIndex: number) =>
                     Object.entries(statList).map((map, index) => (
                         <Row justify="space-between">
                             {listIndex > 0 && index === 0 && <StyledDivider />}
@@ -82,7 +94,7 @@ const MatchLineup = ({ matchData }) => {
         );
     }
 
-    function renderPlayer(player, isBench) {
+    function renderPlayer(player: matchPlayerTypes, isBench: boolean) {
         return (
             <PlayerContainer
                 onClick={() => {
@@ -134,13 +146,13 @@ const MatchLineup = ({ matchData }) => {
         );
     }
 
-    function playerModal(player) {
+    function playerModal(player: matchPlayerTypes) {
         return (
             <Modal
                 title={`${player.shirt} ${player.name.firstName} ${player.name.lastName}`}
                 visible={visibleModalNumber === player.id}
                 onCancel={() => {
-                    setVisibleModalNumber("0");
+                    setVisibleModalNumber(0);
                 }}
                 footer={null}
             >

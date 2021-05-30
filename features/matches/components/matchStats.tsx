@@ -1,8 +1,14 @@
 import { Col, Progress, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
+import Fade from "react-reveal/Fade";
+import { matchStatsTypes, statTypes } from "../types/matchDataTypes";
 
-const MatchStats = ({ statData }) => {
+type dataType = {
+    statData: matchStatsTypes;
+};
+
+const MatchStats = ({ statData }: dataType) => {
     const stats = statData.stats;
     const homeColor = statData.teamColors.home;
     const awayColor = statData.teamColors.away;
@@ -13,56 +19,64 @@ const MatchStats = ({ statData }) => {
                 md={16}
                 style={{ padding: "5% 0", justifyContent: "center" }}
             >
-                <h2 style={{ textAlign: "center" }}>{stats[0].title}</h2>
-                {stats[0].stats.map((stat, index) =>
-                    stat.type === "graph" ? (
-                        <div key={index}>
-                            <Title>{stat.title}</Title>
-                            <Row
-                                key={stat.title}
-                                style={{
-                                    justifyContent: "center",
-                                    marginBottom: "12px",
-                                }}
-                            >
-                                <Col xs={6} md={4}>
-                                    <StatTitle
-                                        highlited={stat.highlighted === "home"}
-                                        textcolor={homeColor}
-                                    >
-                                        {stat.stats[0] + "%"}
-                                    </StatTitle>
-                                </Col>
-                                <Col xs={12} md={12}>
-                                    <Progress
-                                        percent={
-                                            (parseInt(stat.stats[0]) /
-                                                (parseInt(stat.stats[0]) +
-                                                    parseInt(stat.stats[1]))) *
-                                            100
-                                        }
-                                        strokeColor={homeColor}
-                                        trailColor={awayColor}
-                                        strokeLinecap="square"
-                                        showInfo={false}
-                                    />
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <StatTitle
-                                        highlited={stat.highlighted === "away"}
-                                        textcolor={awayColor}
-                                    >
-                                        {stat.stats[1] + "%"}
-                                    </StatTitle>
-                                </Col>
-                            </Row>
-                        </div>
-                    ) : (
-                        <div key={index}>
-                            {renderPlayerStats(stat, homeColor, awayColor)}
-                        </div>
-                    )
-                )}
+                <Fade bottom cascade ssrFadeout>
+                    <h2 style={{ textAlign: "center" }}>{stats[0].title}</h2>
+                    {stats[0].stats.map((stat, index) =>
+                        stat.type === "graph" ? (
+                            <div key={index}>
+                                <Title>{stat.title}</Title>
+                                <Row
+                                    key={stat.title}
+                                    style={{
+                                        justifyContent: "center",
+                                        marginBottom: "12px",
+                                    }}
+                                >
+                                    <Col xs={6} md={4}>
+                                        <StatTitle
+                                            highlited={
+                                                stat.highlighted === "home"
+                                            }
+                                            textcolor={homeColor}
+                                        >
+                                            {stat.stats[0] + "%"}
+                                        </StatTitle>
+                                    </Col>
+                                    <Col xs={12} md={12}>
+                                        <Progress
+                                            percent={
+                                                (parseInt(stat.stats[0]) /
+                                                    (parseInt(stat.stats[0]) +
+                                                        parseInt(
+                                                            stat.stats[1]
+                                                        ))) *
+                                                100
+                                            }
+                                            strokeColor={homeColor}
+                                            trailColor={awayColor}
+                                            strokeLinecap="square"
+                                            showInfo={false}
+                                        />
+                                    </Col>
+                                    <Col xs={6} md={4}>
+                                        <StatTitle
+                                            highlited={
+                                                stat.highlighted === "away"
+                                            }
+                                            textcolor={awayColor}
+                                        >
+                                            {stat.stats[1] + "%"}
+                                        </StatTitle>
+                                    </Col>
+                                </Row>
+                            </div>
+                        ) : (
+                            <div key={index}>
+                                {renderPlayerStats(stat, homeColor, awayColor)}
+                            </div>
+                        )
+                    )}
+                </Fade>
             </Col>
             <Row style={{ justifyContent: "center" }}>
                 {stats.slice(1, 5).map((subStats, index) => (
@@ -72,21 +86,31 @@ const MatchStats = ({ statData }) => {
                         md={10}
                         style={{ marginBottom: "24px" }}
                     >
-                        <h3 style={{ textAlign: "center" }}>
-                            {subStats.title}
-                        </h3>
-                        {subStats.stats.map((stat) => (
-                            <div key={stat.title}>
-                                {renderPlayerStats(stat, homeColor, awayColor)}
-                            </div>
-                        ))}
+                        <Fade bottom cascade ssrFadeout>
+                            <h3 style={{ textAlign: "center" }}>
+                                {subStats.title}
+                            </h3>
+                            {subStats.stats.map((stat) => (
+                                <div key={stat.title}>
+                                    {renderPlayerStats(
+                                        stat,
+                                        homeColor,
+                                        awayColor
+                                    )}
+                                </div>
+                            ))}
+                        </Fade>
                     </Col>
                 ))}
             </Row>
         </Row>
     );
 
-    function renderPlayerStats(stat, homeColor, awayColor) {
+    function renderPlayerStats(
+        stat: statTypes,
+        homeColor: string,
+        awayColor: string
+    ) {
         return (
             <Row key={stat.title} style={{ justifyContent: "center" }}>
                 <Col xs={6} md={4}>

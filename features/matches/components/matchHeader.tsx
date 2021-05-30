@@ -4,14 +4,19 @@ import { Col, Row, Tooltip } from "antd";
 import Fade from "react-reveal/Fade";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
 
-const MatchHeader = ({ matchData }) => {
-    const [impEvent, setImpEvent] = useState([[], []]);
+type dataType = {
+    matchData: matchDetailTypes;
+};
+
+const MatchHeader = ({ matchData }: dataType) => {
+    const [impEvent, setImpEvent] = useState<matchEventTypes[][]>([[], []]);
     const events = matchData.content.matchFacts.events.events;
     const infoBox = matchData.content.matchFacts.infoBox;
     const header = matchData.header;
 
-    function eventClassification(events) {
+    function eventClassification(events: Array<matchEventTypes>) {
         const homeEvents = [];
         const awayEvents = [];
         events.map((data) => {
@@ -23,7 +28,7 @@ const MatchHeader = ({ matchData }) => {
         return [homeEvents, awayEvents];
     }
 
-    function renderEvent(data, ishome) {
+    function renderEvent(data: matchEventTypes, ishome: boolean) {
         if (ishome)
             return data.type === "Goal" ? (
                 <>
@@ -77,192 +82,167 @@ const MatchHeader = ({ matchData }) => {
 
     return (
         <Fade bottom cascade ssrFadeout>
-            <>
-                <TournamentName>
-                    {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
-                </TournamentName>
-                <Row
+            <TournamentName>
+                {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
+            </TournamentName>
+            <Row
+                style={{
+                    justifyContent: "center",
+                    marginBottom: "12px",
+                }}
+            >
+                <Col xs={4} md={2}>
+                    {matchData.content.matchFacts.teamForm[0].map((match) => (
+                        <Tooltip
+                            key={match.tooltipText}
+                            title={
+                                <>
+                                    <TooltipText>
+                                        {match.tooltipText.split(": ")[0]}
+                                    </TooltipText>
+                                    <TooltipText>
+                                        {match.tooltipText.split(": ")[1]}
+                                    </TooltipText>
+                                </>
+                            }
+                            color="#f7f7f7"
+                        >
+                            <Row
+                                align="middle"
+                                justify="center"
+                                style={{ marginBottom: "4px" }}
+                            >
+                                <TeamLogo src={match.imageUrl} width="24px" />
+                                <TeamForm matchresult={match.result}>
+                                    <span>
+                                        {match.result === 1
+                                            ? "W"
+                                            : match.result === -1
+                                            ? "L"
+                                            : "D"}
+                                    </span>
+                                </TeamForm>
+                            </Row>
+                        </Tooltip>
+                    ))}
+                </Col>
+                <TeamScoreCol xs={6} md={7}>
+                    <Row>
+                        <TeamNameCol xs={24} md={8}>
+                            <TitleLogo
+                                src={header.teams[0].imageUrl}
+                                width="100px"
+                            />
+                        </TeamNameCol>
+                        <TeamNameCol xs={0} md={16}>
+                            <TeamName ishome={true}>
+                                {header.teams[0].name
+                                    .replace(" ", "\n")
+                                    .toUpperCase()}
+                            </TeamName>
+                        </TeamNameCol>
+                    </Row>
+                </TeamScoreCol>
+                <TeamScoreCol xs={4} md={6}>
+                    <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
+                </TeamScoreCol>
+                <TeamScoreCol xs={6} md={7}>
+                    <Row>
+                        <TeamNameCol xs={0} md={16}>
+                            <TeamName ishome={false}>
+                                {header.teams[1].name
+                                    .replace(" ", "\n")
+                                    .toUpperCase()}
+                            </TeamName>
+                        </TeamNameCol>
+                        <TeamNameCol xs={24} md={8}>
+                            <TitleLogo
+                                src={header.teams[1].imageUrl}
+                                width="100px"
+                            />
+                        </TeamNameCol>
+                    </Row>
+                </TeamScoreCol>
+                <Col xs={4} md={2}>
+                    {matchData.content.matchFacts.teamForm[1].map((match) => (
+                        <Tooltip
+                            key={match.tooltipText}
+                            title={
+                                <>
+                                    <TooltipText>
+                                        {match.tooltipText.split(": ")[0]}
+                                    </TooltipText>
+                                    <TooltipText>
+                                        {match.tooltipText.split(": ")[1]}
+                                    </TooltipText>
+                                </>
+                            }
+                            color="#f7f7f7"
+                        >
+                            <Row
+                                align="middle"
+                                justify="center"
+                                style={{ marginBottom: "4px" }}
+                            >
+                                <TeamForm matchresult={match.result}>
+                                    <span>
+                                        {match.result === 1
+                                            ? "W"
+                                            : match.result === -1
+                                            ? "L"
+                                            : "D"}
+                                    </span>
+                                </TeamForm>
+                                <TeamLogo src={match.imageUrl} />
+                            </Row>
+                        </Tooltip>
+                    ))}
+                </Col>
+            </Row>
+            <Row
+                style={{
+                    justifyContent: "center",
+                }}
+            >
+                <Col
                     style={{
-                        justifyContent: "center",
+                        textAlign: "center",
+                        alignSelf: "flex-start",
+                        marginBottom: "12px",
                     }}
+                    xs={24}
+                    md={0}
                 >
-                    <Col xs={4} md={2}>
-                        {matchData.content.matchFacts.teamForm[0].map(
-                            (match) => (
-                                <Tooltip
-                                    key={match.tooltipText}
-                                    title={
-                                        <>
-                                            <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[0]
-                                                }
-                                            </TooltipText>
-                                            <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[1]
-                                                }
-                                            </TooltipText>
-                                        </>
-                                    }
-                                    color="#f7f7f7"
-                                >
-                                    <Row
-                                        align="middle"
-                                        justify="center"
-                                        style={{ marginBottom: "4px" }}
-                                    >
-                                        <TeamLogo
-                                            src={match.imageUrl}
-                                            width="24px"
-                                        />
-                                        <TeamForm matchresult={match.result}>
-                                            <span>
-                                                {match.result === 1
-                                                    ? "W"
-                                                    : match.result === -1
-                                                    ? "L"
-                                                    : "D"}
-                                            </span>
-                                        </TeamForm>
-                                    </Row>
-                                </Tooltip>
-                            )
-                        )}
-                    </Col>
-                    <TeamScoreCol xs={6} md={7}>
-                        <Row>
-                            <TeamNameCol xs={24} md={10}>
-                                <TitleLogo
-                                    src={header.teams[0].imageUrl}
-                                    width="100px"
-                                />
-                            </TeamNameCol>
-                            <TeamNameCol xs={0} md={14}>
-                                <TeamName ishome={true}>
-                                    {header.teams[0].name
-                                        .replace(" ", "\n")
-                                        .toUpperCase()}
-                                </TeamName>
-                            </TeamNameCol>
-                        </Row>
-                    </TeamScoreCol>
-                    <TeamScoreCol xs={4} md={6}>
-                        <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
-                    </TeamScoreCol>
-                    <TeamScoreCol xs={6} md={7}>
-                        <Row>
-                            <TeamNameCol xs={0} md={14}>
-                                <TeamName ishome={false}>
-                                    {header.teams[1].name
-                                        .replace(" ", "\n")
-                                        .toUpperCase()}
-                                </TeamName>
-                            </TeamNameCol>
-                            <TeamNameCol xs={24} md={10}>
-                                <TitleLogo
-                                    src={header.teams[1].imageUrl}
-                                    width="100px"
-                                />
-                            </TeamNameCol>
-                        </Row>
-                    </TeamScoreCol>
-                    <Col xs={4} md={2}>
-                        {matchData.content.matchFacts.teamForm[1].map(
-                            (match) => (
-                                <Tooltip
-                                    key={match.tooltipText}
-                                    title={
-                                        <>
-                                            <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[0]
-                                                }
-                                            </TooltipText>
-                                            <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[1]
-                                                }
-                                            </TooltipText>
-                                        </>
-                                    }
-                                    color="#f7f7f7"
-                                >
-                                    <Row
-                                        align="middle"
-                                        justify="center"
-                                        style={{ marginBottom: "4px" }}
-                                    >
-                                        <TeamForm matchresult={match.result}>
-                                            <span>
-                                                {match.result === 1
-                                                    ? "W"
-                                                    : match.result === -1
-                                                    ? "L"
-                                                    : "D"}
-                                            </span>
-                                        </TeamForm>
-                                        <TeamLogo src={match.imageUrl} />
-                                    </Row>
-                                </Tooltip>
-                            )
-                        )}
-                    </Col>
-                </Row>
-                <Row
-                    style={{
-                        justifyContent: "center",
-                    }}
+                    <StadiumRound>
+                        {infoBox.Stadium.name.toUpperCase()}
+                    </StadiumRound>
+                    <StadiumRound>
+                        {infoBox.Tournament.text.split(" - ")[1].toUpperCase()}
+                    </StadiumRound>
+                </Col>
+                <Col md={8} xs={12}>
+                    {impEvent[0].map((data, index) => (
+                        <div key={index}>{renderEvent(data, true)}</div>
+                    ))}
+                </Col>
+                <Col
+                    style={{ textAlign: "center", alignSelf: "flex-start" }}
+                    xs={0}
+                    md={6}
                 >
-                    <Col
-                        style={{ textAlign: "center", alignSelf: "flex-start" }}
-                        xs={24}
-                        md={0}
-                    >
-                        <StadiumRound>
-                            {infoBox.Stadium.name.toUpperCase()}
-                        </StadiumRound>
-                        <StadiumRound>
-                            {infoBox.Tournament.text
-                                .split(" - ")[1]
-                                .toUpperCase()}
-                        </StadiumRound>
-                    </Col>
-                    <Col md={8} xs={12}>
-                        {impEvent[0].map((data, index) => (
-                            <div key={index}>{renderEvent(data, true)}</div>
-                        ))}
-                    </Col>
-                    <Col
-                        style={{ textAlign: "center", alignSelf: "flex-start" }}
-                        offset={1}
-                        xs={0}
-                        md={4}
-                    >
-                        <StadiumRound>
-                            {infoBox.Stadium.name.toUpperCase()}
-                        </StadiumRound>
-                        <StadiumRound>
-                            {infoBox.Tournament.text
-                                .split(" - ")[1]
-                                .toUpperCase()}
-                        </StadiumRound>
-                    </Col>
-                    <Col md={8} xs={12}>
-                        {impEvent[1].map((data, index) => (
-                            <div key={index}>{renderEvent(data, false)}</div>
-                        ))}
-                    </Col>
-                </Row>
-            </>
+                    <StadiumRound>
+                        {infoBox.Stadium.name.toUpperCase()}
+                    </StadiumRound>
+                    <StadiumRound>
+                        {infoBox.Tournament.text.split(" - ")[1].toUpperCase()}
+                    </StadiumRound>
+                </Col>
+                <Col md={8} xs={12}>
+                    {impEvent[1].map((data, index) => (
+                        <div key={index}>{renderEvent(data, false)}</div>
+                    ))}
+                </Col>
+            </Row>
         </Fade>
     );
 };
@@ -287,6 +267,10 @@ const TitleLogo = styled.img`
     width: 100px;
     height: 100px;
 
+    @media screen and (max-width: 992px) {
+        width: 75px;
+        height: 75px;
+    }
     @media screen and (max-width: 768px) {
         width: 50px;
         height: 50px;
@@ -342,7 +326,7 @@ const TeamName = styled.h2<{ ishome: boolean }>`
     margin: 0;
     text-align: ${(props) => (props.ishome ? "end" : "start")};
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 992px) {
         font-size: 18px;
     }
 `;
