@@ -12,11 +12,13 @@ import { matchDataTypes } from "../api/cityDataTypes";
 const MatchSchedule = ({ matchList, currentMonth }) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
+    console.log(beforeMonth, currentMonth);
 
-    const newMatchList = [
-        ...matchList[beforeMonth],
-        ...matchList[currentMonth],
-    ];
+    const newMatchList =
+        beforeMonth !== currentMonth
+            ? [...matchList[beforeMonth], ...matchList[currentMonth]]
+            : [...matchList["May 2021"], ...matchList["August 2021"]];
+    //   matchList["May 2021"];
     let match5 = 0;
     return (
         <Container>
@@ -56,6 +58,7 @@ function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
             reIndex = index;
         }
     });
+
     return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
 }
 

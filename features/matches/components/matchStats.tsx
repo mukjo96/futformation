@@ -146,7 +146,7 @@ const Title = styled.h3`
 `;
 
 const StatTitle = styled.div<{ highlited: boolean; textcolor: string }>`
-    width: 75%;
+    width: 36px;
     margin: 0 auto;
     font-size: 14px;
     text-align: center;

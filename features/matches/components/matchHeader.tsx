@@ -92,39 +92,53 @@ const MatchHeader = ({ matchData }: dataType) => {
                 }}
             >
                 <Col xs={4} md={2}>
-                    {matchData.content.matchFacts.teamForm[0].map((match) => (
-                        <Tooltip
-                            key={match.tooltipText}
-                            title={
-                                <>
-                                    <TooltipText>
-                                        {match.tooltipText.split(": ")[0]}
-                                    </TooltipText>
-                                    <TooltipText>
-                                        {match.tooltipText.split(": ")[1]}
-                                    </TooltipText>
-                                </>
-                            }
-                            color="#f7f7f7"
-                        >
-                            <Row
-                                align="middle"
-                                justify="center"
-                                style={{ marginBottom: "4px" }}
-                            >
-                                <TeamLogo src={match.imageUrl} width="24px" />
-                                <TeamForm matchresult={match.result}>
-                                    <span>
-                                        {match.result === 1
-                                            ? "W"
-                                            : match.result === -1
-                                            ? "L"
-                                            : "D"}
-                                    </span>
-                                </TeamForm>
-                            </Row>
-                        </Tooltip>
-                    ))}
+                    {matchData.content.matchFacts.teamForm &&
+                        matchData.content.matchFacts.teamForm[0].map(
+                            (match) => (
+                                <Tooltip
+                                    key={match.tooltipText}
+                                    title={
+                                        <>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[0]
+                                                }
+                                            </TooltipText>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[1]
+                                                }
+                                            </TooltipText>
+                                        </>
+                                    }
+                                    color="#f7f7f7"
+                                >
+                                    <Row
+                                        align="middle"
+                                        justify="center"
+                                        style={{ marginBottom: "4px" }}
+                                    >
+                                        <TeamLogo
+                                            src={match.imageUrl}
+                                            width="24px"
+                                        />
+                                        <TeamForm matchresult={match.result}>
+                                            <span>
+                                                {match.result === 1
+                                                    ? "W"
+                                                    : match.result === -1
+                                                    ? "L"
+                                                    : "D"}
+                                            </span>
+                                        </TeamForm>
+                                    </Row>
+                                </Tooltip>
+                            )
+                        )}
                 </Col>
                 <TeamScoreCol xs={6} md={7}>
                     <Row>
@@ -164,39 +178,50 @@ const MatchHeader = ({ matchData }: dataType) => {
                     </Row>
                 </TeamScoreCol>
                 <Col xs={4} md={2}>
-                    {matchData.content.matchFacts.teamForm[1].map((match) => (
-                        <Tooltip
-                            key={match.tooltipText}
-                            title={
-                                <>
-                                    <TooltipText>
-                                        {match.tooltipText.split(": ")[0]}
-                                    </TooltipText>
-                                    <TooltipText>
-                                        {match.tooltipText.split(": ")[1]}
-                                    </TooltipText>
-                                </>
-                            }
-                            color="#f7f7f7"
-                        >
-                            <Row
-                                align="middle"
-                                justify="center"
-                                style={{ marginBottom: "4px" }}
-                            >
-                                <TeamForm matchresult={match.result}>
-                                    <span>
-                                        {match.result === 1
-                                            ? "W"
-                                            : match.result === -1
-                                            ? "L"
-                                            : "D"}
-                                    </span>
-                                </TeamForm>
-                                <TeamLogo src={match.imageUrl} />
-                            </Row>
-                        </Tooltip>
-                    ))}
+                    {matchData.content.matchFacts.teamForm &&
+                        matchData.content.matchFacts.teamForm[1].map(
+                            (match) => (
+                                <Tooltip
+                                    key={match.tooltipText}
+                                    title={
+                                        <>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[0]
+                                                }
+                                            </TooltipText>
+                                            <TooltipText>
+                                                {
+                                                    match.tooltipText.split(
+                                                        ": "
+                                                    )[1]
+                                                }
+                                            </TooltipText>
+                                        </>
+                                    }
+                                    color="#f7f7f7"
+                                >
+                                    <Row
+                                        align="middle"
+                                        justify="center"
+                                        style={{ marginBottom: "4px" }}
+                                    >
+                                        <TeamForm matchresult={match.result}>
+                                            <span>
+                                                {match.result === 1
+                                                    ? "W"
+                                                    : match.result === -1
+                                                    ? "L"
+                                                    : "D"}
+                                            </span>
+                                        </TeamForm>
+                                        <TeamLogo src={match.imageUrl} />
+                                    </Row>
+                                </Tooltip>
+                            )
+                        )}
                 </Col>
             </Row>
             <Row
@@ -213,6 +238,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                     xs={24}
                     md={0}
                 >
+                    <StadiumRound>{header.status.startDateStr}</StadiumRound>
                     <StadiumRound>
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
@@ -230,6 +256,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                     xs={0}
                     md={6}
                 >
+                    <StadiumRound>{header.status.startDateStr}</StadiumRound>
                     <StadiumRound>
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
