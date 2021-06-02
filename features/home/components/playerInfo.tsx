@@ -4,7 +4,7 @@ import { getPlayerInfo } from "../api/getCityData.api";
 
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import MoreButton from "@features/common/button/MoreButton";
+import MoreButton from "@features/common/button/moreButton";
 import Link from "next/link";
 import { playerInfoDataTypes } from "../api/cityDataTypes";
 import LoadingView from "@features/common/loadingView";

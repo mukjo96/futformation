@@ -3,7 +3,7 @@ import { Typography } from "antd";
 
 import styled from "styled-components";
 
-import MoreButton from "@features/common/button/MoreButton";
+import MoreButton from "@features/common/button/moreButton";
 
 const { Link } = Typography;
 

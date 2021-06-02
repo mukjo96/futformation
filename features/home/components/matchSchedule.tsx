@@ -4,7 +4,7 @@ import { Row, Col, Divider } from "antd";
 
 import styled from "styled-components";
 import Link from "next/link";
-import MoreButton from "@features/common/button/MoreButton";
+import MoreButton from "@features/common/button/moreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
 

@@ -1,4 +1,4 @@
-import MoreButton from "@features/common/button/MoreButton";
+import MoreButton from "@features/common/button/moreButton";
 
 import Fade from "react-reveal/Fade";
 import { matchDataTypes } from "@features/home/api/cityDataTypes";
