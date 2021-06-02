@@ -11,39 +11,33 @@ const NavBar = () => {
     const [open, setOpen] = useState(false);
 
     return (
-        <Background>
-            <Container>
-                <Link href="/">
-                    <a>
-                        <TextLogo />
-                    </a>
-                </Link>
-                <Hamburger className={open ? "show" : "hidden"}>
-                    <NavLinks open={open} />
-                    <GroupBar className={open ? "show" : "hidden"}>
-                        <Searchbar />
-                    </GroupBar>
-                </Hamburger>
-                <ToggleBtn>
-                    <HamburgerMenu
-                        isOpen={open}
-                        menuClicked={() => setOpen(!open)}
-                        width={18}
-                        height={15}
-                        color="white"
-                        position="absolute"
-                    />
-                </ToggleBtn>
-            </Container>
-        </Background>
+        <Container>
+            <Link href="/">
+                <a>
+                    <TextLogo />
+                </a>
+            </Link>
+            <Hamburger className={open ? "show" : "hidden"}>
+                <NavLinks open={open} />
+                <GroupBar className={open ? "show" : "hidden"}>
+                    <Searchbar />
+                </GroupBar>
+            </Hamburger>
+            <ToggleBtn>
+                <HamburgerMenu
+                    isOpen={open}
+                    menuClicked={() => setOpen(!open)}
+                    width={18}
+                    height={15}
+                    color="white"
+                    position="absolute"
+                />
+            </ToggleBtn>
+        </Container>
     );
 };
 
 export default NavBar;
-
-const Background = styled.div`
-    background: #1c2c5b;
-`;
 
 const Container = styled.nav`
     display: flex;
