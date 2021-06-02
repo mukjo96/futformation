@@ -17,7 +17,10 @@ const MatchSchedule = ({ matchList, currentMonth }) => {
     const newMatchList =
         beforeMonth !== currentMonth
             ? [...matchList[beforeMonth], ...matchList[currentMonth]]
-            : [...matchList["May 2021"], ...matchList["August 2021"]];
+            : [
+                  ...matchList[dateKeys[dateKeys.length - 2][0]],
+                  ...matchList[dateKeys[dateKeys.length - 1][0]],
+              ];
     //   matchList["May 2021"];
     let match5 = 0;
     return (

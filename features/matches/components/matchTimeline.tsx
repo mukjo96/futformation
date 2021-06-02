@@ -94,6 +94,7 @@ const MatchTimeline = ({ matchData }: dataType) => {
                                     ) : matchEvent.type === "Substitution" ? (
                                         <TooltipContainer>
                                             {tooltipHeader(matchEvent)}
+
                                             <Row align="middle">
                                                 <FontAwesomeIcon
                                                     icon={faLongArrowAltRight}
@@ -184,7 +185,7 @@ const Card = styled.div<{ color: string }>`
     }
 `;
 
-const TooltipContainer = styled.div`
+const TooltipContainer = styled(Col)`
     text-align: center;
     /* background-color: white; */
     h5 {

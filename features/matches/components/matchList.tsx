@@ -10,7 +10,7 @@ import { matchDetailTypes } from "../types/matchDataTypes";
 const { Panel } = Collapse;
 
 type dataType = {
-    matchData: matchDetailTypes;
+    matchData: Array<matchDataTypes>;
     currentMonth: string;
 };
 
