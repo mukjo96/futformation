@@ -1,4 +1,3 @@
-import Loading from "@features/common/loading";
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +15,7 @@ import PlayerStats from "../components/playerStats";
 import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
 import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
+import LoadingView from "@features/common/loadingView";
 
 const BackDiv = styled.div`
     background-color: white;
@@ -45,7 +45,7 @@ const Home = () => {
         apiResult && setIsLoading(false);
         return (
             <Container>
-                <Loading />
+                <LoadingView />
             </Container>
         );
     } else {

@@ -7,7 +7,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import MoreButton from "@features/common/button/MoreButton";
 import Link from "next/link";
 import { playerInfoDataTypes } from "../api/cityDataTypes";
-import Loading from "@features/common/loading";
+import LoadingView from "@features/common/loadingView";
 
 const PlayerInfo = ({ id }) => {
     const [playerData, setPlayerData] = useState<playerInfoDataTypes>();
@@ -43,7 +43,7 @@ const PlayerInfo = ({ id }) => {
     if (isLoading) {
         return (
             <Col span={24} style={{ textAlign: "center" }}>
-                <Loading />
+                <LoadingView />
             </Col>
         );
     } else {
