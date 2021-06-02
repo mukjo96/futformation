@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 
-const NavLinks = (open: any) => {
+const NaviLinks = (open: any) => {
     const router = useRouter();
 
     const navItems = [
@@ -30,7 +30,7 @@ const NavLinks = (open: any) => {
     );
 };
 
-export default NavLinks;
+export default NaviLinks;
 
 const Container = styled.ul`
     display: flex;
