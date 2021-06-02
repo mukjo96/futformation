@@ -4,7 +4,7 @@ import HamburgerMenu from "react-hamburger-menu";
 import { TextLogo } from "@features/common/logo/Logo";
 import Link from "next/link";
 import Searchbar from "@features/common/input/searchBar";
-import NavLinks from "./navLinks";
+import NavLinks from "@features/navigation/navLinks";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
