@@ -14,7 +14,7 @@ const MatchDetail = () => {
     const { matchid } = router.query;
 
     const { data, error } = useSWR(
-        `https://cors-anywhere.herokuapp.com/https://www.fotmob.com/matchDetails?matchId=${matchid}`
+        `https://cors.bridged.cc/https://www.fotmob.com/matchDetails?matchId=${matchid}`
     );
 
     if (error)
