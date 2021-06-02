@@ -3,7 +3,6 @@ import Head from "next/head";
 import "../styles/globals.css";
 import moment from "moment";
 import { wrapper } from "../redux/configureStore";
-
 import Foot from "@features/common/Footer/Foot";
 import NavBar from "@features/navigation/NavBar";
 
