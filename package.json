@@ -44,7 +44,8 @@
         "reselect": "^4.0.0",
         "styled-components": "^5.2.1",
         "swr": "^0.4.0",
-        "typesafe-actions": "^5.1.0"
+        "typesafe-actions": "^5.1.0",
+        "webpack": "^5.38.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.10",
