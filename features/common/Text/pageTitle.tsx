@@ -6,13 +6,15 @@ type titleProps = {
     text: string;
 };
 
-export const PageTitle = ({ text }: titleProps) => {
+const PageTitle = ({ text }: titleProps) => {
     return (
         <Fade left cascade>
             <NewsTitle>{text}</NewsTitle>
         </Fade>
     );
 };
+
+export default PageTitle;
 
 const NewsTitle = styled.h1`
     font-family: "Josefin Sans", sans-serif;

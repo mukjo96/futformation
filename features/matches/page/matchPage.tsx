@@ -1,5 +1,5 @@
 import LoadingView from "@features/common/loadingView";
-import { PageTitle } from "@features/common/text/pageTitle";
+import PageTitle from "@features/common/text/pageTitle";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
