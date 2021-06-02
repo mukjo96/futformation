@@ -9,8 +9,7 @@
             }
         ],
         "@babel/typescript",
-        "@babel/preset-react",
-        "next/babel"
+        "@babel/preset-react"
     ],
     "plugins": [
         [

@@ -8,9 +8,6 @@ module.exports = {
         ecmaFeatures: { jsx: true },
     },
     extends: [
-        "prettier/react",
-        "airbnb",
-        "airbnb/hooks",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
@@ -23,7 +20,7 @@ module.exports = {
         "react/prop-types": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/exhaustive-deps": "off",
         "@typescript-eslint/interface-name-prefix": "off",
     },
     settings: {
