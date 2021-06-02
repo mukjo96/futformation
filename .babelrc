@@ -19,8 +19,8 @@
                 "extensions": [".ts"],
                 "root": ["."],
                 "alias": {
-                    "@features": "./features",
-                    "@styles": "./styles"
+                    "@features/*": "./features/*",
+                    "@styles/*": "./styles/*"
                 }
             }
         ],
