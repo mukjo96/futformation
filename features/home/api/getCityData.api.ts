@@ -4,12 +4,7 @@ import moment from "moment";
 export async function getCityNews() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=news&type=team&timezone=Asia/Seoul",
-            {
-                headers: {
-                    "User-Agent": "ANYTHING_WILL_WORK_HERE",
-                },
-            }
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=news&type=team&timezone=Asia/Seoul"
         );
         const news = response;
         return news.data;
@@ -21,12 +16,7 @@ export async function getCityNews() {
 export async function getCityFixtures() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team&timezone=Asia/Seoul",
-            {
-                headers: {
-                    "User-Agent": "ANYTHING_WILL_WORK_HERE",
-                },
-            }
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=fixtures&type=team&timezone=Asia/Seoul"
         );
 
         return response.data;
@@ -38,12 +28,7 @@ export async function getCityFixtures() {
 export async function getCityPlayers() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=squad&type=team",
-            {
-                headers: {
-                    "User-Agent": "ANYTHING_WILL_WORK_HERE",
-                },
-            }
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=squad&type=team"
         );
 
         return response.data;
@@ -55,12 +40,7 @@ export async function getCityPlayers() {
 export async function getCityStats() {
     try {
         let response = await axios.get(
-            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=overview&type=team",
-            {
-                headers: {
-                    "User-Agent": "ANYTHING_WILL_WORK_HERE",
-                },
-            }
+            "https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/teams?id=8456&tab=overview&type=team"
         );
         return response.data.topPlayers;
     } catch (error) {
@@ -71,12 +51,7 @@ export async function getCityStats() {
 export async function getPlayerInfo(id: number) {
     try {
         let response = await axios.get(
-            `https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/playerData?id=${id}`,
-            {
-                headers: {
-                    "User-Agent": "ANYTHING_WILL_WORK_HERE",
-                },
-            }
+            `https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/playerData?id=${id}`
         );
         return response.data;
     } catch (error) {
