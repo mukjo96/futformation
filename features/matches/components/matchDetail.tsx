@@ -1,4 +1,4 @@
-import Loading from "@features/common/loading";
+import LoadingView from "@features/common/loadingView";
 import { Row, Result, Button } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
@@ -27,7 +27,7 @@ const MatchDetail = () => {
                 />
             </div>
         );
-    else if (!data || !matchid) return <Loading />;
+    else if (!data || !matchid) return <LoadingView />;
 
     return (
         <Container>

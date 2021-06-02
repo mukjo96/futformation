@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const antIcon = <LoadingOutlined style={{ fontSize: "8em" }} spin />;
 
-const Loading = () => {
+const LoadingView = () => {
     return (
         <Fragment>
             <StyledSpin indicator={antIcon} />
@@ -13,7 +13,7 @@ const Loading = () => {
     );
 };
 
-export default Loading;
+export default LoadingView;
 
 const StyledSpin = styled(Spin)`
     margin: 10vw auto;
