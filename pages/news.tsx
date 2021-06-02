@@ -2,7 +2,7 @@ import React from "react";
 import NewsPage from "@features/news/page/newsPage";
 import styled from "styled-components";
 
-const Index = () => {
+const News = () => {
     return (
         <Page>
             <NewsPage />
@@ -10,7 +10,7 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default News;
 
 const Page = styled.div`
     width: 100%;
