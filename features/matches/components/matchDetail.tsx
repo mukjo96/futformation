@@ -14,7 +14,7 @@ const MatchDetail = () => {
     const { matchid } = router.query;
 
     const { data, error } = useSWR(
-        `https://thingproxy.freeboard.io/fetch/https://www.fotmob.com/matchDetails?matchId=${matchid}`
+        `https://cors-anywhere.herokuapp.com/https://www.fotmob.com/matchDetails?matchId=${matchid}`
     );
 
     if (error)
