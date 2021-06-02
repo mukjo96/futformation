@@ -40,6 +40,7 @@ const NavBar = () => {
 export default NavBar;
 
 const Container = styled.nav`
+    background: #1c2c5b;
     display: flex;
     margin: 0 auto;
     padding: 8px 12px;
@@ -53,7 +54,6 @@ const Container = styled.nav`
     }
 
     @media screen and (max-width: 768px) {
-        background: #1c2c5b;
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
