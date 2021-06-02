@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Avatar } from "antd";
+import React from "react";
+import { Card, Avatar } from "antd";
 import Carousel from "react-simply-carousel";
 import styled from "styled-components";
-import { getCityNews } from "@features/home/api/getCityData.api";
-import Loading from "@features/common/Loading";
+
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { IconLogo } from "@features/common/logo/Logo";
 import Link from "antd/lib/typography/Link";

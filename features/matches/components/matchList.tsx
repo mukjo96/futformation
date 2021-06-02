@@ -6,7 +6,7 @@ import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { matchDetailTypes } from "../types/matchDataTypes";
+
 const { Panel } = Collapse;
 
 type dataType = {

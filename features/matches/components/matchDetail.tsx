@@ -1,7 +1,7 @@
-import Loading from "@features/common/Loading";
+import Loading from "@features/common/loading";
 import { Row, Result, Button } from "antd";
 import { useRouter } from "next/dist/client/router";
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 import MatchHeader from "./matchHeader";

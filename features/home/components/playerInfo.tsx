@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Row, Col, Divider, Avatar, Result } from "antd";
 import { getPlayerInfo } from "../api/getCityData.api";
-import Loading from "@features/common/Loading";
+
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import MoreButton from "@features/common/button/MoreButton";
 import Link from "next/link";
 import { playerInfoDataTypes } from "../api/cityDataTypes";
+import Loading from "@features/common/loading";
 
 const PlayerInfo = ({ id }) => {
     const [playerData, setPlayerData] = useState<playerInfoDataTypes>();

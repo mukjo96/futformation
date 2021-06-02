@@ -1,10 +1,8 @@
-import Loading from "@features/common/Loading";
-import { PageTitle } from "@features/common/Text/pageTitle";
-import { getCityNews } from "@features/home/api/getCityData.api";
+import Loading from "@features/common/loading";
+import { PageTitle } from "@features/common/text/pageTitle";
+
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Fade from "react-reveal/Fade";
-import styled from "styled-components";
 import {
     actApiInit,
     actApiRequest,

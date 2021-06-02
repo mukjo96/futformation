@@ -3,8 +3,8 @@ import Head from "next/head";
 import "../styles/globals.css";
 import moment from "moment";
 import { wrapper } from "../redux/configureStore";
-import Foot from "@features/common/Footer/Foot";
-import NavBar from "@features/navigation/NavBar";
+import Foot from "@features/common/footer/foot";
+import NavBar from "@features/navigation/navBar";
 
 function MyApp({ Component, pageProps }) {
     moment.locale("ko");

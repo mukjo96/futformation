@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Carousel, Typography } from "antd";
-import { getCityNews } from "../api/getCityData.api";
+import React from "react";
+import { Typography } from "antd";
+
 import styled from "styled-components";
-import Loading from "@features/common/Loading";
+
 import MoreButton from "@features/common/button/MoreButton";
-import { newsDataTypes } from "../api/cityDataTypes";
+
 const { Link } = Typography;
 
 const MainBanner = ({ bannerList }) => {

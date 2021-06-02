@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Slide from "react-reveal/Slide";
 import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
-import { getCityNews } from "../api/getCityData.api";
-import Loading from "@features/common/Loading";
+
 import { Avatar } from "antd";
 import { IconLogo } from "@features/common/logo/Logo";
-import { newsDataTypes } from "../api/cityDataTypes";
 
 const LatestNews = ({ newsList }) => {
     return (

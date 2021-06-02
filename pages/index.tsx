@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Home from "@features/home/page/Home";
 import styled from "styled-components";
 

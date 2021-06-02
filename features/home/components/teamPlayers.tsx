@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Col, List, Avatar, Result } from "antd";
 import { SelectOutlined } from "@ant-design/icons";
 import BlockTitle from "./Title/blockTitle";
-import { getCityPlayers } from "../api/getCityData.api";
-import Loading from "@features/common/Loading";
 
 import PlayerInfo from "./playerInfo";
 

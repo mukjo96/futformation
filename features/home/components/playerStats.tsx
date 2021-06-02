@@ -1,12 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { Row, Col, Avatar, Divider } from "antd";
 import Slide from "react-reveal/Slide";
 import BlockTitle from "./Title/blockTitle";
-import { getCityStats } from "../api/getCityData.api";
-import Loading from "@features/common/Loading";
+
 import Link from "next/link";
-import { playerStatDataTypes } from "../api/cityDataTypes";
 
 const PlayerStats = ({ statList }) => {
     return (

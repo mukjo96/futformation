@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import HamburgerMenu from "react-hamburger-menu";
 import { TextLogo } from "@features/common/logo/Logo";
-
-import Searchbar from "@features/common/input/SerchBar";
 import Link from "next/link";
-import NavLinks from "./NavLinks";
+import Searchbar from "@features/common/input/searchBar";
+import NavLinks from "./navLinks";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);

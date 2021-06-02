@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Fade from "react-reveal/Fade";
 import { Row, Col, Divider } from "antd";
-import { getCityFixtures } from "../api/getCityData.api";
-import Loading from "@features/common/Loading";
+
 import styled from "styled-components";
 import Link from "next/link";
 import MoreButton from "@features/common/button/MoreButton";

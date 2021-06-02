@@ -1,5 +1,5 @@
-import Loading from "@features/common/Loading";
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import Loading from "@features/common/loading";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
