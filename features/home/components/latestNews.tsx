@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
 import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
 
@@ -12,7 +12,7 @@ const LatestNews = ({ newsList }) => {
         <Container>
             <Col>
                 <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
-                <Slide right>
+                <Fade bottom cascade ssrFadeout>
                     <NewsRow>
                         {newsList.slice(1, 5).map((news, index) => {
                             const sourceTitle = news.sourceStr.split(" - ");
@@ -84,7 +84,7 @@ const LatestNews = ({ newsList }) => {
                             );
                         })}
                     </NewsRow>
-                </Slide>
+                </Fade>
             </Col>
         </Container>
     );

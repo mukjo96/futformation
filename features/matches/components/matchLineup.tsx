@@ -24,8 +24,8 @@ const MatchLineup = ({ matchData }: dataType) => {
                 return (
                     <StyledCol md={12} xs={24} key={index}>
                         <Fade
-                            left={index === 0}
-                            right={index === 1}
+                            top={index === 0}
+                            bottom={index === 1}
                             cascade
                             ssrFadeout
                             key={index}
@@ -240,7 +240,7 @@ const Shirt = styled.span`
     margin-right: 4px;
     color: darkgray;
     @media screen and (max-width: 768px) {
-        font-size: 10px;
+        display: none;
     }
 `;
 
