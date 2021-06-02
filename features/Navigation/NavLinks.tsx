@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { Router, useRouter } from "next/dist/client/router";
 
-const NavLinks = (open) => {
+const NavLinks = (open: any) => {
     const router = useRouter();
 
     const navItems = [
