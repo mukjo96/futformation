@@ -2,6 +2,7 @@ import LoadingView from "@features/common/loadingView";
 import PageTitle from "@features/common/text/pageTitle";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import {
     actApiInit,
     actApiRequest,
@@ -26,7 +27,11 @@ const MatchPage = () => {
 
     if (isLoading) {
         apiResult && setIsLoading(false);
-        return <LoadingView />;
+        return (
+            <LoadingContainer>
+                <LoadingView />
+            </LoadingContainer>
+        );
     } else {
         return (
             <Fragment>
@@ -41,3 +46,15 @@ const MatchPage = () => {
 };
 
 export default MatchPage;
+
+const LoadingContainer = styled.div`
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        height: 600px;
+    }
+`;

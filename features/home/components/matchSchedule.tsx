@@ -81,7 +81,7 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
     }
     return (
         <MatchCol xs={24} md={6} key={match.id}>
-            <div>
+            <MatchContainer>
                 <MatchScore>
                     <div>
                         <TeamLogo
@@ -117,7 +117,7 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
                     {match.status.startTimeStr &&
                         ` | ${match.status.startTimeStr}`}
                 </StartDate>
-            </div>
+            </MatchContainer>
             <Link href={`matches/${match.id}`}>
                 <a style={{ textDecoration: "none" }}>
                     <MoreButton value="More" size="medium" />
@@ -146,6 +146,10 @@ const MatchCol = styled(Col)`
         border-right: none;
         padding: 5vw;
     }
+`;
+
+const MatchContainer = styled.div`
+    margin-bottom: 12px;
 `;
 
 const MatchScore = styled(Row)`

@@ -79,11 +79,12 @@ const BannerContainer = styled.div`
 `;
 
 const CityzenImage = styled.img`
-    padding: 28px;
+    padding: 14px;
     width: 50%;
 `;
 
 const BannerMessage = styled.h3`
+    font-size: 14px;
     color: white;
 `;
 

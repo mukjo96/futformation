@@ -14,6 +14,7 @@ export default Matches;
 
 const Page = styled.div`
     width: 100%;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     margin: 0 auto;

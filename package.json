@@ -10,6 +10,8 @@
         "vercel-deploy": "next build && next export"
     },
     "dependencies": {
+        "@emotion/core": "^11.0.0",
+        "@emotion/styled": "^11.3.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.32",
         "@fortawesome/free-brands-svg-icons": "^5.15.2",
         "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -40,6 +42,7 @@
         "react-redux": "^7.2.2",
         "react-reveal": "^1.2.2",
         "react-simply-carousel": "^4.2.0",
+        "react-spinners": "^0.11.0",
         "reselect": "^4.0.0",
         "styled-components": "^5.2.1",
         "swr": "^0.4.0",

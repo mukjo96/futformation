@@ -23,13 +23,7 @@ const MatchLineup = ({ matchData }: dataType) => {
                         : team.players.slice(0).reverse();
                 return (
                     <StyledCol md={12} xs={24} key={index}>
-                        <Fade
-                            top={index === 0}
-                            bottom={index === 1}
-                            cascade
-                            ssrFadeout
-                            key={index}
-                        >
+                        <Fade bottom cascade ssrFadeout key={index}>
                             <BackgroundPitch>
                                 <Row justify="space-around">
                                     <Title>{team.teamName.toUpperCase()}</Title>
@@ -114,7 +108,7 @@ const MatchLineup = ({ matchData }: dataType) => {
                 >
                     <Avatar
                         size={48}
-                        shape="circle"
+                        shape="square"
                         src={player.imageUrl}
                         icon={<UserOutlined />}
                         onError={() => true}
@@ -124,22 +118,9 @@ const MatchLineup = ({ matchData }: dataType) => {
                 <PlayerName justify="center" align="middle">
                     <Shirt>{player.shirt}</Shirt>
                     <Name isbench={isBench}>{player.name.lastName}</Name>
-                    {player?.events?.g && (
-                        <GoalIcon
-                            icon={faFutbol}
-                            style={{
-                                marginLeft: "4px",
-                            }}
-                        />
-                    )}
+                    {player?.events?.g && <GoalIcon icon={faFutbol} />}
                     {player?.timeSubbedOn && (
-                        <FontAwesomeIcon
-                            icon={faExchangeAlt}
-                            style={{
-                                marginLeft: "4px",
-                                width: "10px",
-                            }}
-                        />
+                        <SubstitutionIcon icon={faExchangeAlt} />
                     )}
                 </PlayerName>
             </PlayerContainer>
@@ -254,7 +235,15 @@ const Name = styled.span<{ isbench: boolean }>`
 `;
 
 const GoalIcon = styled(FontAwesomeIcon)`
+    margin-left: 4px;
+    width: 12px !important;
+    height: 12px !important;
     @media screen and (max-width: 768px) {
         width: 10px !important;
+        height: 10px !important;
     }
+`;
+const SubstitutionIcon = styled(FontAwesomeIcon)`
+    margin-left: 4px;
+    width: 10px !important;
 `;

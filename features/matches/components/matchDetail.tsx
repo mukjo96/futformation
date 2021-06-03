@@ -27,7 +27,12 @@ const MatchDetail = () => {
                 />
             </div>
         );
-    else if (!data || !matchid) return <LoadingView />;
+    else if (!data || !matchid)
+        return (
+            <LoadingContainer>
+                <LoadingView />
+            </LoadingContainer>
+        );
 
     return (
         <Container>
@@ -52,5 +57,17 @@ const Container = styled.div`
     @media screen and (max-width: 768px) {
         padding: 0;
         padding-top: 5%;
+    }
+`;
+
+const LoadingContainer = styled.div`
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        height: 600px;
     }
 `;

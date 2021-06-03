@@ -47,6 +47,6 @@ const Button = styled.button<{ size: string }>`
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
-    margin-top: 12px;
+
     cursor: pointer;
 `;

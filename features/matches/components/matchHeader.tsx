@@ -158,7 +158,19 @@ const MatchHeader = ({ matchData }: dataType) => {
                     </Row>
                 </TeamScoreCol>
                 <TeamScoreCol xs={4} md={6}>
-                    <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
+                    {header.teams[0].score > header.teams[1].score ? (
+                        <Score>
+                            <strong>{header.teams[0].score}</strong>
+                            {` : ${header.teams[1].score}`}
+                        </Score>
+                    ) : header.teams[0].score < header.teams[1].score ? (
+                        <Score>
+                            {`${header.teams[0].score} : `}
+                            <strong>{header.teams[1].score}</strong>
+                        </Score>
+                    ) : (
+                        <Score>{`${header.teams[0].score} : ${header.teams[1].score}`}</Score>
+                    )}
                 </TeamScoreCol>
                 <TeamScoreCol xs={6} md={7}>
                     <Row>
@@ -361,6 +373,11 @@ const TeamName = styled.h2<{ ishome: boolean }>`
 const Score = styled.h3`
     margin: 0;
     font-size: 48px;
+
+    strong {
+        color: green;
+        font-weight: 500;
+    }
     @media screen and (max-width: 768px) {
         font-size: 24px;
     }

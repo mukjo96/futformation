@@ -56,16 +56,15 @@ export type matchDataTypes = {
     };
 };
 
-export type playerListDataTypes = [
-    string,
-    Array<{
-        id: number;
-        name: string;
-        ccode: string;
-        cname: string;
-        role: string;
-    }>
-];
+export type playerListDataTypes = [string, Array<playerTypes>];
+
+export type playerTypes = {
+    id: number;
+    name: string;
+    ccode: string;
+    cname: string;
+    role?: string;
+};
 
 export type playerInfoDataTypes = {
     id: number;

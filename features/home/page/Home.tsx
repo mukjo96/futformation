@@ -32,11 +32,11 @@ const Home = () => {
 
     useEffect(() => {
         if (!apiResult) {
-            handleOnClick();
+            dispatchApi();
         }
     }, []);
 
-    const handleOnClick = () => {
+    const dispatchApi = () => {
         dispatch(actApiInit());
         dispatch(actApiRequest());
     };
@@ -75,4 +75,8 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+        height: 600px;
+    }
 `;
