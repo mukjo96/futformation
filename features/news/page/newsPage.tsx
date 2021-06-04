@@ -3,6 +3,7 @@ import PageTitle from "@features/common/text/pageTitle";
 
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { select } from "redux/actions/actExample";
 import {
     actApiInit,
     actApiRequest,
@@ -17,16 +18,23 @@ const NewsPage = () => {
     const [activeNews, setActiveNews] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
+    const teamId = useSelector(
+        (state: RootStateInterface): number => state.rdcExample.teamId
+    );
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
     );
 
     useEffect(() => {
-        if (!apiResult) {
-            dispatch(actApiInit());
-            dispatch(actApiRequest());
-        }
-    }, []);
+        setIsLoading(true);
+        dispatchApi();
+    }, [teamId]);
+
+    const dispatchApi = () => {
+        dispatch(actApiInit());
+        dispatch(actApiRequest());
+        dispatch(select(teamId));
+    };
 
     if (isLoading) {
         apiResult && setIsLoading(false);

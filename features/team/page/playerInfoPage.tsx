@@ -1,21 +1,19 @@
 import LoadingView from "@features/common/loadingView";
-import { Row, Result, Button } from "antd";
+import { Row, Result, Button, Avatar } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
 import useSWR from "swr";
-import MatchHeader from "./matchHeader";
-import MatchLineup from "./matchLineup";
-import MatchStats from "./matchStats";
-import MatchTimeline from "./matchTimeline";
 
-const MatchDetail = () => {
+const PlayerInfoPage = () => {
     const router = useRouter();
-    const { matchid } = router.query;
+    const { playerid } = router.query;
 
     const { data, error } = useSWR(
-        `https://cors.bridged.cc/https://www.fotmob.com/matchDetails?matchId=${matchid}`
+        `https://cors.bridged.cc/https://www.fotmob.com/playerData?id=${playerid}`
     );
+
+    console.log(playerid);
 
     if (error)
         return (
@@ -27,7 +25,7 @@ const MatchDetail = () => {
                 />
             </div>
         );
-    else if (!data || !matchid)
+    else if (!data || !playerid)
         return (
             <LoadingContainer>
                 <LoadingView />
@@ -36,19 +34,16 @@ const MatchDetail = () => {
 
     return (
         <Container>
-            <MatchHeader matchData={data} />
-            {data.header.status.started && (
-                <>
-                    <MatchTimeline matchData={data} />
-                    <MatchLineup matchData={data} />
-                    <MatchStats statData={data.content.stats} />
-                </>
-            )}
+            <Avatar
+                size={100}
+                shape="square"
+                src={`https://images.fotmob.com/image_resources/playerimages/${data.id}.png`}
+            />
         </Container>
     );
 };
 
-export default MatchDetail;
+export default PlayerInfoPage;
 
 const Container = styled.div`
     width: 100%;

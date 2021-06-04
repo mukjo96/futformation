@@ -1,4 +1,4 @@
-export interface IUser {
+/* export interface IUser {
   id: number;
   name: string;
   username: string;
@@ -21,11 +21,7 @@ export interface IUser {
     bs: string;
   };
 }
-
+*/
 export interface IExampleState {
-  count: number;
-  error: null | Error;
-  lastUpdate: number;
-  light: boolean;
-  placeholderData: IUser[] | null;
+    teamId: number;
 }

@@ -16,6 +16,8 @@ import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
 import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
 import LoadingView from "@features/common/loadingView";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
+import { select } from "redux/actions/actExample";
 
 const BackDiv = styled.div`
     background-color: white;
@@ -26,19 +28,22 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const dispatch = useDispatch();
+    const teamId = useSelector(
+        (state: RootStateInterface): number => state.rdcExample.teamId
+    );
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
     );
 
     useEffect(() => {
-        if (!apiResult) {
-            dispatchApi();
-        }
-    }, []);
+        setIsLoading(true);
+        dispatchApi();
+    }, [teamId]);
 
     const dispatchApi = () => {
         dispatch(actApiInit());
         dispatch(actApiRequest());
+        dispatch(select(teamId));
     };
 
     if (isLoading) {

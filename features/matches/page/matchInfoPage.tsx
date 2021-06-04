@@ -1,12 +1,73 @@
-import React, { Fragment } from "react";
-import MatchDetail from "../components/matchDetail";
+import LoadingView from "@features/common/loadingView";
+import { Row, Result, Button } from "antd";
+import { useRouter } from "next/dist/client/router";
+import React from "react";
+import styled from "styled-components";
+import useSWR from "swr";
+import MatchHeader from "../components/matchHeader";
+import MatchLineup from "../components/matchLineup";
+import MatchStats from "../components/matchStats";
+import MatchTimeline from "../components/matchTimeline";
 
 const MatchInfoPage = () => {
+    const router = useRouter();
+    const { matchid } = router.query;
+
+    const { data, error } = useSWR(
+        `https://cors.bridged.cc/https://www.fotmob.com/matchDetails?matchId=${matchid}`
+    );
+
+    if (error)
+        return (
+            <div>
+                <Result
+                    status="error"
+                    title={error}
+                    extra={<Button type="primary">Back Home</Button>}
+                />
+            </div>
+        );
+    else if (!data || !matchid)
+        return (
+            <LoadingContainer>
+                <LoadingView />
+            </LoadingContainer>
+        );
+
     return (
-        <Fragment>
-            <MatchDetail />
-        </Fragment>
+        <Container>
+            <MatchHeader matchData={data} />
+            {data.header.status.started && (
+                <>
+                    <MatchTimeline matchData={data} />
+                    <MatchLineup matchData={data} />
+                    <MatchStats statData={data.content.stats} />
+                </>
+            )}
+        </Container>
     );
 };
 
 export default MatchInfoPage;
+
+const Container = styled.div`
+    width: 100%;
+    padding: 5%;
+
+    @media screen and (max-width: 768px) {
+        padding: 0;
+        padding-top: 5%;
+    }
+`;
+
+const LoadingContainer = styled.div`
+    width: 100%;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        height: 600px;
+    }
+`;

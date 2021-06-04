@@ -7,30 +7,35 @@ import BlockTitle from "./Title/blockTitle";
 import Link from "next/link";
 
 const PlayerStats = ({ statList }) => {
+    console.log(statList);
     return (
-        <Container>
-            <BlockTitle
-                title="PLAYER STATS"
-                link="players"
-                linktext="player stats"
-                theme="light"
-            />
-            <Slide bottom cascade ssrFadeout>
-                <ContainRow>
-                    {renderStatList(statList.byRating, "Ratings")}
-                    {renderStatList(statList.byGoals, "Goals")}
-                    {renderStatList(statList.byAssists, "Assists")}
-                    <ImageCol
-                        xs={24}
-                        md={6}
-                        style={{
-                            backgroundImage:
-                                "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
-                        }}
-                    ></ImageCol>
-                </ContainRow>
-            </Slide>
-        </Container>
+        <>
+            {statList.byRating.length !== 0 && (
+                <Container>
+                    <BlockTitle
+                        title="PLAYER STATS"
+                        link="players"
+                        linktext="player stats"
+                        theme="light"
+                    />
+                    <Slide bottom cascade ssrFadeout>
+                        <ContainRow>
+                            {renderStatList(statList.byRating, "Ratings")}
+                            {renderStatList(statList.byGoals, "Goals")}
+                            {renderStatList(statList.byAssists, "Assists")}
+                            <ImageCol
+                                xs={24}
+                                md={6}
+                                style={{
+                                    backgroundImage:
+                                        "url(https://www.footyrenders.com/render/kevin-de-bruyne-29-359x540.png)",
+                                }}
+                            ></ImageCol>
+                        </ContainRow>
+                    </Slide>
+                </Container>
+            )}
+        </>
     );
 };
 

@@ -22,21 +22,23 @@ import {
     getCityPlayers,
     getCityStats,
 } from "@features/home/api/getCityData.api";
+import { useSelector } from "react-redux";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
 
-async function callCityDataAPI() {
+async function callCityDataAPI(teamId: number) {
     let matchList, currentMonth, newsList, playerList, statList;
     await Promise.all([
-        getCityFixtures().then((data) => {
+        getCityFixtures(teamId).then((data) => {
             currentMonth = data.fixturesTab.currentMonth;
             matchList = data.fixturesTab.fixtures;
         }),
-        getCityNews().then((data) => {
+        getCityNews(teamId).then((data) => {
             newsList = data.news;
         }),
-        getCityPlayers().then((data) => {
+        getCityPlayers(teamId).then((data) => {
             playerList = data.squad;
         }),
-        getCityStats().then((data) => {
+        getCityStats(teamId).then((data) => {
             statList = data;
         }),
     ]);
@@ -61,7 +63,8 @@ function* apiRequest() {
         //     params,
         //     headers
         // );
-        const data: IApiResult = yield call(callCityDataAPI);
+        const action = yield take("SELECT");
+        const data: IApiResult = yield call(callCityDataAPI, action.teamId);
         yield put(actApiSuccess(data));
     } catch (err) {
         yield put(actApiFail(err));

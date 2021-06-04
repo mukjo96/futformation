@@ -5,17 +5,48 @@ import { TextLogo } from "@features/common/logo/Logo";
 import Link from "next/link";
 import Searchbar from "@features/common/input/searchBar";
 import NaviLinks from "./naviLinks";
+import { Dropdown, Menu, Row } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { select } from "redux/actions/actExample";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
 
+    const dispatch = useDispatch();
+
+    function changeTeam(teamId: number) {
+        dispatch(select(teamId));
+    }
+
+    const menu = (
+        <Menu>
+            <Menu.Item key={8650} onClick={() => changeTeam(8650)}>
+                LiverPool
+            </Menu.Item>
+            <Menu.Item key={8586} onClick={() => changeTeam(8586)}>
+                Tottenham
+            </Menu.Item>
+            <Menu.Item key={8456} onClick={() => changeTeam(8456)}>
+                Man City
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
         <Container>
-            <Link href="/">
-                <a>
-                    <TextLogo />
+            <Dropdown overlay={menu} trigger={["click"]}>
+                <a
+                    className="ant-dropdown-link"
+                    onClick={(e) => e.preventDefault()}
+                >
+                    <Row>
+                        <TextLogo />
+                        <DownOutlined />
+                    </Row>
                 </a>
-            </Link>
+            </Dropdown>
+
             <Hamburger className={open ? "show" : "hidden"}>
                 <NaviLinks open={open} />
                 <GroupBar className={open ? "show" : "hidden"}>
