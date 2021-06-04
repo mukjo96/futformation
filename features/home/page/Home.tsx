@@ -28,8 +28,8 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const dispatch = useDispatch();
-    const teamId = useSelector(
-        (state: RootStateInterface): number => state.rdcExample.teamId
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
     );
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
@@ -38,12 +38,12 @@ const Home = () => {
     useEffect(() => {
         setIsLoading(true);
         dispatchApi();
-    }, [teamId]);
+    }, [team.teamId]);
 
     const dispatchApi = () => {
         dispatch(actApiInit());
         dispatch(actApiRequest());
-        dispatch(select(teamId));
+        dispatch(select(team));
     };
 
     if (isLoading) {

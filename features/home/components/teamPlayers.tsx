@@ -5,6 +5,9 @@ import { SelectOutlined } from "@ant-design/icons";
 import BlockTitle from "./Title/blockTitle";
 
 import PlayerInfo from "./playerInfo";
+import { useSelector } from "react-redux";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 const TeamPlayers = ({ dataList }) => {
     const [selectedId, setSelectedId] = useState(0);
@@ -13,10 +16,18 @@ const TeamPlayers = ({ dataList }) => {
 
     playerDataToObjects();
 
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
+    );
+
     return (
         <Container>
             <StyledTitle>
-                <BlockTitle title="MCI PLAYERS" link="players" theme="light" />
+                <BlockTitle
+                    title={`${team.teamName} PLAYERS`}
+                    link="players"
+                    theme="light"
+                />
             </StyledTitle>
             <StyledRow>
                 <Col xs={24} md={18} style={{ alignSelf: "center" }}>

@@ -3,11 +3,18 @@ import React, { Fragment } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import SyncLoader from "react-spinners/SyncLoader";
+import { useSelector } from "react-redux";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 const LoadingView = () => {
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
+    );
+
     return (
         <LoadingContainer>
-            <StyledSpin color="#6cabdd" speedMultiplier={0.8} />
+            <StyledSpin color={team.teamColor} speedMultiplier={0.8} />
         </LoadingContainer>
     );
 };

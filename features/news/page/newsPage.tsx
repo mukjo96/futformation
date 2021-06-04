@@ -4,6 +4,7 @@ import PageTitle from "@features/common/text/pageTitle";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import {
     actApiInit,
     actApiRequest,
@@ -18,8 +19,8 @@ const NewsPage = () => {
     const [activeNews, setActiveNews] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
-    const teamId = useSelector(
-        (state: RootStateInterface): number => state.rdcExample.teamId
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
     );
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
@@ -28,12 +29,12 @@ const NewsPage = () => {
     useEffect(() => {
         setIsLoading(true);
         dispatchApi();
-    }, [teamId]);
+    }, [team.teamId]);
 
     const dispatchApi = () => {
         dispatch(actApiInit());
         dispatch(actApiRequest());
-        dispatch(select(teamId));
+        dispatch(select(team));
     };
 
     if (isLoading) {
@@ -42,7 +43,11 @@ const NewsPage = () => {
     } else {
         return (
             <Fragment>
-                <PageTitle text="CITY NEWS" />
+                <PageTitle
+                    text={`${team.teamName} NEWS`}
+                    mainColor={team.teamColor}
+                    subColor={team.teamSubColor}
+                />
                 <NewsCard
                     newsList={apiResult.newsList}
                     activeSlide={activeNews}

@@ -3,6 +3,7 @@ import PageTitle from "@features/common/text/pageTitle";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import styled from "styled-components";
 import {
     actApiInit,
@@ -15,8 +16,8 @@ import MatchList from "../components/matchList";
 const MatchPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
-    const teamId = useSelector(
-        (state: RootStateInterface): number => state.rdcExample.teamId
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
     );
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
@@ -25,12 +26,12 @@ const MatchPage = () => {
     useEffect(() => {
         setIsLoading(true);
         dispatchApi();
-    }, [teamId]);
+    }, [team.teamId]);
 
     const dispatchApi = () => {
         dispatch(actApiInit());
         dispatch(actApiRequest());
-        dispatch(select(teamId));
+        dispatch(select(team));
     };
 
     if (isLoading) {
@@ -43,7 +44,11 @@ const MatchPage = () => {
     } else {
         return (
             <Fragment>
-                <PageTitle text="CITY MATCHES" />
+                <PageTitle
+                    text={`${team.teamName} MATCHES`}
+                    mainColor={team.teamColor}
+                    subColor={team.teamSubColor}
+                />
                 <MatchList
                     matchData={apiResult.matchList}
                     currentMonth={apiResult.currentMonth}

@@ -64,7 +64,10 @@ function* apiRequest() {
         //     headers
         // );
         const action = yield take("SELECT");
-        const data: IApiResult = yield call(callCityDataAPI, action.teamId);
+        const data: IApiResult = yield call(
+            callCityDataAPI,
+            action.data.teamId
+        );
         yield put(actApiSuccess(data));
     } catch (err) {
         yield put(actApiFail(err));

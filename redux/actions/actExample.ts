@@ -1,3 +1,4 @@
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import {
     EActionTypesExample,
     IReset,
@@ -8,9 +9,9 @@ export function reset(): IReset {
     return { type: EActionTypesExample.RESET };
 }
 
-export function select(data: number): ISelect {
+export function select(data: IExampleState): ISelect {
     return {
         type: EActionTypesExample.SELECT,
-        teamId: data,
+        data,
     };
 }

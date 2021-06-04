@@ -4,24 +4,27 @@ import styled from "styled-components";
 
 type titleProps = {
     text: string;
+    mainColor: string;
+    subColor: string;
 };
 
-const PageTitle = ({ text }: titleProps) => {
+const PageTitle = ({ text, mainColor, subColor }: titleProps) => {
     return (
         <Fade left cascade>
-            <NewsTitle>{text}</NewsTitle>
+            <NewsTitle mainColor={mainColor} subColor={subColor}>
+                {text}
+            </NewsTitle>
         </Fade>
     );
 };
 
 export default PageTitle;
 
-const NewsTitle = styled.h1`
+const NewsTitle = styled.h1<{ mainColor: string; subColor: string }>`
     font-family: "Josefin Sans", sans-serif;
     padding: 56px 0 0 112px;
-    color: #6cabdd;
-    text-shadow: 1px 1px #1c2c5b;
-
+    color: ${(props) => props.mainColor};
+    text-shadow: 1px 1px ${(props) => " " + props.subColor};
     text-decoration: underline;
     font-size: 36px;
     font-weight: 600;

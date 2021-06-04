@@ -9,6 +9,9 @@ import {
 
 export const initialState: IExampleState = {
     teamId: 8456,
+    teamName: "CITY",
+    teamColor: "#6CABDD",
+    teamSubColor: "#1C2C5B",
 };
 
 interface HydratePayload {
@@ -27,13 +30,13 @@ const rdcExample = (
         case EActionTypesExample.SELECT:
             return {
                 ...state,
-                ...{ teamId: action.teamId },
+                ...action.data,
             };
 
         case EActionTypesExample.RESET:
             return {
                 ...state,
-                ...{ teamId: initialState.teamId },
+                ...initialState,
             };
 
         default:

@@ -24,4 +24,7 @@
 */
 export interface IExampleState {
     teamId: number;
+    teamName: string;
+    teamColor: string;
+    teamSubColor: string;
 }
