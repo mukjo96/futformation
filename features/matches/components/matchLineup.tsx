@@ -63,9 +63,12 @@ const MatchLineup = ({ matchData }: dataType) => {
     function tooltipPlayerStat(stats: Array<Array<object>>) {
         return (
             <>
-                {stats.map((statList: Array<object>, listIndex: number) =>
+                {stats?.map((statList: Array<object>, listIndex: number) =>
                     Object.entries(statList).map((map, index) => (
-                        <Row justify="space-between">
+                        <Row
+                            justify="space-between"
+                            key={`${listIndex}-${index}`}
+                        >
                             {listIndex > 0 && index === 0 && <StyledDivider />}
                             <StatTitle>
                                 {index === 0 ? (
@@ -97,7 +100,7 @@ const MatchLineup = ({ matchData }: dataType) => {
             >
                 <Badge
                     count={
-                        player.rating.num ? (
+                        player.rating?.num ? (
                             <Rating background={player.rating.bgcolor}>
                                 {player.rating.num}
                             </Rating>

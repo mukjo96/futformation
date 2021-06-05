@@ -13,9 +13,10 @@ const { Panel } = Collapse;
 
 type dataType = {
     playerData: Array<playerListDataTypes>;
+    teamColor: string;
 };
 
-const PlayerList = ({ playerData }: dataType) => {
+const PlayerList = ({ playerData, teamColor }: dataType) => {
     return (
         <Container>
             <Fade bottom cascade ssrFadeout>
@@ -49,7 +50,11 @@ const PlayerList = ({ playerData }: dataType) => {
                                                                 />
                                                             </ScoreCol>
                                                         </MatchScore>
-                                                        <CustomDivider />
+                                                        <CustomDivider
+                                                            teamcolor={
+                                                                teamColor
+                                                            }
+                                                        />
                                                     </>
                                                 }
                                             />
@@ -129,9 +134,9 @@ const ScoreCol = styled(Col)`
     align-content: space-between;
 `;
 
-const CustomDivider = styled(Divider)`
+const CustomDivider = styled(Divider)<{ teamcolor: string }>`
     margin: 10px 0;
-    background: #6cabdd;
+    background: ${(props) => props.teamcolor};
 `;
 
 const MatchDescription = styled.div`

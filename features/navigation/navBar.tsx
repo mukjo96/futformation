@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import HamburgerMenu from "react-hamburger-menu";
 import { TextLogo } from "@features/common/logo/Logo";
@@ -12,12 +12,14 @@ import { select } from "redux/actions/actExample";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { teamList } from "./teamList";
+import { useRouter } from "next/dist/client/router";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
     const team = useSelector(
         (state: RootStateInterface): IExampleState => state.rdcExample
     );
+    const router = useRouter();
 
     const dispatch = useDispatch();
 
@@ -25,6 +27,10 @@ const NavBar = () => {
         console.log(teamInfo);
         dispatch(select(teamInfo));
     }
+
+    useEffect(() => {
+        setOpen(false);
+    }, [router.query]);
 
     const menu = (
         <Menu>
@@ -112,7 +118,6 @@ const Hamburger = styled.div`
             flex-direction: column;
             align-items: center;
             width: 100%;
-            background: #1c2c5b;
             li {
                 width: 100%;
                 text-align: center;
@@ -143,7 +148,7 @@ const ToggleBtn = styled.section`
     display: none;
     position: absolute;
     right: 32px;
-    top: 15.5px;
+    top: 25.5px;
     font-size: 24px;
 
     @media screen and (max-width: 768px) {

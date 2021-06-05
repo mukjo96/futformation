@@ -2,16 +2,22 @@ import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 export const teamList: IExampleState[] = [
     {
-        teamId: 8650,
-        teamName: "LFC",
-        teamColor: "#C8102E",
-        teamSubColor: "#00B2A9",
+        teamId: 8633,
+        teamName: "RMCF",
+        teamColor: "#FEBE10",
+        teamSubColor: "#00529F",
     },
     {
         teamId: 8456,
         teamName: "CITY",
         teamColor: "#6CABDD",
         teamSubColor: "#1C2C5B",
+    },
+    {
+        teamId: 8650,
+        teamName: "LFC",
+        teamColor: "#C8102E",
+        teamSubColor: "#00B2A9",
     },
     {
         teamId: 8586,

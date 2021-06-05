@@ -49,6 +49,7 @@ const TeamPlayers = ({ dataList }) => {
                                 key={item.id}
                                 onClick={() => setSelectedId(item.id)}
                                 id={(selectedId === item.id).toString()}
+                                teamcolor={team.teamColor}
                             >
                                 <StyledMeta
                                     avatar={
@@ -114,9 +115,9 @@ const ListCol = styled(Col)`
     overflow: auto;
 `;
 
-const StyledItem = styled(List.Item)<{ id: string }>`
+const StyledItem = styled(List.Item)<{ id: string; teamcolor: string }>`
     background-color: ${(props) =>
-        props.id === "true" && "rgba(108,171,221,0.1)"};
+        props.id === "true" && props.teamcolor + "19"};
 `;
 
 const StyledMeta = styled(List.Item.Meta)`

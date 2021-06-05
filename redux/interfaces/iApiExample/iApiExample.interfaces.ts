@@ -10,7 +10,7 @@ export interface IApiResult {
     newsList: Array<newsDataTypes>;
     currentMonth: string;
     playerList: Array<playerListDataTypes>;
-    statList: Array<playerStatDataTypes>;
+    statList: playerStatDataTypes;
 }
 
 /* export interface IApiExampleState {

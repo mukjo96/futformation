@@ -8,12 +8,19 @@ import MoreButton from "@features/common/button/moreButton";
 import Link from "next/link";
 import { playerInfoDataTypes } from "../api/cityDataTypes";
 import LoadingView from "@features/common/loadingView";
+import { useSelector } from "react-redux";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 const PlayerInfo = ({ id }) => {
     const [playerData, setPlayerData] = useState<playerInfoDataTypes>();
     const [isLoading, setIsLoading] = useState(true);
     const [statData, setStatData] = useState({});
     const [propData, setPropData] = useState({});
+
+    const teamColor = useSelector(
+        (state: RootStateInterface): string => state.rdcExample.teamColor
+    );
 
     useEffect(() => {
         let isSubscribed = true;
@@ -48,9 +55,9 @@ const PlayerInfo = ({ id }) => {
         );
     } else {
         return (
-            <Container>
+            <Container teamcolor={teamColor}>
                 <StyledCol xs={24} md={12}>
-                    <ShirtDiv>
+                    <ShirtDiv teamcolor={teamColor}>
                         <span>#</span>
                         <ShirtNumber>{propData["Shirt"]}</ShirtNumber>
                     </ShirtDiv>
@@ -189,8 +196,8 @@ const renderCircular = (value: number, text: number, title: string) => {
         </CircularCol>
     );
 };
-const Container = styled(Row)`
-    background-color: rgba(108, 171, 221, 0.1);
+const Container = styled(Row)<{ teamcolor: string }>`
+    background-color: ${(props) => props.teamcolor + "19"};
     height: 100%;
     align-self: center;
 `;
@@ -199,18 +206,17 @@ const StyledCol = styled(Col)`
     padding: 5% 10%;
 `;
 
-const ShirtDiv = styled.div`
+const ShirtDiv = styled.div<{ teamcolor: string }>`
     display: flex;
 
     span {
-        color: #6cabdd;
+        color: ${(props) => props.teamcolor};
         margin-top: 4px;
     }
 `;
 
 const ShirtNumber = styled.span`
     font-size: 28px;
-    color: #6cabdd;
     margin-top: 0 !important;
 `;
 

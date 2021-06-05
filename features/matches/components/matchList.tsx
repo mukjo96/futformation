@@ -181,7 +181,7 @@ const ScoreH4 = styled.h4<{ iscitywin: string }>`
     margin: 0;
     color: ${(props) =>
         props.iscitywin === "win"
-            ? "#6cabdd"
+            ? "green"
             : props.iscitywin === "draw"
             ? "darkgrey"
             : "#EC3325"};
@@ -196,7 +196,7 @@ const CustomDivider = styled(Divider)<{ ispast: string; iscitywin: string }>`
     background: ${(props) =>
         props.ispast === "true"
             ? props.iscitywin === "win"
-                ? "#6cabdd"
+                ? "green"
                 : props.iscitywin === "draw"
                 ? "lightgrey"
                 : "#EC3325"

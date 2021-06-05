@@ -8,10 +8,10 @@ import {
 } from "../interfaces/iExample/iExampleAct.interfaces";
 
 export const initialState: IExampleState = {
-    teamId: 8456,
-    teamName: "CITY",
-    teamColor: "#6CABDD",
-    teamSubColor: "#1C2C5B",
+    teamId: 8633,
+    teamName: "RMCF",
+    teamColor: "#FEBE10",
+    teamSubColor: "#00529F",
 };
 
 interface HydratePayload {

@@ -49,7 +49,10 @@ const TeamPage = () => {
                     mainColor={team.teamColor}
                     subColor={team.teamSubColor}
                 />
-                <PlayerList playerData={apiResult.playerList} />
+                <PlayerList
+                    playerData={apiResult.playerList}
+                    teamColor={team.teamColor}
+                />
             </Fragment>
         );
     }

@@ -26,7 +26,6 @@ const BackDiv = styled.div`
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
-
     const dispatch = useDispatch();
     const team = useSelector(
         (state: RootStateInterface): IExampleState => state.rdcExample
@@ -54,6 +53,7 @@ const Home = () => {
             </Container>
         );
     } else {
+        console.log(apiResult?.statList);
         return (
             <Fragment>
                 <MainBanner bannerList={apiResult?.newsList[0]} />
@@ -63,7 +63,11 @@ const Home = () => {
                 />
                 <LatestNews newsList={apiResult?.newsList} />
                 <TeamPlayers dataList={apiResult?.playerList} />
-                <PlayerStats statList={apiResult?.statList} />
+                <PlayerStats
+                    statList={apiResult?.statList}
+                    color={team.teamColor}
+                    teamId={team.teamId}
+                />
                 <AdBanner />
                 <Sponsorship />
                 <BackDiv></BackDiv>

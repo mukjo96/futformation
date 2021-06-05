@@ -80,13 +80,22 @@ export type playerInfoDataTypes = {
     meta: any;
 };
 
-export type playerStatDataTypes = {
+export type playerStatDataTypes = [topPlayersDataTypes, tableDataTypes];
+
+export type topPlayersDataTypes = {
     byRating: Array<statPlayer>;
     byGoals: Array<statPlayer>;
     byAssists: Array<statPlayer>;
 };
 
-type statPlayer = {
+export type tableDataTypes = {
+    tables: Array<any>;
+    teamForms: any;
+    nextOpponent: any;
+    tableHeader: any;
+};
+
+export type statPlayer = {
     id: 169200;
     name: string;
     goals: number;

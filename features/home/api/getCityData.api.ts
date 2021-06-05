@@ -42,7 +42,7 @@ export async function getCityStats(teamId: number) {
         let response = await axios.get(
             `https://cors.bridged.cc/https://www.fotmob.com/teams?id=${teamId}&tab=overview&type=team`
         );
-        return response.data.topPlayers;
+        return [response.data.topPlayers, response.data.tableData];
     } catch (error) {
         console.log(error);
     }

@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
 import useSWR from "swr";
+import PlayerHeader from "../components/playerHeader";
 
 const PlayerInfoPage = () => {
     const router = useRouter();
@@ -34,11 +35,7 @@ const PlayerInfoPage = () => {
 
     return (
         <Container>
-            <Avatar
-                size={100}
-                shape="square"
-                src={`https://images.fotmob.com/image_resources/playerimages/${data.id}.png`}
-            />
+            <PlayerHeader playerData={data} />
         </Container>
     );
 };
