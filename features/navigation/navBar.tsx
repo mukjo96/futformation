@@ -5,7 +5,7 @@ import { TextLogo } from "@features/common/logo/Logo";
 import Link from "next/link";
 import Searchbar from "@features/common/input/searchBar";
 import NaviLinks from "./naviLinks";
-import { Dropdown, Menu, Row } from "antd";
+import { Avatar, Dropdown, Menu, Row } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
@@ -35,8 +35,17 @@ const NavBar = () => {
     const menu = (
         <Menu>
             {teamList.map((team) => (
-                <Menu.Item key={team.teamId} onClick={() => changeTeam(team)}>
-                    {team.teamName}
+                <Menu.Item
+                    key={team.teamId}
+                    onClick={() => changeTeam(team)}
+                    style={{ alignItems: "center" }}
+                >
+                    <Avatar
+                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                        size="small"
+                        style={{ marginRight: "4px" }}
+                    />
+                    <span>{team.teamName}</span>
                 </Menu.Item>
             ))}
         </Menu>

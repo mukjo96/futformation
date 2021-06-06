@@ -11,7 +11,7 @@ const Foot = () => {
             <StyledRow>
                 <TextLogo />
                 <Col>
-                    <Text>Manchester City Unofficial Website</Text>
+                    <Text>Football Information Unofficial Site</Text>
                     <Text>©2021 Created by mukjo96</Text>
                 </Col>
             </StyledRow>
