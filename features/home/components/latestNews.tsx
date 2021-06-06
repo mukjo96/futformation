@@ -7,7 +7,7 @@ import BlockTitle from "./Title/blockTitle";
 import { Avatar } from "antd";
 import { IconLogo } from "@features/common/logo/Logo";
 
-const LatestNews = ({ newsList }) => {
+const LatestNews = ({ newsList, teamId }) => {
     return (
         <Container>
             <Col>
@@ -56,7 +56,9 @@ const LatestNews = ({ newsList }) => {
                                                     icon={
                                                         news.sourceIconUrl ===
                                                         "https://images.fotmob.com/image_resources/news/default.png" ? (
-                                                            <IconLogo />
+                                                            <img
+                                                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamId}_small.png`}
+                                                            />
                                                         ) : (
                                                             <img
                                                                 src={

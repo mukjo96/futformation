@@ -94,17 +94,20 @@ const PlayerInfo = ({ id }) => {
                             {renderCircular(
                                 statData["conversion"],
                                 statData["conversion"],
-                                "Conversion"
+                                "Conversion",
+                                teamColor
                             )}
                             {renderCircular(
                                 statData["dribbles"],
                                 statData["dribbles"],
-                                "Dribbles"
+                                "Dribbles",
+                                teamColor
                             )}
                             {renderCircular(
                                 statData["tackles"],
                                 statData["tackles"],
-                                "Tackles"
+                                "Tackles",
+                                teamColor
                             )}
                         </CircularRow>
                     </StyledCol>
@@ -129,11 +132,9 @@ const PlayerInfo = ({ id }) => {
     function statDataToObject() {
         const virStatData = {};
         if (playerData.careerStatistics) {
-            playerData.careerStatistics[0].name ===
-                "England - Premier League" &&
-                playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
-                    (props) => (virStatData[props[0]] = props[1])
-                );
+            playerData.careerStatistics[0].seasons[0].stats[0].statsArr.map(
+                (props) => (virStatData[props[0]] = props[1])
+            );
             virStatData["conversion"] = Math.floor(
                 (statData["Goals"] /
                     (statData["Shots on target"] +
@@ -172,9 +173,14 @@ const renderStat = (title: string, data: number) => {
     );
 };
 
-const renderCircular = (value: number, text: number, title: string) => {
+const renderCircular = (
+    value: number,
+    text: number,
+    title: string,
+    teamColor: string
+) => {
     return (
-        <CircularCol span={6}>
+        <CircularCol teamcolor={teamColor} span={6}>
             <CircularProgressbar
                 value={value ? value : 0}
                 text={text ? `${text}%` : "0%"}
@@ -189,7 +195,6 @@ const renderCircular = (value: number, text: number, title: string) => {
                     // Colors
                     textColor: "black",
                     trailColor: "#d6d6d6",
-                    backgroundColor: "#1C2C5B",
                 })}
             />
             <CircularTitle>{title}</CircularTitle>
@@ -258,8 +263,12 @@ const CircularRow = styled(Row)`
     justify-content: space-between;
 `;
 
-const CircularCol = styled(Col)`
+const CircularCol = styled(Col)<{ teamcolor: string }>`
     text-align: center;
+
+    .CircularProgressbar-path {
+        stroke: ${(props) => props.teamcolor};
+    }
 `;
 
 const CircularTitle = styled.span`

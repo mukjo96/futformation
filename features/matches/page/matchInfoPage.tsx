@@ -2,6 +2,9 @@ import LoadingView from "@features/common/loadingView";
 import { Row, Result, Button } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
+import { useSelector } from "react-redux";
+import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
 import styled from "styled-components";
 import useSWR from "swr";
 import MatchHeader from "../components/matchHeader";
@@ -17,6 +20,9 @@ const MatchInfoPage = () => {
         `https://cors.bridged.cc/https://www.fotmob.com/matchDetails?matchId=${matchid}`
     );
 
+    const team = useSelector(
+        (state: RootStateInterface): IExampleState => state.rdcExample
+    );
     if (error)
         return (
             <div>
@@ -39,7 +45,10 @@ const MatchInfoPage = () => {
             <MatchHeader matchData={data} />
             {data.header.status.started && (
                 <>
-                    <MatchTimeline matchData={data} />
+                    <MatchTimeline
+                        matchData={data}
+                        teamColor={team.teamColor}
+                    />
                     <MatchLineup matchData={data} />
                     <MatchStats statData={data.content.stats} />
                 </>

@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
 import useSWR from "swr";
+import PlayerDetailTab from "../components/playerDetailTab";
 import PlayerHeader from "../components/playerHeader";
 
 const PlayerInfoPage = () => {
@@ -36,6 +37,7 @@ const PlayerInfoPage = () => {
     return (
         <Container>
             <PlayerHeader playerData={data} />
+            <PlayerDetailTab playerData={data} />
         </Container>
     );
 };

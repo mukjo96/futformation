@@ -23,7 +23,11 @@ const PlayerList = ({ playerData, teamColor }: dataType) => {
                 <StyledCollapse bordered={false}>
                     {playerData.map((position) => (
                         <Panel
-                            header={position[0].toUpperCase()}
+                            header={
+                                position[0] === "attackers"
+                                    ? "FORWARDS"
+                                    : position[0].toUpperCase()
+                            }
                             key={position[0]}
                         >
                             <List
@@ -41,12 +45,18 @@ const PlayerList = ({ playerData, teamColor }: dataType) => {
                                                                 <TeamLogo
                                                                     src={`https://images.fotmob.com/image_resources/playerimages/${item.id}.png`}
                                                                     width="60px"
+                                                                    alt={
+                                                                        item.name
+                                                                    }
                                                                 />
                                                             </div>
                                                             <ScoreCol>
                                                                 <TeamLogo
                                                                     src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.ccode.toLowerCase()}.png`}
                                                                     width="40px"
+                                                                    alt={
+                                                                        item.cname
+                                                                    }
                                                                 />
                                                             </ScoreCol>
                                                         </MatchScore>

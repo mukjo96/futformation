@@ -13,9 +13,10 @@ import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
 
 type dataType = {
     matchData: matchDetailTypes;
+    teamColor: string;
 };
 
-const MatchTimeline = ({ matchData }: dataType) => {
+const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     const [marks, setMarks] = useState({});
     const events = matchData.content.matchFacts.events.events;
 
@@ -162,7 +163,12 @@ const MatchTimeline = ({ matchData }: dataType) => {
     return (
         <Fade bottom cascade ssrFadeout>
             <Col xs={22} md={24} style={{ margin: "0 auto" }}>
-                <StyledSlider marks={marks} max={90} disabled />
+                <StyledSlider
+                    teamcolor={teamColor}
+                    marks={marks}
+                    max={90}
+                    disabled
+                />
             </Col>
         </Fade>
     );
@@ -214,7 +220,7 @@ const LogoIcon = styled.img`
     }
 `;
 
-const StyledSlider = styled(Slider)`
+const StyledSlider = styled(Slider)<{ teamcolor: string }>`
     cursor: default !important;
     margin: 36px 0;
     .ant-slider-handle {
@@ -237,7 +243,7 @@ const StyledSlider = styled(Slider)`
     }
 
     .ant-slider-rail {
-        background-color: #6cabdd !important;
+        background-color: ${(props) => props.teamcolor} !important;
         cursor: default !important;
     }
 

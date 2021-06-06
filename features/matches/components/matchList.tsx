@@ -12,9 +12,10 @@ const { Panel } = Collapse;
 type dataType = {
     matchData: Array<matchDataTypes>;
     currentMonth: string;
+    teamId: number;
 };
 
-const MatchList = ({ matchData, currentMonth }: dataType) => {
+const MatchList = ({ matchData, currentMonth, teamId }: dataType) => {
     return (
         <Container>
             <Fade bottom cascade ssrFadeout>
@@ -28,21 +29,21 @@ const MatchList = ({ matchData, currentMonth }: dataType) => {
                                 itemLayout="vertical"
                                 dataSource={matchData[key]}
                                 renderItem={(item: matchDataTypes) => {
-                                    let isCityWin: string;
-                                    if (item.home.name === "Man City") {
+                                    let isTeamWin: string;
+                                    if (item.home.id === teamId) {
                                         item.home.score > item.away.score
-                                            ? (isCityWin = "win")
+                                            ? (isTeamWin = "win")
                                             : item.home.score ===
                                               item.away.score
-                                            ? (isCityWin = "draw")
-                                            : (isCityWin = "lose");
+                                            ? (isTeamWin = "draw")
+                                            : (isTeamWin = "lose");
                                     } else {
                                         item.away.score > item.home.score
-                                            ? (isCityWin = "win")
+                                            ? (isTeamWin = "win")
                                             : item.away.score ===
                                               item.home.score
-                                            ? (isCityWin = "draw")
-                                            : (isCityWin = "lose");
+                                            ? (isTeamWin = "draw")
+                                            : (isTeamWin = "lose");
                                     }
                                     return (
                                         <List.Item>
@@ -71,8 +72,8 @@ const MatchList = ({ matchData, currentMonth }: dataType) => {
                                                                         : ""}
                                                                 </LiveText>
                                                                 <ScoreH4
-                                                                    iscitywin={
-                                                                        isCityWin
+                                                                    isteamwin={
+                                                                        isTeamWin
                                                                     }
                                                                 >
                                                                     {
@@ -82,14 +83,14 @@ const MatchList = ({ matchData, currentMonth }: dataType) => {
                                                                     }{" "}
                                                                     {item.status
                                                                         .started &&
-                                                                        isCityWin.toUpperCase()[0]}
+                                                                        isTeamWin.toUpperCase()[0]}
                                                                 </ScoreH4>
                                                             </ScoreCol>
                                                         </MatchScore>
                                                         <CustomDivider
                                                             ispast={item.isPastMatch.toString()}
-                                                            iscitywin={
-                                                                isCityWin
+                                                            isteamwin={
+                                                                isTeamWin
                                                             }
                                                         />
                                                     </>
@@ -175,14 +176,14 @@ const LiveText = styled.h4`
     margin: 0;
     color: #ec3325;
 `;
-const ScoreH4 = styled.h4<{ iscitywin: string }>`
+const ScoreH4 = styled.h4<{ isteamwin: string }>`
     font-size: 16px;
     font-weight: 500;
     margin: 0;
     color: ${(props) =>
-        props.iscitywin === "win"
+        props.isteamwin === "win"
             ? "green"
-            : props.iscitywin === "draw"
+            : props.isteamwin === "draw"
             ? "darkgrey"
             : "#EC3325"};
 
@@ -191,13 +192,13 @@ const ScoreH4 = styled.h4<{ iscitywin: string }>`
     }
 `;
 
-const CustomDivider = styled(Divider)<{ ispast: string; iscitywin: string }>`
+const CustomDivider = styled(Divider)<{ ispast: string; isteamwin: string }>`
     margin: 10px 0;
     background: ${(props) =>
         props.ispast === "true"
-            ? props.iscitywin === "win"
+            ? props.isteamwin === "win"
                 ? "green"
-                : props.iscitywin === "draw"
+                : props.isteamwin === "draw"
                 ? "lightgrey"
                 : "#EC3325"
             : "lightgrey"};

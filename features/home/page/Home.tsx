@@ -61,7 +61,10 @@ const Home = () => {
                     matchList={apiResult?.matchList}
                     currentMonth={apiResult?.currentMonth}
                 />
-                <LatestNews newsList={apiResult?.newsList} />
+                <LatestNews
+                    newsList={apiResult?.newsList}
+                    teamId={team.teamId}
+                />
                 <TeamPlayers dataList={apiResult?.playerList} />
                 <PlayerStats
                     statList={apiResult?.statList}

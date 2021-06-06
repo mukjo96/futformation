@@ -10,27 +10,64 @@ const PlayerHeader = ({ playerData }: playerDataTypes) => {
     return (
         <Container>
             <Row>
-                <Col xs={{ span: 24 }} md={{ span: 6 }}>
-                    <Avatar
-                        size={100}
-                        shape="square"
-                        src={`https://images.fotmob.com/image_resources/playerimages/${playerData.id}.png`}
-                    />
-                </Col>
+                <AvatarCol xs={{ span: 24 }} md={{ span: 6 }}>
+                    <Col>
+                        <Avatar
+                            size={100}
+                            shape="square"
+                            style={{ marginBottom: "12px" }}
+                            src={`https://images.fotmob.com/image_resources/playerimages/${playerData.id}.png`}
+                        />
+                    </Col>
+                    <Col xs={{ span: 0 }} md={{ span: 24 }}>
+                        <PrimaryPosition>
+                            {playerData.origin.positionDesc.primaryPosition}
+                        </PrimaryPosition>
+                        <SubPosition>
+                            {
+                                playerData.origin.positionDesc
+                                    ?.nonPrimaryPositions
+                            }
+                        </SubPosition>
+                    </Col>
+                </AvatarCol>
                 <Col xs={{ span: 24 }} md={{ span: 18 }}>
-                    <Infos>
-                        <Title>{playerData.name}</Title>
-                        <Row>
-                            <Avatar
-                                size={24}
-                                shape="circle"
-                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${playerData.origin.teamId}_small.png`}
-                            />
-
-                            <Release>{playerData.origin.teamName}</Release>
-                        </Row>
-                    </Infos>
-                    <Row></Row>
+                    <Row>
+                        <Col xs={{ span: 12 }} md={{ span: 24 }}>
+                            <Title>{playerData.name}</Title>
+                            <Row>
+                                <Avatar
+                                    size={24}
+                                    shape="circle"
+                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${playerData.origin.teamId}_small.png`}
+                                />
+                                <Release>{playerData.origin.teamName}</Release>
+                            </Row>
+                        </Col>
+                        <Col xs={{ span: 12 }} md={{ span: 0 }}>
+                            <PrimaryPosition>
+                                {playerData.origin.positionDesc.primaryPosition}
+                            </PrimaryPosition>
+                            <SubPosition>
+                                {
+                                    playerData.origin.positionDesc
+                                        ?.nonPrimaryPositions
+                                }
+                            </SubPosition>
+                        </Col>
+                    </Row>
+                    <Row>
+                        {playerData.playerProps.map((props) => (
+                            <Col span={12}>
+                                <DetailDesc>
+                                    <Tagsmalltitle>
+                                        {props.title.toUpperCase()}
+                                    </Tagsmalltitle>
+                                    {props.value}
+                                </DetailDesc>
+                            </Col>
+                        ))}
+                    </Row>
                 </Col>
             </Row>
         </Container>
@@ -49,35 +86,63 @@ const Container = styled.div`
     }
 `;
 
-const Infos = styled.div`
-    display: flex-box;
-    width: 100%;
-    align-items: baseline;
-    @media screen and (max-width: 768px) {
-    }
+const AvatarCol = styled(Col)`
+    margin-bottom: 12px;
 `;
 
 const Title = styled.h1`
-    color: #333333;
     font-weight: 600;
     font-size: 24px;
     line-height: 1.5;
-    margin-left: 3px;
     margin-bottom: 0;
 
     @media screen and (max-width: 768px) {
         font-size: 16px;
     }
 `;
+const PrimaryPosition = styled.h3`
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 600;
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+    }
+`;
 
+const SubPosition = styled.h5`
+    font-size: 12px;
+    margin: 0;
+    color: #555555;
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
+    }
+`;
 const Release = styled.h5`
     color: #555555;
     font-weight: 600;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.7;
     margin-bottom: 0;
     margin-left: 4px;
     @media screen and (max-width: 768px) {
-        font-size: 14px;
+        font-size: 12px;
+        line-height: 2.1;
     }
+`;
+
+const DetailDesc = styled.div`
+    margin-top: 1rem;
+`;
+
+const Smalltitle = styled.h5`
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-bottom: 6px;
+`;
+
+const Tagsmalltitle = styled.h5`
+    font-size: 12px;
+    color: #a0a0a0;
+    margin-bottom: 0;
 `;

@@ -52,6 +52,7 @@ const MatchPage = () => {
                 <MatchList
                     matchData={apiResult.matchList}
                     currentMonth={apiResult.currentMonth}
+                    teamId={team.teamId}
                 />
             </Fragment>
         );

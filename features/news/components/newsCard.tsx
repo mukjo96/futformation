@@ -9,7 +9,7 @@ import Link from "antd/lib/typography/Link";
 
 const { Meta } = Card;
 
-const NewsCard = ({ newsList, activeSlide, setActiveSlide }) => {
+const NewsCard = ({ newsList, activeSlide, setActiveSlide, teamId }) => {
     return (
         <Container>
             <Carousel
@@ -112,7 +112,9 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide }) => {
                                             icon={
                                                 news.sourceIconUrl ===
                                                 "https://images.fotmob.com/image_resources/news/default.png" ? (
-                                                    <IconLogo />
+                                                    <img
+                                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamId}_small.png`}
+                                                    />
                                                 ) : (
                                                     <img
                                                         src={news.sourceIconUrl}

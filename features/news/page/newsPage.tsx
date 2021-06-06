@@ -52,6 +52,7 @@ const NewsPage = () => {
                     newsList={apiResult.newsList}
                     activeSlide={activeNews}
                     setActiveSlide={setActiveNews}
+                    teamId={team.teamId}
                 />
             </Fragment>
         );

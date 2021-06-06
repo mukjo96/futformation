@@ -33,7 +33,11 @@ const TeamPlayers = ({ dataList }) => {
                 <Col xs={24} md={18} style={{ alignSelf: "center" }}>
                     {selectedId === 0 ? (
                         <Result
-                            icon={<SelectOutlined />}
+                            icon={
+                                <SelectOutlined
+                                    style={{ color: team.teamColor }}
+                                />
+                            }
                             title="Select your player!"
                         />
                     ) : (
