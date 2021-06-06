@@ -48,7 +48,7 @@ const RecentMatches = ({ playerData }) => {
                                         <MatchDescription>
                                             <div>
                                                 <StyledRow align="middle">
-                                                    <Col span={2}>
+                                                    <Col>
                                                         <Tooltip title="Minutes Played">
                                                             <TimeIcon
                                                                 icon={
@@ -57,44 +57,50 @@ const RecentMatches = ({ playerData }) => {
                                                             />
                                                         </Tooltip>
                                                     </Col>
-                                                    <Col span={2}>
+                                                    <DataCol>
                                                         {item.minutesPlayed}
-                                                    </Col>
-                                                    <Col span={2}>
+                                                    </DataCol>
+                                                    <Divider type="vertical" />
+                                                    <Col>
                                                         <Tooltip title="Goals">
                                                             <GoalIcon
                                                                 icon={faFutbol}
                                                             />
                                                         </Tooltip>
                                                     </Col>
-                                                    <Col span={2}>
+                                                    <DataCol>
                                                         {item.goals}
-                                                    </Col>
-                                                    <Col span={2}>
+                                                    </DataCol>
+                                                    <Divider type="vertical" />
+                                                    <Col>
                                                         <Tooltip title="Assists">
                                                             <AssistIcon />
                                                         </Tooltip>
                                                     </Col>
-                                                    <Col span={2}>
+                                                    <DataCol>
                                                         {item.assists}
-                                                    </Col>
-                                                    <Col span={2}>
+                                                    </DataCol>
+                                                    <Divider type="vertical" />
+                                                    <Col>
                                                         <Tooltip title="Yellow Cards">
                                                             <Card color="Yellow" />
                                                         </Tooltip>
                                                     </Col>
-                                                    <Col span={2}>
+                                                    <DataCol>
                                                         {item.yellowCards}
-                                                    </Col>
-                                                    <Col span={2}>
+                                                    </DataCol>
+                                                    <Divider type="vertical" />
+                                                    <Col>
                                                         <Tooltip title="Red Cards">
                                                             <Card color="Red" />
                                                         </Tooltip>
                                                     </Col>
-                                                    <Col span={2}>
+
+                                                    <DataCol>
                                                         {item.redCards}
-                                                    </Col>
-                                                    <Col span={4}>
+                                                    </DataCol>
+                                                    <Divider type="vertical" />
+                                                    <DataCol>
                                                         <Rating
                                                             background={
                                                                 item.ratingProps
@@ -106,7 +112,7 @@ const RecentMatches = ({ playerData }) => {
                                                                     .num
                                                             }
                                                         </Rating>
-                                                    </Col>
+                                                    </DataCol>
                                                 </StyledRow>
                                                 <TournamentName>
                                                     {item.date}
@@ -164,7 +170,6 @@ const CustomDivider = styled(Divider)<{ teamcolor: string }>`
 `;
 
 const StyledRow = styled(Row)`
-    width: 300px;
     text-align: center;
     .ant-col-2 {
         display: flex;
@@ -177,14 +182,27 @@ const StyledRow = styled(Row)`
     }
 `;
 
+const DataCol = styled(Col)`
+    margin-left: 4px;
+`;
+
 const GoalIcon = styled(FontAwesomeIcon)`
     width: 16px !important;
-    height: 24px;
+    height: 100%;
+
+    @media screen and (max-width: 768px) {
+        width: 14px !important;
+        height: 100%;
+    }
 `;
 
 const TimeIcon = styled(FontAwesomeIcon)`
     width: 14px !important;
-    height: 24px;
+    height: 100%;
+    @media screen and (max-width: 768px) {
+        width: 12px !important;
+        height: 100%;
+    }
 `;
 
 const Card = styled.div<{ color: string }>`
@@ -245,4 +263,9 @@ const AssistIcon = styled.img.attrs(() => ({
 }))`
     width: 24px;
     height: 24px;
+
+    @media screen and (max-width: 768px) {
+        width: 18px;
+        height: 100%;
+    }
 `;
