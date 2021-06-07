@@ -200,6 +200,7 @@ const TeamName = styled.h2`
 `;
 
 const CustomDivider = styled(Divider)<{ teamcolor: string }>`
+    align-self: center;
     margin: 10px 0;
     background: ${(props) => props.teamcolor};
 `;

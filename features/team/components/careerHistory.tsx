@@ -86,7 +86,12 @@ const CareerHistory = ({ playerData }) => {
                                                 <DataCol>
                                                     {item.appearances ?? 0}
                                                 </DataCol>
-                                                <Divider type="vertical" />
+                                                <Divider
+                                                    type="vertical"
+                                                    style={{
+                                                        alignSelf: "center",
+                                                    }}
+                                                />
                                                 <Col>
                                                     <Tooltip title="Goals">
                                                         <GoalIcon
