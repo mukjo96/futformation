@@ -123,7 +123,7 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide, teamId }) => {
                                             }
                                             style={{
                                                 marginRight: "4px",
-                                                background: "white",
+                                                background: "none",
                                             }}
                                         />
                                         <span>{news.sourceStr}</span>
@@ -150,6 +150,7 @@ const NewsContainer = styled.div`
 
     @media screen and (max-width: 768px) {
         width: 250px;
+        height: 505px;
     }
 `;
 const StyledCard = styled(Card)`
@@ -169,5 +170,9 @@ const StyledCard = styled(Card)`
     }
     .ant-card-meta-description {
         font-size: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+        height: 505px;
     }
 `;

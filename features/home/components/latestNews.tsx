@@ -72,6 +72,7 @@ export function renderNewsBox(news, index, teamId) {
                             }
                             style={{
                                 marginRight: "4px",
+                                background: "none",
                             }}
                         />
                         <div>

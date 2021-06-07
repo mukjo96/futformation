@@ -1,7 +1,7 @@
 import MoreButton from "@features/common/button/moreButton";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Collapse, List, Row, Col, Divider, Modal, Avatar } from "antd";
+import { Collapse, List, Row, Col, Divider, Modal, Avatar, Empty } from "antd";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { renderPlayerStats } from "./recentMatches";
@@ -12,90 +12,100 @@ const CareerStatistics = ({ playerData }) => {
     const matches = playerData.careerStatistics;
     const [visibleModalNumber, setVisibleModalNumber] = useState(0);
 
-    return (
-        <Col>
-            <StyledCollapse bordered={false}>
-                {matches.map((careers) => (
-                    <Panel
-                        header={
-                            <>
-                                <TeamLogo
-                                    src={`https://images.fotmob.com/image_resources/logo/leaguelogo/${careers.id}.png`}
-                                    shape="square"
-                                    icon={
-                                        <FontAwesomeIcon
-                                            icon={faUsers}
-                                            color="black"
-                                        />
-                                    }
-                                    style={{ background: "white" }}
-                                    onError={() => true}
-                                />
-                                {careers.name}
-                            </>
-                        }
-                        key={careers.id}
-                    >
-                        <List
-                            itemLayout="vertical"
-                            dataSource={careers.seasons}
-                            renderItem={(item: any) => {
-                                return (
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            style={{ margin: 0 }}
-                                            title={
-                                                <>
-                                                    <MatchScore>
-                                                        <Row align="middle">
-                                                            <TeamName>
-                                                                {item.name}
-                                                            </TeamName>
-                                                        </Row>
-                                                    </MatchScore>
-                                                    <CustomDivider
-                                                        teamcolor={
-                                                            playerData.origin
-                                                                .teamColor
-                                                        }
-                                                    />
-                                                </>
-                                            }
-                                        />
-                                        <MatchDescription>
-                                            <div>
-                                                {renderPlayerStats(
-                                                    false,
-                                                    item.matches,
-                                                    item.goals,
-                                                    item.assists,
-                                                    item.yc,
-                                                    item.rc
-                                                )}
-                                            </div>
-                                            <MoreButton
-                                                value="More"
-                                                size="medium"
-                                                onClick={() =>
-                                                    setVisibleModalNumber(
-                                                        item.stats[0].startTS
-                                                    )
+    if (!matches) {
+        return (
+            <EmptyCol>
+                <Empty />
+            </EmptyCol>
+        );
+    } else {
+        return (
+            <Col>
+                <StyledCollapse bordered={false}>
+                    {matches?.map((careers) => (
+                        <Panel
+                            header={
+                                <>
+                                    <TeamLogo
+                                        src={`https://images.fotmob.com/image_resources/logo/leaguelogo/${careers.id}.png`}
+                                        shape="square"
+                                        icon={
+                                            <FontAwesomeIcon
+                                                icon={faUsers}
+                                                color="black"
+                                            />
+                                        }
+                                        style={{ background: "white" }}
+                                        onError={() => true}
+                                    />
+                                    {careers.name}
+                                </>
+                            }
+                            key={careers.id}
+                        >
+                            <List
+                                itemLayout="vertical"
+                                dataSource={careers.seasons}
+                                renderItem={(item: any) => {
+                                    return (
+                                        <List.Item>
+                                            <List.Item.Meta
+                                                style={{ margin: 0 }}
+                                                title={
+                                                    <>
+                                                        <MatchScore>
+                                                            <Row align="middle">
+                                                                <TeamName>
+                                                                    {item.name}
+                                                                </TeamName>
+                                                            </Row>
+                                                        </MatchScore>
+                                                        <CustomDivider
+                                                            teamcolor={
+                                                                playerData
+                                                                    .origin
+                                                                    .teamColor
+                                                            }
+                                                        />
+                                                    </>
                                                 }
                                             />
-                                            {renderCareerModal(
-                                                item.stats[0],
-                                                item.name
-                                            )}
-                                        </MatchDescription>
-                                    </List.Item>
-                                );
-                            }}
-                        />
-                    </Panel>
-                ))}
-            </StyledCollapse>
-        </Col>
-    );
+                                            <MatchDescription>
+                                                <div>
+                                                    {renderPlayerStats(
+                                                        false,
+                                                        item.matches,
+                                                        item.goals,
+                                                        item.assists,
+                                                        item.yc,
+                                                        item.rc
+                                                    )}
+                                                </div>
+                                                <MoreButton
+                                                    value="More"
+                                                    size="medium"
+                                                    onClick={() =>
+                                                        setVisibleModalNumber(
+                                                            item.stats[0]
+                                                                .startTS
+                                                        )
+                                                    }
+                                                />
+                                                {renderCareerModal(
+                                                    item.stats[0],
+                                                    item.name
+                                                )}
+                                            </MatchDescription>
+                                        </List.Item>
+                                    );
+                                }}
+                            />
+                        </Panel>
+                    ))}
+                </StyledCollapse>
+            </Col>
+        );
+    }
 
     function renderCareerModal(stats, name) {
         return (
@@ -123,6 +133,10 @@ const CareerStatistics = ({ playerData }) => {
 };
 
 export default CareerStatistics;
+
+const EmptyCol = styled(Col)`
+    margin-top: 5%;
+`;
 
 const StyledCollapse = styled(Collapse)`
     background-color: white;

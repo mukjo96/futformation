@@ -89,23 +89,25 @@ const PlayerList = ({ playerData, teamColor }: dataType) => {
                                                             : "Coach"}
                                                     </TournamentName>
                                                 </div>
-                                                <Link
-                                                    href={`players/${item.id}`}
-                                                >
-                                                    <a
-                                                        style={{
-                                                            textDecoration:
-                                                                "none",
-                                                            alignSelf:
-                                                                "flex-end",
-                                                        }}
+                                                {position[0] !== "coach" && (
+                                                    <Link
+                                                        href={`players/${item.id}`}
                                                     >
-                                                        <MoreButton
-                                                            value="More"
-                                                            size="medium"
-                                                        />
-                                                    </a>
-                                                </Link>
+                                                        <a
+                                                            style={{
+                                                                textDecoration:
+                                                                    "none",
+                                                                alignSelf:
+                                                                    "flex-end",
+                                                            }}
+                                                        >
+                                                            <MoreButton
+                                                                value="More"
+                                                                size="medium"
+                                                            />
+                                                        </a>
+                                                    </Link>
+                                                )}
                                             </MatchDescription>
                                         </List.Item>
                                     );

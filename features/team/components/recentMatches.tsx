@@ -9,6 +9,7 @@ import { Collapse, List, Row, Col, Divider, Tooltip } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import Fade from "react-reveal/Fade";
 
 const { Panel } = Collapse;
 
@@ -16,84 +17,92 @@ const RecentMatches = ({ playerData }) => {
     const matches = playerData.recentMatches;
 
     return (
-        <Col>
-            <StyledCollapse bordered={false}>
-                {matches.tabs.map((matchName: string) => (
-                    <Panel header={matchName} key={matchName}>
-                        <List
-                            itemLayout="vertical"
-                            dataSource={matches[matchName]}
-                            renderItem={(item: any) => {
-                                return (
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            style={{ margin: 0 }}
-                                            title={
-                                                <>
-                                                    <MatchScore>
-                                                        <Row align="middle">
-                                                            <TeamName>
-                                                                {`vs ${item.versus.opponentName}`}
-                                                            </TeamName>
-                                                            <TeamLogo
-                                                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.versus.opponentId}_small.png`}
-                                                                width="40px"
-                                                            />
-                                                        </Row>
-                                                        <ScoreCol>
-                                                            <ScoreH4>
-                                                                {`${item.versus.homeTeamScore} : ${item.versus.awayTeamScore}`}
-                                                            </ScoreH4>
-                                                        </ScoreCol>
-                                                    </MatchScore>
-                                                    <CustomDivider
-                                                        teamcolor={
-                                                            playerData.origin
-                                                                .teamColor
-                                                        }
-                                                    />
-                                                </>
-                                            }
-                                        />
-                                        <MatchDescription>
-                                            <div>
-                                                {renderPlayerStats(
-                                                    true,
-                                                    item.minutesPlayed,
-                                                    item.goals,
-                                                    item.assists,
-                                                    item.yellowCards,
-                                                    item.redCards,
-                                                    item.ratingProps
-                                                )}
-                                                <TournamentName>
-                                                    {item.date}
-                                                </TournamentName>
-                                            </div>
-                                            <Link
-                                                href={`/matches/${item.versus.matchId}`}
-                                            >
-                                                <a
-                                                    style={{
-                                                        textDecoration: "none",
-                                                        alignSelf: "flex-end",
-                                                    }}
+        <Fade bottom cascade ssrFadeout>
+            <Col>
+                <StyledCollapse bordered={false}>
+                    {matches.tabs.map((matchName: string) => (
+                        <Panel header={matchName} key={matchName}>
+                            <List
+                                itemLayout="vertical"
+                                dataSource={matches[matchName]}
+                                renderItem={(item: any) => {
+                                    return (
+                                        <List.Item>
+                                            <List.Item.Meta
+                                                style={{ margin: 0 }}
+                                                title={
+                                                    <>
+                                                        <MatchScore>
+                                                            <Row align="middle">
+                                                                <TeamName>
+                                                                    {`vs ${item.versus.opponentName}`}
+                                                                </TeamName>
+                                                                <TeamLogo
+                                                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.versus.opponentId}_small.png`}
+                                                                    width="40px"
+                                                                />
+                                                            </Row>
+
+                                                            <ScoreCol>
+                                                                <ScoreH4>
+                                                                    {`${item.versus.homeTeamScore} : ${item.versus.awayTeamScore}`}
+                                                                </ScoreH4>
+                                                            </ScoreCol>
+                                                        </MatchScore>
+                                                        <CustomDivider
+                                                            teamcolor={
+                                                                playerData
+                                                                    .origin
+                                                                    .teamColor
+                                                            }
+                                                        />
+                                                    </>
+                                                }
+                                            />
+                                            <MatchDescription>
+                                                <div>
+                                                    {item.minutesPlayed > 0
+                                                        ? renderPlayerStats(
+                                                              true,
+                                                              item.minutesPlayed,
+                                                              item.goals,
+                                                              item.assists,
+                                                              item.yellowCards,
+                                                              item.redCards,
+                                                              item.ratingProps
+                                                          )
+                                                        : "Ruled Out"}
+                                                    <TournamentName>
+                                                        {item.date}
+                                                    </TournamentName>
+                                                </div>
+                                                <Link
+                                                    href={`/matches/${item.versus.matchId}`}
                                                 >
-                                                    <MoreButton
-                                                        value="More"
-                                                        size="medium"
-                                                    />
-                                                </a>
-                                            </Link>
-                                        </MatchDescription>
-                                    </List.Item>
-                                );
-                            }}
-                        />
-                    </Panel>
-                ))}
-            </StyledCollapse>
-        </Col>
+                                                    <a
+                                                        style={{
+                                                            textDecoration:
+                                                                "none",
+                                                            alignSelf:
+                                                                "flex-end",
+                                                        }}
+                                                    >
+                                                        <MoreButton
+                                                            value="More"
+                                                            size="medium"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </MatchDescription>
+                                        </List.Item>
+                                    );
+                                }}
+                            />
+                        </Panel>
+                    ))}
+                </StyledCollapse>
+            </Col>
+        </Fade>
     );
 };
 
@@ -112,7 +121,7 @@ export function renderPlayerStats(
     return (
         <StyledRow align="middle">
             <Col>
-                <Tooltip title={isMatch ? "Minutes Played" : "Matches"}>
+                <Tooltip title={isMatch ? "Minutes Played" : "Appearances"}>
                     {isMatch ? (
                         <TimeIcon icon={faStopwatch} />
                     ) : (
@@ -197,7 +206,7 @@ const CustomDivider = styled(Divider)<{ teamcolor: string }>`
 
 const StyledRow = styled(Row)`
     text-align: center;
-    .ant-col-2 {
+    .ant-col {
         display: flex;
         align-items: center;
         justify-content: center;

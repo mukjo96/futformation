@@ -112,7 +112,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                             {renderStatList(statData.byGoals, "Goals")}
                             {renderStatList(statData.byAssists, "Assists")}
 
-                            <ImageCol xs={24} md={6}>
+                            <TableCol xs={24} md={6}>
                                 <List
                                     size="small"
                                     style={{
@@ -150,7 +150,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                             </StyledItem>
                                         ))}
                                 </List>
-                            </ImageCol>
+                            </TableCol>
                         </ContainRow>
                     </Slide>
                 </Container>
@@ -241,9 +241,13 @@ const PlayerData = styled.span<{ teamcolor: string }>`
     font-weight: bold;
 `;
 
-const ImageCol = styled(Col)`
+const TableCol = styled(Col)`
     padding-top: 16px;
     padding-left: 16px;
+
+    @media screen and (max-width: 768px) {
+        padding-left: 0;
+    }
 `;
 
 const StyledItem = styled(List.Item)<{ isteam: string; teamcolor: string }>`

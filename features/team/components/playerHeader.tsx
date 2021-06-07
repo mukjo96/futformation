@@ -2,6 +2,7 @@ import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 import { Avatar, Col, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
+import Fade from "react-reveal/Fade";
 
 type playerDataTypes = {
     playerData: playerInfoDataTypes;
@@ -9,42 +10,18 @@ type playerDataTypes = {
 const PlayerHeader = ({ playerData }: playerDataTypes) => {
     return (
         <Container>
-            <Row>
-                <AvatarCol xs={{ span: 24 }} md={{ span: 6 }}>
-                    <Col>
-                        <Avatar
-                            size={100}
-                            shape="square"
-                            style={{ marginBottom: "12px" }}
-                            src={`https://images.fotmob.com/image_resources/playerimages/${playerData.id}.png`}
-                        />
-                    </Col>
-                    <Col xs={{ span: 0 }} md={{ span: 24 }}>
-                        <PrimaryPosition>
-                            {playerData.origin.positionDesc.primaryPosition}
-                        </PrimaryPosition>
-                        <SubPosition>
-                            {
-                                playerData.origin.positionDesc
-                                    ?.nonPrimaryPositions
-                            }
-                        </SubPosition>
-                    </Col>
-                </AvatarCol>
-                <Col xs={{ span: 24 }} md={{ span: 18 }}>
-                    <Row>
-                        <Col xs={{ span: 12 }} md={{ span: 24 }}>
-                            <Title>{playerData.name}</Title>
-                            <Row>
-                                <Avatar
-                                    size={24}
-                                    shape="circle"
-                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${playerData.origin.teamId}_small.png`}
-                                />
-                                <Release>{playerData.origin.teamName}</Release>
-                            </Row>
+            <Fade bottom cascade ssrFadeout>
+                <Row>
+                    <AvatarCol xs={{ span: 24 }} md={{ span: 6 }}>
+                        <Col>
+                            <Avatar
+                                size={100}
+                                shape="square"
+                                style={{ marginBottom: "12px" }}
+                                src={`https://images.fotmob.com/image_resources/playerimages/${playerData.id}.png`}
+                            />
                         </Col>
-                        <Col xs={{ span: 12 }} md={{ span: 0 }}>
+                        <Col xs={{ span: 0 }} md={{ span: 24 }}>
                             <PrimaryPosition>
                                 {playerData.origin.positionDesc.primaryPosition}
                             </PrimaryPosition>
@@ -55,21 +32,52 @@ const PlayerHeader = ({ playerData }: playerDataTypes) => {
                                 }
                             </SubPosition>
                         </Col>
-                    </Row>
-                    <Row>
-                        {playerData.playerProps.map((props) => (
-                            <Col span={12} key={props.title}>
-                                <DetailDesc>
-                                    <Tagsmalltitle>
-                                        {props.title.toUpperCase()}
-                                    </Tagsmalltitle>
-                                    {props.value}
-                                </DetailDesc>
+                    </AvatarCol>
+                    <Col xs={{ span: 24 }} md={{ span: 18 }}>
+                        <Row>
+                            <Col xs={{ span: 12 }} md={{ span: 24 }}>
+                                <Title>{playerData.name}</Title>
+                                <Row>
+                                    <Avatar
+                                        size={24}
+                                        shape="circle"
+                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${playerData.origin.teamId}_small.png`}
+                                    />
+                                    <Release>
+                                        {playerData.origin.teamName}
+                                    </Release>
+                                </Row>
                             </Col>
-                        ))}
-                    </Row>
-                </Col>
-            </Row>
+                            <Col xs={{ span: 12 }} md={{ span: 0 }}>
+                                <PrimaryPosition>
+                                    {
+                                        playerData.origin.positionDesc
+                                            .primaryPosition
+                                    }
+                                </PrimaryPosition>
+                                <SubPosition>
+                                    {
+                                        playerData.origin.positionDesc
+                                            ?.nonPrimaryPositions
+                                    }
+                                </SubPosition>
+                            </Col>
+                        </Row>
+                        <Row>
+                            {playerData.playerProps.map((props) => (
+                                <Col span={12} key={props.title}>
+                                    <DetailDesc>
+                                        <Tagsmalltitle>
+                                            {props.title.toUpperCase()}
+                                        </Tagsmalltitle>
+                                        {props.value}
+                                    </DetailDesc>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
+            </Fade>
         </Container>
     );
 };

@@ -5,10 +5,13 @@ import {
     HistoryOutlined,
     BarChartOutlined,
     SolutionOutlined,
+    TrophyOutlined,
 } from "@ant-design/icons";
 import RecentMatches from "./recentMatches";
 import CareerStatistics from "./careerStatistics";
 import RelatedNews from "./relatedNews";
+import Fade from "react-reveal/Fade";
+import CareerHistory from "./careerHistory";
 
 const { TabPane } = Tabs;
 
@@ -16,34 +19,48 @@ const PlayerDetailTab = ({ playerData }) => {
     return (
         <Container>
             <BackTop />
-            <StyledTabs
-                defaultActiveKey="1"
-                centered={true}
-                teamcolor={playerData.origin.teamColor}
-            >
-                <TabPane
-                    tab={
-                        <span>
-                            <HistoryOutlined />
-                            <span className="tabTitle">RECENT MATCHES</span>
-                        </span>
-                    }
-                    key="1"
+            <Fade bottom cascade ssrFadeout>
+                <StyledTabs
+                    defaultActiveKey="1"
+                    centered={true}
+                    teamcolor={playerData.origin.teamColor}
                 >
-                    <RecentMatches playerData={playerData} />
-                </TabPane>
-                <TabPane
-                    tab={
-                        <span>
-                            <BarChartOutlined />
-                            <span className="tabTitle">CAREER STATISTICS</span>
-                        </span>
-                    }
-                    key="2"
-                >
-                    <CareerStatistics playerData={playerData} />
-                </TabPane>
-                {playerData.relatedNews && (
+                    <TabPane
+                        tab={
+                            <span>
+                                <HistoryOutlined />
+                                <span className="tabTitle">RECENT MATCHES</span>
+                            </span>
+                        }
+                        key="1"
+                    >
+                        <RecentMatches playerData={playerData} />
+                    </TabPane>
+                    <TabPane
+                        tab={
+                            <span>
+                                <TrophyOutlined />
+                                <span className="tabTitle">CAREER HISTORY</span>
+                            </span>
+                        }
+                        key="2"
+                    >
+                        <CareerHistory playerData={playerData} />
+                    </TabPane>
+                    <TabPane
+                        tab={
+                            <span>
+                                <BarChartOutlined />
+                                <span className="tabTitle">
+                                    CAREER STATISTICS
+                                </span>
+                            </span>
+                        }
+                        key="3"
+                    >
+                        <CareerStatistics playerData={playerData} />
+                    </TabPane>
+
                     <TabPane
                         tab={
                             <span>
@@ -51,12 +68,12 @@ const PlayerDetailTab = ({ playerData }) => {
                                 <span className="tabTitle">RELATED NEWS</span>
                             </span>
                         }
-                        key="3"
+                        key="4"
                     >
                         <RelatedNews playerData={playerData} />
                     </TabPane>
-                )}
-            </StyledTabs>
+                </StyledTabs>
+            </Fade>
         </Container>
     );
 };
