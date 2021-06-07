@@ -123,6 +123,7 @@ const NewsCard = ({ newsList, activeSlide, setActiveSlide, teamId }) => {
                                             }
                                             style={{
                                                 marginRight: "4px",
+                                                background: "white",
                                             }}
                                         />
                                         <span>{news.sourceStr}</span>

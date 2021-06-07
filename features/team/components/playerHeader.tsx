@@ -58,7 +58,7 @@ const PlayerHeader = ({ playerData }: playerDataTypes) => {
                     </Row>
                     <Row>
                         {playerData.playerProps.map((props) => (
-                            <Col span={12}>
+                            <Col span={12} key={props.title}>
                                 <DetailDesc>
                                     <Tagsmalltitle>
                                         {props.title.toUpperCase()}

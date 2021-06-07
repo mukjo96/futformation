@@ -1,18 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Tabs } from "antd";
+import { Tabs, BackTop } from "antd";
 import {
     HistoryOutlined,
     BarChartOutlined,
     SolutionOutlined,
 } from "@ant-design/icons";
 import RecentMatches from "./recentMatches";
+import CareerStatistics from "./careerStatistics";
+import RelatedNews from "./relatedNews";
 
 const { TabPane } = Tabs;
 
 const PlayerDetailTab = ({ playerData }) => {
     return (
         <Container>
+            <BackTop />
             <StyledTabs
                 defaultActiveKey="1"
                 centered={true}
@@ -37,16 +40,22 @@ const PlayerDetailTab = ({ playerData }) => {
                         </span>
                     }
                     key="2"
-                ></TabPane>
-                <TabPane
-                    tab={
-                        <span>
-                            <SolutionOutlined />
-                            <span className="tabTitle">RELATED NEWS</span>
-                        </span>
-                    }
-                    key="3"
-                ></TabPane>
+                >
+                    <CareerStatistics playerData={playerData} />
+                </TabPane>
+                {playerData.relatedNews && (
+                    <TabPane
+                        tab={
+                            <span>
+                                <SolutionOutlined />
+                                <span className="tabTitle">RELATED NEWS</span>
+                            </span>
+                        }
+                        key="3"
+                    >
+                        <RelatedNews playerData={playerData} />
+                    </TabPane>
+                )}
             </StyledTabs>
         </Container>
     );

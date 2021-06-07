@@ -1,5 +1,9 @@
 import MoreButton from "@features/common/button/moreButton";
-import { faFutbol, faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import {
+    faFutbol,
+    faStopwatch,
+    faTshirt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Collapse, List, Row, Col, Divider, Tooltip } from "antd";
 import Link from "next/link";
@@ -27,9 +31,15 @@ const RecentMatches = ({ playerData }) => {
                                             title={
                                                 <>
                                                     <MatchScore>
-                                                        <TeamName>
-                                                            {`${item.htName.toUpperCase()} v ${item.atName.toUpperCase()}`}
-                                                        </TeamName>
+                                                        <Row align="middle">
+                                                            <TeamName>
+                                                                {`vs ${item.versus.opponentName}`}
+                                                            </TeamName>
+                                                            <TeamLogo
+                                                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${item.versus.opponentId}_small.png`}
+                                                                width="40px"
+                                                            />
+                                                        </Row>
                                                         <ScoreCol>
                                                             <ScoreH4>
                                                                 {`${item.versus.homeTeamScore} : ${item.versus.awayTeamScore}`}
@@ -47,79 +57,21 @@ const RecentMatches = ({ playerData }) => {
                                         />
                                         <MatchDescription>
                                             <div>
-                                                <StyledRow align="middle">
-                                                    <Col>
-                                                        <Tooltip title="Minutes Played">
-                                                            <TimeIcon
-                                                                icon={
-                                                                    faStopwatch
-                                                                }
-                                                            />
-                                                        </Tooltip>
-                                                    </Col>
-                                                    <DataCol>
-                                                        {item.minutesPlayed}
-                                                    </DataCol>
-                                                    <Divider type="vertical" />
-                                                    <Col>
-                                                        <Tooltip title="Goals">
-                                                            <GoalIcon
-                                                                icon={faFutbol}
-                                                            />
-                                                        </Tooltip>
-                                                    </Col>
-                                                    <DataCol>
-                                                        {item.goals}
-                                                    </DataCol>
-                                                    <Divider type="vertical" />
-                                                    <Col>
-                                                        <Tooltip title="Assists">
-                                                            <AssistIcon />
-                                                        </Tooltip>
-                                                    </Col>
-                                                    <DataCol>
-                                                        {item.assists}
-                                                    </DataCol>
-                                                    <Divider type="vertical" />
-                                                    <Col>
-                                                        <Tooltip title="Yellow Cards">
-                                                            <Card color="Yellow" />
-                                                        </Tooltip>
-                                                    </Col>
-                                                    <DataCol>
-                                                        {item.yellowCards}
-                                                    </DataCol>
-                                                    <Divider type="vertical" />
-                                                    <Col>
-                                                        <Tooltip title="Red Cards">
-                                                            <Card color="Red" />
-                                                        </Tooltip>
-                                                    </Col>
-
-                                                    <DataCol>
-                                                        {item.redCards}
-                                                    </DataCol>
-                                                    <Divider type="vertical" />
-                                                    <DataCol>
-                                                        <Rating
-                                                            background={
-                                                                item.ratingProps
-                                                                    .bgcolor
-                                                            }
-                                                        >
-                                                            {
-                                                                item.ratingProps
-                                                                    .num
-                                                            }
-                                                        </Rating>
-                                                    </DataCol>
-                                                </StyledRow>
+                                                {renderPlayerStats(
+                                                    true,
+                                                    item.minutesPlayed,
+                                                    item.goals,
+                                                    item.assists,
+                                                    item.yellowCards,
+                                                    item.redCards,
+                                                    item.ratingProps
+                                                )}
                                                 <TournamentName>
                                                     {item.date}
                                                 </TournamentName>
                                             </div>
                                             <Link
-                                                href={`matches/${item.versus.matchId}`}
+                                                href={`/matches/${item.versus.matchId}`}
                                             >
                                                 <a
                                                     style={{
@@ -145,6 +97,73 @@ const RecentMatches = ({ playerData }) => {
     );
 };
 
+export function renderPlayerStats(
+    isMatch: boolean,
+    minutesPlayed: number,
+    goals: number,
+    assists: number,
+    yellowcards: number,
+    redcards: number,
+    rating?: {
+        bgcolor: string;
+        num: number;
+    }
+) {
+    return (
+        <StyledRow align="middle">
+            <Col>
+                <Tooltip title={isMatch ? "Minutes Played" : "Matches"}>
+                    {isMatch ? (
+                        <TimeIcon icon={faStopwatch} />
+                    ) : (
+                        <ShirtIcon icon={faTshirt} />
+                    )}
+                </Tooltip>
+            </Col>
+            <DataCol>{minutesPlayed}</DataCol>
+            <Divider type="vertical" />
+            <Col>
+                <Tooltip title="Goals">
+                    <GoalIcon icon={faFutbol} />
+                </Tooltip>
+            </Col>
+            <DataCol>{goals}</DataCol>
+            <Divider type="vertical" />
+            <Col>
+                <Tooltip title="Assists">
+                    <AssistIcon />
+                </Tooltip>
+            </Col>
+            <DataCol>{assists}</DataCol>
+            <Divider type="vertical" />
+            <Col>
+                <Tooltip title="Yellow Cards">
+                    <Card color="Yellow" />
+                </Tooltip>
+            </Col>
+            <DataCol>{yellowcards}</DataCol>
+            <Divider type="vertical" />
+            <Col>
+                <Tooltip title="Red Cards">
+                    <Card color="Red" />
+                </Tooltip>
+            </Col>
+
+            <DataCol>{redcards}</DataCol>
+            {rating && (
+                <>
+                    <Divider type="vertical" />
+                    <DataCol>
+                        <Rating background={rating.bgcolor}>
+                            {rating.num}
+                        </Rating>
+                    </DataCol>
+                </>
+            )}
+        </StyledRow>
+    );
+}
+
 export default RecentMatches;
 
 const StyledCollapse = styled(Collapse)`
@@ -154,6 +173,13 @@ const StyledCollapse = styled(Collapse)`
 const MatchScore = styled(Row)`
     justify-content: space-between;
     align-items: flex-end;
+`;
+
+const TeamLogo = styled.img`
+    margin-left: 12px;
+    @media screen and (max-width: 768px) {
+        margin-left: 2vw;
+    }
 `;
 
 const TeamName = styled.h2`
@@ -202,6 +228,14 @@ const TimeIcon = styled(FontAwesomeIcon)`
     @media screen and (max-width: 768px) {
         width: 12px !important;
         height: 100%;
+    }
+`;
+const ShirtIcon = styled(FontAwesomeIcon)`
+    width: 18px !important;
+    height: 18px;
+    @media screen and (max-width: 768px) {
+        width: 14px !important;
+        height: 14px;
     }
 `;
 

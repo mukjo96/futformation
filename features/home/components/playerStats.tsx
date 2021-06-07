@@ -91,7 +91,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
     const tableStart = teamRank < 3 ? 0 : teamRank - 2;
     const tableEnd =
         tableStart < 3
-            ? 5 - teamRank - tableStart
+            ? tableStart + 5
             : teamRank > tableData.tables[0].table.length - 4
             ? tableData.tables[0].table.length - 1
             : teamRank + 2;

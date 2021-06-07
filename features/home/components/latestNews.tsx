@@ -14,77 +14,11 @@ const LatestNews = ({ newsList, teamId }) => {
                 <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
                 <Fade bottom cascade ssrFadeout>
                     <NewsRow>
-                        {newsList.slice(1, 5).map((news, index) => {
-                            const sourceTitle = news.sourceStr.split(" - ");
-                            return (
-                                <NewsBox
-                                    style={{
-                                        backgroundImage: `url(${news.imageUrl})`,
-                                    }}
-                                    xs={24}
-                                    md={6}
-                                    key={index}
-                                >
-                                    <BackFilter
-                                        onClick={
-                                            sourceTitle[0] === "FotMob"
-                                                ? () =>
-                                                      window.open(
-                                                          `https://www.fotmob.com${news.page.url}`,
-                                                          "_ blank"
-                                                      )
-                                                : () =>
-                                                      window.open(
-                                                          news.page.url,
-                                                          "_ blank"
-                                                      )
-                                        }
-                                    >
-                                        <Col style={{ lineHeight: "1.2" }}>
-                                            <NewsCategory>
-                                                {sourceTitle[0] === "YouTube"
-                                                    ? "VIDEO"
-                                                    : sourceTitle[0] ===
-                                                      "City Xtra"
-                                                    ? "FIRST TEAM"
-                                                    : "MEDIA WATCH"}
-                                            </NewsCategory>
-                                            <NewsTitle>{news.title}</NewsTitle>
-                                            <Row>
-                                                <Avatar
-                                                    size="small"
-                                                    icon={
-                                                        news.sourceIconUrl ===
-                                                        "https://images.fotmob.com/image_resources/news/default.png" ? (
-                                                            <img
-                                                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamId}_small.png`}
-                                                            />
-                                                        ) : (
-                                                            <img
-                                                                src={
-                                                                    news.sourceIconUrl
-                                                                }
-                                                            />
-                                                        )
-                                                    }
-                                                    style={{
-                                                        marginRight: "4px",
-                                                    }}
-                                                />
-                                                <div>
-                                                    <NewsSource>
-                                                        {sourceTitle[0]}
-                                                    </NewsSource>
-                                                    <NewsLate>
-                                                        {sourceTitle[1]}
-                                                    </NewsLate>
-                                                </div>
-                                            </Row>
-                                        </Col>
-                                    </BackFilter>
-                                </NewsBox>
-                            );
-                        })}
+                        {newsList
+                            .slice(1, 5)
+                            .map((news, index) =>
+                                renderNewsBox(news, index, teamId)
+                            )}
                     </NewsRow>
                 </Fade>
             </Col>
@@ -92,6 +26,64 @@ const LatestNews = ({ newsList, teamId }) => {
     );
 };
 
+export function renderNewsBox(news, index, teamId) {
+    const sourceTitle = news.sourceStr.split(" - ");
+    return (
+        <NewsBox
+            style={{
+                backgroundImage: `url(${news.imageUrl})`,
+            }}
+            xs={24}
+            md={6}
+            key={index}
+        >
+            <BackFilter
+                onClick={
+                    sourceTitle[0] === "FotMob"
+                        ? () =>
+                              window.open(
+                                  `https://www.fotmob.com${news.page.url}`,
+                                  "_ blank"
+                              )
+                        : () => window.open(news.page.url, "_ blank")
+                }
+            >
+                <Col style={{ lineHeight: "1.2" }}>
+                    <NewsCategory>
+                        {sourceTitle[0] === "YouTube"
+                            ? "VIDEO"
+                            : sourceTitle[0] === "City Xtra"
+                            ? "FIRST TEAM"
+                            : "MEDIA WATCH"}
+                    </NewsCategory>
+                    <NewsTitle>{news.title}</NewsTitle>
+                    <Row>
+                        <Avatar
+                            size="small"
+                            icon={
+                                news.sourceIconUrl ===
+                                "https://images.fotmob.com/image_resources/news/default.png" ? (
+                                    <img
+                                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamId}_small.png`}
+                                    />
+                                ) : (
+                                    <img src={news.sourceIconUrl} />
+                                )
+                            }
+                            style={{
+                                marginRight: "4px",
+                            }}
+                        />
+                        <div>
+                            <NewsSource>{sourceTitle[0]}</NewsSource>
+                            <NewsLate>{sourceTitle[1]}</NewsLate>
+                        </div>
+                    </Row>
+                </Col>
+            </BackFilter>
+        </NewsBox>
+    );
+}
 export default LatestNews;
 
 const Container = styled.div`
