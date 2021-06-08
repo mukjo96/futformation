@@ -2,16 +2,25 @@ import React from "react";
 import { Col, Layout, Row } from "antd";
 import styled from "styled-components";
 import { IconLogo, TextLogo } from "../logo/Logo";
+import { useSelector } from "react-redux";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
 
 const { Footer } = Layout;
 
 const Foot = () => {
+    const teamColor = useSelector(
+        (state: RootStateInterface): string => state.rdcExample.teamColor
+    );
     return (
-        <StyledFooter>
+        <StyledFooter teamcolor={teamColor}>
             <StyledRow>
-                <TextLogo />
+                <Row align="middle">
+                    <TextLogo />
+                    <Text>
+                        <strong>FUTFORMATION</strong>
+                    </Text>
+                </Row>
                 <Col>
-                    <Text>Football Information Unofficial Site</Text>
                     <Text>©2021 Created by mukjo96</Text>
                 </Col>
             </StyledRow>
@@ -21,9 +30,9 @@ const Foot = () => {
 
 export default Foot;
 
-const StyledFooter = styled(Footer)`
+const StyledFooter = styled(Footer)<{ teamcolor: string }>`
     text-align: center;
-    background-color: #1c2c5b;
+    background-color: ${(props) => props.teamcolor};
     color: white;
     border-top: 1px solid #d6d6d6;
 `;
@@ -38,4 +47,10 @@ const Text = styled.h4`
     color: white;
     margin: 0;
     padding-left: 12px;
+
+    strong {
+        font-family: "Viaoda Libre", cursive;
+        font-weight: 400;
+        font-size: 16px;
+    }
 `;

@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>Football Information Unofficial Site</title>
+                <title>FUTFORMATION football information website</title>
                 <link rel="shortcut icon" href="/image/favicon.ico" />
             </Head>
             <NavBar />

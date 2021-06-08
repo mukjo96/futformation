@@ -28,6 +28,8 @@ const EmptyCol = styled(Col)`
 `;
 
 const StyledRow = styled(Row)`
+    padding-left: 12px;
+    padding-right: 12px;
     .ant-col {
         margin: 12px;
     }

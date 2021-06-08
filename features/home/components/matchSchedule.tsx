@@ -8,7 +8,7 @@ import MoreButton from "@features/common/button/moreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
 
-const MatchSchedule = ({ matchList, currentMonth }) => {
+const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
     console.log(beforeMonth, currentMonth);
@@ -42,7 +42,8 @@ const MatchSchedule = ({ matchList, currentMonth }) => {
                                 match5 += 1;
                                 return renderMatchSchedule(
                                     match,
-                                    match.isPastMatch
+                                    match.isPastMatch,
+                                    teamId
                                 );
                             }
                         })}
@@ -64,9 +65,13 @@ function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
     return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
 }
 
-function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
+function renderMatchSchedule(
+    match: matchDataTypes,
+    isPast: boolean,
+    teamId: number
+) {
     let isCityWin: string;
-    if (match.home.name === "Man City") {
+    if (match.home.id === teamId) {
         match.home.score > match.away.score
             ? (isCityWin = "win")
             : match.home.score === match.away.score
@@ -100,6 +105,7 @@ function renderMatchSchedule(match: matchDataTypes, isPast: boolean) {
                                 : ""}
                         </LiveText>
                         <ScoreH4 iscitywin={isCityWin}>
+                            {match.status.cancelled && "Cancelled"}
                             {match.status.scoreStr}
                         </ScoreH4>
                     </ScoreCol>

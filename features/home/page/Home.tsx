@@ -60,6 +60,7 @@ const Home = () => {
                 <MatchSchedule
                     matchList={apiResult?.matchList}
                     currentMonth={apiResult?.currentMonth}
+                    teamId={team.teamId}
                 />
                 <LatestNews
                     newsList={apiResult?.newsList}
@@ -71,8 +72,8 @@ const Home = () => {
                     color={team.teamColor}
                     teamId={team.teamId}
                 />
-                {/* <AdBanner />
-                <Sponsorship /> */}
+                <AdBanner teamColor={team.teamColor} />
+                {/* <Sponsorship /> */}
                 <BackDiv></BackDiv>
             </Fragment>
         );

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row, Col, Avatar, Divider, List } from "antd";
+import { Row, Col, Avatar, Divider, List, Empty } from "antd";
 import Slide from "react-reveal/Slide";
 import BlockTitle from "./Title/blockTitle";
 
@@ -21,16 +21,37 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
     const statData = statList[0];
     const tableData = statList[1];
     const [teamRank, setTeamRank] = useState(-1);
+    const [teamTableIndex, setTeamTableIndex] = useState(-1);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        tableData && findTeamRank();
+        setIsLoading(true);
+        if (tableData) {
+            if (tableData.tables[0].table) {
+                findTeamRank();
+            }
+            if (tableData.tables[0].tables) {
+                findTeamTable();
+            }
+            setIsLoading(false);
+        }
     }, [teamId]);
 
     function findTeamRank() {
-        tableData.tables[0].table.map((team, index) => {
+        tableData.tables[0].table?.map((team, index) => {
             if (team.id === teamId) {
                 setTeamRank(index);
             }
+        });
+    }
+    function findTeamTable() {
+        tableData.tables[0].tables?.map((table, tableIndex) => {
+            table.table.map((team, index) => {
+                if (team.id === teamId) {
+                    setTeamRank(index);
+                    setTeamTableIndex(tableIndex);
+                }
+            });
         });
     }
 
@@ -96,9 +117,11 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
             ? tableData.tables[0].table.length - 1
             : teamRank + 3;
 
-    return (
-        <>
-            {statData.byRating.length !== 0 && (
+    if (isLoading) {
+        return <div></div>;
+    } else {
+        return (
+            <>
                 <Container>
                     <BlockTitle
                         title="PLAYER STATS"
@@ -108,9 +131,23 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                     />
                     <Slide bottom cascade ssrFadeout>
                         <ContainRow>
-                            {renderStatList(statData.byRating, "Ratings")}
-                            {renderStatList(statData.byGoals, "Goals")}
-                            {renderStatList(statData.byAssists, "Assists")}
+                            {statData.byRating.length !== 0 ? (
+                                <>
+                                    {renderStatList(
+                                        statData.byRating,
+                                        "Ratings"
+                                    )}
+                                    {renderStatList(statData.byGoals, "Goals")}
+                                    {renderStatList(
+                                        statData.byAssists,
+                                        "Assists"
+                                    )}
+                                </>
+                            ) : (
+                                <TableCol xs={0} md={18}>
+                                    <Empty description="No Player Stats" />
+                                </TableCol>
+                            )}
 
                             <TableCol xs={24} md={6}>
                                 <List
@@ -130,33 +167,67 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                         <Col span={2}>D</Col>
                                         <Col span={2}>L</Col>
                                     </StyledItem>
-                                    {tableData.tables[0].table
-                                        .slice(tableStart, tableEnd)
-                                        .map((team) => (
-                                            <StyledItem
-                                                key={team.id}
-                                                isteam={(
-                                                    team.id === teamId
-                                                ).toString()}
-                                                teamcolor={color}
-                                            >
-                                                <Col span={2}>{team.idx}</Col>
-                                                <Col span={14}>{team.name}</Col>
-                                                <Col span={2}>{team.wins}</Col>
-                                                <Col span={2}>{team.draws}</Col>
-                                                <Col span={2}>
-                                                    {team.losses}
-                                                </Col>
-                                            </StyledItem>
-                                        ))}
+                                    {teamTableIndex === -1
+                                        ? tableData.tables[0].table
+                                              .slice(tableStart, tableEnd)
+                                              .map((team) => (
+                                                  <StyledItem
+                                                      key={team.id}
+                                                      isteam={(
+                                                          team.id === teamId
+                                                      ).toString()}
+                                                      teamcolor={color}
+                                                  >
+                                                      <Col span={2}>
+                                                          {team.idx}
+                                                      </Col>
+                                                      <Col span={14}>
+                                                          {team.name}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.wins}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.draws}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.losses}
+                                                      </Col>
+                                                  </StyledItem>
+                                              ))
+                                        : tableData.tables[0].tables[
+                                              teamTableIndex
+                                          ].table.map((team) => (
+                                              <StyledItem
+                                                  key={team.id}
+                                                  isteam={(
+                                                      team.id === teamId
+                                                  ).toString()}
+                                                  teamcolor={color}
+                                              >
+                                                  <Col span={2}>{team.idx}</Col>
+                                                  <Col span={14}>
+                                                      {team.name}
+                                                  </Col>
+                                                  <Col span={2}>
+                                                      {team.wins}
+                                                  </Col>
+                                                  <Col span={2}>
+                                                      {team.draws}
+                                                  </Col>
+                                                  <Col span={2}>
+                                                      {team.losses}
+                                                  </Col>
+                                              </StyledItem>
+                                          ))}
                                 </List>
                             </TableCol>
                         </ContainRow>
                     </Slide>
                 </Container>
-            )}
-        </>
-    );
+            </>
+        );
+    }
 };
 
 export default PlayerStats;
@@ -244,6 +315,7 @@ const PlayerData = styled.span<{ teamcolor: string }>`
 const TableCol = styled(Col)`
     padding-top: 16px;
     padding-left: 16px;
+    align-self: center;
 
     @media screen and (max-width: 768px) {
         padding-left: 0;

@@ -13,6 +13,7 @@ import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { teamList } from "./teamList";
 import { useRouter } from "next/dist/client/router";
+import SubMenu from "antd/lib/menu/SubMenu";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
@@ -34,19 +35,23 @@ const NavBar = () => {
 
     const menu = (
         <Menu>
-            {teamList.map((team) => (
-                <Menu.Item
-                    key={team.teamId}
-                    onClick={() => changeTeam(team)}
-                    style={{ alignItems: "center" }}
-                >
-                    <Avatar
-                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
-                        size="small"
-                        style={{ marginRight: "4px" }}
-                    />
-                    <span>{team.teamName}</span>
-                </Menu.Item>
+            {teamList.map((league) => (
+                <SubMenu title={league.label} key={league.label}>
+                    {league.children.map((team) => (
+                        <Menu.Item
+                            key={team.teamId}
+                            onClick={() => changeTeam(team)}
+                            style={{ alignItems: "center" }}
+                        >
+                            <Avatar
+                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                                size="small"
+                                style={{ marginRight: "4px" }}
+                            />
+                            <span>{team.teamName}</span>
+                        </Menu.Item>
+                    ))}
+                </SubMenu>
             ))}
         </Menu>
     );

@@ -83,7 +83,7 @@ const MatchHeader = ({ matchData }: dataType) => {
     return (
         <Fade bottom cascade ssrFadeout>
             <TournamentName>
-                {infoBox.Tournament.text.split(" - ")[0].toUpperCase()}
+                {infoBox.Tournament.text.split(" - ")[0]?.toUpperCase()}
             </TournamentName>
             <Row
                 style={{
@@ -152,7 +152,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                             <TeamName ishome={true}>
                                 {header.teams[0].name
                                     .replace(" ", "\n")
-                                    .toUpperCase()}
+                                    ?.toUpperCase()}
                             </TeamName>
                         </TeamNameCol>
                     </Row>
@@ -178,7 +178,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                             <TeamName ishome={false}>
                                 {header.teams[1].name
                                     .replace(" ", "\n")
-                                    .toUpperCase()}
+                                    ?.toUpperCase()}
                             </TeamName>
                         </TeamNameCol>
                         <TeamNameCol xs={24} md={8}>
@@ -255,7 +255,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.text.split(" - ")[1].toUpperCase()}
+                        {infoBox.Tournament.text.split(" - ")[1]?.toUpperCase()}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>
@@ -273,7 +273,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.text.split(" - ")[1].toUpperCase()}
+                        {infoBox.Tournament.text.split(" - ")[1]?.toUpperCase()}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>
