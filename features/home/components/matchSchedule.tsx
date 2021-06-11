@@ -11,7 +11,6 @@ import { matchDataTypes } from "../api/cityDataTypes";
 const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
-    console.log(beforeMonth, currentMonth);
 
     const newMatchList =
         beforeMonth !== currentMonth

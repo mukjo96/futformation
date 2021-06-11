@@ -25,7 +25,6 @@ const NavBar = () => {
     const dispatch = useDispatch();
 
     function changeTeam(teamInfo: IExampleState) {
-        console.log(teamInfo);
         dispatch(select(teamInfo));
     }
 

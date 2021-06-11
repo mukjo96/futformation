@@ -7,7 +7,7 @@ const LeagueTable = ({ tableData, color, teamId }) => {
         <Container justify="space-around">
             {tableData.tables[0].table ? (
                 <Col span={24}>
-                    <StyledList size="small">
+                    <StyledList size="small" bordered>
                         <StyledItem isteam={"false"} teamcolor={color}>
                             {renderTableHeader()}
                         </StyledItem>
@@ -24,10 +24,10 @@ const LeagueTable = ({ tableData, color, teamId }) => {
                 </Col>
             ) : (
                 tableData.tables[0].tables.map((tables) => (
-                    <Col xs={24} md={10}>
+                    <Col xs={24} md={10} key={tables.leagueName}>
                         <>
                             <h3>{tables.leagueName}</h3>
-                            <StyledList size="small">
+                            <StyledList size="small" bordered>
                                 <StyledItem isteam={"false"} teamcolor={color}>
                                     {renderTableHeader()}
                                 </StyledItem>
@@ -93,6 +93,10 @@ const StyledList = styled(List)`
     border-radius: 15px;
     background: #ffffff;
     box-shadow: 15px 15px 30px #d9d9d9, -15px -15px 30px #ffffff;
+
+    @media screen and (max-width: 768px) {
+        box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
+    }
 `;
 
 const StyledItem = styled(List.Item)<{ isteam: string; teamcolor: string }>`

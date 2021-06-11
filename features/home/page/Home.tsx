@@ -53,7 +53,6 @@ const Home = () => {
             </Container>
         );
     } else {
-        console.log(apiResult?.statList);
         return (
             <Fragment>
                 <MainBanner bannerList={apiResult?.newsList[0]} />

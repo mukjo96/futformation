@@ -80,7 +80,6 @@ const Searchbar = () => {
                     type="text"
                     className={focus ? "focused" : ""}
                     onChange={(e) => {
-                        console.log(e.target.value);
                         setText(e.target.value);
                     }}
                     placeholder="Search"

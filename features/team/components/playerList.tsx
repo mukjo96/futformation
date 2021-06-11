@@ -124,6 +124,9 @@ export default PlayerList;
 
 const Container = styled.div`
     padding: 56px;
+    @media screen and (max-width: 768px) {
+        padding: 28px;
+    }
 `;
 
 const StyledCollapse = styled(Collapse)`

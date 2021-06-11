@@ -29,4 +29,8 @@ const NewsTitle = styled.h1<{ mainColor: string; subColor: string }>`
     font-size: 36px;
     font-weight: 600;
     margin: 0;
+
+    @media screen and (max-width: 768px) {
+        padding: 28px 0 0 28px;
+    }
 `;

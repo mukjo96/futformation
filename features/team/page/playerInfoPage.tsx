@@ -15,8 +15,6 @@ const PlayerInfoPage = () => {
         `https://cors.bridged.cc/https://www.fotmob.com/playerData?id=${playerid}`
     );
 
-    console.log(playerid);
-
     if (error)
         return (
             <div>
