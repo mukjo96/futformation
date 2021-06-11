@@ -2,7 +2,7 @@ import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 type teamListTypes = {
     label: string;
-    children: teamListTypes | IExampleState[];
+    children: any;
 }[];
 
 export const teamList: teamListTypes = [
