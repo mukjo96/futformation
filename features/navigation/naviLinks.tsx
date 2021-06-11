@@ -10,9 +10,9 @@ const NaviLinks = (open: any) => {
         { title: "HOME", route: "/" },
         { title: "NEWS", route: "/news" },
         { title: "MATCH", route: "/matches" },
+        { title: "TABLE", route: "/table" },
         { title: "TEAM", route: "/players" },
-        { title: "TICKETS", route: "https://www.mancity.com/matchinfo" },
-        { title: "SHOP", route: "https://shop.mancity.com/" },
+        // { title: "SHOP", route: "https://shop.mancity.com/" },
     ];
 
     return (
