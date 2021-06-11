@@ -16,9 +16,7 @@ const Foot = () => {
             <StyledRow>
                 <Row align="middle">
                     <TextLogo />
-                    <Text>
-                        <strong>FUTFORMATION</strong>
-                    </Text>
+                    {/* <Text>FUTFORMATION</Text> */}
                 </Row>
                 <Col>
                     <Text>©2021 Created by mukjo96</Text>

@@ -37,20 +37,39 @@ const NavBar = () => {
         <Menu>
             {teamList.map((league) => (
                 <SubMenu title={league.label} key={league.label}>
-                    {league.children.map((team) => (
-                        <Menu.Item
-                            key={team.teamId}
-                            onClick={() => changeTeam(team)}
-                            style={{ alignItems: "center" }}
-                        >
-                            <Avatar
-                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
-                                size="small"
-                                style={{ marginRight: "4px" }}
-                            />
-                            <span>{team.teamName}</span>
-                        </Menu.Item>
-                    ))}
+                    {league.label === "EURO"
+                        ? league.children.map((group) => (
+                              <SubMenu title={group.label} key={group.label}>
+                                  {group.children.map((team) => (
+                                      <Menu.Item
+                                          key={team.teamId}
+                                          onClick={() => changeTeam(team)}
+                                          style={{ alignItems: "center" }}
+                                      >
+                                          <Avatar
+                                              src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                                              size="small"
+                                              style={{ marginRight: "4px" }}
+                                          />
+                                          <span>{team.teamName}</span>
+                                      </Menu.Item>
+                                  ))}
+                              </SubMenu>
+                          ))
+                        : league.children.map((team) => (
+                              <Menu.Item
+                                  key={team.teamId}
+                                  onClick={() => changeTeam(team)}
+                                  style={{ alignItems: "center" }}
+                              >
+                                  <Avatar
+                                      src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                                      size="small"
+                                      style={{ marginRight: "4px" }}
+                                  />
+                                  <span>{team.teamName}</span>
+                              </Menu.Item>
+                          ))}
                 </SubMenu>
             ))}
         </Menu>

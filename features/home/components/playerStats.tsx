@@ -162,7 +162,8 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                         teamcolor={color}
                                     >
                                         <Col span={2}>#</Col>
-                                        <Col span={14}>TEAM</Col>
+                                        <Col span={12}>TEAM</Col>
+                                        <Col span={2}>PT</Col>
                                         <Col span={2}>W</Col>
                                         <Col span={2}>D</Col>
                                         <Col span={2}>L</Col>
@@ -181,8 +182,11 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                       <Col span={2}>
                                                           {team.idx}
                                                       </Col>
-                                                      <Col span={14}>
+                                                      <Col span={12}>
                                                           {team.name}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.pts}
                                                       </Col>
                                                       <Col span={2}>
                                                           {team.wins}
@@ -206,9 +210,10 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                   teamcolor={color}
                                               >
                                                   <Col span={2}>{team.idx}</Col>
-                                                  <Col span={14}>
+                                                  <Col span={12}>
                                                       {team.name}
                                                   </Col>
+                                                  <Col span={2}>{team.pts}</Col>
                                                   <Col span={2}>
                                                       {team.wins}
                                                   </Col>
@@ -325,4 +330,6 @@ const TableCol = styled(Col)`
 const StyledItem = styled(List.Item)<{ isteam: string; teamcolor: string }>`
     background-color: ${(props) =>
         props.isteam === "true" && props.teamcolor + "19"};
+
+    padding: 8px 8px !important;
 `;
