@@ -233,6 +233,11 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                               </StyledItem>
                                           ))}
                                 </List>
+                                <Row justify="end">
+                                    <Link href="/table">
+                                        <TableLink>View all table +</TableLink>
+                                    </Link>
+                                </Row>
                             </TableCol>
                         </ContainRow>
                     </Slide>
@@ -339,4 +344,15 @@ const StyledItem = styled(List.Item)<{ isteam: string; teamcolor: string }>`
         props.isteam === "true" && props.teamcolor + "19"};
 
     padding: 8px 8px !important;
+`;
+
+const TableLink = styled.span`
+    color: darkgray;
+    font-size: 10px;
+    margin: 0;
+    text-align: end;
+    :hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
 `;
