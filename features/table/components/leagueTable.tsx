@@ -9,7 +9,7 @@ const LeagueTable = ({ tableData, color, teamId }) => {
             {tableData.tables[0].table ? (
                 <Col span={24}>
                     <Fade ssrFadeout bottom cascade>
-                        <StyledList size="small" bordered>
+                        <StyledList size="small" bordered teamcolor={color}>
                             <StyledItem isteam={"false"} teamcolor={color}>
                                 {renderTableHeader()}
                             </StyledItem>
@@ -30,7 +30,7 @@ const LeagueTable = ({ tableData, color, teamId }) => {
                     <Col xs={24} md={10} key={tables.leagueName}>
                         <Fade ssrFadeout bottom cascade>
                             <h3>{tables.leagueName}</h3>
-                            <StyledList size="small" bordered>
+                            <StyledList size="small" bordered teamcolor={color}>
                                 <StyledItem isteam={"false"} teamcolor={color}>
                                     {renderTableHeader()}
                                 </StyledItem>
@@ -89,12 +89,13 @@ const Container = styled(Row)`
     padding: 5%;
 `;
 
-const StyledList = styled(List)`
+const StyledList = styled(List)<{ teamcolor: string }>`
     text-align: center;
     font-size: 12px;
     margin: 36px 0;
     border-radius: 15px;
     background: #ffffff;
+    border-color: ${(props) => props.teamcolor};
     box-shadow: 15px 15px 30px #d9d9d9, -15px -15px 30px #ffffff;
 
     @media screen and (max-width: 768px) {
