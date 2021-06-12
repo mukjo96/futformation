@@ -1,7 +1,7 @@
 import { faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row, Tooltip } from "antd";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";

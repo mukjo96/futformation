@@ -4,7 +4,7 @@ import { Avatar, Badge, Col, Row, Tooltip, Modal, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import { matchDetailTypes, matchPlayerTypes } from "../types/matchDataTypes";
 
 type dataType = {
@@ -161,10 +161,10 @@ const BackgroundPitch = styled.div`
     flex-direction: column;
     padding-top: 8px;
     background-image: url("http://sharemytactics.com/images/pitch.svg");
-    height: 580px;
+    height: 580px !important;
 
     @media screen and (max-width: 768px) {
-        height: 500px;
+        height: 500px !important;
     }
 `;
 

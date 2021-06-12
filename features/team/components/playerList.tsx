@@ -1,5 +1,5 @@
 import MoreButton from "@features/common/button/moreButton";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import {
     playerListDataTypes,
     playerTypes,

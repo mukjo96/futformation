@@ -1,7 +1,7 @@
 import { Col, Progress, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import { matchStatsTypes, statTypes } from "../types/matchDataTypes";
 
 type dataType = {

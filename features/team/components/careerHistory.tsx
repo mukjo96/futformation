@@ -10,7 +10,7 @@ import { Collapse, List, Row, Col, Divider, Tooltip, Avatar } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 
 const { Panel } = Collapse;
 
@@ -22,6 +22,7 @@ const CareerHistory = ({ playerData }) => {
                 <List
                     itemLayout="vertical"
                     dataSource={careerHistory.careerData.careerItems[key]}
+                    key={key}
                     header={<strong>{key.toUpperCase()}</strong>}
                     bordered
                     style={{ marginBottom: "24px" }}
@@ -106,7 +107,6 @@ const CareerHistory = ({ playerData }) => {
                                         </>
                                     }
                                 />
-                                <MatchDescription></MatchDescription>
                             </List.Item>
                         );
                     }}

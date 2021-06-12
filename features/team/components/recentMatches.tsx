@@ -9,7 +9,7 @@ import { Collapse, List, Row, Col, Divider, Tooltip } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 
 const { Panel } = Collapse;
 

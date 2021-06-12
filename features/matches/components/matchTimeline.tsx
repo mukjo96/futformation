@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row, Slider, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
 
 type dataType = {

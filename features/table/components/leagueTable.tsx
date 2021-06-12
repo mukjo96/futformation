@@ -1,31 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col, Avatar, Divider, List, Empty } from "antd";
+import Fade from "react-reveal-effects/Fade";
 
 const LeagueTable = ({ tableData, color, teamId }) => {
     return (
         <Container justify="space-around">
             {tableData.tables[0].table ? (
                 <Col span={24}>
-                    <StyledList size="small" bordered>
-                        <StyledItem isteam={"false"} teamcolor={color}>
-                            {renderTableHeader()}
-                        </StyledItem>
-                        {tableData.tables[0].table.map((team) => (
-                            <StyledItem
-                                key={team.id}
-                                isteam={(team.id === teamId).toString()}
-                                teamcolor={color}
-                            >
-                                {renderTableData(team)}
+                    <Fade ssrFadeout bottom cascade>
+                        <StyledList size="small" bordered>
+                            <StyledItem isteam={"false"} teamcolor={color}>
+                                {renderTableHeader()}
                             </StyledItem>
-                        ))}
-                    </StyledList>
+                            {tableData.tables[0].table.map((team) => (
+                                <StyledItem
+                                    key={team.id}
+                                    isteam={(team.id === teamId).toString()}
+                                    teamcolor={color}
+                                >
+                                    {renderTableData(team)}
+                                </StyledItem>
+                            ))}
+                        </StyledList>
+                    </Fade>
                 </Col>
             ) : (
                 tableData.tables[0].tables.map((tables) => (
                     <Col xs={24} md={10} key={tables.leagueName}>
-                        <>
+                        <Fade ssrFadeout bottom cascade>
                             <h3>{tables.leagueName}</h3>
                             <StyledList size="small" bordered>
                                 <StyledItem isteam={"false"} teamcolor={color}>
@@ -41,7 +44,7 @@ const LeagueTable = ({ tableData, color, teamId }) => {
                                     </StyledItem>
                                 ))}
                             </StyledList>
-                        </>
+                        </Fade>
                     </Col>
                 ))
             )}

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Row, Col, Avatar, Divider, List, Empty } from "antd";
-import Slide from "react-reveal/Slide";
+import Slide from "react-reveal-effects/Slide";
 import BlockTitle from "./Title/blockTitle";
 
 import Link from "next/link";

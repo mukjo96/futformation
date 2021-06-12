@@ -2,7 +2,7 @@ import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 
 type teamListTypes = {
     label: string;
-    children: any;
+    children: teamListTypes | IExampleState[];
 }[];
 
 export const teamList: teamListTypes = [
@@ -182,6 +182,81 @@ export const teamList: teamListTypes = [
                         teamName: "POR",
                         teamColor: "#006600",
                         teamSubColor: "#FF0000",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: "COPA AMERICA",
+        children: [
+            {
+                label: "ZONA SUR",
+                children: [
+                    {
+                        teamId: 6706,
+                        teamName: "ARG",
+                        teamColor: "#74ACDF",
+                        teamSubColor: "#F6B40E",
+                    },
+                    {
+                        teamId: 5797,
+                        teamName: "BOL",
+                        teamColor: "#DA291C",
+                        teamSubColor: "#007A33",
+                    },
+                    {
+                        teamId: 9762,
+                        teamName: "CHI",
+                        teamColor: "#D52B1E",
+                        teamSubColor: "#0039A6",
+                    },
+                    {
+                        teamId: 6724,
+                        teamName: "PAR",
+                        teamColor: "#d52b1e",
+                        teamSubColor: "#0038a8",
+                    },
+                    {
+                        teamId: 5796,
+                        teamName: "URU",
+                        teamColor: "#fcd116",
+                        teamSubColor: "#0038a8",
+                    },
+                ],
+            },
+            {
+                label: "ZONA NORTE",
+                children: [
+                    {
+                        teamId: 8256,
+                        teamName: "BRA",
+                        teamColor: "#009c3b",
+                        teamSubColor: "#ffdf00",
+                    },
+                    {
+                        teamId: 8258,
+                        teamName: "COL",
+                        teamColor: "#FFCD00",
+                        teamSubColor: "#003087",
+                    },
+                    {
+                        teamId: 6707,
+                        teamName: "ECU",
+                        teamColor: "#FFDD00",
+                        teamSubColor: "#034EA2",
+                    },
+                    {
+                        teamId: 5798,
+                        teamName: "PER",
+                        teamColor: "#D91023",
+                        teamSubColor: "#ffffff",
+                    },
+                    {
+                        teamId: 5800,
+                        teamName: "VEN",
+                        teamColor: "#ffcc00",
+                        teamSubColor: "#00247D",
                     },
                 ],
             },

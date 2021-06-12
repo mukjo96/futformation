@@ -1,5 +1,5 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import { Row, Col, Divider } from "antd";
 
 import styled from "styled-components";

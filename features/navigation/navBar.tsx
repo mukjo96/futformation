@@ -36,7 +36,7 @@ const NavBar = () => {
         <Menu>
             {teamList.map((league) => (
                 <SubMenu title={league.label} key={league.label}>
-                    {league.label === "EURO"
+                    {league.label === "EURO" || league.label === "COPA AMERICA"
                         ? league.children.map((group) => (
                               <SubMenu title={group.label} key={group.label}>
                                   {group.children.map((team) => (

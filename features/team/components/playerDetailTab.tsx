@@ -10,7 +10,7 @@ import {
 import RecentMatches from "./recentMatches";
 import CareerStatistics from "./careerStatistics";
 import RelatedNews from "./relatedNews";
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import CareerHistory from "./careerHistory";
 
 const { TabPane } = Tabs;

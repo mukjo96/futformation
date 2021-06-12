@@ -1,6 +1,6 @@
 import MoreButton from "@features/common/button/moreButton";
 
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal-effects/Fade";
 import { matchDataTypes } from "@features/home/api/cityDataTypes";
 import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
