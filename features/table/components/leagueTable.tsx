@@ -87,16 +87,15 @@ function renderTableData(team) {
                 span={1}
                 style={{
                     alignSelf: "stretch",
+                    justifyContent: "center",
+                    display: "flex",
                 }}
             >
-                <Col
-                    span={6}
-                    offset={8}
+                <LegendDiv
                     style={{
                         backgroundColor: team.qualColor && team.qualColor,
-                        height: "100%",
                     }}
-                ></Col>
+                ></LegendDiv>
             </Col>
             <Col span={1}>{team.idx}</Col>
             <Col span={10}>{team.name}</Col>
@@ -136,4 +135,9 @@ const StyledItem = styled(List.Item)<{ isteam: string; teamcolor: string }>`
         props.isteam === "true" && props.teamcolor + "19"};
 
     padding: 8px 8px !important;
+`;
+
+const LegendDiv = styled.div`
+    height: 100%;
+    width: 4px;
 `;

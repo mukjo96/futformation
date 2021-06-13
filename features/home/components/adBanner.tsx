@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col, Carousel } from "antd";
-import MoreButton from "@features/common/button/moreButton";
 import Link from "next/link";
 
 const AdBanner = ({ teamColor }) => {
@@ -17,8 +16,6 @@ const AdBanner = ({ teamColor }) => {
                     </ImageCol>
                     <BannerCol xs={24} md={10} backcolor="#0d7c91">
                         <BannerContainer>
-                            {/* <CityzenImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/UEFA_Euro_2020_logo.svg/640px-UEFA_Euro_2020_logo.svg.png" /> */}
-
                             <BannerMessage color="white">
                                 The new UEFA EURO 2020 schedule has been
                                 confirmed, with 11 host cities staging the 51
