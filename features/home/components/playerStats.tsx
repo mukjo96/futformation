@@ -26,6 +26,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
 
     useEffect(() => {
         setIsLoading(true);
+        console.log(statList);
         if (tableData) {
             if (tableData.tables[0].table) {
                 findTeamRank();
@@ -55,10 +56,23 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
         });
     }
 
+    const renderBlankStatList = (category: "Ratings" | "Goals" | "Assists") => {
+        return (
+            <StyledCol xs={0} md={6}>
+                <StatTitle>{category}</StatTitle>
+                <Empty
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    style={{ margin: "25% 0" }}
+                />
+            </StyledCol>
+        );
+    };
+
     const renderStatList = (
         listData: Array<statPlayer>,
         category: "Ratings" | "Goals" | "Assists"
     ) => {
+        console.log(listData);
         return (
             <StyledCol xs={24} md={6}>
                 <Link href={`/players/${listData[0].id}`}>
@@ -131,17 +145,29 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                     />
                     <Slide bottom cascade ssrFadeout>
                         <ContainRow>
-                            {statData.byRating.length !== 0 ? (
+                            {statData.byRating.length +
+                                statData.byGoals.length +
+                                statData.byAssists.length !==
+                            0 ? (
                                 <>
-                                    {renderStatList(
-                                        statData.byRating,
-                                        "Ratings"
-                                    )}
-                                    {renderStatList(statData.byGoals, "Goals")}
-                                    {renderStatList(
-                                        statData.byAssists,
-                                        "Assists"
-                                    )}
+                                    {statData.byRating.length !== 0
+                                        ? renderStatList(
+                                              statData.byRating,
+                                              "Ratings"
+                                          )
+                                        : renderBlankStatList("Ratings")}
+                                    {statData.byGoals.length !== 0
+                                        ? renderStatList(
+                                              statData.byGoals,
+                                              "Goals"
+                                          )
+                                        : renderBlankStatList("Goals")}
+                                    {statData.byAssists.length !== 0
+                                        ? renderStatList(
+                                              statData.byAssists,
+                                              "Assists"
+                                          )
+                                        : renderBlankStatList("Assists")}
                                 </>
                             ) : (
                                 <TableCol xs={0} md={18}>
