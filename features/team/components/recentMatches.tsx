@@ -13,7 +13,7 @@ import Fade from "react-reveal-effects/Fade";
 
 const { Panel } = Collapse;
 
-const RecentMatches = ({ playerData }) => {
+const RecentMatches = ({ playerData, teamColor }) => {
     const matches = playerData.recentMatches;
 
     return (
@@ -51,9 +51,7 @@ const RecentMatches = ({ playerData }) => {
                                                         </MatchScore>
                                                         <CustomDivider
                                                             teamcolor={
-                                                                playerData
-                                                                    .origin
-                                                                    .teamColor
+                                                                teamColor
                                                             }
                                                         />
                                                     </>

@@ -15,7 +15,7 @@ import CareerHistory from "./careerHistory";
 
 const { TabPane } = Tabs;
 
-const PlayerDetailTab = ({ playerData }) => {
+const PlayerDetailTab = ({ playerData, teamColor }) => {
     return (
         <Container>
             <BackTop />
@@ -23,7 +23,7 @@ const PlayerDetailTab = ({ playerData }) => {
                 <StyledTabs
                     defaultActiveKey="1"
                     centered={true}
-                    teamcolor={playerData.origin.teamColor}
+                    teamcolor={teamColor}
                 >
                     <TabPane
                         tab={
@@ -34,7 +34,10 @@ const PlayerDetailTab = ({ playerData }) => {
                         }
                         key="1"
                     >
-                        <RecentMatches playerData={playerData} />
+                        <RecentMatches
+                            playerData={playerData}
+                            teamColor={teamColor}
+                        />
                     </TabPane>
                     <TabPane
                         tab={
@@ -45,7 +48,10 @@ const PlayerDetailTab = ({ playerData }) => {
                         }
                         key="2"
                     >
-                        <CareerHistory playerData={playerData} />
+                        <CareerHistory
+                            playerData={playerData}
+                            teamColor={teamColor}
+                        />
                     </TabPane>
                     <TabPane
                         tab={
@@ -58,7 +64,10 @@ const PlayerDetailTab = ({ playerData }) => {
                         }
                         key="3"
                     >
-                        <CareerStatistics playerData={playerData} />
+                        <CareerStatistics
+                            playerData={playerData}
+                            teamColor={teamColor}
+                        />
                     </TabPane>
 
                     <TabPane

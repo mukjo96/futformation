@@ -8,7 +8,7 @@ import { renderPlayerStats } from "./recentMatches";
 
 const { Panel } = Collapse;
 
-const CareerStatistics = ({ playerData }) => {
+const CareerStatistics = ({ playerData, teamColor }) => {
     const matches = playerData.careerStatistics;
     const [visibleModalNumber, setVisibleModalNumber] = useState(0);
 
@@ -62,9 +62,7 @@ const CareerStatistics = ({ playerData }) => {
                                                         </MatchScore>
                                                         <CustomDivider
                                                             teamcolor={
-                                                                playerData
-                                                                    .origin
-                                                                    .teamColor
+                                                                teamColor
                                                             }
                                                         />
                                                     </>

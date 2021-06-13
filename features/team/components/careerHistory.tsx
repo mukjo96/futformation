@@ -14,7 +14,7 @@ import Fade from "react-reveal-effects/Fade";
 
 const { Panel } = Collapse;
 
-const CareerHistory = ({ playerData }) => {
+const CareerHistory = ({ playerData, teamColor }) => {
     const careerHistory = playerData.careerHistory;
     return (
         <ContainerCol>
@@ -70,9 +70,7 @@ const CareerHistory = ({ playerData }) => {
                                                 </HistoryCol>
                                             </MatchScore>
                                             <CustomDivider
-                                                teamcolor={
-                                                    playerData.origin.teamColor
-                                                }
+                                                teamcolor={teamColor}
                                             />
                                             <StyledRow>
                                                 <Col>
