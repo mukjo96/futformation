@@ -5,18 +5,23 @@ import moment from "moment";
 import { wrapper } from "../redux/configureStore";
 import Foot from "@features/common/footer/foot";
 import NavBar from "@features/navigation/navBar";
+import { useStore } from "react-redux";
+import { PersistGate } from "redux-persist/lib/integration/react";
 
 function MyApp({ Component, pageProps }) {
     moment.locale("ko");
+    const store = useStore((state) => state);
     return (
         <>
             <Head>
                 <title>FUTFORMATION football information website</title>
                 <link rel="shortcut icon" href="/image/favicon.ico" />
             </Head>
-            <NavBar />
-            <Component {...pageProps} />
-            <Foot />
+            <PersistGate persistor={store.__persistor} loading={null}>
+                <NavBar />
+                <Component {...pageProps} />
+                <Foot />
+            </PersistGate>
         </>
     );
 }
