@@ -16,7 +16,7 @@ interface HydratePayload {
 
 const rdcApiExample = (
     state = initialState,
-    // action: AnyAction,
+
     action:
         | IActionsApiExample
         | { type: typeof HYDRATE; payload: HydratePayload }

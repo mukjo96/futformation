@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col, Avatar, Divider, List, Empty } from "antd";
 import Fade from "react-reveal-effects/Fade";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LeagueTable = ({ tableData, color, teamId }) => {
     return (
@@ -48,6 +50,16 @@ const LeagueTable = ({ tableData, color, teamId }) => {
                     </Col>
                 ))
             )}
+            <Col>
+                {tableData.tables[0].legend.map((legend) => (
+                    <Row justify="start" align="middle" key={legend.title}>
+                        <FontAwesomeIcon icon={faCircle} color={legend.color} />
+                        <span style={{ marginLeft: "12px" }}>
+                            {legend.title}
+                        </span>
+                    </Row>
+                ))}
+            </Col>
         </Container>
     );
 };
@@ -55,7 +67,8 @@ const LeagueTable = ({ tableData, color, teamId }) => {
 function renderTableHeader() {
     return (
         <>
-            <Col span={2}>#</Col>
+            <Col span={1}></Col>
+            <Col span={1}>#</Col>
             <Col span={10}>TEAM</Col>
             <Col span={2}>PL</Col>
             <Col span={2}>W</Col>
@@ -70,7 +83,22 @@ function renderTableHeader() {
 function renderTableData(team) {
     return (
         <>
-            <Col span={2}>{team.idx}</Col>
+            <Col
+                span={1}
+                style={{
+                    alignSelf: "stretch",
+                }}
+            >
+                <Col
+                    span={6}
+                    offset={8}
+                    style={{
+                        backgroundColor: team.qualColor && team.qualColor,
+                        height: "100%",
+                    }}
+                ></Col>
+            </Col>
+            <Col span={1}>{team.idx}</Col>
             <Col span={10}>{team.name}</Col>
             <Col span={2}>{team.played}</Col>
             <Col span={2}>{team.wins}</Col>

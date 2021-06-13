@@ -1,36 +1,57 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col } from "antd";
+import { Row, Col, Carousel } from "antd";
 import MoreButton from "@features/common/button/moreButton";
 import Link from "next/link";
 
 const AdBanner = ({ teamColor }) => {
     return (
-        <Container>
-            <BannerRow>
-                <ImageCol xs={24} md={17}>
-                    <img
-                        src="https://www.broadcastprome.com/wp-content/uploads/2021/03/Euro-2020.jpg"
-                        width="100%"
-                    />
-                </ImageCol>
-                <BannerCol xs={24} md={10}>
-                    <BannerContainer>
-                        {/* <CityzenImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/UEFA_Euro_2020_logo.svg/640px-UEFA_Euro_2020_logo.svg.png" /> */}
+        <Carousel autoplay autoplaySpeed={7000} dotPosition="top" pauseOnHover>
+            <Container>
+                <BannerRow>
+                    <ImageCol xs={24} md={17}>
+                        <img
+                            src="https://www.broadcastprome.com/wp-content/uploads/2021/03/Euro-2020.jpg"
+                            width="100%"
+                        />
+                    </ImageCol>
+                    <BannerCol xs={24} md={10} backcolor="#0d7c91">
+                        <BannerContainer>
+                            {/* <CityzenImage src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/UEFA_Euro_2020_logo.svg/640px-UEFA_Euro_2020_logo.svg.png" /> */}
 
-                        <BannerMessage>
-                            The new UEFA EURO 2020 schedule has been confirmed,
-                            with 11 host cities staging the 51 fixtures.
-                        </BannerMessage>
-                        <Link href="https://editorial.uefa.com/resources/026a-126a09addc81-6f092f1f9f89-1000/euro2021_match_schedule_-_english_-_310521_20210601103927.pdf">
-                            <JoinButton teamcolor={teamColor}>
-                                Download full fixture list
-                            </JoinButton>
-                        </Link>
-                    </BannerContainer>
-                </BannerCol>
-            </BannerRow>
-        </Container>
+                            <BannerMessage color="white">
+                                The new UEFA EURO 2020 schedule has been
+                                confirmed, with 11 host cities staging the 51
+                                fixtures.
+                            </BannerMessage>
+                            <Link href="https://editorial.uefa.com/resources/026a-126a09addc81-6f092f1f9f89-1000/euro2021_match_schedule_-_english_-_310521_20210601103927.pdf">
+                                <JoinButton teamcolor={teamColor}>
+                                    Download full fixture list
+                                </JoinButton>
+                            </Link>
+                        </BannerContainer>
+                    </BannerCol>
+                </BannerRow>
+            </Container>
+            <Container>
+                <BannerRow>
+                    <ImageCol xs={24} md={17}>
+                        <img
+                            src="https://i1.wp.com/copaamericacom.wpcomstaging.com/wp-content/uploads/ca-grupos.jpg"
+                            width="100%"
+                        />
+                    </ImageCol>
+                    <BannerCol xs={24} md={10} backcolor="#f7f7f7">
+                        <BannerContainer>
+                            <BannerMessage color="black">
+                                READY FOR KICKOFF! Fixtures for the 2021
+                                CONMEBOL Copa America have all been confirmed
+                            </BannerMessage>
+                        </BannerContainer>
+                    </BannerCol>
+                </BannerRow>
+            </Container>
+        </Carousel>
     );
 };
 export default AdBanner;
@@ -51,8 +72,9 @@ const ImageCol = styled(Col)`
         /* display: none; */
     }
 `;
-const BannerCol = styled(Col)`
-    background: linear-gradient(270deg, #0d7c91 70%, rgba(0, 40, 94, 0) 91%);
+const BannerCol = styled(Col)<{ backcolor: string }>`
+    background: ${(props) =>
+        `linear-gradient(270deg, ${props.backcolor} 70%, rgba(0, 40, 94, 0) 91%)`};
     margin-left: -12.5%;
     align-items: center;
     padding-left: 5%;
@@ -60,7 +82,7 @@ const BannerCol = styled(Col)`
     display: flex;
 
     @media screen and (max-width: 768px) {
-        background: #0d7c91;
+        background: ${(props) => props.backcolor};
         margin: 0;
     }
 `;
@@ -87,9 +109,9 @@ const CityzenImage = styled.img`
     width: 60%;
 `;
 
-const BannerMessage = styled.h3`
+const BannerMessage = styled.h3<{ color: string }>`
+    color: ${(props) => props.color};
     font-size: 14px;
-    color: white;
 `;
 
 const JoinButton = styled.div<{ teamcolor: string }>`

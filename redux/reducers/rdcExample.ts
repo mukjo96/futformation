@@ -1,5 +1,3 @@
-// import produce from 'immer';
-// import { AnyAction } from 'redux';
 import { HYDRATE } from "next-redux-wrapper";
 import { IExampleState } from "../interfaces/iExample/iExample.interfaces";
 import {
@@ -20,7 +18,7 @@ interface HydratePayload {
 
 const rdcExample = (
     state = initialState,
-    // action: AnyAction,
+
     action: IActionsExample | { type: typeof HYDRATE; payload: HydratePayload }
 ): IExampleState => {
     switch (action.type) {

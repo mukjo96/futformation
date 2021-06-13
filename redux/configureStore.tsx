@@ -4,16 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import rootReducer from "./reducers/index";
 import rootSaga from "./sagas/index";
 
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const bindMiddleware = (middleware: Middleware[]): StoreEnhancer => {
@@ -29,7 +20,6 @@ export const makeStore: MakeStore = () => {
     const sagaMiddleware = createSagaMiddleware();
 
     if (isServer) {
-        //If it's on server side, create a store
         const store = createStore(
             rootReducer,
             bindMiddleware([sagaMiddleware])
@@ -37,9 +27,6 @@ export const makeStore: MakeStore = () => {
         store.sagaTask = sagaMiddleware.run(rootSaga);
         return store;
     } else {
-        //If it's on client side, create a store which will persist
-        // const storage = storage.default
-
         const persistConfig = {
             key: "root",
             version: 1,
@@ -47,7 +34,7 @@ export const makeStore: MakeStore = () => {
             storage,
         };
 
-        const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
+        const persistedReducer = persistReducer(persistConfig, rootReducer);
 
         const store: any = createStore(
             persistedReducer,
@@ -55,7 +42,7 @@ export const makeStore: MakeStore = () => {
         );
 
         store.sagaTask = sagaMiddleware.run(rootSaga);
-        store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+        store.__persistor = persistStore(store);
 
         return store;
     }
