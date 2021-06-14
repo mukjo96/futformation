@@ -72,7 +72,7 @@ export default NewsCard;
 const Container = styled(Row)``;
 
 const StyledAwesomeSlider = styled(AwesomeSlider)`
-    margin: 5% 3%;
+    margin: 0 3% 7% 3%;
 
     .awssld__controls button {
     }
