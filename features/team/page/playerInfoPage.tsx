@@ -1,5 +1,5 @@
 import LoadingView from "@features/common/loadingView";
-import { Row, Result, Button, Avatar } from "antd";
+import { Result, Button } from "antd";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import { useSelector } from "react-redux";

@@ -31,3 +31,12 @@ a {
 * {
     box-sizing: border-box;
 }
+
+.awssld {
+    --organic-arrow-color: #1c2c5b !important;
+
+    --control-bullet-color: lightgrey !important;
+    --control-bullet-active-color: black !important;
+    --loader-bar-color: #851515 !important;
+    --content-background-color: white !important;
+}

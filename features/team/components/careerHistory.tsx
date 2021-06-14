@@ -1,18 +1,8 @@
-import MoreButton from "@features/common/button/moreButton";
-import {
-    faFutbol,
-    faStopwatch,
-    faTshirt,
-    faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFutbol, faTshirt, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Collapse, List, Row, Col, Divider, Tooltip, Avatar } from "antd";
-import Link from "next/link";
+import { List, Row, Col, Divider, Tooltip, Avatar } from "antd";
 import React from "react";
 import styled from "styled-components";
-import Fade from "react-reveal-effects/Fade";
-
-const { Panel } = Collapse;
 
 const CareerHistory = ({ playerData, teamColor }) => {
     const careerHistory = playerData.careerHistory;
@@ -145,11 +135,6 @@ const TeamName = styled.h2`
 const CustomDivider = styled(Divider)<{ teamcolor: string }>`
     margin: 10px 0;
     background: ${(props) => props.teamcolor};
-`;
-
-const MatchDescription = styled.div`
-    display: flex;
-    justify-content: space-between;
 `;
 
 const HistoryCol = styled(Col)`

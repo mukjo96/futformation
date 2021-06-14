@@ -1,197 +1,163 @@
 import React from "react";
-import { Card, Avatar, Row } from "antd";
-import Carousel from "react-simply-carousel";
+import { Carousel, Card, Avatar, Row, Col } from "antd";
+
 import styled from "styled-components";
+import AwesomeSlider from "react-awesome-slider";
 
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { IconLogo } from "@features/common/logo/Logo";
 import Link from "antd/lib/typography/Link";
 import { renderNewsBox } from "@features/home/components/latestNews";
+import MainBanner from "@features/home/components/mainBanner";
+import MoreButton from "@features/common/button/moreButton";
 
 const { Meta } = Card;
 
 const NewsCard = ({ newsList, activeSlide, setActiveSlide, teamId }) => {
-    return (
-        <StyledRow justify="center">
-            {newsList.map((news, index) => renderNewsBox(news, index, teamId))}
-        </StyledRow>
-    );
-
     // return (
-    //     <Container>
-    //         <Carousel
-    //             updateOnItemClick
-    //             centerMode
-    //             containerProps={{
-    //                 style: {
-    //                     justifyContent: "space-between",
-    //                     height: 500,
-    //                 },
-    //             }}
-    //             activeSlideIndex={activeSlide}
-    //             activeSlideProps={{
-    //                 style: {
-    //                     zIndex: 1,
-    //                     fontSize: 20,
-    //                     fontWeight: "bold",
-    //                     filter: "none",
-    //                     boxShadow:
-    //                         "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)",
-    //                 },
-    //             }}
-    //             onRequestChange={setActiveSlide}
-    //             forwardBtnProps={{
-    //                 children: <RightOutlined />,
-    //                 style: {
-    //                     width: 60,
-    //                     height: 60,
-    //                     minWidth: 40,
-    //                     background: "white",
-    //                     border: "none",
-    //                     alignSelf: "center",
-    //                 },
-    //             }}
-    //             backwardBtnProps={{
-    //                 children: <LeftOutlined />,
-    //                 style: {
-    //                     width: 60,
-    //                     height: 60,
-    //                     minWidth: 40,
-    //                     background: "white",
-    //                     border: "none",
-    //                     alignSelf: "center",
-    //                 },
-    //             }}
-    //             itemsToShow={3}
-    //             speed={400}
-    //             easing="ease-in-out"
-    //         >
-    //             {newsList.map((news, index) => (
-    //                 <NewsContainer
-    //                     style={{
-    //                         justifyContent: "center",
-
-    //                         marginLeft: "5px",
-    //                         marginRight: "5px",
-
-    //                         textAlign: "center",
-    //                         boxSizing: "border-box",
-    //                         display: "flex",
-    //                         alignItems: "center",
-    //                         borderRadius: "10px",
-    //                         textDecoration: "none",
-    //                         alignSelf: "center",
-    //                     }}
-    //                     key={news.title}
-    //                 >
-    //                     <StyledCard
-    //                         hoverable
-    //                         cover={
-    //                             <img
-    //                                 style={{
-    //                                     height: "250px",
-    //                                     objectFit: "cover",
-    //                                 }}
-    //                                 alt={news.title}
-    //                                 src={news.imageUrl}
-    //                             />
-    //                         }
-    //                     >
-    //                         <Meta
-    //                             avatar={index + 1}
-    //                             title={
-    //                                 <Link
-    //                                     href={
-    //                                         news.sourceStr.slice(0, 6) ===
-    //                                         "FotMob"
-    //                                             ? `https://www.fotmob.com${news.page.url}`
-    //                                             : news.page.url
-    //                                     }
-    //                                     target="_blank"
-    //                                 >
-    //                                     {news.title}
-    //                                 </Link>
-    //                             }
-    //                             description={
-    //                                 <>
-    //                                     <Avatar
-    //                                         size="small"
-    //                                         icon={
-    //                                             news.sourceIconUrl ===
-    //                                             "https://images.fotmob.com/image_resources/news/default.png" ? (
-    //                                                 <img
-    //                                                     src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamId}_small.png`}
-    //                                                 />
-    //                                             ) : (
-    //                                                 <img
-    //                                                     src={news.sourceIconUrl}
-    //                                                 />
-    //                                             )
-    //                                         }
-    //                                         style={{
-    //                                             marginRight: "4px",
-    //                                             background: "none",
-    //                                         }}
-    //                                     />
-    //                                     <span>{news.sourceStr}</span>
-    //                                 </>
-    //                             }
-    //                         />
-    //                     </StyledCard>
-    //                 </NewsContainer>
-    //             ))}
-    //         </Carousel>
-    //     </Container>
+    //     <StyledRow justify="center">
+    //         {newsList.map((news, index) => renderNewsBox(news, index, teamId))}
+    //     </StyledRow>
     // );
+
+    return (
+        <Container>
+            <StyledAwesomeSlider animation="cubeAnimation">
+                {newsList.map((news, index) => (
+                    <BannerContainer>
+                        <BannerBackground
+                            style={{
+                                backgroundImage: `url(${news.imageUrl})`,
+                            }}
+                        >
+                            <BackFilter>
+                                <TextContainer>
+                                    <NewsHeader>{`TEAM NEWS`}</NewsHeader>
+                                    <BannerTitle>{news.title}</BannerTitle>
+                                    <BannerSource>
+                                        {news.sourceStr}
+                                    </BannerSource>
+                                    <Link
+                                        style={{ cursor: "pointer" }}
+                                        href={
+                                            news.sourceStr.slice(0, 6) ===
+                                            "FotMob"
+                                                ? `https://www.fotmob.com${news.page.url}`
+                                                : news.page.url
+                                        }
+                                        target="_blank"
+                                    >
+                                        <MoreButton
+                                            value="View Now"
+                                            size="large"
+                                        />
+                                    </Link>
+                                </TextContainer>
+                            </BackFilter>
+                        </BannerBackground>
+                    </BannerContainer>
+                ))}
+            </StyledAwesomeSlider>
+            <Col xs={24} md={0}>
+                {newsList.map((news, index) =>
+                    renderNewsBox(news, index, teamId)
+                )}
+            </Col>
+        </Container>
+    );
 };
 
 export default NewsCard;
 
-const Container = styled.div`
-    padding: 28px;
-`;
+const Container = styled(Row)``;
 
-const NewsContainer = styled.div`
-    width: 350px;
-    height: 440px;
+const StyledAwesomeSlider = styled(AwesomeSlider)`
+    margin: 5% 3%;
+
+    .awssld__controls button {
+    }
 
     @media screen and (max-width: 768px) {
-        width: 250px;
-        height: 505px;
-    }
-`;
-const StyledCard = styled(Card)`
-    height: 440px;
+        display: none;
+        /* margin-bottom: 300px;
 
-    .ant-card-meta-title {
-        font-size: 14px;
-        overflow: unset;
-        white-space: unset;
-
-        a {
-            color: black;
-            :hover {
-                color: #6cabdd;
+        .awssld__bullets {
+            bottom: -15px;
+            button {
+                width: 8px;
+                height: 8px;
             }
-        }
-    }
-    .ant-card-meta-description {
-        font-size: 10px;
-    }
-
-    @media screen and (max-width: 768px) {
-        height: 505px;
+        } */
     }
 `;
 
-const StyledRow = styled(Row)`
-    padding-left: 12px;
-    padding-right: 12px;
-    .ant-col {
-        margin: 12px;
-    }
+const BannerContainer = styled.div`
+    display: flex;
+    height: 50vw;
+    max-height: 640px;
+    width: 100%;
+`;
 
-    div {
-        border-radius: 5%;
+const BackFilter = styled.div`
+    display: flex;
+    max-height: 640px;
+    height: 50vw;
+    align-items: flex-end;
+
+    width: 100%;
+    flex-wrap: wrap;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.4) 50vw,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+`;
+const BannerBackground = styled.div`
+    display: flex;
+    height: 50vw;
+    max-height: 640px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+
+const TextContainer = styled.div`
+    padding: 5%;
+    width: 47%;
+    @media screen and (max-width: 768px) {
+        width: 80%;
+    }
+`;
+
+const NewsHeader = styled.h4`
+    font-size: 12px;
+    color: white;
+    margin: 0;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`;
+
+const BannerTitle = styled.h2`
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media screen and (max-width: 992px) {
+        font-size: 24px;
+    }
+    @media screen and (max-width: 768px) {
+        font-size: 14px;
+    }
+`;
+const BannerSource = styled.p`
+    font-size: 12px;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media screen and (max-width: 768px) {
+        font-size: 10px;
     }
 `;

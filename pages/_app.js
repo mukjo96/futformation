@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import "../styles/globals.css";
+import "react-awesome-slider/dist/styles.css";
 import moment from "moment";
 import { wrapper } from "../redux/configureStore";
 import Foot from "@features/common/footer/foot";

@@ -53,13 +53,11 @@ const CareerStatistics = ({ playerData, teamColor }) => {
                                                 style={{ margin: 0 }}
                                                 title={
                                                     <>
-                                                        <MatchScore>
-                                                            <Row align="middle">
-                                                                <TeamName>
-                                                                    {item.name}
-                                                                </TeamName>
-                                                            </Row>
-                                                        </MatchScore>
+                                                        <TeamNameRow align="middle">
+                                                            <TeamName>
+                                                                {item.name}
+                                                            </TeamName>
+                                                        </TeamNameRow>
                                                         <CustomDivider
                                                             teamcolor={
                                                                 teamColor
@@ -140,7 +138,7 @@ const StyledCollapse = styled(Collapse)`
     background-color: white;
 `;
 
-const MatchScore = styled(Row)`
+const TeamNameRow = styled(Row)`
     justify-content: space-between;
     align-items: flex-end;
 `;
