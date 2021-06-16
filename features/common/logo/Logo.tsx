@@ -25,7 +25,7 @@ const Logo = styled.img.attrs(() => ({
     height: 50px;
     filter: brightness(0) invert(1);
     @media screen and (max-width: 860px) {
-        height: 30px;
+        height: 50px;
     }
 `;
 
