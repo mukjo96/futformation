@@ -5,7 +5,6 @@ import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
-import { IconLogo } from "@features/common/logo/Logo";
 
 const LatestNews = ({ newsList, teamId }) => {
     return (

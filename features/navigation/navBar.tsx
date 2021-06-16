@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import HamburgerMenu from "react-hamburger-menu";
 import { TextLogo } from "@features/common/logo/Logo";
-import Link from "next/link";
 import Searchbar from "@features/common/input/searchBar";
 import NaviLinks from "./naviLinks";
 import { Avatar, Dropdown, Menu, Row } from "antd";
@@ -82,10 +81,14 @@ const NavBar = () => {
                     onClick={(e) => e.preventDefault()}
                 >
                     <Row align="middle">
-                        <img
-                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
-                            width={50}
-                        />
+                        {team.teamId === 0 ? (
+                            <TextLogo />
+                        ) : (
+                            <img
+                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
+                                width={50}
+                            />
+                        )}
                         <DownOutlined
                             style={{
                                 color: "white",

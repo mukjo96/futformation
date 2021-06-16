@@ -1,4 +1,5 @@
 import LoadingView from "@features/common/loadingView";
+import SelectTeam from "@features/common/selectTeam";
 import PageTitle from "@features/common/text/pageTitle";
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,9 @@ const MatchPage = () => {
         dispatch(select(team));
     };
 
-    if (isLoading) {
+    if (team.teamId === 0) {
+        return <SelectTeam />;
+    } else if (isLoading) {
         apiResult && setIsLoading(false);
         return (
             <LoadingContainer>

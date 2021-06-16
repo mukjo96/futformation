@@ -6,9 +6,10 @@ import {
 } from "../interfaces/iExample/iExampleAct.interfaces";
 
 export const initialState: IExampleState = {
-    teamId: 8491,
-    teamName: "ENG",
-    teamColor: "#CF081F",
+    teamId: 0,
+    teamNameLong: "",
+    teamName: "",
+    teamColor: "#000000",
     teamSubColor: "#ffffff",
 };
 

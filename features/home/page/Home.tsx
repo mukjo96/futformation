@@ -18,6 +18,7 @@ import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExam
 import LoadingView from "@features/common/loadingView";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
+import SelectTeam from "@features/common/selectTeam";
 
 const BackDiv = styled.div`
     background-color: white;
@@ -44,8 +45,9 @@ const Home = () => {
         dispatch(actApiRequest());
         dispatch(select(team));
     };
-
-    if (isLoading) {
+    if (team.teamId === 0) {
+        return <SelectTeam />;
+    } else if (isLoading) {
         apiResult && setIsLoading(false);
         return (
             <Container>
