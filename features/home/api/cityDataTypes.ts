@@ -83,9 +83,9 @@ export type playerInfoDataTypes = {
 export type playerStatDataTypes = [topPlayersDataTypes, tableDataTypes];
 
 export type topPlayersDataTypes = {
-    byRating: Array<statPlayer>;
-    byGoals: Array<statPlayer>;
-    byAssists: Array<statPlayer>;
+    byRating: { players: Array<statPlayer>; seeAllLink?: "string" };
+    byGoals: { players: Array<statPlayer>; seeAllLink?: "string" };
+    byAssists: { players: Array<statPlayer>; seeAllLink?: "string" };
 };
 
 export type tableDataTypes = {

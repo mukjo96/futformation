@@ -15,12 +15,10 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
     const newMatchList =
         beforeMonth !== currentMonth
             ? [...matchList[beforeMonth], ...matchList[currentMonth]]
-            : [
-                  ...matchList[dateKeys[dateKeys.length - 2][0]],
-                  ...matchList[dateKeys[dateKeys.length - 1][0]],
-              ];
-    //   matchList["May 2021"];
+            : Object.values(matchList).flat();
+
     let match5 = 0;
+
     return (
         <Container>
             <Col>

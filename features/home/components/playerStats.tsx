@@ -26,7 +26,6 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
 
     useEffect(() => {
         setIsLoading(true);
-        console.log(statList);
         if (tableData) {
             if (tableData.tables[0].table) {
                 findTeamRank();
@@ -72,7 +71,6 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
         listData: Array<statPlayer>,
         category: "Ratings" | "Goals" | "Assists"
     ) => {
-        console.log(listData);
         return (
             <StyledCol xs={24} md={6}>
                 <Link href={`/players/${listData[0].id}`}>
@@ -145,26 +143,26 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                     />
                     <Slide bottom cascade ssrFadeout>
                         <ContainRow>
-                            {statData.byRating.length +
-                                statData.byGoals.length +
-                                statData.byAssists.length !==
+                            {statData.byRating.players.length +
+                                statData.byGoals.players.length +
+                                statData.byAssists.players.length !==
                             0 ? (
                                 <>
-                                    {statData.byRating.length !== 0
+                                    {statData.byRating.players.length !== 0
                                         ? renderStatList(
-                                              statData.byRating,
+                                              statData.byRating.players,
                                               "Ratings"
                                           )
                                         : renderBlankStatList("Ratings")}
-                                    {statData.byGoals.length !== 0
+                                    {statData.byGoals.players.length !== 0
                                         ? renderStatList(
-                                              statData.byGoals,
+                                              statData.byGoals.players,
                                               "Goals"
                                           )
                                         : renderBlankStatList("Goals")}
-                                    {statData.byAssists.length !== 0
+                                    {statData.byAssists.players.length !== 0
                                         ? renderStatList(
-                                              statData.byAssists,
+                                              statData.byAssists.players,
                                               "Assists"
                                           )
                                         : renderBlankStatList("Assists")}

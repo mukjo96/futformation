@@ -25,7 +25,7 @@ const SelectTeam = () => {
                 subColor="white"
             />
             <Row justify="center" style={{ margin: "3% 0" }}>
-                <StyledRadio>
+                <StyledRadio value={selectedLeagueIndex}>
                     {teamList.map((league, index) => (
                         <Radio.Button
                             value={index}
@@ -45,7 +45,9 @@ const SelectTeam = () => {
                                     marginRight: "4px",
                                 }}
                             />
-                            <LeagueName>{league.label}</LeagueName>
+                            <LeagueName>
+                                {league.leagueId !== 0 && league.label}
+                            </LeagueName>
                         </Radio.Button>
                     ))}
                 </StyledRadio>
