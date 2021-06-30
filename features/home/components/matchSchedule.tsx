@@ -12,10 +12,9 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
 
-    const newMatchList =
-        beforeMonth !== currentMonth
-            ? [...matchList[beforeMonth], ...matchList[currentMonth]]
-            : Object.values(matchList).flat();
+    const newMatchList = Object.values(matchList)
+        .filter((value, index) => index > beforeMonth)
+        .flat();
 
     let match5 = 0;
 
@@ -31,7 +30,7 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
                 </Col>
                 <Fade bottom cascade ssrFadeout>
                     <Row>
-                        {newMatchList.map((match) => {
+                        {newMatchList.map((match: matchDataTypes) => {
                             if (
                                 match.lastPlayedMatch ||
                                 (!match.isPastMatch && match5 < 4)
@@ -56,10 +55,11 @@ function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
     dateKeys.map((list, index) => {
         if (list[0] === currentMonth) {
             reIndex = index;
+            return reIndex > 0 ? reIndex - 1 : 0;
         }
     });
 
-    return reIndex > 0 ? dateKeys[reIndex - 1][0] : currentMonth;
+    return 0;
 }
 
 function renderMatchSchedule(
