@@ -83,7 +83,7 @@ const MatchHeader = ({ matchData }: dataType) => {
     return (
         <Fade bottom cascade ssrFadeout>
             <TournamentName>
-                {infoBox.Tournament.text.split(" - ")[0]?.toUpperCase()}
+                {infoBox.Tournament.leagueName?.toUpperCase()}
             </TournamentName>
             <Row
                 style={{
@@ -255,7 +255,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.text.split(" - ")[1]?.toUpperCase()}
+                        {infoBox.Tournament.round?.toUpperCase()}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>
@@ -273,7 +273,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.text.split(" - ")[1]?.toUpperCase()}
+                        {infoBox.Tournament.round?.toUpperCase()}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>

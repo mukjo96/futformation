@@ -82,7 +82,8 @@ export type matchFactsTypes = {
         Tournament: {
             id: number;
             link: string;
-            text: string;
+            leagueName: string;
+            round: string;
         };
         Stadium: {
             name: string;
