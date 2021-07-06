@@ -1,10 +1,16 @@
+import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 import { faFutbol, faTshirt, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { List, Row, Col, Divider, Tooltip, Avatar } from "antd";
 import React from "react";
 import styled from "styled-components";
 
-const CareerHistory = ({ playerData, teamColor }) => {
+type propTypes = {
+    playerData: playerInfoDataTypes;
+    teamColor: string;
+};
+
+const CareerHistory = ({ playerData, teamColor }: propTypes) => {
     const careerHistory = playerData.careerHistory;
     return (
         <ContainerCol>

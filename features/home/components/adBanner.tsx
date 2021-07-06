@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { Row, Col, Carousel } from "antd";
 import Link from "next/link";
 
-const AdBanner = ({ teamColor }) => {
+type propTypes = {
+    teamColor: string;
+};
+
+const AdBanner = ({ teamColor }: propTypes) => {
     return (
         <Carousel autoplay autoplaySpeed={7000} dotPosition="top" pauseOnHover>
             <Container>

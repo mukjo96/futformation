@@ -1,4 +1,5 @@
 import MoreButton from "@features/common/button/moreButton";
+import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Collapse, List, Row, Col, Divider, Modal, Avatar, Empty } from "antd";
@@ -8,7 +9,12 @@ import { renderPlayerStats } from "./recentMatches";
 
 const { Panel } = Collapse;
 
-const CareerStatistics = ({ playerData, teamColor }) => {
+type propTypes = {
+    playerData: playerInfoDataTypes;
+    teamColor: string;
+};
+
+const CareerStatistics = ({ playerData, teamColor }: propTypes) => {
     const matches = playerData.careerStatistics;
     const [visibleModalNumber, setVisibleModalNumber] = useState(0);
 

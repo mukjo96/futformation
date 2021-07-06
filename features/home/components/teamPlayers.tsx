@@ -8,8 +8,12 @@ import PlayerInfo from "./playerInfo";
 import { useSelector } from "react-redux";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
+import { playerListDataTypes } from "../api/cityDataTypes";
 
-const TeamPlayers = ({ dataList }) => {
+type propTypes = {
+    dataList: playerListDataTypes[];
+};
+const TeamPlayers = ({ dataList }: propTypes) => {
     const [selectedId, setSelectedId] = useState(0);
 
     const data = [];

@@ -1,31 +1,33 @@
-import React from "react";
-import { Typography } from "antd";
-
-import styled from "styled-components";
-
 import MoreButton from "@features/common/button/moreButton";
+import Link from "antd/lib/typography/Link";
+import React from "react";
+import styled from "styled-components";
+import { newsDataTypes } from "../api/cityDataTypes";
 
-const { Link } = Typography;
+type propTypes = {
+    news: newsDataTypes;
+    header: string;
+};
 
-const MainBanner = ({ bannerList }) => {
+const NewsBanner = ({ news, header }: propTypes) => {
     return (
         <BannerContainer>
             <BannerBackground
                 style={{
-                    backgroundImage: `url(${bannerList.imageUrl})`,
+                    backgroundImage: `url(${news.imageUrl})`,
                 }}
             >
                 <BackFilter>
                     <TextContainer>
-                        <NewsHeader>FIRST TEAM NEWS</NewsHeader>
-                        <BannerTitle>{bannerList.title}</BannerTitle>
-                        <BannerSource>{bannerList.sourceStr}</BannerSource>
+                        <NewsHeader>{header}</NewsHeader>
+                        <BannerTitle>{news.title}</BannerTitle>
+                        <BannerSource>{news.sourceStr}</BannerSource>
                         <Link
                             style={{ cursor: "pointer" }}
                             href={
-                                bannerList.sourceStr.slice(0, 6) === "FotMob"
-                                    ? `https://www.fotmob.com${bannerList.page.url}`
-                                    : bannerList.page.url
+                                news.sourceStr.slice(0, 6) === "FotMob"
+                                    ? `https://www.fotmob.com${news.page.url}`
+                                    : news.page.url
                             }
                             target="_blank"
                         >
@@ -38,7 +40,7 @@ const MainBanner = ({ bannerList }) => {
     );
 };
 
-export default MainBanner;
+export default NewsBanner;
 
 const BannerContainer = styled.div`
     display: flex;
@@ -83,6 +85,10 @@ const NewsHeader = styled.h4`
     font-size: 12px;
     color: white;
     margin: 0;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const BannerTitle = styled.h2`

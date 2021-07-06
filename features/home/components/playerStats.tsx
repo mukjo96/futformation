@@ -5,11 +5,7 @@ import Slide from "react-reveal-effects/Slide";
 import BlockTitle from "./Title/blockTitle";
 
 import Link from "next/link";
-import {
-    playerStatDataTypes,
-    statPlayer,
-    topPlayersDataTypes,
-} from "../api/cityDataTypes";
+import { playerStatDataTypes, statPlayer } from "../api/cityDataTypes";
 
 type dataTypes = {
     statList: playerStatDataTypes;

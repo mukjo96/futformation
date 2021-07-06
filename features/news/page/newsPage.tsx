@@ -16,8 +16,6 @@ import NewsCard from "../components/newsCard";
 
 const NewsPage = () => {
     const dispatch = useDispatch();
-
-    const [activeNews, setActiveNews] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     const team = useSelector(
@@ -51,12 +49,7 @@ const NewsPage = () => {
                     mainColor={team.teamColor}
                     subColor={team.teamSubColor}
                 />
-                <NewsCard
-                    newsList={apiResult.newsList}
-                    activeSlide={activeNews}
-                    setActiveSlide={setActiveNews}
-                    teamId={team.teamId}
-                />
+                <NewsCard newsList={apiResult.newsList} teamId={team.teamId} />
             </Fragment>
         );
     }

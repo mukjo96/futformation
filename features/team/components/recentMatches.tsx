@@ -10,10 +10,15 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
+import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 
 const { Panel } = Collapse;
+type propTypes = {
+    playerData: playerInfoDataTypes;
+    teamColor: string;
+};
 
-const RecentMatches = ({ playerData, teamColor }) => {
+const RecentMatches = ({ playerData, teamColor }: propTypes) => {
     const matches = playerData.recentMatches;
 
     return (

@@ -12,10 +12,16 @@ import CareerStatistics from "./careerStatistics";
 import RelatedNews from "./relatedNews";
 import Fade from "react-reveal-effects/Fade";
 import CareerHistory from "./careerHistory";
+import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 
 const { TabPane } = Tabs;
 
-const PlayerDetailTab = ({ playerData, teamColor }) => {
+type propTypes = {
+    playerData: playerInfoDataTypes;
+    teamColor: string;
+};
+
+const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
     return (
         <Container>
             <BackTop />

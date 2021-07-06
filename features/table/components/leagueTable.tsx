@@ -4,8 +4,15 @@ import { Row, Col, Avatar, Divider, List, Empty } from "antd";
 import Fade from "react-reveal-effects/Fade";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { tableDataTypes } from "@features/home/api/cityDataTypes";
 
-const LeagueTable = ({ tableData, color, teamId }) => {
+type propTypes = {
+    tableData: tableDataTypes;
+    color: string;
+    teamId: number;
+};
+
+const LeagueTable = ({ tableData, color, teamId }: propTypes) => {
     return (
         <Container justify="space-around">
             {tableData.tables[0].table ? (

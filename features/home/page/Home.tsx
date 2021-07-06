@@ -9,7 +9,6 @@ import {
 
 import AdBanner from "../components/adBanner";
 import LatestNews from "../components/latestNews";
-import MainBanner from "../components/mainBanner";
 import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
 import Sponsorship from "../components/sponsorship";
@@ -19,11 +18,7 @@ import LoadingView from "@features/common/loadingView";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
 import SelectTeam from "@features/common/selectTeam";
-
-const BackDiv = styled.div`
-    background-color: white;
-    height: 50px;
-`;
+import NewsBanner from "../components/newsBanner";
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +52,10 @@ const Home = () => {
     } else {
         return (
             <Fragment>
-                <MainBanner bannerList={apiResult?.newsList[0]} />
+                <NewsBanner
+                    news={apiResult?.newsList[0]}
+                    header="FIRST TEAM NEWS"
+                />
                 <MatchSchedule
                     matchList={apiResult?.matchList}
                     currentMonth={apiResult?.currentMonth}
@@ -93,4 +91,8 @@ const Container = styled.div`
     @media screen and (max-width: 768px) {
         height: 600px;
     }
+`;
+
+const BackDiv = styled.div`
+    height: 50px;
 `;

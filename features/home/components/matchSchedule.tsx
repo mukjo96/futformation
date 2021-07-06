@@ -8,7 +8,13 @@ import MoreButton from "@features/common/button/moreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
 
-const MatchSchedule = ({ matchList, currentMonth, teamId }) => {
+type propTypes = {
+    matchList: matchDataTypes[];
+    currentMonth: string;
+    teamId: number;
+};
+
+const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
 

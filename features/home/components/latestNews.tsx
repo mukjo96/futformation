@@ -5,8 +5,14 @@ import { Row, Col } from "antd";
 import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
+import { newsDataTypes } from "../api/cityDataTypes";
 
-const LatestNews = ({ newsList, teamId }) => {
+type propTypes = {
+    newsList: newsDataTypes[];
+    teamId: number;
+};
+
+const LatestNews = ({ newsList, teamId }: propTypes) => {
     return (
         <Container>
             <Col>

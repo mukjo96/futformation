@@ -1,9 +1,17 @@
+import {
+    newsDataTypes,
+    playerInfoDataTypes,
+} from "@features/home/api/cityDataTypes";
 import { renderNewsBox } from "@features/home/components/latestNews";
 import { Col, Empty, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
 
-const RelatedNews = ({ playerData }) => {
+type propTypes = {
+    playerData: playerInfoDataTypes;
+};
+
+const RelatedNews = ({ playerData }: propTypes) => {
     if (playerData.relatedNews.length === 0) {
         return (
             <EmptyCol>
@@ -13,8 +21,9 @@ const RelatedNews = ({ playerData }) => {
     } else {
         return (
             <StyledRow justify="center">
-                {playerData.relatedNews.map((news, index) =>
-                    renderNewsBox(news, index, playerData.origin.teamId)
+                {playerData.relatedNews.map(
+                    (news: newsDataTypes, index: number) =>
+                        renderNewsBox(news, index, playerData.origin.teamId)
                 )}
             </StyledRow>
         );
