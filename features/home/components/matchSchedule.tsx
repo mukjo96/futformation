@@ -7,6 +7,7 @@ import Link from "next/link";
 import MoreButton from "@features/common/button/moreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     matchList: matchDataTypes[];
@@ -17,6 +18,7 @@ type propTypes = {
 const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
     const dateKeys = Object.entries(matchList);
     const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
+    const { t } = useTranslation("common");
 
     const newMatchList = Object.values(matchList)
         .filter((value, index) => index > beforeMonth)
@@ -54,6 +56,74 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
             </Col>
         </Container>
     );
+
+    function renderMatchSchedule(
+        match: matchDataTypes,
+        isPast: boolean,
+        teamId: number
+    ) {
+        let isCityWin: string;
+        if (match.home.id === teamId) {
+            match.home.score > match.away.score
+                ? (isCityWin = "win")
+                : match.home.score === match.away.score
+                ? (isCityWin = "draw")
+                : (isCityWin = "lose");
+        } else {
+            match.away.score > match.home.score
+                ? (isCityWin = "win")
+                : match.away.score === match.home.score
+                ? (isCityWin = "draw")
+                : (isCityWin = "lose");
+        }
+        return (
+            <MatchCol xs={24} md={6} key={match.id}>
+                <MatchContainer>
+                    <MatchScore>
+                        <div>
+                            <TeamLogo
+                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
+                                width="40px"
+                            />
+                            <TeamLogo
+                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
+                                width="40px"
+                            />
+                        </div>
+                        <ScoreCol>
+                            <LiveText>
+                                {match.status.started && !match.status.finished
+                                    ? "LIVE"
+                                    : ""}
+                            </LiveText>
+                            <ScoreH4 iscitywin={isCityWin}>
+                                {match.status.cancelled && "Cancelled"}
+                                {match.status.scoreStr}
+                            </ScoreH4>
+                        </ScoreCol>
+                    </MatchScore>
+                    <CustomDivider
+                        ispast={isPast.toString()}
+                        iscitywin={isCityWin}
+                    />
+                    <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
+                    <TournamentName>{t(match.tournament.name)}</TournamentName>
+                    <StartDate>
+                        {match.status.startDateStr
+                            ? match.status.startDateStr
+                            : match.status.liveTime.short}
+                        {match.status.startTimeStr &&
+                            ` | ${match.status.startTimeStr}`}
+                    </StartDate>
+                </MatchContainer>
+                <Link href={`matches/${match.id}`}>
+                    <a style={{ textDecoration: "none" }}>
+                        <MoreButton value="More" size="medium" />
+                    </a>
+                </Link>
+            </MatchCol>
+        );
+    }
 };
 
 function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
@@ -66,74 +136,6 @@ function getBeforeDateKey(currentMonth: string, dateKeys: Array<any>) {
     });
 
     return 0;
-}
-
-function renderMatchSchedule(
-    match: matchDataTypes,
-    isPast: boolean,
-    teamId: number
-) {
-    let isCityWin: string;
-    if (match.home.id === teamId) {
-        match.home.score > match.away.score
-            ? (isCityWin = "win")
-            : match.home.score === match.away.score
-            ? (isCityWin = "draw")
-            : (isCityWin = "lose");
-    } else {
-        match.away.score > match.home.score
-            ? (isCityWin = "win")
-            : match.away.score === match.home.score
-            ? (isCityWin = "draw")
-            : (isCityWin = "lose");
-    }
-    return (
-        <MatchCol xs={24} md={6} key={match.id}>
-            <MatchContainer>
-                <MatchScore>
-                    <div>
-                        <TeamLogo
-                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
-                            width="40px"
-                        />
-                        <TeamLogo
-                            src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
-                            width="40px"
-                        />
-                    </div>
-                    <ScoreCol>
-                        <LiveText>
-                            {match.status.started && !match.status.finished
-                                ? "LIVE"
-                                : ""}
-                        </LiveText>
-                        <ScoreH4 iscitywin={isCityWin}>
-                            {match.status.cancelled && "Cancelled"}
-                            {match.status.scoreStr}
-                        </ScoreH4>
-                    </ScoreCol>
-                </MatchScore>
-                <CustomDivider
-                    ispast={isPast.toString()}
-                    iscitywin={isCityWin}
-                />
-                <TeamName>{`${match.home.name} vs ${match.away.name}`}</TeamName>
-                <TournamentName>{match.tournament.name}</TournamentName>
-                <StartDate>
-                    {match.status.startDateStr
-                        ? match.status.startDateStr
-                        : match.status.liveTime.short}
-                    {match.status.startTimeStr &&
-                        ` | ${match.status.startTimeStr}`}
-                </StartDate>
-            </MatchContainer>
-            <Link href={`matches/${match.id}`}>
-                <a style={{ textDecoration: "none" }}>
-                    <MoreButton value="More" size="medium" />
-                </a>
-            </Link>
-        </MatchCol>
-    );
 }
 
 export default MatchSchedule;

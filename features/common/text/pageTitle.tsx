@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 import Fade from "react-reveal-effects/Fade";
 import styled from "styled-components";
@@ -6,13 +7,20 @@ type titleProps = {
     text: string;
     mainColor: string;
     subColor: string;
+    teamName?: string;
 };
 
-const PageTitle = ({ text, mainColor, subColor }: titleProps) => {
+const PageTitle = ({
+    text,
+    mainColor,
+    subColor,
+    teamName = "",
+}: titleProps) => {
+    const { t } = useTranslation("common");
     return (
         <Fade left cascade>
             <NewsTitle mainColor={mainColor} subColor={subColor}>
-                {text}
+                {`${teamName} ${t(text)}`}
             </NewsTitle>
         </Fade>
     );

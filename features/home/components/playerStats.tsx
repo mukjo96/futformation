@@ -6,6 +6,7 @@ import BlockTitle from "./Title/blockTitle";
 
 import Link from "next/link";
 import { playerStatDataTypes, statPlayer } from "../api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type dataTypes = {
     statList: playerStatDataTypes;
@@ -14,11 +15,12 @@ type dataTypes = {
 };
 
 const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
-    const statData = statList[0];
-    const tableData = statList[1];
+    const statData = statList && statList[0];
+    const tableData = statList && statList[1];
     const [teamRank, setTeamRank] = useState(-1);
     const [teamTableIndex, setTeamTableIndex] = useState(-1);
     const [isLoading, setIsLoading] = useState(true);
+    const { t } = useTranslation("common");
 
     useEffect(() => {
         setIsLoading(true);
@@ -54,7 +56,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
     const renderBlankStatList = (category: "Ratings" | "Goals" | "Assists") => {
         return (
             <StyledCol xs={0} md={6}>
-                <StatTitle>{category}</StatTitle>
+                <StatTitle>{t(category)}</StatTitle>
                 <Empty
                     image={Empty.PRESENTED_IMAGE_SIMPLE}
                     style={{ margin: "25% 0" }}
@@ -72,7 +74,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                 <Link href={`/players/${listData[0].id}`}>
                     <HeadRow>
                         <Col>
-                            <StatTitle>{category}</StatTitle>
+                            <StatTitle>{t(category)}</StatTitle>
                             <HeadName teamcolor={color}>
                                 {listData[0].name}
                             </HeadName>
@@ -125,7 +127,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
             ? tableData.tables[0].table.length - 1
             : teamRank + 3;
 
-    if (isLoading) {
+    if (isLoading || !statList) {
         return <div></div>;
     } else {
         return (
@@ -165,7 +167,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                 </>
                             ) : (
                                 <TableCol xs={0} md={18}>
-                                    <Empty description="No Player Stats" />
+                                    <Empty description={t("No Player Stats")} />
                                 </TableCol>
                             )}
 
@@ -182,11 +184,11 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                         teamcolor={color}
                                     >
                                         <Col span={2}>#</Col>
-                                        <Col span={12}>TEAM</Col>
-                                        <Col span={2}>W</Col>
-                                        <Col span={2}>D</Col>
-                                        <Col span={2}>L</Col>
-                                        <Col span={2}>PT</Col>
+                                        <Col span={11}>{t("TEAM")}</Col>
+                                        <Col span={2}>{t("W")}</Col>
+                                        <Col span={2}>{t("D")}</Col>
+                                        <Col span={2}>{t("L")}</Col>
+                                        <Col span={3}>{t("PT")}</Col>
                                     </StyledItem>
                                     {teamTableIndex === -1
                                         ? tableData.tables[0].table
@@ -202,7 +204,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                       <Col span={2}>
                                                           {team.idx}
                                                       </Col>
-                                                      <Col span={12}>
+                                                      <Col span={11}>
                                                           {team.name}
                                                       </Col>
                                                       <Col span={2}>
@@ -214,7 +216,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                       <Col span={2}>
                                                           {team.losses}
                                                       </Col>
-                                                      <Col span={2}>
+                                                      <Col span={3}>
                                                           <strong>
                                                               {team.pts}
                                                           </strong>
@@ -255,7 +257,9 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                 </List>
                                 <Row justify="end">
                                     <Link href="/table">
-                                        <TableLink>View all table +</TableLink>
+                                        <TableLink>{`${t(
+                                            "View all table"
+                                        )} +`}</TableLink>
                                     </Link>
                                 </Row>
                             </TableCol>

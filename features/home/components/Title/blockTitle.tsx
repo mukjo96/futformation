@@ -2,12 +2,14 @@ import Link from "next/link";
 import Fade from "react-reveal-effects/Fade";
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "next-i18next";
 
 type titleTypes = {
     title: string;
     link: string;
     linktext?: string;
     theme?: "light" | "dark";
+    teamName?: string;
 };
 
 const BlockTitle = ({
@@ -15,12 +17,19 @@ const BlockTitle = ({
     link,
     linktext = link,
     theme = "light",
+    teamName = "",
 }: titleTypes) => {
+    const { t } = useTranslation("common");
+
     return (
         <Fade left ssrFadeout>
-            <Title theme={theme}>{title}</Title>
+            {teamName !== "" ? (
+                <Title theme={theme}>{`${teamName} ${t(title)}`}</Title>
+            ) : (
+                <Title theme={theme}>{t(title)}</Title>
+            )}
             <Link href={`/${link}`}>
-                <MatchLink>View all {linktext} +</MatchLink>
+                <MatchLink>{t(`View all ${linktext}`)} +</MatchLink>
             </Link>
         </Fade>
     );

@@ -6,6 +6,7 @@ import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     newsList: newsDataTypes[];
@@ -33,6 +34,7 @@ const LatestNews = ({ newsList, teamId }: propTypes) => {
 
 export function renderNewsBox(news, index, teamId) {
     const sourceTitle = news.sourceStr.split(" - ");
+    const { t } = useTranslation("common");
     return (
         <NewsBox
             style={{
@@ -56,10 +58,10 @@ export function renderNewsBox(news, index, teamId) {
                 <Col style={{ lineHeight: "1.2" }}>
                     <NewsCategory>
                         {sourceTitle[0] === "YouTube"
-                            ? "VIDEO"
+                            ? t("VIDEO")
                             : sourceTitle[0] === "City Xtra"
-                            ? "FIRST TEAM"
-                            : "MEDIA WATCH"}
+                            ? t("FIRST TEAM")
+                            : t("MEDIA WATCH")}
                     </NewsCategory>
                     <NewsTitle>{news.title}</NewsTitle>
                     <Row>
@@ -82,13 +84,28 @@ export function renderNewsBox(news, index, teamId) {
                         />
                         <div>
                             <NewsSource>{sourceTitle[0]}</NewsSource>
-                            <NewsLate>{sourceTitle[1]}</NewsLate>
+                            <NewsLate>{translateLate(sourceTitle[1])}</NewsLate>
                         </div>
                     </Row>
                 </Col>
             </BackFilter>
         </NewsBox>
     );
+
+    function translateLate(late: string) {
+        let newLate = late;
+        late.includes("1 day ago") &&
+            (newLate = newLate.replace("1 day ago", t("1 day ago")));
+        late.includes("days ago") &&
+            (newLate = newLate.replace(" days ago", t("days ago")));
+        late.includes("hours ago") &&
+            (newLate = newLate.replace(" hours ago", t("hours ago")));
+        late.includes("minutes ago") &&
+            (newLate = newLate.replace(" minutes ago", t("minutes ago")));
+        late.includes("about") && (newLate = newLate.replace("about ", ""));
+
+        return newLate;
+    }
 }
 export default LatestNews;
 

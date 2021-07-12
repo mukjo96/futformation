@@ -29,6 +29,7 @@
         "cheerio": "^1.0.0-rc.6",
         "moment": "^2.29.1",
         "next": "^10.2.0",
+        "next-i18next": "^8.5.3",
         "next-redux-saga": "^4.1.2",
         "next-redux-wrapper": "^6.0.2",
         "nookies": "^2.5.2",

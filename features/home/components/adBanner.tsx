@@ -2,32 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col, Carousel } from "antd";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     teamColor: string;
 };
 
 const AdBanner = ({ teamColor }: propTypes) => {
+    const { t } = useTranslation("common");
+
     return (
         <Carousel autoplay autoplaySpeed={7000} dotPosition="top" pauseOnHover>
             <Container>
                 <BannerRow>
                     <ImageCol xs={24} md={17}>
                         <img
-                            src="https://www.broadcastprome.com/wp-content/uploads/2021/03/Euro-2020.jpg"
+                            src="https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=158 158w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=276 276w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=280 280w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=369 369w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=490 490w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=556 556w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=656 656w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=988 988w, https://editorial.uefa.com/resources/026b-12bbaf2b1d8f-09f347a6a2ac-1000/format/wide1/italy_v_england_-_uefa_euro_2020_final.jpeg?imwidth=2048 2048w"
                             width="100%"
                         />
                     </ImageCol>
                     <BannerCol xs={24} md={10} backcolor="#0d7c91">
                         <BannerContainer>
                             <BannerMessage color="white">
-                                The new UEFA EURO 2020 schedule has been
-                                confirmed, with 11 host cities staging the 51
-                                fixtures.
+                                Gianluigi Donnarumma saved two penalties as the
+                                Azzurri claimed their second EURO title after a
+                                tense final at Wembley.
                             </BannerMessage>
-                            <Link href="https://editorial.uefa.com/resources/026a-126a09addc81-6f092f1f9f89-1000/euro2021_match_schedule_-_english_-_310521_20210601103927.pdf">
+                            <Link href="https://www.uefa.com/uefaeuro-2020/news/026b-12bba5b7b7a1-5519282c3d1a-1000--spot-on-italy-win-euro-2020/">
                                 <JoinButton teamcolor={teamColor}>
-                                    Download full fixture list
+                                    {t("View Now")}
                                 </JoinButton>
                             </Link>
                         </BannerContainer>
@@ -38,15 +41,15 @@ const AdBanner = ({ teamColor }: propTypes) => {
                 <BannerRow>
                     <ImageCol xs={24} md={17}>
                         <img
-                            src="https://i1.wp.com/copaamericacom.wpcomstaging.com/wp-content/uploads/ca-grupos.jpg"
+                            src="https://i2.wp.com/copaamericacom.wpcomstaging.com/wp-content/uploads/Copia-de-Header-Thumb-Site-Copa-América-48.png"
                             width="100%"
                         />
                     </ImageCol>
                     <BannerCol xs={24} md={10} backcolor="#f7f7f7">
                         <BannerContainer>
                             <BannerMessage color="black">
-                                READY FOR KICKOFF! Fixtures for the 2021
-                                CONMEBOL Copa America have all been confirmed
+                                Argentina beat Brazil at the Maracanã to win the
+                                CONMEBOL Copa America
                             </BannerMessage>
                         </BannerContainer>
                     </BannerCol>

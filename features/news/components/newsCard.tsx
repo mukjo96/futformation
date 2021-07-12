@@ -5,6 +5,7 @@ import AwesomeSlider from "react-awesome-slider";
 import { renderNewsBox } from "@features/home/components/latestNews";
 import NewsBanner from "@features/home/components/newsBanner";
 import { newsDataTypes } from "@features/home/api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     newsList: newsDataTypes[];
@@ -12,14 +13,15 @@ type propTypes = {
 };
 
 const NewsCard = ({ newsList, teamId }: propTypes) => {
+    const { t } = useTranslation("common");
     return (
         <Container>
             <StyledAwesomeSlider animation="cubeAnimation">
                 {newsList.map((news) => (
-                    <div>
+                    <div key={news.title}>
                         <NewsBanner
                             news={news}
-                            header="TEAM NEWS"
+                            header={t("TEAM NEWS")}
                             key={news.title}
                         />
                     </div>

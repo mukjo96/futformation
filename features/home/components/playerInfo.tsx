@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Divider, Avatar, Result } from "antd";
 import { getPlayerInfo } from "../api/getCityData.api";
 
@@ -10,7 +10,7 @@ import { playerInfoDataTypes } from "../api/cityDataTypes";
 import LoadingView from "@features/common/loadingView";
 import { useSelector } from "react-redux";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
-import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
+import { useTranslation } from "next-i18next";
 
 const PlayerInfo = ({ id }) => {
     const [playerData, setPlayerData] = useState<playerInfoDataTypes>();
@@ -22,6 +22,7 @@ const PlayerInfo = ({ id }) => {
         (state: RootStateInterface): string => state.rdcExample.teamColor
     );
 
+    const { t } = useTranslation("common");
     useEffect(() => {
         let isSubscribed = true;
 
@@ -78,42 +79,47 @@ const PlayerInfo = ({ id }) => {
                 </StyledCol>
                 {playerData.careerStatistics ? (
                     <StyledCol xs={24} md={12}>
-                        <LeagueName>{`${playerData.careerStatistics[0].seasons[0].name} STATS`}</LeagueName>
+                        <LeagueName>{`${
+                            playerData.careerStatistics[0].seasons[0].name
+                        } ${t("STATS")}`}</LeagueName>
                         {renderStat(
-                            "Games Played",
+                            t("Games Played"),
                             playerData.careerStatistics[0].seasons[0].matches
                         )}
                         {renderStat(
-                            "Minutes Played",
+                            t("Minutes Played"),
                             statData["Minutes played"]
                         )}
-                        {renderStat("Starting XI", statData["Matches started"])}
-                        {renderStat("Goals", statData["Goals"])}
-                        {renderStat("Assists", statData["Assists"])}
+                        {renderStat(
+                            t("Starting XI"),
+                            statData["Matches started"]
+                        )}
+                        {renderStat(t("Goals"), statData["Goals"])}
+                        {renderStat(t("Assists"), statData["Assists"])}
                         <CircularRow>
                             {renderCircular(
                                 statData["conversion"],
                                 statData["conversion"],
-                                "Conversion",
+                                t("Conversion"),
                                 teamColor
                             )}
                             {renderCircular(
                                 statData["dribbles"],
                                 statData["dribbles"],
-                                "Dribbles",
+                                t("Dribbles"),
                                 teamColor
                             )}
                             {renderCircular(
                                 statData["tackles"],
                                 statData["tackles"],
-                                "Tackles",
+                                t("Tackles"),
                                 teamColor
                             )}
                         </CircularRow>
                     </StyledCol>
                 ) : (
                     <ErrorCol xs={24} md={12}>
-                        <Result status="error" title="Sorry, no data!" />
+                        <Result status="error" title={t("Sorry, no data!")} />
                     </ErrorCol>
                 )}
             </Container>

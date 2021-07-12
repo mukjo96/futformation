@@ -45,9 +45,10 @@ const NewsPage = () => {
         return (
             <Fragment>
                 <PageTitle
-                    text={`${team.teamName} NEWS`}
+                    text="NEWS"
                     mainColor={team.teamColor}
                     subColor={team.teamSubColor}
+                    teamName={team.teamName}
                 />
                 <NewsCard newsList={apiResult.newsList} teamId={team.teamId} />
             </Fragment>

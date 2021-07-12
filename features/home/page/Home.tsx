@@ -19,6 +19,7 @@ import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
 import SelectTeam from "@features/common/selectTeam";
 import NewsBanner from "../components/newsBanner";
+import { useTranslation } from "next-i18next";
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +30,7 @@ const Home = () => {
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
     );
+    const { t } = useTranslation("common");
 
     useEffect(() => {
         setIsLoading(true);
@@ -54,7 +56,7 @@ const Home = () => {
             <Fragment>
                 <NewsBanner
                     news={apiResult?.newsList[0]}
-                    header="FIRST TEAM NEWS"
+                    header={t("FIRST TEAM NEWS")}
                 />
                 <MatchSchedule
                     matchList={apiResult?.matchList}

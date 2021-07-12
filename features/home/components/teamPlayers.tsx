@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { playerListDataTypes } from "../api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     dataList: playerListDataTypes[];
@@ -24,13 +25,16 @@ const TeamPlayers = ({ dataList }: propTypes) => {
         (state: RootStateInterface): IExampleState => state.rdcExample
     );
 
+    const { t } = useTranslation("common");
+
     return (
         <Container>
             <StyledTitle>
                 <BlockTitle
-                    title={`${team.teamName} PLAYERS`}
+                    title="PLAYERS"
                     link="players"
                     theme="light"
+                    teamName={team.teamName}
                 />
             </StyledTitle>
             <StyledRow>
@@ -42,7 +46,7 @@ const TeamPlayers = ({ dataList }: propTypes) => {
                                     style={{ color: team.teamColor }}
                                 />
                             }
-                            title="Select your player!"
+                            title={t("Select your player!")}
                         />
                     ) : (
                         <PlayerInfo id={selectedId} />
@@ -72,13 +76,13 @@ const TeamPlayers = ({ dataList }: propTypes) => {
                                             <PlayerName>{item.name}</PlayerName>
                                             <PlayerRole>
                                                 {item.role === "goalkeepers"
-                                                    ? "Goalkeeper"
+                                                    ? t("Goalkeeper")
                                                     : item.role === "defenders"
-                                                    ? "Defender"
+                                                    ? t("Defender")
                                                     : item.role ===
                                                       "midfielders"
-                                                    ? "Midfielder"
-                                                    : "Forward"}
+                                                    ? t("Midfielder")
+                                                    : t("Forward")}
                                             </PlayerRole>
                                         </Col>
                                     }

@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "@features/home/page/Home";
 import styled from "styled-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Index = () => {
     return (
@@ -11,6 +12,12 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["common"])),
+    },
+});
 
 const Page = styled.div`
     width: 100%;

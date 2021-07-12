@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 import styled, { css } from "styled-components";
 
@@ -8,9 +9,10 @@ type ButtonProps = {
 };
 
 const MoreButton = ({ value, size = "medium", onClick }: ButtonProps) => {
+    const { t } = useTranslation("common");
     return (
         <Button size={size} onClick={onClick}>
-            <span>{value}</span>
+            <span>{t(value)}</span>
             <span>+</span>
         </Button>
     );

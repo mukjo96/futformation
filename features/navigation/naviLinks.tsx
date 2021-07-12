@@ -2,16 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
+import { useTranslation } from "next-i18next";
 
 const NaviLinks = (open: any) => {
     const router = useRouter();
+    const { t } = useTranslation("common");
 
     const navItems = [
         { title: "HOME", route: "/" },
         { title: "NEWS", route: "/news" },
         { title: "MATCH", route: "/matches" },
         { title: "TABLE", route: "/table" },
-        { title: "TEAM", route: "/players" },
+        { title: "SQUAD", route: "/players" },
         // { title: "SHOP", route: "https://shop.mancity.com/" },
     ];
 
@@ -22,7 +24,7 @@ const NaviLinks = (open: any) => {
                     <Titleli
                         isselected={(router.pathname === item.route).toString()}
                     >
-                        {item.title}
+                        {t(item.title)}
                     </Titleli>
                 </Link>
             ))}

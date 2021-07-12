@@ -1,5 +1,6 @@
 import MoreButton from "@features/common/button/moreButton";
 import Link from "antd/lib/typography/Link";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import styled from "styled-components";
 import { newsDataTypes } from "../api/cityDataTypes";
@@ -10,6 +11,8 @@ type propTypes = {
 };
 
 const NewsBanner = ({ news, header }: propTypes) => {
+    const sourceTitle = news.sourceStr.split(" - ");
+    const { t } = useTranslation("common");
     return (
         <BannerContainer>
             <BannerBackground
@@ -21,7 +24,9 @@ const NewsBanner = ({ news, header }: propTypes) => {
                     <TextContainer>
                         <NewsHeader>{header}</NewsHeader>
                         <BannerTitle>{news.title}</BannerTitle>
-                        <BannerSource>{news.sourceStr}</BannerSource>
+                        <BannerSource>{`${sourceTitle[0]} - ${translateLate(
+                            sourceTitle[1]
+                        )}`}</BannerSource>
                         <Link
                             style={{ cursor: "pointer" }}
                             href={
@@ -31,13 +36,28 @@ const NewsBanner = ({ news, header }: propTypes) => {
                             }
                             target="_blank"
                         >
-                            <MoreButton value="View Now" size="large" />
+                            <MoreButton value={"View Now"} size="large" />
                         </Link>
                     </TextContainer>
                 </BackFilter>
             </BannerBackground>
         </BannerContainer>
     );
+
+    function translateLate(late: string) {
+        let newLate = late;
+        late.includes("1 day ago") &&
+            (newLate = newLate.replace("1 day ago", t("1 day ago")));
+        late.includes("days ago") &&
+            (newLate = newLate.replace(" days ago", t("days ago")));
+        late.includes("hours ago") &&
+            (newLate = newLate.replace(" hours ago", t("hours ago")));
+        late.includes("minutes ago") &&
+            (newLate = newLate.replace(" minutes ago", t("minutes ago")));
+        late.includes("about") && (newLate = newLate.replace("about ", ""));
+
+        return newLate;
+    }
 };
 
 export default NewsBanner;

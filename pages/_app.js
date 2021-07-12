@@ -8,6 +8,7 @@ import Foot from "@features/common/footer/foot";
 import NavBar from "@features/navigation/navBar";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
+import { appWithTranslation } from "next-i18next";
 
 function MyApp({ Component, pageProps }) {
     moment.locale("ko");
@@ -27,4 +28,4 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(appWithTranslation(MyApp));
