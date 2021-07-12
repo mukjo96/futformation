@@ -13,6 +13,7 @@ import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { teamList } from "./teamList";
 import { useRouter } from "next/dist/client/router";
 import SubMenu from "antd/lib/menu/SubMenu";
+import LocaleDropdown from "./localeDropdown";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
@@ -102,7 +103,7 @@ const NavBar = () => {
             <Hamburger className={open ? "show" : "hidden"}>
                 <NaviLinks open={open} />
                 <GroupBar className={open ? "show" : "hidden"}>
-                    <Searchbar />
+                    <LocaleDropdown />
                 </GroupBar>
             </Hamburger>
             <ToggleBtn>

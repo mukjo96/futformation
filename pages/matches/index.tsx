@@ -1,6 +1,7 @@
 import React from "react";
 import MatchPage from "@features/matches/page/matchPage";
 import styled from "styled-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Matches = () => {
     return (
@@ -11,6 +12,12 @@ const Matches = () => {
 };
 
 export default Matches;
+
+export const getServerSideProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["common"])),
+    },
+});
 
 const Page = styled.div`
     width: 100%;
