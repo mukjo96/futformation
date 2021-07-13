@@ -11,6 +11,7 @@ import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
 import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
+import { TFunction, useTranslation } from "next-i18next";
 
 const { Panel } = Collapse;
 type propTypes = {
@@ -20,6 +21,7 @@ type propTypes = {
 
 const RecentMatches = ({ playerData, teamColor }: propTypes) => {
     const matches = playerData.recentMatches;
+    const { t } = useTranslation("common");
 
     return (
         <Fade bottom cascade ssrFadeout>
@@ -72,9 +74,10 @@ const RecentMatches = ({ playerData, teamColor }: propTypes) => {
                                                               item.assists,
                                                               item.yellowCards,
                                                               item.redCards,
+                                                              t,
                                                               item.ratingProps
                                                           )
-                                                        : "Ruled Out"}
+                                                        : t("Ruled Out")}
                                                     <TournamentName>
                                                         {item.date}
                                                     </TournamentName>
@@ -116,6 +119,7 @@ export function renderPlayerStats(
     assists: number,
     yellowcards: number,
     redcards: number,
+    t: TFunction,
     rating?: {
         bgcolor: string;
         num: number;
@@ -124,7 +128,9 @@ export function renderPlayerStats(
     return (
         <StyledRow align="middle">
             <Col>
-                <Tooltip title={isMatch ? "Minutes Played" : "Appearances"}>
+                <Tooltip
+                    title={isMatch ? t("Minutes Played") : t("Appearances")}
+                >
                     {isMatch ? (
                         <TimeIcon icon={faStopwatch} />
                     ) : (
@@ -135,28 +141,28 @@ export function renderPlayerStats(
             <DataCol>{minutesPlayed}</DataCol>
             <Divider type="vertical" />
             <Col>
-                <Tooltip title="Goals">
+                <Tooltip title={t("Goals")}>
                     <GoalIcon icon={faFutbol} />
                 </Tooltip>
             </Col>
             <DataCol>{goals}</DataCol>
             <Divider type="vertical" />
             <Col>
-                <Tooltip title="Assists">
+                <Tooltip title={t("Assists")}>
                     <AssistIcon />
                 </Tooltip>
             </Col>
             <DataCol>{assists}</DataCol>
             <Divider type="vertical" />
             <Col>
-                <Tooltip title="Yellow Cards">
+                <Tooltip title={t("Yellow Cards")}>
                     <Card color="Yellow" />
                 </Tooltip>
             </Col>
             <DataCol>{yellowcards}</DataCol>
             <Divider type="vertical" />
             <Col>
-                <Tooltip title="Red Cards">
+                <Tooltip title={t("Red Cards")}>
                     <Card color="Red" />
                 </Tooltip>
             </Col>

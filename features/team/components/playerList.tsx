@@ -8,6 +8,7 @@ import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "next-i18next";
 
 const { Panel } = Collapse;
 
@@ -17,6 +18,8 @@ type dataType = {
 };
 
 const PlayerList = ({ playerData, teamColor }: dataType) => {
+    const { t } = useTranslation("common");
+
     return (
         <Container>
             <Fade bottom cascade ssrFadeout>
@@ -25,8 +28,8 @@ const PlayerList = ({ playerData, teamColor }: dataType) => {
                         <Panel
                             header={
                                 position[0] === "attackers"
-                                    ? "FORWARDS"
-                                    : position[0].toUpperCase()
+                                    ? t("FORWARDS")
+                                    : t(position[0].toUpperCase())
                             }
                             key={position[0]}
                         >
@@ -76,17 +79,17 @@ const PlayerList = ({ playerData, teamColor }: dataType) => {
                                                     <TournamentName>
                                                         {item.role ===
                                                         "goalkeepers"
-                                                            ? "Goalkeeper"
+                                                            ? t("Goalkeeper")
                                                             : item.role ===
                                                               "defenders"
-                                                            ? "Defender"
+                                                            ? t("Defender")
                                                             : item.role ===
                                                               "midfielders"
-                                                            ? "Midfielder"
+                                                            ? t("Midfielder")
                                                             : item.role ===
                                                               "attackers"
-                                                            ? "Forward"
-                                                            : "Coach"}
+                                                            ? t("Forward")
+                                                            : t("Coach")}
                                                     </TournamentName>
                                                 </div>
                                                 {position[0] !== "coach" && (

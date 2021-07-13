@@ -3,6 +3,7 @@ import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Collapse, List, Row, Col, Divider, Modal, Avatar, Empty } from "antd";
+import { useTranslation } from "next-i18next";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { renderPlayerStats } from "./recentMatches";
@@ -17,7 +18,7 @@ type propTypes = {
 const CareerStatistics = ({ playerData, teamColor }: propTypes) => {
     const matches = playerData.careerStatistics;
     const [visibleModalNumber, setVisibleModalNumber] = useState(0);
-
+    const { t } = useTranslation("common");
     if (!matches) {
         return (
             <EmptyCol>
@@ -80,7 +81,8 @@ const CareerStatistics = ({ playerData, teamColor }: propTypes) => {
                                                         item.goals,
                                                         item.assists,
                                                         item.yc,
-                                                        item.rc
+                                                        item.rc,
+                                                        t
                                                     )}
                                                 </div>
                                                 <MoreButton

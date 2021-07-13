@@ -2,6 +2,7 @@ import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
 import { faFutbol, faTshirt, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { List, Row, Col, Divider, Tooltip, Avatar } from "antd";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import styled from "styled-components";
 
@@ -12,6 +13,7 @@ type propTypes = {
 
 const CareerHistory = ({ playerData, teamColor }: propTypes) => {
     const careerHistory = playerData.careerHistory;
+    const { t } = useTranslation("common");
     return (
         <ContainerCol>
             {Object.keys(careerHistory.careerData.careerItems).map((key) => (
@@ -19,7 +21,7 @@ const CareerHistory = ({ playerData, teamColor }: propTypes) => {
                     itemLayout="vertical"
                     dataSource={careerHistory.careerData.careerItems[key]}
                     key={key}
-                    header={<strong>{key.toUpperCase()}</strong>}
+                    header={<strong>{t(key.toUpperCase())}</strong>}
                     bordered
                     style={{ marginBottom: "24px" }}
                     renderItem={(item: any) => {
@@ -56,12 +58,28 @@ const CareerHistory = ({ playerData, teamColor }: propTypes) => {
 
                                                 <HistoryCol>
                                                     <HistoryH4>
-                                                        {`${item.startDate} ~ ${
-                                                            item.endDate ===
-                                                            "now"
-                                                                ? ""
-                                                                : item.endDate
-                                                        }`}
+                                                        {`${t(
+                                                            item.startDate.split(
+                                                                " "
+                                                            )[1]
+                                                        )} ${t(
+                                                            item.startDate.split(
+                                                                " "
+                                                            )[0]
+                                                        )}    
+                                                     ~ ${
+                                                         item.endDate === "now"
+                                                             ? ""
+                                                             : `${t(
+                                                                   item.endDate.split(
+                                                                       " "
+                                                                   )[1]
+                                                               )} ${t(
+                                                                   item.endDate.split(
+                                                                       " "
+                                                                   )[0]
+                                                               )}`
+                                                     }`}
                                                     </HistoryH4>
                                                 </HistoryCol>
                                             </MatchScore>
@@ -71,7 +89,7 @@ const CareerHistory = ({ playerData, teamColor }: propTypes) => {
                                             <StyledRow>
                                                 <Col>
                                                     <Tooltip
-                                                        title={"Appearances"}
+                                                        title={t("Appearances")}
                                                     >
                                                         <ShirtIcon
                                                             icon={faTshirt}
@@ -88,7 +106,7 @@ const CareerHistory = ({ playerData, teamColor }: propTypes) => {
                                                     }}
                                                 />
                                                 <Col>
-                                                    <Tooltip title="Goals">
+                                                    <Tooltip title={t("Goals")}>
                                                         <GoalIcon
                                                             icon={faFutbol}
                                                         />

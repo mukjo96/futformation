@@ -1,6 +1,7 @@
 import LoadingView from "@features/common/loadingView";
 import SelectTeam from "@features/common/selectTeam";
 import PageTitle from "@features/common/text/pageTitle";
+import { useTranslation } from "next-i18next";
 
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +26,7 @@ const TablePage = () => {
     const { apiResult, error } = useSelector(
         (state: RootStateInterface): IApiExampleState => state.rdcApiExample
     );
+    const { t } = useTranslation("common");
 
     useEffect(() => {
         setIsLoading(true);
@@ -46,9 +48,10 @@ const TablePage = () => {
         return (
             <Fragment>
                 <PageTitle
-                    text={`${apiResult?.statList[1].tables[0].leagueName} STANDINGS`}
+                    text="STANDINGS"
                     mainColor={team.teamColor}
                     subColor={team.teamSubColor}
+                    teamName={t(apiResult?.statList[1].tables[0].leagueName)}
                 />
                 <LeagueTable
                     tableData={apiResult?.statList[1]}

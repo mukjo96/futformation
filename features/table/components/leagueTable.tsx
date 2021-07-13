@@ -5,6 +5,7 @@ import Fade from "react-reveal-effects/Fade";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { tableDataTypes } from "@features/home/api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 type propTypes = {
     tableData: tableDataTypes;
@@ -13,6 +14,7 @@ type propTypes = {
 };
 
 const LeagueTable = ({ tableData, color, teamId }: propTypes) => {
+    const { t } = useTranslation("common");
     return (
         <Container justify="space-around">
             {tableData.tables[0].table ? (
@@ -62,61 +64,61 @@ const LeagueTable = ({ tableData, color, teamId }: propTypes) => {
                     <Row justify="start" align="middle" key={legend.title}>
                         <FontAwesomeIcon icon={faCircle} color={legend.color} />
                         <span style={{ marginLeft: "12px" }}>
-                            {legend.title}
+                            {t(legend.title)}
                         </span>
                     </Row>
                 ))}
             </Col>
         </Container>
     );
+    function renderTableHeader() {
+        return (
+            <>
+                <Col span={1}></Col>
+                <Col span={1}>#</Col>
+                <Col span={10}>{t("TEAM")}</Col>
+                <Col span={2}>{t("PL")}</Col>
+                <Col span={2}>{t("W")}</Col>
+                <Col span={2}>{t("D")}</Col>
+                <Col span={2}>{t("L")}</Col>
+                <Col span={2}>{t("GD")}</Col>
+                <Col span={2}>{t("PT")}</Col>
+            </>
+        );
+    }
+
+    function renderTableData(team) {
+        return (
+            <>
+                <Col
+                    span={1}
+                    style={{
+                        alignSelf: "stretch",
+                        justifyContent: "center",
+                        display: "flex",
+                    }}
+                >
+                    <LegendDiv
+                        style={{
+                            backgroundColor: team.qualColor && team.qualColor,
+                        }}
+                    ></LegendDiv>
+                </Col>
+                <Col span={1}>{team.idx}</Col>
+                <Col span={10}>{team.name}</Col>
+                <Col span={2}>{team.played}</Col>
+                <Col span={2}>{team.wins}</Col>
+                <Col span={2}>{team.draws}</Col>
+                <Col span={2}>{team.losses}</Col>
+                <Col span={2}>{team.goalConDiff}</Col>
+                <Col span={2}>
+                    <strong>{team.pts}</strong>
+                </Col>
+            </>
+        );
+    }
 };
 
-function renderTableHeader() {
-    return (
-        <>
-            <Col span={1}></Col>
-            <Col span={1}>#</Col>
-            <Col span={10}>TEAM</Col>
-            <Col span={2}>PL</Col>
-            <Col span={2}>W</Col>
-            <Col span={2}>D</Col>
-            <Col span={2}>L</Col>
-            <Col span={2}>GD</Col>
-            <Col span={2}>PTS</Col>
-        </>
-    );
-}
-
-function renderTableData(team) {
-    return (
-        <>
-            <Col
-                span={1}
-                style={{
-                    alignSelf: "stretch",
-                    justifyContent: "center",
-                    display: "flex",
-                }}
-            >
-                <LegendDiv
-                    style={{
-                        backgroundColor: team.qualColor && team.qualColor,
-                    }}
-                ></LegendDiv>
-            </Col>
-            <Col span={1}>{team.idx}</Col>
-            <Col span={10}>{team.name}</Col>
-            <Col span={2}>{team.played}</Col>
-            <Col span={2}>{team.wins}</Col>
-            <Col span={2}>{team.draws}</Col>
-            <Col span={2}>{team.losses}</Col>
-            <Col span={2}>{team.goalConDiff}</Col>
-            <Col span={2}>
-                <strong>{team.pts}</strong>
-            </Col>
-        </>
-    );
-}
 export default LeagueTable;
 
 const Container = styled(Row)`

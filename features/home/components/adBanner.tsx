@@ -24,9 +24,7 @@ const AdBanner = ({ teamColor }: propTypes) => {
                     <BannerCol xs={24} md={10} backcolor="#0d7c91">
                         <BannerContainer>
                             <BannerMessage color="white">
-                                Gianluigi Donnarumma saved two penalties as the
-                                Azzurri claimed their second EURO title after a
-                                tense final at Wembley.
+                                {t("adBanner1")}
                             </BannerMessage>
                             <Link href="https://www.uefa.com/uefaeuro-2020/news/026b-12bba5b7b7a1-5519282c3d1a-1000--spot-on-italy-win-euro-2020/">
                                 <JoinButton teamcolor={teamColor}>
@@ -48,8 +46,7 @@ const AdBanner = ({ teamColor }: propTypes) => {
                     <BannerCol xs={24} md={10} backcolor="#f7f7f7">
                         <BannerContainer>
                             <BannerMessage color="black">
-                                Argentina beat Brazil at the Maracanã to win the
-                                CONMEBOL Copa America
+                                {t("adBanner2")}
                             </BannerMessage>
                         </BannerContainer>
                     </BannerCol>

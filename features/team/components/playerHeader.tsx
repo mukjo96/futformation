@@ -3,11 +3,14 @@ import { Avatar, Col, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
+import { useTranslation } from "next-i18next";
 
 type playerDataTypes = {
     playerData: playerInfoDataTypes;
 };
 const PlayerHeader = ({ playerData }: playerDataTypes) => {
+    const { t } = useTranslation("common");
+
     return (
         <Container>
             <Fade bottom cascade ssrFadeout>
@@ -68,9 +71,9 @@ const PlayerHeader = ({ playerData }: playerDataTypes) => {
                                 <Col span={12} key={props.title}>
                                     <DetailDesc>
                                         <Tagsmalltitle>
-                                            {props.title.toUpperCase()}
+                                            {t(props.title.toUpperCase())}
                                         </Tagsmalltitle>
-                                        {props.value}
+                                        {t(props.value)}
                                     </DetailDesc>
                                 </Col>
                             ))}

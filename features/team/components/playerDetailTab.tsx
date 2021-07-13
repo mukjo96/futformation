@@ -13,6 +13,7 @@ import RelatedNews from "./relatedNews";
 import Fade from "react-reveal-effects/Fade";
 import CareerHistory from "./careerHistory";
 import { playerInfoDataTypes } from "@features/home/api/cityDataTypes";
+import { useTranslation } from "next-i18next";
 
 const { TabPane } = Tabs;
 
@@ -22,6 +23,7 @@ type propTypes = {
 };
 
 const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
+    const { t } = useTranslation("common");
     return (
         <Container>
             <BackTop />
@@ -35,7 +37,9 @@ const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
                         tab={
                             <span>
                                 <HistoryOutlined />
-                                <span className="tabTitle">RECENT MATCHES</span>
+                                <span className="tabTitle">
+                                    {t("RECENT MATCHES")}
+                                </span>
                             </span>
                         }
                         key="1"
@@ -49,7 +53,9 @@ const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
                         tab={
                             <span>
                                 <TrophyOutlined />
-                                <span className="tabTitle">CAREER HISTORY</span>
+                                <span className="tabTitle">
+                                    {t("CAREER HISTORY")}
+                                </span>
                             </span>
                         }
                         key="2"
@@ -64,7 +70,7 @@ const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
                             <span>
                                 <BarChartOutlined />
                                 <span className="tabTitle">
-                                    CAREER STATISTICS
+                                    {t("CAREER STATISTICS")}
                                 </span>
                             </span>
                         }
@@ -80,7 +86,9 @@ const PlayerDetailTab = ({ playerData, teamColor }: propTypes) => {
                         tab={
                             <span>
                                 <SolutionOutlined />
-                                <span className="tabTitle">RELATED NEWS</span>
+                                <span className="tabTitle">
+                                    {t("RELATED NEWS")}
+                                </span>
                             </span>
                         }
                         key="4"
