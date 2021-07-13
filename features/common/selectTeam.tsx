@@ -5,7 +5,6 @@ import { Avatar, Button, Col, Radio, Row } from "antd";
 import { useDispatch } from "react-redux";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
-import { TrophyOutlined } from "@ant-design/icons";
 import PageTitle from "./text/pageTitle";
 
 const SelectTeam = () => {
@@ -146,6 +145,11 @@ const LeagueName = styled.span`
 const StyledButton = styled(Button)`
     border: none;
     margin: 5%;
+    :hover {
+        div {
+            text-decoration: underline;
+        }
+    }
 `;
 
 const StyledCol = styled(Col)`

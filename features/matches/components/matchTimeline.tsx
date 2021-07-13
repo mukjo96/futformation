@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
 import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
+import { useTranslation } from "next-i18next";
 
 type dataType = {
     matchData: matchDetailTypes;
@@ -19,6 +20,7 @@ type dataType = {
 const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     const [marks, setMarks] = useState({});
     const events = matchData.content.matchFacts.events.events;
+    const { t } = useTranslation("common");
 
     useEffect(() => {
         inputMarks();
@@ -38,9 +40,9 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                         width="24px"
                     />
                 )}
-                <h5
-                    style={{ marginLeft: "8px" }}
-                >{`${matchEvent.timeStr} ${matchEvent.type}`}</h5>
+                <h5 style={{ marginLeft: "8px" }}>{`${matchEvent.timeStr} ${t(
+                    matchEvent.type
+                )}`}</h5>
             </Row>
         );
     }
@@ -48,7 +50,10 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     function inputMarks() {
         let exMarks = { 0: "0'" };
         events.map((matchEvent) => {
-            if (matchEvent.type !== "AddedTime")
+            if (
+                matchEvent.type !== "AddedTime" &&
+                parseInt(matchEvent.timeStr) <= 90
+            )
                 exMarks[parseInt(matchEvent.timeStr)] = (
                     <>
                         <Tooltip
@@ -59,7 +64,7 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                                         <TooltipContainer>
                                             {tooltipHeader(matchEvent)}
                                             <Row>
-                                                <h5>{matchEvent.nameStr}</h5>
+                                                <h5>{t(matchEvent.nameStr)}</h5>
                                                 <h5
                                                     style={{
                                                         marginLeft: "4px",
@@ -90,7 +95,12 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                                                     )
                                                 </h5>
                                             </Row>
-                                            <h5>{matchEvent.assistStr}</h5>
+                                            <h5>
+                                                {matchEvent.assistStr?.replace(
+                                                    "assist by",
+                                                    t("assist by")
+                                                )}
+                                            </h5>
                                         </TooltipContainer>
                                     ) : matchEvent.type === "Substitution" ? (
                                         <TooltipContainer>
@@ -128,7 +138,7 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                                             {tooltipHeader(matchEvent)}
                                             <Row>
                                                 <Card color={matchEvent.card} />
-                                                <h5>{matchEvent.nameStr}</h5>
+                                                <h5>{t(matchEvent.nameStr)}</h5>
                                             </Row>
                                         </TooltipContainer>
                                     ) : (

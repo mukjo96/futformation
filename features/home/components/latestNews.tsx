@@ -98,6 +98,8 @@ export function renderNewsBox(news, index, teamId) {
             (newLate = newLate.replace("1 day ago", t("1 day ago")));
         late.includes("days ago") &&
             (newLate = newLate.replace(" days ago", t("days ago")));
+        late.includes("hour ago") &&
+            (newLate = newLate.replace(" hour ago", t("hour ago")));
         late.includes("hours ago") &&
             (newLate = newLate.replace(" hours ago", t("hours ago")));
         late.includes("minutes ago") &&

@@ -5,6 +5,7 @@ import Fade from "react-reveal-effects/Fade";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
+import { useTranslation } from "next-i18next";
 
 type dataType = {
     matchData: matchDetailTypes;
@@ -15,6 +16,8 @@ const MatchHeader = ({ matchData }: dataType) => {
     const events = matchData.content.matchFacts.events.events;
     const infoBox = matchData.content.matchFacts.infoBox;
     const header = matchData.header;
+
+    const { t } = useTranslation("common");
 
     function eventClassification(events: Array<matchEventTypes>) {
         const homeEvents = [];
@@ -46,7 +49,9 @@ const MatchHeader = ({ matchData }: dataType) => {
 
                         <GoalIcon icon={faFutbol} />
                     </Row>
-                    <Assist>{data.assistStr}</Assist>
+                    <Assist>
+                        {data.assistStr?.replace("assist by", t("assist by"))}
+                    </Assist>
                 </>
             ) : (
                 <Row
@@ -129,10 +134,10 @@ const MatchHeader = ({ matchData }: dataType) => {
                                         <TeamForm matchresult={match.result}>
                                             <span>
                                                 {match.result === 1
-                                                    ? "W"
+                                                    ? t("W")
                                                     : match.result === -1
-                                                    ? "L"
-                                                    : "D"}
+                                                    ? t("L")
+                                                    : t("D")}
                                             </span>
                                         </TeamForm>
                                     </Row>
@@ -223,10 +228,10 @@ const MatchHeader = ({ matchData }: dataType) => {
                                         <TeamForm matchresult={match.result}>
                                             <span>
                                                 {match.result === 1
-                                                    ? "W"
+                                                    ? t("W")
                                                     : match.result === -1
-                                                    ? "L"
-                                                    : "D"}
+                                                    ? t("L")
+                                                    : t("D")}
                                             </span>
                                         </TeamForm>
                                         <TeamLogo src={match.imageUrl} />
@@ -255,7 +260,9 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.round?.toUpperCase()}
+                        {translateRound(
+                            infoBox.Tournament.round?.toUpperCase()
+                        )}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>
@@ -273,7 +280,9 @@ const MatchHeader = ({ matchData }: dataType) => {
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
                     <StadiumRound>
-                        {infoBox.Tournament.round?.toUpperCase()}
+                        {translateRound(
+                            infoBox.Tournament.round?.toUpperCase()
+                        )}
                     </StadiumRound>
                 </Col>
                 <Col md={8} xs={12}>
@@ -284,6 +293,15 @@ const MatchHeader = ({ matchData }: dataType) => {
             </Row>
         </Fade>
     );
+
+    function translateRound(round: string) {
+        if (round.includes("ROUND OF")) {
+            return t(round);
+        } else if (round.includes("ROUND")) {
+            return round.replace("ROUND", t("ROUND"));
+        }
+        return t(round);
+    }
 };
 export default MatchHeader;
 

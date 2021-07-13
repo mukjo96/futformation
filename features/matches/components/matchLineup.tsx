@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
 import { matchDetailTypes, matchPlayerTypes } from "../types/matchDataTypes";
+import { useTranslation } from "next-i18next";
 
 type dataType = {
     matchData: matchDetailTypes;
@@ -13,6 +14,7 @@ type dataType = {
 
 const MatchLineup = ({ matchData }: dataType) => {
     const [visibleModalNumber, setVisibleModalNumber] = useState(0);
+    const { t } = useTranslation("common");
 
     return (
         <Row style={{ marginTop: "48px" }}>
@@ -44,7 +46,7 @@ const MatchLineup = ({ matchData }: dataType) => {
                                 <StyledDivider
                                     style={{ borderTopColor: "lightgray" }}
                                 >
-                                    SUBSTITUTES
+                                    {t("SUBSTITUTES")}
                                 </StyledDivider>
                                 {team.bench.slice(0, 8).map((player) => (
                                     <Col span={6} key={player.id}>
@@ -70,11 +72,12 @@ const MatchLineup = ({ matchData }: dataType) => {
                             key={`${listIndex}-${index}`}
                         >
                             {listIndex > 0 && index === 0 && <StyledDivider />}
+
                             <StatTitle>
                                 {index === 0 ? (
-                                    <strong>{map[0].toUpperCase()}</strong>
+                                    <strong>{t(map[0].toUpperCase())}</strong>
                                 ) : (
-                                    map[0]
+                                    t(map[0])
                                 )}
                             </StatTitle>
                             <StatTitle>

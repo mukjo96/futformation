@@ -48,9 +48,10 @@ const MatchPage = () => {
         return (
             <Fragment>
                 <PageTitle
-                    text={`${team.teamName} MATCHES`}
+                    text="MATCHES"
                     mainColor={team.teamColor}
                     subColor={team.teamSubColor}
+                    teamName={team.teamName}
                 />
                 <MatchList
                     matchData={apiResult.matchList}

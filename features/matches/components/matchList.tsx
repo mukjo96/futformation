@@ -6,6 +6,7 @@ import { Collapse, List, Row, Col, Divider } from "antd";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "next-i18next";
 
 const { Panel } = Collapse;
 
@@ -16,6 +17,7 @@ type dataType = {
 };
 
 const MatchList = ({ matchData, currentMonth, teamId }: dataType) => {
+    const { t } = useTranslation("common");
     return (
         <Container>
             <Fade bottom cascade ssrFadeout>
@@ -24,7 +26,12 @@ const MatchList = ({ matchData, currentMonth, teamId }: dataType) => {
                     defaultActiveKey={[currentMonth]}
                 >
                     {Object.keys(matchData).map((key) => (
-                        <Panel header={key} key={key}>
+                        <Panel
+                            header={`${t(key.split(" ")[1])} ${t(
+                                key.split(" ")[0]
+                            )}`}
+                            key={key}
+                        >
                             <List
                                 itemLayout="vertical"
                                 dataSource={matchData[key]}
@@ -83,7 +90,9 @@ const MatchList = ({ matchData, currentMonth, teamId }: dataType) => {
                                                                     }{" "}
                                                                     {item.status
                                                                         .started &&
-                                                                        isTeamWin.toUpperCase()[0]}
+                                                                        t(
+                                                                            isTeamWin.toUpperCase()[0]
+                                                                        )}
                                                                 </ScoreH4>
                                                             </ScoreCol>
                                                         </MatchScore>
@@ -100,7 +109,9 @@ const MatchList = ({ matchData, currentMonth, teamId }: dataType) => {
                                                 <div>
                                                     <TeamName>{`${item.home.name} vs ${item.away.name}`}</TeamName>
                                                     <TournamentName>
-                                                        {item.tournament.name}
+                                                        {t(
+                                                            item.tournament.name
+                                                        )}
                                                     </TournamentName>
                                                     <StartDate>
                                                         {item.status
@@ -215,7 +226,7 @@ const MatchDescription = styled.div`
 `;
 
 const TournamentName = styled.h5`
-    font-size: 10px;
+    font-size: 11px;
     color: darkgray;
     height: 10px;
 `;

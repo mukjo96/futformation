@@ -234,7 +234,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                   teamcolor={color}
                                               >
                                                   <Col span={2}>{team.idx}</Col>
-                                                  <Col span={12}>
+                                                  <Col span={11}>
                                                       {team.name}
                                                   </Col>
 
@@ -247,7 +247,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                                   <Col span={2}>
                                                       {team.losses}
                                                   </Col>
-                                                  <Col span={2}>
+                                                  <Col span={3}>
                                                       <strong>
                                                           {team.pts}
                                                       </strong>

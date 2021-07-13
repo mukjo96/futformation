@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
 import { matchStatsTypes, statTypes } from "../types/matchDataTypes";
+import { useTranslation } from "next-i18next";
 
 type dataType = {
     statData: matchStatsTypes;
@@ -12,6 +13,7 @@ const MatchStats = ({ statData }: dataType) => {
     const stats = statData.stats;
     const homeColor = statData.teamColors.home;
     const awayColor = statData.teamColors.away;
+    const { t } = useTranslation("common");
     return (
         <Row justify="center">
             <Col
@@ -20,11 +22,11 @@ const MatchStats = ({ statData }: dataType) => {
                 style={{ padding: "5% 0", justifyContent: "center" }}
             >
                 <Fade bottom cascade ssrFadeout>
-                    <h2 style={{ textAlign: "center" }}>{stats[0].title}</h2>
+                    <h2 style={{ textAlign: "center" }}>{t(stats[0].title)}</h2>
                     {stats[0].stats.map((stat, index) =>
                         stat.type === "graph" ? (
                             <div key={index}>
-                                <Title>{stat.title}</Title>
+                                <Title>{t(stat.title)}</Title>
                                 <Row
                                     key={stat.title}
                                     style={{
@@ -88,7 +90,7 @@ const MatchStats = ({ statData }: dataType) => {
                     >
                         <Fade bottom cascade ssrFadeout>
                             <h3 style={{ textAlign: "center" }}>
-                                {subStats.title}
+                                {t(subStats.title)}
                             </h3>
                             {subStats.stats.map((stat) => (
                                 <div key={stat.title}>
@@ -122,7 +124,7 @@ const MatchStats = ({ statData }: dataType) => {
                     </StatTitle>
                 </Col>
                 <Col xs={12} md={12}>
-                    <Title>{stat.title}</Title>
+                    <Title>{t(stat.title)}</Title>
                 </Col>
                 <Col xs={6} md={4}>
                     <StatTitle
