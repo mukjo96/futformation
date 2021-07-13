@@ -11,12 +11,12 @@ const LocaleDropdown = () => {
     const menu = (
         <Menu>
             <StyledItem key="0">
-                <Link href="#" locale="kr">
+                <Link href="/" locale="kr">
                     한국어
                 </Link>
             </StyledItem>
             <StyledItem key="1">
-                <Link href="#" locale="en">
+                <Link href="/" locale="en">
                     English
                 </Link>
             </StyledItem>

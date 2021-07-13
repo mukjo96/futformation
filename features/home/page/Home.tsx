@@ -42,7 +42,7 @@ const Home = () => {
         dispatch(actApiRequest());
         dispatch(select(team));
     };
-    if (team.teamId === 0) {
+    if (team.teamId === 0 || team.teamId === null) {
         return <SelectTeam />;
     } else if (isLoading) {
         apiResult && setIsLoading(false);
