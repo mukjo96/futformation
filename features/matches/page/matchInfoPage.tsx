@@ -50,7 +50,9 @@ const MatchInfoPage = () => {
                         teamColor={team.teamColor}
                     />
                     <MatchLineup matchData={data} />
-                    <MatchStats statData={data.content.stats} />
+                    {data.content.stats && (
+                        <MatchStats statData={data.content.stats} />
+                    )}
                 </>
             )}
         </Container>

@@ -295,10 +295,12 @@ const MatchHeader = ({ matchData }: dataType) => {
     );
 
     function translateRound(round: string) {
-        if (round.includes("ROUND OF")) {
-            return t(round);
-        } else if (round.includes("ROUND")) {
-            return round.replace("ROUND", t("ROUND"));
+        if (round) {
+            if (round.includes("ROUND OF")) {
+                return t(round);
+            } else if (round.includes("ROUND")) {
+                return round.replace("ROUND", t("ROUND"));
+            }
         }
         return t(round);
     }

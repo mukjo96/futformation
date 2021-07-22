@@ -120,12 +120,17 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
     };
 
     const tableStart = teamRank < 3 ? 0 : teamRank - 2;
-    const tableEnd =
-        tableStart < 3
+    const tableEnd = tableData.tables[0].table
+        ? tableStart < 3
             ? tableStart + 5
             : teamRank > tableData.tables[0].table.length - 4
-            ? tableData.tables[0].table.length - 1
-            : teamRank + 3;
+            ? tableData.tables[0].table.length
+            : teamRank + 3
+        : tableStart < 3
+        ? tableStart + 5
+        : teamRank > tableData.tables[0].tables[teamTableIndex].table.length - 4
+        ? tableData.tables[0].tables[teamTableIndex].table.length
+        : teamRank + 3;
 
     if (isLoading || !statList) {
         return <div></div>;
@@ -225,35 +230,39 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
                                               ))
                                         : tableData.tables[0].tables[
                                               teamTableIndex
-                                          ].table.map((team) => (
-                                              <StyledItem
-                                                  key={team.id}
-                                                  isteam={(
-                                                      team.id === teamId
-                                                  ).toString()}
-                                                  teamcolor={color}
-                                              >
-                                                  <Col span={2}>{team.idx}</Col>
-                                                  <Col span={11}>
-                                                      {team.name}
-                                                  </Col>
+                                          ].table
+                                              .slice(tableStart, tableEnd)
+                                              .map((team) => (
+                                                  <StyledItem
+                                                      key={team.id}
+                                                      isteam={(
+                                                          team.id === teamId
+                                                      ).toString()}
+                                                      teamcolor={color}
+                                                  >
+                                                      <Col span={2}>
+                                                          {team.idx}
+                                                      </Col>
+                                                      <Col span={11}>
+                                                          {team.name}
+                                                      </Col>
 
-                                                  <Col span={2}>
-                                                      {team.wins}
-                                                  </Col>
-                                                  <Col span={2}>
-                                                      {team.draws}
-                                                  </Col>
-                                                  <Col span={2}>
-                                                      {team.losses}
-                                                  </Col>
-                                                  <Col span={3}>
-                                                      <strong>
-                                                          {team.pts}
-                                                      </strong>
-                                                  </Col>
-                                              </StyledItem>
-                                          ))}
+                                                      <Col span={2}>
+                                                          {team.wins}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.draws}
+                                                      </Col>
+                                                      <Col span={2}>
+                                                          {team.losses}
+                                                      </Col>
+                                                      <Col span={3}>
+                                                          <strong>
+                                                              {team.pts}
+                                                          </strong>
+                                                      </Col>
+                                                  </StyledItem>
+                                              ))}
                                 </List>
                                 <Row justify="end">
                                     <Link href="/table">

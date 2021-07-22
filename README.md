@@ -112,12 +112,15 @@
 -   Liverpool
 -   Tottenham Hotspur
 -   Chelsea
+-   Arsenal
+-   Manchster United
 
 #### La Liga
 
 -   Real Madrid
 -   Atletico Madrid
 -   Barcelona
+-   Valencia CF
 
 #### Etc
 
