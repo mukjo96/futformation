@@ -1,3 +1,4 @@
+
 ![logo](https://user-images.githubusercontent.com/65903404/124590801-869f9c80-de96-11eb-9fd0-cd9b68a7ce5c.png)
 
 # FUTFORMATION
@@ -6,7 +7,7 @@
 
 <img alt="HTML5" src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white"/> <img alt="CSS3" src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"/> <img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img alt="Next JS" src="https://img.shields.io/badge/nextjs-%23000000.svg?style=for-the-badge&logo=next.js&logoColor=white"/> <img alt="TypeScript" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/> <img alt="Styled Components" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/> <img alt="Redux" src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"/> <img alt="Ant-Design" src="https://img.shields.io/badge/-AntDesign-%230170FE?style=for-the-badge&logo=ant-design&logoColor=white"/> <img alt="Vercel" src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"/>
 
-### ⚽️ Futformation은 해외 다수의 프로 축구 팀별 종합 홈페이지입니다.<br/>
+### ⚽️ [Futformation](https://futformation.vercel.app)은 해외 다수의 프로 축구 팀별 종합 홈페이지입니다.<br/>
 
 -   경기 일정, 팀 뉴스, 선수단, 경기 정보 등을 제공합니다.
 -   React.js, Next.js, TypeScript로 개발되었습니다.
@@ -16,14 +17,16 @@
 -   Ant-design UI 라이브러리를 활용하였습니다.
 -   Vercel을 통해 배포하고 있습니다.
 -   반응형으로 제작되어 모바일 디스플레이 환경에도 최적화되어 있습니다.
--   현재는 영어만을 지원하며, 한국어를 지원할 예정입니다.
+-   i18n을 이용하여 한국어와 영어를 모두 지원합니다.(2021.07.13)
     <br/>
 
 # 주요 화면
 
 ### Home
-
-![home screen](https://user-images.githubusercontent.com/65903404/124592719-b5b70d80-de98-11eb-82ad-3c51719fa679.png)
+#### EN
+![home screen en](https://user-images.githubusercontent.com/65903404/125425848-5cd2947e-3ed2-4276-996c-c9a1031e6663.png)
+#### KR
+![home screen kr](https://user-images.githubusercontent.com/65903404/125425639-088bb37b-fc38-440d-a5d0-c4e11dd3ea5d.png)
 
 -   홈 화면에서는 전체적인 팀의 요약 정보를 확인할 수 있습니다.
 
