@@ -73,7 +73,7 @@ const Home = () => {
                     color={team.teamColor}
                     teamId={team.teamId}
                 />
-                <AdBanner teamColor={team.teamColor} />
+                {/* <AdBanner teamColor={team.teamColor} /> */}
                 {/* <Sponsorship /> */}
                 <BackDiv></BackDiv>
             </Fragment>
