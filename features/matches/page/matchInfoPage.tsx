@@ -17,7 +17,7 @@ const MatchInfoPage = () => {
     const { matchid } = router.query;
 
     const { data, error } = useSWR(
-        `https://cors.bridged.cc/https://www.fotmob.com/matchDetails?matchId=${matchid}`
+        `https://fotmob-cors.herokuapp.com/https://www.fotmob.com/matchDetails?matchId=${matchid}`
     );
 
     const team = useSelector(

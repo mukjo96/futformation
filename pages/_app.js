@@ -9,6 +9,7 @@ import NavBar from "@features/navigation/navBar";
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { appWithTranslation } from "next-i18next";
+import styled from "styled-components";
 
 function MyApp({ Component, pageProps }) {
     moment.locale("ko");
@@ -20,12 +21,23 @@ function MyApp({ Component, pageProps }) {
                 <link rel="shortcut icon" href="/image/favicon.ico" />
             </Head>
             <PersistGate persistor={store.__persistor} loading={null}>
-                <NavBar />
-                <Component {...pageProps} />
-                <Foot />
+                <ContentWrapper>
+                    <div>
+                        <NavBar />
+                        <Component {...pageProps} />
+                    </div>
+                    <Foot />
+                </ContentWrapper>
             </PersistGate>
         </>
     );
 }
 
 export default wrapper.withRedux(appWithTranslation(MyApp));
+
+const ContentWrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;

@@ -17,7 +17,7 @@ const PlayerInfoPage = () => {
     );
 
     const { data, error } = useSWR(
-        `https://cors.bridged.cc/https://www.fotmob.com/playerData?id=${playerid}`
+        `https://fotmob-cors.herokuapp.com/https://www.fotmob.com/playerData?id=${playerid}`
     );
 
     if (error)

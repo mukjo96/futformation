@@ -43,7 +43,7 @@ const Container = styled.ul`
     margin: 0;
     li {
         list-style: none;
-        font-family: "Poppins", cursive;
+        font-family: "Poppins", "Noto Sans KR", cursive;
         font-size: 15px;
         padding: 3px;
         color: #f9f9f9;
