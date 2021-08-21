@@ -75,52 +75,60 @@ const NavBar = () => {
     );
 
     return (
-        <Container style={{ background: team.teamColor }}>
-            <Dropdown overlay={menu} trigger={["click"]}>
-                <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                >
-                    <Row align="middle">
-                        {team.teamId === 0 ? (
-                            <TextLogo />
-                        ) : (
-                            <img
-                                src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
-                                width={50}
+        <NavWrapper style={{ background: team.teamColor }}>
+            <Container>
+                <Dropdown overlay={menu} trigger={["click"]}>
+                    <a
+                        className="ant-dropdown-link"
+                        onClick={(e) => e.preventDefault()}
+                    >
+                        <Row align="middle">
+                            {team.teamId === 0 ? (
+                                <TextLogo />
+                            ) : (
+                                <img
+                                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
+                                    width={50}
+                                />
+                            )}
+                            <DownOutlined
+                                style={{
+                                    color: "white",
+                                    marginLeft: "4px",
+                                }}
                             />
-                        )}
-                        <DownOutlined
-                            style={{
-                                color: "white",
-                                marginLeft: "4px",
-                            }}
-                        />
-                    </Row>
-                </a>
-            </Dropdown>
+                        </Row>
+                    </a>
+                </Dropdown>
 
-            <Hamburger className={open ? "show" : "hidden"}>
-                <NaviLinks open={open} />
-                <GroupBar className={open ? "show" : "hidden"}>
-                    <LocaleDropdown />
-                </GroupBar>
-            </Hamburger>
-            <ToggleBtn>
-                <HamburgerMenu
-                    isOpen={open}
-                    menuClicked={() => setOpen(!open)}
-                    width={18}
-                    height={15}
-                    color="white"
-                    position="absolute"
-                />
-            </ToggleBtn>
-        </Container>
+                <Hamburger className={open ? "show" : "hidden"}>
+                    <NaviLinks open={open} />
+                    <GroupBar className={open ? "show" : "hidden"}>
+                        <LocaleDropdown />
+                    </GroupBar>
+                </Hamburger>
+                <ToggleBtn>
+                    <HamburgerMenu
+                        isOpen={open}
+                        menuClicked={() => setOpen(!open)}
+                        width={18}
+                        height={15}
+                        color="white"
+                        position="absolute"
+                    />
+                </ToggleBtn>
+            </Container>
+        </NavWrapper>
     );
 };
 
 export default NavBar;
+
+const NavWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
 
 const Container = styled.nav`
     display: flex;
@@ -129,6 +137,7 @@ const Container = styled.nav`
     align-items: center;
     position: relative;
     z-index: 1;
+    width: 100%;
 
     @media screen and (min-width: 1280px) {
         width: 1280px;
