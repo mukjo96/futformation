@@ -1,4 +1,3 @@
-
 ![logo](https://user-images.githubusercontent.com/65903404/124590801-869f9c80-de96-11eb-9fd0-cd9b68a7ce5c.png)
 
 # FUTFORMATION
@@ -18,14 +17,20 @@
 -   Vercel을 통해 배포하고 있습니다.
 -   반응형으로 제작되어 모바일 디스플레이 환경에도 최적화되어 있습니다.
 -   i18n을 이용하여 한국어와 영어를 모두 지원합니다.(2021.07.13)
+-   Premier League 전체 팀을 지원합니다.(2021.08.21)
+
     <br/>
 
 # 주요 화면
 
 ### Home
+
 #### EN
+
 ![home screen en](https://user-images.githubusercontent.com/65903404/125425848-5cd2947e-3ed2-4276-996c-c9a1031e6663.png)
+
 #### KR
+
 ![home screen kr](https://user-images.githubusercontent.com/65903404/125425639-088bb37b-fc38-440d-a5d0-c4e11dd3ea5d.png)
 
 -   홈 화면에서는 전체적인 팀의 요약 정보를 확인할 수 있습니다.
@@ -66,9 +71,39 @@
 
 <br/>
 
-## 지원 팀 목록
+# 지원 팀 목록
 
-#### EURO 2020
+#### **Premier League** (ALL TEAMS!)
+
+-   Man United
+-   Chelsea
+-   Liverpool
+-   West Ham
+-   Everton
+-   Brentford
+-   Watford
+-   Brighton
+-   Leicester
+-   Tottenham
+-   Aston Villa
+-   Burnley
+-   Man City
+-   Wolves
+-   Newcastle
+-   Southampton
+-   Arsenal
+-   Crystal Palace
+-   Norwich
+-   Leeds
+
+#### **La Liga**
+
+-   Real Madrid
+-   Atletico Madrid
+-   Barcelona
+-   Valencia CF
+
+#### **EURO 2020**
 
 -   Italy
 -   Switzerland
@@ -96,7 +131,7 @@
 -   Hungary
 -   Portugal
 
-#### COPA AMERICA
+#### **COPA AMERICA**
 
 -   Argentina
 -   Bolivia
@@ -109,23 +144,7 @@
 -   Peru
 -   Venezuela
 
-#### Premier League
-
--   Manchester City
--   Liverpool
--   Tottenham Hotspur
--   Chelsea
--   Arsenal
--   Manchster United
-
-#### La Liga
-
--   Real Madrid
--   Atletico Madrid
--   Barcelona
--   Valencia CF
-
-#### Etc
+#### **Etc**
 
 -   Paris Saint Germain
 -   Bayern München
@@ -134,8 +153,10 @@
 -   Internazionale Milano
 -   Porto
 
-## 유의 사항
+<br/>
+
+# 유의 사항
 
 -   해당 사이트의 모든 데이터는 [FotMob API](https://www.fotmob.com)로부터 제공되었으며 언제든지 데이터가 변경되거나 표시되지 않을 수 있습니다.
 -   기타 문의사항이나 피드백이 있다면 <sl3895@g.kmou.ac.kr>로 보내주시면 감사하겠습니다.
--   코드 리뷰 및 코드에 대한 지적은 얼마든지 환영합니다.
+-   코드 리뷰 및 지적은 얼마든지 환영합니다.
