@@ -135,6 +135,7 @@
 
     "MINUTES PLAYED": "출전 시간",
     "Expected goals (xG)": "골 기대값 (xG)",
+    "Expected assists (xA)": "어시스트 기대값 (xA)",
     "Total shots": "전체 슈팅",
     "Accurate passes": "패스 성공",
     "Pass success": "패스 성공률",
@@ -157,6 +158,7 @@
     "Throws": "스로인",
     "Corners": "코너킥",
     "DUELS WON": "경합 승리",
+    "Duels won": "경합 승리",
     "Duels lost": "경합 패배",
     "Clearances": "클리어링",
     "Headed clearance": "공중볼 클리어링",
@@ -174,10 +176,21 @@
     "Offsides": "오프사이드",
     "Recoveries": "볼 탈취",
 
+    "Goals conceded": "실점",
+    "Expected goals conceded": "예상 실점",
+    "Saves": "선방",
+    "Diving save": "다이빙 선방",
+    "Saves inside box": "박스 내 선방",
+    "Acted as sweeper": "스위퍼 역할 수행",
+    "Punches": "펀치",
+    "High claim": "공중볼 처리",
+    "Errors led to goal": "골로 이어진 실책",
+
     "TOP STATS": "기록 요약",
     "Ball possession": "볼 점유율",
     "Big chances": "빅 찬스",
     "SHOTS": "슈팅",
+    "Shots": "슈팅",
     "Shots on target": "유효 슈팅",
     "Shots off target": "벗어난 슈팅",
     "Shots inside box": "박스 안 슈팅",
@@ -190,6 +203,11 @@
     "xG set play": "세트 플레이 xG",
     "Duels": "경합",
     "Dribbles attempteds": "드리블 시도",
+
+    "DISCIPLINE": "규칙",
+    "Discipline": "규칙",
+    "Yellow cards": "옐로 카드",
+    "Red cards": "레드 카드",
 
     "STANDINGS": "순위표",
 

@@ -134,6 +134,7 @@
 
     "MINUTES PLAYED": "MINUTES PLAYED",
     "Expected goals (xG)": "Expected goals (xG)",
+    "Expected assists (xA)": "Expected assists (xA)",
     "Total shots": "Total shots",
     "Accurate passes": "Accurate passes",
     "Pass success": "Pass success",
@@ -156,6 +157,7 @@
     "Throws": "Throws",
     "Corners": "Corners",
     "DUELS WON": "DUELS WON",
+    "Duels won": "Duels won",
     "Duels lost": "Duels lost",
     "Clearances": "Clearances",
     "Headed clearance": "Headed clearance",
@@ -173,10 +175,21 @@
     "Offsides": "Offsides",
     "Recoveries": "Recoveries",
 
+    "Goals conceded": "Goals conceded",
+    "Expected goals conceded": "Expected goals conceded",
+    "Saves": "Saves",
+    "Diving save": "Diving save",
+    "Saves inside box": "Saves inside box",
+    "Acted as sweeper": "Acted as sweeper",
+    "Punches": "Punches",
+    "High claim": "High claim",
+    "Errors led to goal": "Errors led to goal",
+
     "TOP STATS": "TOP STATS",
     "Ball possession": "Ball possession",
     "Big chances": "Big chances",
     "SHOTS": "SHOTS",
+    "Shots": "Shots",
     "Shots on target": "Shots on target",
     "Shots off target": "Shots off target",
     "Shots inside box": "Shots inside box",
@@ -189,6 +202,11 @@
     "xG set play": "xG set play",
     "Duels": "Duels",
     "Dribbles attempteds": "Dribbles attempteds",
+
+    "DISCIPLINE": "DISCIPLINE",
+    "Discipline": "Discipline",
+    "Yellow cards": "Yellow cards",
+    "Red cards": "Red cards",
 
     "STANDINGS": "STANDINGS",
 
