@@ -88,7 +88,7 @@ const MatchHeader = ({ matchData }: dataType) => {
     return (
         <Fade bottom cascade ssrFadeout>
             <TournamentName>
-                {infoBox.Tournament.leagueName?.toUpperCase()}
+                {t(infoBox.Tournament.leagueName)?.toUpperCase()}
             </TournamentName>
             <Row
                 style={{

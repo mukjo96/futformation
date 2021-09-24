@@ -19,6 +19,7 @@ type dataType = {
 
 const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     const [marks, setMarks] = useState({});
+    const [extraMarks, setExtraMarks] = useState({});
     const events = matchData.content.matchFacts.events.events;
     const { t } = useTranslation("common");
 
@@ -40,7 +41,7 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                         width="24px"
                     />
                 )}
-                <h5 style={{ marginLeft: "8px" }}>{`${matchEvent.timeStr} ${t(
+                <h5 style={{ marginLeft: "8px" }}>{`${matchEvent.timeStr}' ${t(
                     matchEvent.type
                 )}`}</h5>
             </Row>
@@ -48,13 +49,12 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     }
 
     function inputMarks() {
-        let exMarks = { 0: "0'" };
+        let Marks = { 0: "0'" };
+        let extMarks = { 90: "90'" };
         events.map((matchEvent) => {
-            if (
-                matchEvent.type !== "AddedTime" &&
-                parseInt(matchEvent.timeStr) <= 90
-            )
-                exMarks[parseInt(matchEvent.timeStr)] = (
+            let newMark: JSX.Element;
+            if (matchEvent.type !== "AddedTime")
+                newMark = (
                     <>
                         <Tooltip
                             color="white"
@@ -166,8 +166,12 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                         </Tooltip>
                     </>
                 );
+            parseInt(matchEvent.timeStr) <= 90
+                ? (Marks[parseInt(matchEvent.timeStr)] = newMark)
+                : (extMarks[parseInt(matchEvent.timeStr)] = newMark);
         });
-        setMarks(exMarks);
+        setMarks(Marks);
+        Object.keys(extMarks).length > 1 && setExtraMarks(extMarks);
     }
 
     return (
@@ -179,6 +183,16 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                     max={90}
                     disabled
                 />
+                {Object.keys(extraMarks).length > 0 && (
+                    <StyledSlider
+                        teamcolor={teamColor}
+                        marks={extraMarks}
+                        style={{ marginTop: "7%" }}
+                        min={90}
+                        max={120}
+                        disabled
+                    />
+                )}
             </Col>
         </Fade>
     );

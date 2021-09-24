@@ -18,47 +18,53 @@ const MatchLineup = ({ matchData }: dataType) => {
 
     return (
         <Row style={{ marginTop: "48px" }}>
-            {matchData.content.lineup.lineup.map((team, index) => {
-                const players =
-                    index === 1
-                        ? team.players
-                        : team.players.slice(0).reverse();
-                return (
-                    <StyledCol md={12} xs={24} key={index}>
-                        <Fade bottom cascade ssrFadeout key={index}>
-                            <BackgroundPitch>
-                                <Row justify="space-around">
-                                    <Title>{team.teamName.toUpperCase()}</Title>
-                                    <Title>{team.lineup}</Title>
-                                </Row>
-                                {players.map((position, index) => (
-                                    <Row justify="space-around" key={index}>
-                                        {position.map((player) => (
-                                            <div key={player.id}>
-                                                {renderPlayer(player, false)}
-                                                {playerModal(player)}
-                                            </div>
-                                        ))}
+            {matchData.content.lineup.lineup &&
+                matchData.content.lineup.lineup.map((team, index) => {
+                    const players =
+                        index === 1
+                            ? team.players
+                            : team.players.slice(0).reverse();
+                    return (
+                        <StyledCol md={12} xs={24} key={index}>
+                            <Fade bottom cascade ssrFadeout key={index}>
+                                <BackgroundPitch>
+                                    <Row justify="space-around">
+                                        <Title>
+                                            {team.teamName.toUpperCase()}
+                                        </Title>
+                                        <Title>{team.lineup}</Title>
                                     </Row>
-                                ))}
-                            </BackgroundPitch>
-                            <Row justify="center">
-                                <StyledDivider
-                                    style={{ borderTopColor: "lightgray" }}
-                                >
-                                    {t("SUBSTITUTES")}
-                                </StyledDivider>
-                                {team.bench.slice(0, 8).map((player) => (
-                                    <Col span={6} key={player.id}>
-                                        {renderPlayer(player, true)}
-                                        {playerModal(player)}
-                                    </Col>
-                                ))}
-                            </Row>
-                        </Fade>
-                    </StyledCol>
-                );
-            })}
+                                    {players.map((position, index) => (
+                                        <Row justify="space-around" key={index}>
+                                            {position.map((player) => (
+                                                <div key={player.id}>
+                                                    {renderPlayer(
+                                                        player,
+                                                        false
+                                                    )}
+                                                    {playerModal(player)}
+                                                </div>
+                                            ))}
+                                        </Row>
+                                    ))}
+                                </BackgroundPitch>
+                                <Row justify="center">
+                                    <StyledDivider
+                                        style={{ borderTopColor: "lightgray" }}
+                                    >
+                                        {t("SUBSTITUTES")}
+                                    </StyledDivider>
+                                    {team.bench.slice(0, 8).map((player) => (
+                                        <Col span={6} key={player.id}>
+                                            {renderPlayer(player, true)}
+                                            {playerModal(player)}
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </Fade>
+                        </StyledCol>
+                    );
+                })}
         </Row>
     );
 
