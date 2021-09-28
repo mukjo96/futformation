@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal-effects/Fade";
-import { Row, Col } from "antd";
+import { Row, Col, Skeleton } from "antd";
 import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
@@ -21,10 +21,25 @@ const LatestNews = ({ newsList, teamId }: propTypes) => {
                 <Fade bottom cascade ssrFadeout>
                     <NewsRow>
                         {newsList
-                            .slice(1, 5)
-                            .map((news, index) =>
-                                renderNewsBox(news, index, teamId)
-                            )}
+                            ? newsList
+                                  .slice(1, 5)
+                                  .map((news, index) =>
+                                      renderNewsBox(news, index, teamId)
+                                  )
+                            : Array.from({ length: 4 }, (x, i) => i).map(
+                                  (_) => (
+                                      <NewsBox
+                                          style={{ backgroundColor: "grey" }}
+                                          xs={24}
+                                          md={6}
+                                          key={_}
+                                      >
+                                          <BackFilter>
+                                              <Skeleton active />
+                                          </BackFilter>
+                                      </NewsBox>
+                                  )
+                              )}
                     </NewsRow>
                 </Fade>
             </Col>

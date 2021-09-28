@@ -3,6 +3,7 @@ import Link from "antd/lib/typography/Link";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import styled from "styled-components";
+import { Skeleton } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
 
 type propTypes = {
@@ -11,37 +12,56 @@ type propTypes = {
 };
 
 const NewsBanner = ({ news, header }: propTypes) => {
-    const sourceTitle = news.sourceStr.split(" - ");
+    const sourceTitle = news && news.sourceStr.split(" - ");
     const { t } = useTranslation("common");
     return (
-        <BannerContainer>
-            <BannerBackground
-                style={{
-                    backgroundImage: `url(${news.imageUrl})`,
-                }}
-            >
-                <BackFilter>
-                    <TextContainer>
-                        <NewsHeader>{header}</NewsHeader>
-                        <BannerTitle>{news.title}</BannerTitle>
-                        <BannerSource>{`${sourceTitle[0]} - ${translateLate(
-                            sourceTitle[1]
-                        )}`}</BannerSource>
-                        <Link
-                            style={{ cursor: "pointer" }}
-                            href={
-                                news.sourceStr.slice(0, 6) === "FotMob"
-                                    ? `https://www.fotmob.com${news.page.url}`
-                                    : news.page.url
-                            }
-                            target="_blank"
-                        >
-                            <MoreButton value={"View Now"} size="large" />
-                        </Link>
-                    </TextContainer>
-                </BackFilter>
-            </BannerBackground>
-        </BannerContainer>
+        <>
+            {news && header ? (
+                <BannerContainer>
+                    <BannerBackground
+                        style={{
+                            backgroundImage: `url(${news.imageUrl})`,
+                        }}
+                    >
+                        <BackFilter>
+                            <TextContainer>
+                                <NewsHeader>{header}</NewsHeader>
+                                <BannerTitle>{news.title}</BannerTitle>
+                                <BannerSource>{`${
+                                    sourceTitle[0]
+                                } - ${translateLate(
+                                    sourceTitle[1]
+                                )}`}</BannerSource>
+                                <Link
+                                    style={{ cursor: "pointer" }}
+                                    href={
+                                        news.sourceStr.slice(0, 6) === "FotMob"
+                                            ? `https://www.fotmob.com${news.page.url}`
+                                            : news.page.url
+                                    }
+                                    target="_blank"
+                                >
+                                    <MoreButton
+                                        value={"View Now"}
+                                        size="large"
+                                    />
+                                </Link>
+                            </TextContainer>
+                        </BackFilter>
+                    </BannerBackground>
+                </BannerContainer>
+            ) : (
+                <BannerContainer>
+                    <BannerBackground>
+                        <BackFilter>
+                            <TextContainer>
+                                <Skeleton active />
+                            </TextContainer>
+                        </BackFilter>
+                    </BannerBackground>
+                </BannerContainer>
+            )}
+        </>
     );
 
     function translateLate(late: string) {
@@ -91,6 +111,7 @@ const BannerBackground = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: grey;
 `;
 
 const TextContainer = styled.div`

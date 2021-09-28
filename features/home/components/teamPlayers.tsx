@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Row, Col, List, Avatar, Result } from "antd";
+import { Row, Col, List, Avatar, Result, Skeleton } from "antd";
 import { SelectOutlined } from "@ant-design/icons";
 import BlockTitle from "./Title/blockTitle";
 
@@ -19,7 +19,7 @@ const TeamPlayers = ({ dataList }: propTypes) => {
 
     const data = [];
 
-    playerDataToObjects();
+    dataList && playerDataToObjects();
 
     const team = useSelector(
         (state: RootStateInterface): IExampleState => state.rdcExample
@@ -54,41 +54,59 @@ const TeamPlayers = ({ dataList }: propTypes) => {
                 </Col>
                 <ListCol xs={24} md={6}>
                     <List
-                        dataSource={data.reverse()}
+                        dataSource={
+                            data.length > 0
+                                ? data.reverse()
+                                : [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        }
                         size="large"
-                        renderItem={(item) => (
-                            <StyledItem
-                                key={item.id}
-                                onClick={() => setSelectedId(item.id)}
-                                id={(selectedId === item.id).toString()}
-                                teamcolor={team.teamColor}
-                            >
-                                <StyledMeta
-                                    avatar={
-                                        <Avatar
-                                            size={48}
-                                            shape="square"
-                                            src={`https://images.fotmob.com/image_resources/playerimages/${item.id}.png`}
-                                        />
-                                    }
-                                    title={
-                                        <Col>
-                                            <PlayerName>{item.name}</PlayerName>
-                                            <PlayerRole>
-                                                {item.role === "goalkeepers"
-                                                    ? t("Goalkeeper")
-                                                    : item.role === "defenders"
-                                                    ? t("Defender")
-                                                    : item.role ===
-                                                      "midfielders"
-                                                    ? t("Midfielder")
-                                                    : t("Forward")}
-                                            </PlayerRole>
-                                        </Col>
-                                    }
-                                />
-                            </StyledItem>
-                        )}
+                        renderItem={(item) =>
+                            item.name ? (
+                                <StyledItem
+                                    key={item.id}
+                                    onClick={() => setSelectedId(item.id)}
+                                    id={(selectedId === item.id).toString()}
+                                    teamcolor={team.teamColor}
+                                >
+                                    <StyledMeta
+                                        avatar={
+                                            <Avatar
+                                                size={48}
+                                                shape="square"
+                                                src={`https://images.fotmob.com/image_resources/playerimages/${item.id}.png`}
+                                            />
+                                        }
+                                        title={
+                                            <Col>
+                                                <PlayerName>
+                                                    {item.name}
+                                                </PlayerName>
+                                                <PlayerRole>
+                                                    {item.role === "goalkeepers"
+                                                        ? t("Goalkeeper")
+                                                        : item.role ===
+                                                          "defenders"
+                                                        ? t("Defender")
+                                                        : item.role ===
+                                                          "midfielders"
+                                                        ? t("Midfielder")
+                                                        : t("Forward")}
+                                                </PlayerRole>
+                                            </Col>
+                                        }
+                                    />
+                                </StyledItem>
+                            ) : (
+                                <StyledItem key={item}>
+                                    <Skeleton
+                                        avatar
+                                        paragraph={{ rows: 2 }}
+                                        title={false}
+                                        active
+                                    />
+                                </StyledItem>
+                            )
+                        }
                     ></List>
                 </ListCol>
             </StyledRow>
@@ -127,7 +145,7 @@ const ListCol = styled(Col)`
     overflow: auto;
 `;
 
-const StyledItem = styled(List.Item)<{ id: string; teamcolor: string }>`
+const StyledItem = styled(List.Item)<{ id?: string; teamcolor?: string }>`
     background-color: ${(props) =>
         props.id === "true" && props.teamcolor + "19"};
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 import Fade from "react-reveal-effects/Fade";
-import { Row, Col, Divider } from "antd";
+import { Row, Col, Divider, Skeleton } from "antd";
 
 import styled from "styled-components";
 import Link from "next/link";
@@ -16,13 +16,16 @@ type propTypes = {
 };
 
 const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
-    const dateKeys = Object.entries(matchList);
-    const beforeMonth = getBeforeDateKey(currentMonth, dateKeys);
+    const dateKeys = matchList && Object.entries(matchList);
+    const beforeMonth =
+        currentMonth && getBeforeDateKey(currentMonth, dateKeys);
     const { t } = useTranslation("common");
 
-    const newMatchList = Object.values(matchList)
-        .filter((value, index) => index > beforeMonth)
-        .flat();
+    const newMatchList =
+        matchList &&
+        Object.values(matchList)
+            .filter((value, index) => index > beforeMonth)
+            .flat();
 
     let match5 = 0;
 
@@ -37,21 +40,31 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
                     />
                 </Col>
                 <Fade bottom cascade ssrFadeout>
-                    <Row>
-                        {newMatchList.map((match: matchDataTypes) => {
-                            if (
-                                match.lastPlayedMatch ||
-                                (!match.isPastMatch && match5 < 4)
-                            ) {
-                                match5 += 1;
-                                return renderMatchSchedule(
-                                    match,
-                                    match.isPastMatch,
-                                    teamId
-                                );
-                            }
-                        })}
-                    </Row>
+                    {matchList ? (
+                        <Row>
+                            {newMatchList.map((match: matchDataTypes) => {
+                                if (
+                                    match.lastPlayedMatch ||
+                                    (!match.isPastMatch && match5 < 4)
+                                ) {
+                                    match5 += 1;
+                                    return renderMatchSchedule(
+                                        match,
+                                        match.isPastMatch,
+                                        teamId
+                                    );
+                                }
+                            })}
+                        </Row>
+                    ) : (
+                        <Row>
+                            {Array.from({ length: 4 }, (x, i) => i).map((_) => (
+                                <MatchCol xs={24} md={6} key={_}>
+                                    <Skeleton active />
+                                </MatchCol>
+                            ))}
+                        </Row>
+                    )}
                 </Fade>
             </Col>
         </Container>

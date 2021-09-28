@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row, Col, Avatar, Divider, List, Empty } from "antd";
+import { Row, Col, Avatar, Divider, List, Empty, Skeleton } from "antd";
 import Slide from "react-reveal-effects/Slide";
 import BlockTitle from "./Title/blockTitle";
 
@@ -119,22 +119,42 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
         );
     };
 
-    const tableStart = teamRank < 3 ? 0 : teamRank - 2;
-    const tableEnd = tableData.tables[0].table
-        ? tableStart < 3
-            ? tableStart + 5
-            : teamRank > tableData.tables[0].table.length - 4
-            ? tableData.tables[0].table.length
-            : teamRank + 3
-        : tableStart < 3
-        ? tableStart + 5
-        : teamRank > tableData.tables[0].tables[teamTableIndex].table.length - 4
-        ? tableData.tables[0].tables[teamTableIndex].table.length
-        : teamRank + 3;
-
     if (isLoading || !statList) {
-        return <div></div>;
+        return (
+            <div>
+                <Container>
+                    <BlockTitle
+                        title="PLAYER STATS"
+                        link="players"
+                        linktext="player stats"
+                        theme="light"
+                    />
+                    <Slide bottom cascade ssrFadeout>
+                        <Row>
+                            {Array.from({ length: 4 }, (x, i) => i).map((_) => (
+                                <TableCol xs={24} md={6} key={_}>
+                                    <Skeleton active />
+                                </TableCol>
+                            ))}
+                        </Row>
+                    </Slide>
+                </Container>
+            </div>
+        );
     } else {
+        const tableStart = teamRank < 3 ? 0 : teamRank - 2;
+        const tableEnd = tableData.tables[0].table
+            ? tableStart < 3
+                ? tableStart + 5
+                : teamRank > tableData.tables[0].table.length - 4
+                ? tableData.tables[0].table.length
+                : teamRank + 3
+            : tableStart < 3
+            ? tableStart + 5
+            : teamRank >
+              tableData.tables[0].tables[teamTableIndex].table.length - 4
+            ? tableData.tables[0].tables[teamTableIndex].table.length
+            : teamRank + 3;
         return (
             <>
                 <Container>

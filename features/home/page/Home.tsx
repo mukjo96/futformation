@@ -7,14 +7,11 @@ import {
     actApiRequest,
 } from "../../../redux/actions/actApiExample";
 
-import AdBanner from "../components/adBanner";
 import LatestNews from "../components/latestNews";
 import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
-import Sponsorship from "../components/sponsorship";
 import TeamPlayers from "../components/teamPlayers";
 import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
-import LoadingView from "@features/common/loadingView";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
 import SelectTeam from "@features/common/selectTeam";
@@ -22,7 +19,6 @@ import NewsBanner from "../components/newsBanner";
 import { useTranslation } from "next-i18next";
 
 const Home = () => {
-    const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
     const team = useSelector(
         (state: RootStateInterface): IExampleState => state.rdcExample
@@ -33,7 +29,6 @@ const Home = () => {
     const { t } = useTranslation("common");
 
     useEffect(() => {
-        setIsLoading(true);
         dispatchApi();
     }, [team.teamId]);
 
@@ -44,13 +39,6 @@ const Home = () => {
     };
     if (team.teamId === 0 || team.teamId === null) {
         return <SelectTeam />;
-    } else if (isLoading) {
-        apiResult && setIsLoading(false);
-        return (
-            <Container>
-                <LoadingView />
-            </Container>
-        );
     } else {
         return (
             <Fragment>
