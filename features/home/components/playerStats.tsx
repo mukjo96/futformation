@@ -33,7 +33,7 @@ const PlayerStats = ({ statList, color, teamId }: dataTypes) => {
             }
             setIsLoading(false);
         }
-    }, [teamId]);
+    }, [statList, teamId]);
 
     function findTeamRank() {
         tableData.tables[0].table?.map((team, index) => {
