@@ -49,8 +49,8 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
     }
 
     function inputMarks() {
-        let Marks = { 0: "0'" };
-        let extMarks = { 90: "90'" };
+        let Marks = { 0: "0'", 90: "90'" };
+        let extMarks = { 90: "90'", 120: "120'" };
         events.map((matchEvent) => {
             let newMark: JSX.Element;
             if (matchEvent.type !== "AddedTime")
@@ -166,12 +166,14 @@ const MatchTimeline = ({ matchData, teamColor }: dataType) => {
                         </Tooltip>
                     </>
                 );
-            parseInt(matchEvent.timeStr) <= 90
+            parseInt(matchEvent.timeStr) < 90
                 ? (Marks[parseInt(matchEvent.timeStr)] = newMark)
-                : (extMarks[parseInt(matchEvent.timeStr)] = newMark);
+                : parseInt(matchEvent.timeStr) > 90
+                ? (extMarks[parseInt(matchEvent.timeStr)] = newMark)
+                : null;
         });
         setMarks(Marks);
-        Object.keys(extMarks).length > 1 && setExtraMarks(extMarks);
+        Object.keys(extMarks).length > 2 && setExtraMarks(extMarks);
     }
 
     return (
@@ -257,11 +259,15 @@ const StyledSlider = styled(Slider)<{ teamcolor: string }>`
     }
 
     .ant-slider-dot {
-        :first-child {
+        :first-child,
+        :last-child {
             width: 2px;
+            height: 18px;
             border-radius: 20%;
             margin-left: -1px;
+            margin-top: -4px;
         }
+
         border: 1px solid #1c2c5b !important;
         cursor: default !important;
     }
