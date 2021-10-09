@@ -1,14 +1,4 @@
-import {
-    all,
-    call,
-    delay,
-    put,
-    take,
-    takeLatest,
-    fork,
-    takeEvery,
-} from "redux-saga/effects";
-import axios, { AxiosResponse } from "axios";
+import { all, call, put, take, fork, takeEvery } from "redux-saga/effects";
 
 import { actApiSuccess, actApiFail } from "../actions/actApiExample";
 import {
@@ -22,8 +12,6 @@ import {
     getCityPlayers,
     getCityStats,
 } from "@features/home/api/getCityData.api";
-import { useSelector } from "react-redux";
-import { RootStateInterface } from "redux/interfaces/ifRootState";
 
 async function callCityDataAPI(teamId: number) {
     let matchList, currentMonth, newsList, playerList, statList;
@@ -53,16 +41,6 @@ async function callCityDataAPI(teamId: number) {
 
 function* apiRequest() {
     try {
-        // const headers = { headers: { Authorization: "bearer " } };
-        // const formData = new FormData();
-        // formData.append('id', id);
-
-        // const { status, data }: AxiosResponse<ICityDataReducer> = yield call(
-        //     axios.post,
-        //     "/api/animal",
-        //     params,
-        //     headers
-        // );
         const action = yield take("SELECT");
         const data: IApiResult = yield call(
             callCityDataAPI,

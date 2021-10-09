@@ -8,6 +8,7 @@ import MoreButton from "@features/common/button/moreButton";
 import BlockTitle from "./Title/blockTitle";
 import { matchDataTypes } from "../api/cityDataTypes";
 import { useTranslation } from "next-i18next";
+import { translateShortDateToKorean } from "utils/moment/translateMoment";
 
 type propTypes = {
     matchList: matchDataTypes[];
@@ -19,7 +20,7 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
     const dateKeys = matchList && Object.entries(matchList);
     const beforeMonth =
         currentMonth && getBeforeDateKey(currentMonth, dateKeys);
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
 
     const newMatchList =
         matchList &&
@@ -123,7 +124,11 @@ const MatchSchedule = ({ matchList, currentMonth, teamId }: propTypes) => {
                     <TournamentName>{t(match.tournament.name)}</TournamentName>
                     <StartDate>
                         {match.status.startDateStr
-                            ? match.status.startDateStr
+                            ? i18n.language === "kr"
+                                ? translateShortDateToKorean(
+                                      match.status.startDateStr
+                                  )
+                                : match.status.startDateStr
                             : match.status.liveTime.short}
                         {match.status.startTimeStr &&
                             ` | ${match.status.startTimeStr}`}

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { matchDetailTypes, matchEventTypes } from "../types/matchDataTypes";
 import { useTranslation } from "next-i18next";
+import { translateLongDateToKorean } from "utils/moment/translateMoment";
 
 type dataType = {
     matchData: matchDetailTypes;
@@ -17,7 +18,7 @@ const MatchHeader = ({ matchData }: dataType) => {
     const infoBox = matchData.content.matchFacts.infoBox;
     const header = matchData.header;
 
-    const { t } = useTranslation("common");
+    const { t, i18n } = useTranslation("common");
 
     function eventClassification(events: Array<matchEventTypes>) {
         const homeEvents = [];
@@ -105,11 +106,15 @@ const MatchHeader = ({ matchData }: dataType) => {
                                     title={
                                         <>
                                             <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[0]
-                                                }
+                                                {i18n.language === "kr"
+                                                    ? translateLongDateToKorean(
+                                                          match.tooltipText.split(
+                                                              ": "
+                                                          )[0]
+                                                      )
+                                                    : match.tooltipText.split(
+                                                          ": "
+                                                      )[0]}
                                             </TooltipText>
                                             <TooltipText>
                                                 {
@@ -203,11 +208,15 @@ const MatchHeader = ({ matchData }: dataType) => {
                                     title={
                                         <>
                                             <TooltipText>
-                                                {
-                                                    match.tooltipText.split(
-                                                        ": "
-                                                    )[0]
-                                                }
+                                                {i18n.language === "kr"
+                                                    ? translateLongDateToKorean(
+                                                          match.tooltipText.split(
+                                                              ": "
+                                                          )[0]
+                                                      )
+                                                    : match.tooltipText.split(
+                                                          ": "
+                                                      )[0]}
                                             </TooltipText>
                                             <TooltipText>
                                                 {
@@ -255,7 +264,13 @@ const MatchHeader = ({ matchData }: dataType) => {
                     xs={24}
                     md={0}
                 >
-                    <StadiumRound>{header.status.startDateStr}</StadiumRound>
+                    <StadiumRound>
+                        {i18n.language === "kr"
+                            ? translateLongDateToKorean(
+                                  header.status.startDateStr
+                              )
+                            : header.status.startDateStr}
+                    </StadiumRound>
                     <StadiumRound>
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
@@ -275,7 +290,13 @@ const MatchHeader = ({ matchData }: dataType) => {
                     xs={0}
                     md={6}
                 >
-                    <StadiumRound>{header.status.startDateStr}</StadiumRound>
+                    <StadiumRound>
+                        {i18n.language === "kr"
+                            ? translateLongDateToKorean(
+                                  header.status.startDateStr
+                              )
+                            : header.status.startDateStr}
+                    </StadiumRound>
                     <StadiumRound>
                         {infoBox.Stadium.name.toUpperCase()}
                     </StadiumRound>
