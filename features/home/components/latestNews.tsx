@@ -6,7 +6,8 @@ import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
-import { useTranslation } from "next-i18next";
+import { TFunction, useTranslation } from "next-i18next";
+import { translateLate } from "utils/moment/translateMoment";
 
 type propTypes = {
     newsList: newsDataTypes[];
@@ -99,30 +100,15 @@ export function renderNewsBox(news, index, teamId) {
                         />
                         <div>
                             <NewsSource>{sourceTitle[0]}</NewsSource>
-                            <NewsLate>{translateLate(sourceTitle[1])}</NewsLate>
+                            <NewsLate>
+                                {translateLate(sourceTitle[1], t)}
+                            </NewsLate>
                         </div>
                     </Row>
                 </Col>
             </BackFilter>
         </NewsBox>
     );
-
-    function translateLate(late: string) {
-        let newLate = late;
-        late.includes("1 day ago") &&
-            (newLate = newLate.replace("1 day ago", t("1 day ago")));
-        late.includes("days ago") &&
-            (newLate = newLate.replace(" days ago", t("days ago")));
-        late.includes("hour ago") &&
-            (newLate = newLate.replace(" hour ago", t("hour ago")));
-        late.includes("hours ago") &&
-            (newLate = newLate.replace(" hours ago", t("hours ago")));
-        late.includes("minutes ago") &&
-            (newLate = newLate.replace(" minutes ago", t("minutes ago")));
-        late.includes("about") && (newLate = newLate.replace("about ", ""));
-
-        return newLate;
-    }
 }
 export default LatestNews;
 
