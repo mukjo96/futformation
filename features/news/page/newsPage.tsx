@@ -50,7 +50,11 @@ const NewsPage = () => {
                     subColor={team.teamSubColor}
                     teamName={team.teamName}
                 />
-                <NewsCard newsList={apiResult.newsList} teamId={team.teamId} />
+                <NewsCard
+                    newsList={apiResult.newsList}
+                    teamId={team.teamId}
+                    teamColor={team.teamColor}
+                />
             </Fragment>
         );
     }
