@@ -1,20 +1,20 @@
 import React from "react";
-import { Row, Col, Avatar } from "antd";
+import { Row, Col, Avatar, Skeleton } from "antd";
 import styled from "styled-components";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { newsDataTypes } from "@features/home/api/cityDataTypes";
-import { TFunction } from "next-i18next";
+import { TFunction, useTranslation } from "next-i18next";
 import { translateLate } from "utils/moment/translateMoment";
 
 type propTypes = {
-    news: newsDataTypes;
+    news: newsDataTypes | null;
     teamId: number;
     teamColor: string;
-    t: TFunction;
 };
 
-const FirstNewsCard = ({ news, teamId, teamColor, t }: propTypes) => {
-    return (
+const FirstNewsCard = ({ news, teamId, teamColor }: propTypes) => {
+    const { t } = useTranslation("common");
+    return news ? (
         <FirstNews>
             <Col
                 md={11}
@@ -79,6 +79,13 @@ const FirstNewsCard = ({ news, teamId, teamColor, t }: propTypes) => {
                 </Row>
 
                 <DivideLine style={{ backgroundColor: teamColor }}></DivideLine>
+            </FirstNewsContents>
+        </FirstNews>
+    ) : (
+        <FirstNews>
+            <Col md={11} style={{ backgroundColor: "darkgray" }}></Col>
+            <FirstNewsContents md={11} offset={1}>
+                <Skeleton active />
             </FirstNewsContents>
         </FirstNews>
     );

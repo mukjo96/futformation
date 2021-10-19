@@ -1,4 +1,3 @@
-import LoadingView from "@features/common/loadingView";
 import SelectTeam from "@features/common/selectTeam";
 import PageTitle from "@features/common/text/pageTitle";
 
@@ -16,7 +15,6 @@ import NewsCard from "../components/newsCard";
 
 const NewsPage = () => {
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(true);
 
     const team = useSelector(
         (state: RootStateInterface): IExampleState => state.rdcExample
@@ -26,7 +24,6 @@ const NewsPage = () => {
     );
 
     useEffect(() => {
-        setIsLoading(true);
         dispatchApi();
     }, [team.teamId]);
 
@@ -38,9 +35,6 @@ const NewsPage = () => {
 
     if (team.teamId === 0) {
         return <SelectTeam />;
-    } else if (isLoading) {
-        apiResult && setIsLoading(false);
-        return <LoadingView />;
     } else {
         return (
             <Fragment>
@@ -50,11 +44,19 @@ const NewsPage = () => {
                     subColor={team.teamSubColor}
                     teamName={team.teamName}
                 />
-                <NewsCard
-                    newsList={apiResult.newsList}
-                    teamId={team.teamId}
-                    teamColor={team.teamColor}
-                />
+                {apiResult ? (
+                    <NewsCard
+                        newsList={apiResult.newsList}
+                        teamId={team.teamId}
+                        teamColor={team.teamColor}
+                    />
+                ) : (
+                    <NewsCard
+                        newsList={null}
+                        teamId={team.teamId}
+                        teamColor={team.teamColor}
+                    />
+                )}
             </Fragment>
         );
     }

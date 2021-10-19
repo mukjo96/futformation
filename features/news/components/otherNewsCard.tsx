@@ -1,19 +1,18 @@
 import { newsDataTypes } from "@features/home/api/cityDataTypes";
-import { Avatar, Col, Row } from "antd";
-import { TFunction } from "next-i18next";
+import { Avatar, Col, Row, Skeleton } from "antd";
+import { TFunction, useTranslation } from "next-i18next";
 import React from "react";
 import styled from "styled-components";
 import { translateLate } from "utils/moment/translateMoment";
 
 type propTypes = {
-    news: newsDataTypes;
+    news: newsDataTypes | null;
     teamId: number;
-
-    t: TFunction;
 };
 
-const OtherNewsCard = ({ news, teamId, t }: propTypes) => {
-    return (
+const OtherNewsCard = ({ news, teamId }: propTypes) => {
+    const { t } = useTranslation("common");
+    return news ? (
         <Container>
             <Col
                 span={24}
@@ -77,6 +76,21 @@ const OtherNewsCard = ({ news, teamId, t }: propTypes) => {
                         </div>
                     </Row>
                 </Col>
+            </Content>
+        </Container>
+    ) : (
+        <Container>
+            <Col
+                span={24}
+                style={{
+                    backgroundColor: "darkgray",
+                    height: "10vw",
+                    maxHeight: "128px",
+                    padding: 0,
+                }}
+            ></Col>
+            <Content>
+                <Skeleton active />
             </Content>
         </Container>
     );
