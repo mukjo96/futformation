@@ -3,7 +3,7 @@ import { Row, Col, Avatar, Skeleton } from "antd";
 import styled from "styled-components";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { newsDataTypes } from "@features/home/api/cityDataTypes";
-import { TFunction, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import { translateLate } from "utils/moment/translateMoment";
 
 type propTypes = {

@@ -1,5 +1,3 @@
-import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
-
 type teamListTypes = {
     label: string;
     leagueId: number;

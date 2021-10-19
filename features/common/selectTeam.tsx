@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { teamList } from "@features/navigation/teamList";
+
 import styled from "styled-components";
 import { Avatar, Button, Col, Radio, Row } from "antd";
 import { useDispatch } from "react-redux";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
 import PageTitle from "./text/pageTitle";
+import { teamList } from "@features/data/teamList";
 
 const SelectTeam = () => {
     const [selectedLeagueIndex, setSelectedLeagueIndex] = useState(0);

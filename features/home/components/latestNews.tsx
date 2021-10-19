@@ -6,7 +6,7 @@ import BlockTitle from "./Title/blockTitle";
 
 import { Avatar } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
-import { TFunction, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import { translateLate } from "utils/moment/translateMoment";
 
 type propTypes = {

@@ -1,6 +1,6 @@
 import { newsDataTypes } from "@features/home/api/cityDataTypes";
 import { Avatar, Col, Row, Skeleton } from "antd";
-import { TFunction, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import React from "react";
 import styled from "styled-components";
 import { translateLate } from "utils/moment/translateMoment";

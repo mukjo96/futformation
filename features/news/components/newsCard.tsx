@@ -6,7 +6,6 @@ import { newsDataTypes } from "@features/home/api/cityDataTypes";
 
 import FirstNewsCard from "./firstNewsCard";
 import OtherNewsCard from "./otherNewsCard";
-import { TFunction } from "next-i18next";
 
 type propTypes = {
     newsList: newsDataTypes[] | null;

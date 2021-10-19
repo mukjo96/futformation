@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Layout, Row } from "antd";
 import styled from "styled-components";
-import { IconLogo, TextLogo } from "../logo/Logo";
+import { TextLogo } from "../logo/Logo";
 import { useSelector } from "react-redux";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
 

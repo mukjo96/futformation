@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col, Avatar, Divider, List, Empty } from "antd";
+import { Row, Col, List } from "antd";
 import Fade from "react-reveal-effects/Fade";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

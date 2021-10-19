@@ -1,6 +1,4 @@
 import React, { Fragment } from "react";
-
-import { LoadingOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import SyncLoader from "react-spinners/SyncLoader";
 import { useSelector } from "react-redux";

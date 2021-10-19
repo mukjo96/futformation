@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
 import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
-import { teamList } from "./teamList";
+
 import { useRouter } from "next/dist/client/router";
 import SubMenu from "antd/lib/menu/SubMenu";
 import LocaleDropdown from "./localeDropdown";
+import { teamList } from "@features/data/teamList";
 
 const NavBar = () => {
     const [open, setOpen] = useState(false);
