@@ -114,7 +114,10 @@ const MatchStats = ({ statData }: dataType) => {
         awayColor: string
     ) {
         return (
-            <Row key={stat.title} style={{ justifyContent: "center" }}>
+            <Row
+                key={stat.title}
+                style={{ justifyContent: "center", marginBottom: "1em" }}
+            >
                 <Col xs={6} md={4}>
                     <StatTitle
                         highlited={stat.highlighted === "home"}
@@ -145,6 +148,7 @@ const Title = styled.h3`
     text-align: center;
     color: darkgray;
     font-weight: 400;
+    margin-bottom: 0;
 `;
 
 const StatTitle = styled.div<{ highlited: boolean; textcolor: string }>`

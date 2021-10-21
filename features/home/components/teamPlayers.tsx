@@ -10,6 +10,7 @@ import { RootStateInterface } from "redux/interfaces/ifRootState";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { playerListDataTypes } from "../api/cityDataTypes";
 import { useTranslation } from "next-i18next";
+import { CustomShapeDividerWave } from "@features/common/divider/customShapeDivider";
 
 type propTypes = {
     dataList: playerListDataTypes[];
@@ -29,6 +30,7 @@ const TeamPlayers = ({ dataList }: propTypes) => {
 
     return (
         <Container>
+            <CustomShapeDividerWave color="#000000" small />
             <StyledTitle>
                 <BlockTitle
                     title="PLAYERS"
@@ -129,7 +131,9 @@ const TeamPlayers = ({ dataList }: propTypes) => {
 
 export default TeamPlayers;
 
-const Container = styled.div``;
+const Container = styled.div`
+    position: relative;
+`;
 
 const StyledTitle = styled.div`
     padding: 28px;

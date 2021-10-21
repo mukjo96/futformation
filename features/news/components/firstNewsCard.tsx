@@ -115,7 +115,7 @@ const TitleDiv = styled.div`
     :hover {
         h2,
         span {
-            color: slateblue;
+            color: #04aaff;
         }
         cursor: pointer;
     }

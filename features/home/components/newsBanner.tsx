@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import { Skeleton } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
+import { CustomShapeDividerWaveOpacity } from "@features/common/divider/customShapeDivider";
 
 type propTypes = {
     news: newsDataTypes;
@@ -49,6 +50,7 @@ const NewsBanner = ({ news, header }: propTypes) => {
                             </TextContainer>
                         </BackFilter>
                     </BannerBackground>
+                    <CustomShapeDividerWaveOpacity />
                 </BannerContainer>
             ) : (
                 <BannerContainer>
@@ -83,6 +85,7 @@ const NewsBanner = ({ news, header }: propTypes) => {
 export default NewsBanner;
 
 const BannerContainer = styled.div`
+    position: relative;
     display: flex;
     height: 50vw;
     max-height: 640px;

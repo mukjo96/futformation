@@ -8,6 +8,7 @@ import { Avatar } from "antd";
 import { newsDataTypes } from "../api/cityDataTypes";
 import { useTranslation } from "next-i18next";
 import { translateLate } from "utils/moment/translateMoment";
+import { CustomShapeDividerWave } from "@features/common/divider/customShapeDivider";
 
 type propTypes = {
     newsList: newsDataTypes[];
@@ -17,6 +18,7 @@ type propTypes = {
 const LatestNews = ({ newsList, teamId }: propTypes) => {
     return (
         <Container>
+            <CustomShapeDividerWave />
             <Col>
                 <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
                 <Fade bottom cascade ssrFadeout>
@@ -113,7 +115,9 @@ export function renderNewsBox(news, index, teamId) {
 export default LatestNews;
 
 const Container = styled.div`
+    position: relative;
     padding: 28px;
+
     padding-right: 0;
     @media screen and (max-width: 768px) {
         padding: 4vw;

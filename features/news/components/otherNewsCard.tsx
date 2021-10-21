@@ -130,7 +130,7 @@ const Title = styled.h2`
     height: 4.5em;
 
     :hover {
-        color: slateblue;
+        color: #04aaff;
         cursor: pointer;
     }
 `;
