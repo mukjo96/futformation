@@ -140,12 +140,16 @@
     "Accurate passes": "패스 성공",
     "Pass success": "패스 성공률",
     "Chances created": "찬스 생성",
+    "Fantasy points": "판타지 포인트",
+
     "SHOT ACCURACY": "슈팅 정확도",
     "Shot off target": "벗어난 슈팅",
     "Shot on target": "유효 슈팅",
     "Blocked shots": "블락된 슈팅",
     "Shots woodwork": "골대맞은 슈팅",
-    "ACCURATE PASSES": "패스 정확도",
+    "Big chance missed": "빅찬스 미스",
+
+    "ACCURATE PASSES": "패스 성공",
     "Own half": "수비 진영 패스",
     "Opposition half": "공격 진영 패스",
     "Passes": "패스",
@@ -157,6 +161,7 @@
     "Touches": "볼 터치",
     "Throws": "스로인",
     "Corners": "코너킥",
+
     "DUELS WON": "경합 승리",
     "Duels won": "경합 승리",
     "Duels lost": "경합 패배",

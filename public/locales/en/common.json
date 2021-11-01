@@ -139,11 +139,15 @@
     "Accurate passes": "Accurate passes",
     "Pass success": "Pass success",
     "Chances created": "Chances created",
+    "Fantasy points": "Fantasy points",
+
     "SHOT ACCURACY": "SHOT ACCURACY",
     "Shot off target": "Shot off target",
     "Shot on target": "Shot on target",
     "Blocked shots": "Blocked shots",
     "Shots woodwork": "Shots woodwork",
+    "Big chance missed": "Big chance missed",
+
     "ACCURATE PASSES": "ACCURATE PASSES",
     "Own half": "Own half",
     "Opposition half": "Opposition half",
@@ -156,6 +160,7 @@
     "Touches": "Touches",
     "Throws": "Throws",
     "Corners": "Corners",
+
     "DUELS WON": "DUELS WON",
     "Duels won": "Duels won",
     "Duels lost": "Duels lost",
