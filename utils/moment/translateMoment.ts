@@ -14,6 +14,10 @@ export const translateShortDateToKorean = (dateString: string) => {
 
 export function translateLate(late: string, t: TFunction) {
     let newLate = late;
+    late.includes("1 month ago") &&
+        (newLate = newLate.replace("1 month ago", t("1 month ago")));
+    late.includes("months ago") &&
+        (newLate = newLate.replace(" months ago", t("months ago")));
     late.includes("1 day ago") &&
         (newLate = newLate.replace("1 day ago", t("1 day ago")));
     late.includes("days ago") &&

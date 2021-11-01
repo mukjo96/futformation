@@ -3,6 +3,7 @@ import {
     playerInfoDataTypes,
 } from "@features/home/api/cityDataTypes";
 import { renderNewsBox } from "@features/home/components/latestNews";
+import OtherNewsCard from "@features/news/components/otherNewsCard";
 import { Col, Empty, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
@@ -20,10 +21,18 @@ const RelatedNews = ({ playerData }: propTypes) => {
         );
     } else {
         return (
-            <StyledRow justify="center">
+            <StyledRow justify="center" gutter={30}>
                 {playerData.relatedNews.map(
-                    (news: newsDataTypes, index: number) =>
-                        renderNewsBox(news, index, playerData.origin.teamId)
+                    (news: newsDataTypes, index: number) => (
+                        // renderNewsBox(news, index, playerData.origin.teamId)
+
+                        <Col span={6} key={index}>
+                            <OtherNewsCard
+                                news={news}
+                                teamId={playerData.origin.teamId}
+                            />
+                        </Col>
+                    )
                 )}
             </StyledRow>
         );
@@ -37,13 +46,5 @@ const EmptyCol = styled(Col)`
 `;
 
 const StyledRow = styled(Row)`
-    padding-left: 12px;
-    padding-right: 12px;
-    .ant-col {
-        margin: 12px;
-    }
-
-    div {
-        border-radius: 5%;
-    }
+    margin-top: 2%;
 `;
