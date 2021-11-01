@@ -93,8 +93,8 @@ export const teamList: teamListTypes = [
                 teamId: 10252,
                 teamNameLong: "Aston Villa",
                 teamName: "AVL",
-                teamColor: "#95BFE5",
-                teamSubColor: "#670E36",
+                teamColor: "#670E36",
+                teamSubColor: "#95BFE5",
             },
             {
                 teamId: 8191,
