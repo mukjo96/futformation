@@ -45,7 +45,9 @@ const PlayerInfo = ({ id }) => {
             setIsLoading(false);
         }
 
-        return () => (isSubscribed = false);
+        return () => {
+            isSubscribed = false;
+        };
     }, [id, playerData]);
 
     if (isLoading) {
