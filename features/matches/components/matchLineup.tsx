@@ -1,6 +1,6 @@
 import { faExchangeAlt, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Avatar, Badge, Col, Row, Tooltip, Modal, Divider } from "antd";
+import { Avatar, Badge, Col, Row, Modal, Divider } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import styled from "styled-components";

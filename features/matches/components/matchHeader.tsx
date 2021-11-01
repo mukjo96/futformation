@@ -99,8 +99,9 @@ const MatchHeader = ({ matchData }: dataType) => {
             >
                 <Col xs={4} md={2}>
                     {matchData.content.matchFacts.teamForm &&
-                        matchData.content.matchFacts.teamForm[0].map(
-                            (match) => (
+                        [...matchData.content.matchFacts.teamForm[0]]
+                            .reverse()
+                            .map((match) => (
                                 <Tooltip
                                     key={match.tooltipText}
                                     title={
@@ -147,8 +148,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                                         </TeamForm>
                                     </Row>
                                 </Tooltip>
-                            )
-                        )}
+                            ))}
                 </Col>
                 <TeamScoreCol xs={6} md={7}>
                     <Row>
@@ -201,8 +201,9 @@ const MatchHeader = ({ matchData }: dataType) => {
                 </TeamScoreCol>
                 <Col xs={4} md={2}>
                     {matchData.content.matchFacts.teamForm &&
-                        matchData.content.matchFacts.teamForm[1].map(
-                            (match) => (
+                        [...matchData.content.matchFacts.teamForm[1]]
+                            .reverse()
+                            .map((match) => (
                                 <Tooltip
                                     key={match.tooltipText}
                                     title={
@@ -246,8 +247,7 @@ const MatchHeader = ({ matchData }: dataType) => {
                                         <TeamLogo src={match.imageUrl} />
                                     </Row>
                                 </Tooltip>
-                            )
-                        )}
+                            ))}
                 </Col>
             </Row>
             <Row

@@ -225,7 +225,7 @@ const TooltipContainer = styled(Col)`
         margin: 0;
 
         strong {
-            color: #ec3325;
+            color: green;
         }
     }
 
