@@ -1,21 +1,18 @@
 import React, { Fragment, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
-import {
-    actApiInit,
-    actApiRequest,
-} from "../../../redux/actions/actApiExample";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import { actApiInit, actApiRequest } from "redux/actions/actApiExample";
 
 import LatestNews from "../components/latestNews";
 import MatchSchedule from "../components/matchSchedule";
 import PlayerStats from "../components/playerStats";
 import TeamPlayers from "../components/teamPlayers";
-import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
+import { IApiExampleState } from "redux/interfaces/iApiExample/iApiExample.interfaces";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import { select } from "redux/actions/actExample";
 import SelectTeam from "@features/common/selectTeam";
-import NewsBanner from "../components/newsBanner";
+import NewsBanner from "@features/home/components/newsBanner";
 import { useTranslation } from "next-i18next";
 
 const Home = () => {

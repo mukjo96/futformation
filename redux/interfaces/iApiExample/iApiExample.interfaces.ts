@@ -13,11 +13,6 @@ export interface IApiResult {
     statList: playerStatDataTypes;
 }
 
-/* export interface IApiExampleState {
-    apiResult: IApiResult | null;
-    error: null | Error;
-} */
-
 export interface IApiExampleState {
     apiResult: IApiResult | null;
     error: null | Error;

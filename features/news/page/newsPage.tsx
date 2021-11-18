@@ -5,13 +5,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
-import {
-    actApiInit,
-    actApiRequest,
-} from "../../../redux/actions/actApiExample";
-import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
-import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
-import NewsCard from "../components/newsCard";
+import { actApiInit, actApiRequest } from "redux/actions/actApiExample";
+import { IApiExampleState } from "redux/interfaces/iApiExample/iApiExample.interfaces";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import NewsCard from "@features/news/components/newsCard";
 
 const NewsPage = () => {
     const dispatch = useDispatch();

@@ -6,13 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
 import styled from "styled-components";
-import {
-    actApiInit,
-    actApiRequest,
-} from "../../../redux/actions/actApiExample";
-import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
-import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
-import PlayerList from "../components/playerList";
+import { actApiInit, actApiRequest } from "redux/actions/actApiExample";
+import { IApiExampleState } from "redux/interfaces/iApiExample/iApiExample.interfaces";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import PlayerList from "@features/team/components/playerList";
 
 const TeamPage = () => {
     const [isLoading, setIsLoading] = useState(true);

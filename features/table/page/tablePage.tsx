@@ -7,13 +7,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "redux/actions/actExample";
 import { IExampleState } from "redux/interfaces/iExample/iExample.interfaces";
-import {
-    actApiInit,
-    actApiRequest,
-} from "../../../redux/actions/actApiExample";
-import { IApiExampleState } from "../../../redux/interfaces/iApiExample/iApiExample.interfaces";
-import { RootStateInterface } from "../../../redux/interfaces/ifRootState";
-import LeagueTable from "../components/leagueTable";
+import { actApiInit, actApiRequest } from "redux/actions/actApiExample";
+import { IApiExampleState } from "redux/interfaces/iApiExample/iApiExample.interfaces";
+import { RootStateInterface } from "redux/interfaces/ifRootState";
+import LeagueTable from "@features/table/components/leagueTable";
 const TablePage = () => {
     const dispatch = useDispatch();
 

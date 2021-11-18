@@ -1,9 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import "../styles/globals.css";
+import "styles/globals.css";
 import "react-awesome-slider/dist/styles.css";
 import moment from "moment";
-import { wrapper } from "../redux/configureStore";
+import { wrapper } from "redux/configureStore";
 import Foot from "@features/common/footer/foot";
 import NavBar from "@features/navigation/navBar";
 import { useStore } from "react-redux";
@@ -36,7 +36,6 @@ function MyApp({ Component, pageProps }) {
 export default wrapper.withRedux(appWithTranslation(MyApp));
 
 const ContentWrapper = styled.div`
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
