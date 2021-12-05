@@ -8,7 +8,11 @@ export const translateLongDateToKorean = (dateString: string) => {
 };
 
 export const translateShortDateToKorean = (dateString: string) => {
-    let date = moment(dateString);
+    let date = moment(dateString.trim());
+    date.month >= moment().month
+        ? date.set("year", moment().get("year"))
+        : date.set("year", moment().add(1, "y").get("year"));
+
     return date.format("MMMM Do dddd");
 };
 

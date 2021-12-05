@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col, List } from "antd";
+import { Row, Col, List, Avatar } from "antd";
 import Fade from "react-reveal-effects/Fade";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -105,7 +105,13 @@ const LeagueTable = ({ tableData, color, teamId }: propTypes) => {
                     ></LegendDiv>
                 </Col>
                 <Col span={1}>{team.idx}</Col>
-                <Col span={10}>{team.name}</Col>
+                <Col span={3}>
+                    <Avatar
+                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.id}_small.png`}
+                        size="small"
+                    />
+                </Col>
+                <Col span={7}>{team.name}</Col>
                 <Col span={2}>{team.played}</Col>
                 <Col span={2}>{team.wins}</Col>
                 <Col span={2}>{team.draws}</Col>

@@ -14,7 +14,6 @@ import LeagueTable from "@features/table/components/leagueTable";
 const TablePage = () => {
     const dispatch = useDispatch();
 
-    const [activeNews, setActiveNews] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     const team = useSelector(
