@@ -1,6 +1,7 @@
 import { appWithTranslation } from 'next-i18next';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
 import '../styles/global.css';
@@ -12,6 +13,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
     <RecoilRoot>
       <Component {...pageProps} />
     </RecoilRoot>
+    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );
 
