@@ -1,22 +1,33 @@
-import { useEffect } from 'react';
+import { Fragment } from 'react';
 
-import axios from 'axios';
+import { useTranslation } from 'next-i18next';
 
-import { Meta } from '@/layout/Meta';
-import { Main } from '@/templates/Main';
+import { useGetTeamQuery } from '@/api/getTeamData';
+import NewsBanner from '@/components/home/newsBanner';
+import MatchSchedule from '@/components/home/matchSchedule';
 
 const Index = () => {
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get(
-        'https://fotmob-cors.herokuapp.com/https://www.fotmob.com/api/teams?id=9768&tab=news&type=team&timezone=Asia/Seoul'
-      );
-      console.log(response);
-    })();
-  }, []);
+  const { data: newsData } = useGetTeamQuery({ teamId: 8456, tab: 'news' });
+  const { data: fixturesData } = useGetTeamQuery({
+    teamId: 8456,
+    tab: 'fixtures',
+  });
+  const { t } = useTranslation('common');
 
   return (
-    <Main meta={<Meta title="Home" description="Welcome home" />}>Home</Main>
+    // <Main meta={<Meta title="Home" description="Welcome home" />}>
+    <Fragment>
+      <NewsBanner
+        news={newsData?.data?.news?.data[0]}
+        header={t('FIRST TEAM NEWS')}
+      />
+      <MatchSchedule
+        matchList={fixturesData?.data?.fixturesTab?.allFixtures}
+        teamId={8456}
+      />
+      <div className="h-[400px]" />
+    </Fragment>
+    // </Main>
   );
 };
 
