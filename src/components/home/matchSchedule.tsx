@@ -1,27 +1,23 @@
 import React, { ReactNode } from 'react';
-import { Row, Col, Divider, Skeleton } from 'antd';
 
+import { Row, Col, Divider, Skeleton } from 'antd';
+import { I18n, TFunction, useTranslation } from 'next-i18next';
 import Link from 'next/link';
+
 import MoreButton from '@/components/common/button/moreButton';
 import BlockTitle from '@/components/common/Title/blockTitle';
-import { I18n, TFunction, useTranslation } from 'next-i18next';
 import { IFixture, IMatchListTypes } from '@/types/apiTypes';
 import { translateShortDateToKorean } from '@/utils/formatDate';
 
-type propTypes = {
+type PropTypes = {
   matchList: IMatchListTypes;
   teamId: number;
 };
 
-const MatchSchedule = ({ matchList, teamId }: propTypes) => {
+const MatchSchedule = ({ matchList, teamId }: PropTypes) => {
   const { t, i18n } = useTranslation('common');
   const beforeFixtures = matchList?.fixtures
-    ?.filter(
-      (item) =>
-        item?.status?.finished ||
-        item?.status?.cancelled ||
-        item?.status?.started
-    )
+    ?.filter((item) => item?.status?.finished || item?.status?.cancelled)
     ?.slice(-3);
   const nextFixture = matchList?.nextMatch;
 
@@ -84,17 +80,19 @@ const MatchScheduleCard = ({
 }) => {
   let isCityWin: string;
   if (match.home.id === teamId) {
-    match.home.score > match.away.score
-      ? (isCityWin = 'win')
-      : match.home.score === match.away.score
-      ? (isCityWin = 'draw')
-      : (isCityWin = 'lose');
+    isCityWin =
+      match.home.score > match.away.score
+        ? 'win'
+        : match.home.score === match.away.score
+        ? 'draw'
+        : 'lose';
   } else {
-    match.away.score > match.home.score
-      ? (isCityWin = 'win')
-      : match.away.score === match.home.score
-      ? (isCityWin = 'draw')
-      : (isCityWin = 'lose');
+    isCityWin =
+      match.away.score > match.home.score
+        ? 'win'
+        : match.away.score === match.home.score
+        ? 'draw'
+        : 'lose';
   }
 
   return (
@@ -115,7 +113,7 @@ const MatchScheduleCard = ({
           </div>
 
           <Col className="content-between">
-            <h4 className="text-[12px] font-medium m-0 text-[#ec3325]">
+            <h4 className="m-0 text-[12px] font-medium text-[#ec3325]">
               {match.status.started && !match.status.finished ? 'LIVE' : ''}
             </h4>
             <h4
@@ -143,11 +141,11 @@ const MatchScheduleCard = ({
               : 'bg-gray-500'
           } ${isPast ? 'h-[2px]' : 'h-[1px]'}`}
         />
-        <h3 className="text-sm m-0 h-[50px]">{`${match.home.name} vs ${match.away.name}`}</h3>
-        <h5 className="text-[10px] text-gray-700 h-[10px]">
+        <h3 className="m-0 h-[50px] text-sm">{`${match.home.name} vs ${match.away.name}`}</h3>
+        <h5 className="h-[10px] text-[10px] text-gray-700">
           {t(match.tournament.name)}
         </h5>
-        <span className="text-[10px] h-[10px]">
+        <span className="h-[10px] text-[10px]">
           {match.status.startDateStr
             ? i18n.language === 'kr'
               ? translateShortDateToKorean(match.status.startDateStr)
@@ -169,7 +167,7 @@ const MatchCol = ({ children }: { children: ReactNode }) => (
   <Col
     xs={24}
     md={6}
-    className="border-0 p-[5vw] md:border-r-1 md:p-8 md:border-gray-400 last:border-0"
+    className="border-0 p-[5vw] last:border-0 md:border-r md:border-gray-400 md:p-8"
   >
     {children}
   </Col>
