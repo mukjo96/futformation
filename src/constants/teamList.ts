@@ -1,10 +1,6 @@
-type TeamListTypes = {
-  label: string;
-  leagueId: number;
-  children: Array<any>;
-}[];
+import { ITeamList } from '@/types/teamTypes';
 
-export const teamList: TeamListTypes = [
+export const teamList: ITeamList[] = [
   {
     label: 'PL',
     leagueId: 47,

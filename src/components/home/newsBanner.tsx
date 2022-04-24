@@ -51,10 +51,10 @@ const NewsBanner = ({ news, header }: PropTypes) => {
                 <h4 className="m-0 hidden text-xs text-white md:block">
                   {header}
                 </h4>
-                <h2 className="m-0 text-sm font-bold text-white drop-shadow md:text-2xl lg:text-xl mb-1">
+                <h2 className="m-0 mb-1 text-sm font-bold text-white drop-shadow md:text-2xl md:leading-8 lg:text-xl">
                   {news.title}
                 </h2>
-                <p className="text-[0.625rem] text-white drop-shadow md:text-xs mb-2">{`${
+                <p className="mb-2 text-[0.625rem] text-white drop-shadow md:text-xs">{`${
                   sourceTitle[0]
                 } - ${translateLate(sourceTitle[1])}`}</p>
                 <Link

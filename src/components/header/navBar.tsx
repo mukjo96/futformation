@@ -5,31 +5,22 @@ import { Avatar, Dropdown, Menu, Row } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import Hamburger from 'hamburger-react';
 import { useRouter } from 'next/dist/client/router';
+import { useRecoilState } from 'recoil';
 
 import { TextLogo } from '@/components/common/logo/Logo';
 import { teamList } from '@/constants/teamList';
+import { teamState } from '@/store/team';
+import { ITeam } from '@/types/teamTypes';
 
 import LocaleDropdown from './localeDropdown';
 import NaviLinks from './naviLinks';
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
-  // const team = useSelector(
-  //   (state: RootStateInterface): IExampleState => state.rdcExample
-  // );
+  const [team, setTeam] = useRecoilState(teamState);
   const router = useRouter();
-
-  // const dispatch = useDispatch();
-
-  // function changeTeam(teamInfo: IExampleState) {
-  //   dispatch(select(teamInfo));
-  // }
-  const team = {
-    teamId: 8456,
-    teamNameLong: 'Manchester City',
-    teamName: 'MNC',
-    teamColor: '#6CABDD',
-    teamSubColor: '#1C2C5B',
+  const handleChangeTeam = (teamInfo: ITeam) => {
+    setTeam(teamInfo);
   };
 
   useEffect(() => {
@@ -43,34 +34,34 @@ const NavBar = () => {
           {league.label === 'EURO' || league.label === 'COPA AMERICA'
             ? league.children.map((group) => (
                 <SubMenu title={group.label} key={group.label}>
-                  {group.children.map((team) => (
+                  {group.children.map((teamInfo: ITeam) => (
                     <Menu.Item
-                      key={team.teamId}
-                      // onClick={() => changeTeam(team)}
+                      key={teamInfo.teamId}
+                      onClick={() => handleChangeTeam(teamInfo)}
                       style={{ alignItems: 'center' }}
                     >
                       <Avatar
-                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                        src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamInfo.teamId}_small.png`}
                         size="small"
                         style={{ marginRight: '4px' }}
                       />
-                      <span>{team.teamName}</span>
+                      <span>{teamInfo.teamName}</span>
                     </Menu.Item>
                   ))}
                 </SubMenu>
               ))
-            : league.children.map((team) => (
+            : league.children.map((teamInfo: ITeam) => (
                 <Menu.Item
-                  key={team.teamId}
-                  // onClick={() => changeTeam(team)}
+                  key={teamInfo.teamId}
+                  onClick={() => handleChangeTeam(teamInfo)}
                   style={{ alignItems: 'center' }}
                 >
                   <Avatar
-                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}_small.png`}
+                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${teamInfo.teamId}_small.png`}
                     size="small"
                     style={{ marginRight: '4px' }}
                   />
-                  <span>{team.teamName}</span>
+                  <span>{teamInfo.teamName}</span>
                 </Menu.Item>
               ))}
         </SubMenu>

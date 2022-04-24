@@ -1,3 +1,5 @@
+import { IPlayerTypes } from './playerTypes';
+
 export interface IGetTeamData {
   teamId: number;
   tab: 'overview' | 'news' | 'fixtures' | 'squad' | 'overview';
@@ -63,3 +65,5 @@ export interface INewsData {
     url: string;
   };
 }
+
+export type IPlayerListDataTypes = [string, Array<IPlayerTypes>];
