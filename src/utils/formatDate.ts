@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import { TFunction } from 'next-i18next';
 
 export const translateLongDateToKorean = (dateString: string) => {
   const date = dayjs(dateString).locale('ko');
-  return date.format('YYYY년 MMMM Do dddd');
+  return date.format('YYYY년 MMMM ddd dddd');
 };
 
 export const translateShortDateToKorean = (dateString: string) => {
@@ -15,7 +16,7 @@ export const translateShortDateToKorean = (dateString: string) => {
     date.set('year', dayjs().add(1, 'y').get('year'));
   }
 
-  return date.locale('ko').format('MMMM Do dddd');
+  return date.locale('ko').format('MMMM D일, dddd');
 };
 
 export function translateLate(late: string, t: TFunction) {

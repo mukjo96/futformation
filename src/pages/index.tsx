@@ -1,4 +1,5 @@
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { useGetTeamQuery } from '@/api/getTeamData';
 import LatestNews from '@/components/home/latestNews';
@@ -32,3 +33,9 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});

@@ -5,5 +5,8 @@ module.exports = {
     defaultLocale: 'kr',
     locales: ['kr', 'en'],
     localePath: path.resolve('./public/locales'),
+    otherLanguages: ['kr', 'en'],
+    defaultLanguage: 'kr',
+    fallbackLng: ['kr'],
   },
 };
