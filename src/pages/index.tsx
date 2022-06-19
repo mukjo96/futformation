@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { useGetTeamQuery } from '@/api/getTeamData';
 import LatestNews from '@/components/home/latestNews';
@@ -11,7 +11,7 @@ import TeamPlayers from '@/components/home/teamPlayers';
 import { teamState } from '@/store/team';
 
 const Index = () => {
-  const [team] = useRecoilState(teamState);
+  const team = useRecoilValue(teamState);
   const { teamId } = team;
 
   const { data: newsData } = useGetTeamQuery({
@@ -27,6 +27,8 @@ const Index = () => {
     tab: 'squad',
   });
 
+  // console.log(fixturesData);
+
   const { t } = useTranslation('common');
 
   return (
@@ -36,15 +38,15 @@ const Index = () => {
       </Head>
       <div className="m-auto flex w-full max-w-[1280px] flex-col ">
         <NewsBanner
-          news={newsData?.data?.news?.data[0]}
+          news={newsData?.news?.data[0]}
           header={t('FIRST TEAM NEWS')}
         />
         <MatchSchedule
-          matchList={fixturesData?.data?.fixturesTab?.allFixtures}
+          matchList={fixturesData?.fixtures?.allFixtures}
           teamId={teamId}
         />
-        <LatestNews newsList={newsData?.data?.news?.data} teamId={teamId} />
-        <TeamPlayers dataList={squadData?.data?.squad} />
+        <LatestNews newsList={newsData?.news?.data} teamId={teamId} />
+        <TeamPlayers dataList={squadData?.squad} />
         <div className="h-[400px]" />
       </div>
     </>

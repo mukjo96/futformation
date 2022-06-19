@@ -102,11 +102,13 @@ const MatchScheduleCard = ({
           <div className="flex gap-x-1">
             <img
               className="mr-[2vw] md:mr-3"
+              alt="home_logo"
               src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.home.id}_small.png`}
               width="40px"
             />
             <img
               className="mr-[2vw] md:mr-3"
+              alt="away_logo"
               src={`https://images.fotmob.com/image_resources/logo/teamlogo/${match.away.id}_small.png`}
               width="40px"
             />

@@ -10,6 +10,8 @@ import { teamState } from '@/store/team';
 import { IPlayerListDataTypes } from '@/types/apiTypes';
 import { IPlayerTypes } from '@/types/playerTypes';
 
+import PlayerInfo from './playerInfo';
+
 type PropTypes = {
   dataList: IPlayerListDataTypes[];
 };
@@ -41,15 +43,16 @@ const TeamPlayers = ({ dataList }: PropTypes) => {
         />
       </div>
       <Row>
-        <Col xs={24} md={18} style={{ alignSelf: 'center' }}>
+        <Col xs={24} md={18} className="h-full" style={{ alignSelf: 'center' }}>
           {selectedId === 0 ? (
             <Result
               icon={<SelectOutlined style={{ color: team.teamColor }} />}
               title={t('Select your player!')}
             />
           ) : (
-            // <PlayerInfo id={selectedId} />
-            <div />
+            <PlayerInfo id={selectedId} />
+            // <LoadingSpinner />
+            // <div />
           )}
         </Col>
         <Col className="h-[393px] overflow-auto" xs={24} md={6}>

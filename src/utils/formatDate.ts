@@ -8,6 +8,10 @@ export const translateLongDateToKorean = (dateString: string) => {
 };
 
 export const translateShortDateToKorean = (dateString: string) => {
+  if (dateString === 'Today') {
+    return '오늘';
+  }
+
   const date = dayjs(dateString.trim());
 
   if (date.month >= dayjs().month) {

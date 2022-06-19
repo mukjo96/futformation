@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil';
 import NavBar from '@/components/header/navBar';
 
 import '../styles/global.css';
+import 'react-circular-progressbar/dist/styles.css';
 
 const queryClient = new QueryClient();
 

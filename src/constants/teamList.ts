@@ -397,7 +397,7 @@ export const teamList: ITeamList[] = [
             teamSubColor: '#ffbb00',
           },
           {
-            teamId: 8498,
+            teamId: 8520,
             teamNameLong: 'Sweden',
             teamName: 'SWE',
             teamColor: '#004B87',
