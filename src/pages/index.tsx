@@ -7,6 +7,7 @@ import { useGetTeamQuery } from '@/api/getTeamData';
 import LatestNews from '@/components/home/latestNews';
 import MatchSchedule from '@/components/home/matchSchedule';
 import NewsBanner from '@/components/home/newsBanner';
+import PlayerStats from '@/components/home/playerStats';
 import TeamPlayers from '@/components/home/teamPlayers';
 import { teamState } from '@/store/team';
 
@@ -26,6 +27,10 @@ const Index = () => {
     teamId,
     tab: 'squad',
   });
+  const { data: statData } = useGetTeamQuery({
+    teamId,
+    tab: 'overview',
+  });
 
   const { t } = useTranslation('common');
 
@@ -44,7 +49,8 @@ const Index = () => {
           teamId={teamId}
         />
         <LatestNews newsList={newsData?.news?.data} teamId={teamId} />
-        <TeamPlayers dataList={squadData?.squad} />
+        <TeamPlayers players={squadData?.squad} />
+        <PlayerStats statList={[statData?.topPlayers, statData?.table]} />
         <div className="h-[400px]" />
       </div>
     </>

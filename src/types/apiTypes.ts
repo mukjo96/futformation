@@ -70,3 +70,40 @@ export interface INewsData {
 }
 
 export type IPlayerListDataTypes = [string, Array<IPlayerTypes>];
+
+export type IPlayerStatDataTypes = [ITopPlayersDataTypes, ITableDataTypes];
+
+export type ITopPlayersDataTypes = {
+  byRating: { players: Array<IStatPlayer>; seeAllLink?: 'string' };
+  byGoals: { players: Array<IStatPlayer>; seeAllLink?: 'string' };
+  byAssists: { players: Array<IStatPlayer>; seeAllLink?: 'string' };
+};
+
+export type ITableDataTypes = {
+  ccode: string;
+  composite: boolean;
+  leagueId: number;
+  leagueName: string;
+  legend: any[];
+  nextOpponent: object;
+  pageUrl: string;
+  table: { all: any[]; home: any[]; away: any[] };
+  tableHeader: { staticTableHeaders: any[]; dynamicTableHeaders: any[] };
+  teamForm: object;
+}[];
+
+export type IStatPlayer = {
+  id: number;
+  name: string;
+  goals: number;
+  assists: number;
+  rating: number;
+  positionId: number;
+  ccode: string;
+  cname: string;
+  teamId: number;
+  teamName: number;
+  showRole: boolean;
+  showCountryFlag: boolean;
+  showTeamFlag: boolean;
+};

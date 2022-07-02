@@ -1,36 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { SelectOutlined } from '@ant-design/icons';
 import { Col, List, Avatar, Result, Skeleton, Row } from 'antd';
 import { useTranslation } from 'next-i18next';
-import { useRecoilState } from 'recoil';
 
 import BlockTitle from '@/components/common/Title/blockTitle';
-import { teamState } from '@/store/team';
+import { useTeamPlayers } from '@/hooks/useTeamPlayers';
 import { IPlayerListDataTypes } from '@/types/apiTypes';
-import { IPlayerTypes } from '@/types/playerTypes';
 
 import PlayerInfo from './playerInfo';
 
 type PropTypes = {
-  dataList: IPlayerListDataTypes[];
+  players: IPlayerListDataTypes[];
 };
-const TeamPlayers = ({ dataList }: PropTypes) => {
+
+const TeamPlayers = ({ players }: PropTypes) => {
   const { t } = useTranslation('common');
 
-  const [team] = useRecoilState(teamState);
-  const [selectedId, setSelectedId] = useState(0);
-
-  const data =
-    dataList
-      ?.filter((players) => players[0] !== 'coach')
-      ?.flatMap((players) => {
-        return players[1].map((player: IPlayerTypes) => ({
-          id: player.id,
-          name: player.name,
-          role: player.role,
-        }));
-      }) ?? [];
+  const { team, selectedId, handlePlayerSelect, teamPlayers } =
+    useTeamPlayers(players);
 
   return (
     <div className="relative">
@@ -51,15 +39,13 @@ const TeamPlayers = ({ dataList }: PropTypes) => {
             />
           ) : (
             <PlayerInfo id={selectedId} />
-            // <LoadingSpinner />
-            // <div />
           )}
         </Col>
         <Col className="h-[393px] overflow-auto" xs={24} md={6}>
           <List
             dataSource={
-              data.length > 0
-                ? data.reverse()
+              teamPlayers.length > 0
+                ? teamPlayers.reverse()
                 : Array.from({ length: 9 }, (_, i) => ({
                     id: i,
                     name: 'none',
@@ -77,7 +63,7 @@ const TeamPlayers = ({ dataList }: PropTypes) => {
                         : undefined,
                   }}
                   key={item.id}
-                  onClick={() => setSelectedId(item.id)}
+                  onClick={() => handlePlayerSelect(item.id)}
                 >
                   <List.Item.Meta
                     avatar={

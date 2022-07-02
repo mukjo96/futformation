@@ -136,7 +136,7 @@ const renderStat = (title: string, data: number) => {
         <span className="text-xs text-gray-700">{title}</span>
         <span className="text-xs font-bold">{data || 0}</span>
       </div>
-      <Divider className="m-2" />
+      <Divider style={{ margin: '8px 0' }} />
     </>
   );
 };
@@ -148,7 +148,7 @@ const renderCircular = (
   teamColor: string
 ) => {
   return (
-    <Col className="text-center" span={6}>
+    <Col className="text-center" xs={4} md={6}>
       <CircularProgressbar
         value={value || 0}
         text={text ? `${text}%` : '0%'}
