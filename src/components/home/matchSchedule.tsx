@@ -53,7 +53,7 @@ const MatchSchedule = ({ matchList, teamId }: PropTypes) => {
           </Row>
         ) : (
           <Row>
-            {Array.from({ length: 4 }, (x, i) => i).map((_) => (
+            {Array.from({ length: 4 }, (_, i) => i).map((_) => (
               <MatchCol key={_}>
                 <Skeleton active />
               </MatchCol>

@@ -29,7 +29,7 @@ const LocaleDropdown = () => {
         className="ant-dropdown-link text-white no-underline hover:text-white hover:underline"
         onClick={(e) => e.preventDefault()}
       >
-        {i18n.language.toUpperCase()} <DownOutlined />
+        {i18n.language?.toUpperCase()} <DownOutlined />
       </a>
     </Dropdown>
   );

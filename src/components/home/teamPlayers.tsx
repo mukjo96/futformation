@@ -60,7 +60,7 @@ const TeamPlayers = ({ dataList }: PropTypes) => {
             dataSource={
               data.length > 0
                 ? data.reverse()
-                : Array.from({ length: 9 }, (x, i) => ({
+                : Array.from({ length: 9 }, (_, i) => ({
                     id: i,
                     name: 'none',
                     role: 'none',

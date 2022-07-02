@@ -91,7 +91,7 @@ const LatestNews = ({ newsList, teamId }: PropTypes) => {
             ? newsList
                 ?.slice(1, 5)
                 .map((news, index) => renderNewsBox(news, index, teamId, t))
-            : Array.from({ length: 4 }, (x, i) => i).map((_) => (
+            : Array.from({ length: 4 }, (_, i) => i).map((_) => (
                 <Col
                   className="h-60 max-h-[280px] cursor-pointer bg-cover bg-center bg-no-repeat md:h-[22vw]"
                   style={{ backgroundColor: 'grey' }}

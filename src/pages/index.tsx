@@ -27,8 +27,6 @@ const Index = () => {
     tab: 'squad',
   });
 
-  // console.log(fixturesData);
-
   const { t } = useTranslation('common');
 
   return (
