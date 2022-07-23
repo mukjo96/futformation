@@ -78,7 +78,7 @@ const PlayerStats = ({ statList }: PropTypes) => {
           return (
             <Fragment key={player.id}>
               <Link href={`/players/${player.id}`} passHref>
-                <div className="flex cursor-pointer justify-between border-r-0 py-3 px-[5vw] md:border-r md:pl-8 md:pr-0">
+                <div className="flex cursor-pointer justify-between border-r-0 py-3 px-[5vw] md:px-0">
                   <span className={`text-xs hover:text-[${teamColor}]`}>
                     {player.name}
                   </span>

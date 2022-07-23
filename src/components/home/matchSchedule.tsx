@@ -78,22 +78,15 @@ const MatchScheduleCard = ({
   t: TFunction;
   i18n: I18n;
 }) => {
-  let isCityWin: string;
-  if (match.home.id === teamId) {
-    isCityWin =
-      match.home.score > match.away.score
-        ? 'win'
-        : match.home.score === match.away.score
-        ? 'draw'
-        : 'lose';
-  } else {
-    isCityWin =
-      match.away.score > match.home.score
-        ? 'win'
-        : match.away.score === match.home.score
-        ? 'draw'
-        : 'lose';
-  }
+  const teamGround = match.home.id === teamId ? 'home' : 'away';
+  const enemyGround = match.home.id !== teamId ? 'home' : 'away';
+
+  const isCityWin =
+    match[teamGround].score > match[enemyGround].score
+      ? 'win'
+      : match[teamGround].score === match[enemyGround].score
+      ? 'draw'
+      : 'lose';
 
   return (
     <MatchCol key={match.id}>

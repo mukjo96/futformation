@@ -38,7 +38,7 @@ export const useSetPlayerData = (playerData: Record<string, any>) => {
         playerData.careerStatistics[0].seasons[0].matches -
         playerData.careerStatistics[0].seasons[0].subIn;
     }
-    return virStatData;
+    return { ...statData, ...virStatData };
   }, [playerData]);
 
   return { propDataToObject, statDataToObject };

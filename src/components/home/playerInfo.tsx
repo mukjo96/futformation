@@ -7,51 +7,28 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useRecoilValue } from 'recoil';
 
 import { useGetPlayerDataQuery } from '@/api/getTeamData';
-import { useSetPlayerData } from '@/hooks/useSetPlayerData';
+import { usePlayerInfoData } from '@/hooks/usePlayerInfoLoading';
 import { teamState } from '@/store/team';
-import { checkEmptyObject } from '@/utils/object';
 
 import MoreButton from '../common/button/moreButton';
 import LoadingSpinner from '../common/loadingSpinner';
 
 const PlayerInfo = ({ id }: { id: number }) => {
   const [playerData, setPlayerData] = useState<Record<string, any>>({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [statData, setStatData] = useState<Record<string, any>>({});
-  const [propData, setPropData] = useState<Record<string, any>>({});
+
   const team = useRecoilValue(teamState);
   const { teamColor } = team;
 
   const { t } = useTranslation('common');
   const { data } = useGetPlayerDataQuery({ playerId: id });
 
-  const { propDataToObject, statDataToObject } = useSetPlayerData(playerData);
+  const { isLoading, statData, propData } = usePlayerInfoData(playerData);
 
   useEffect(() => {
     if (id !== 0 && data) {
       setPlayerData(data);
     }
   }, [id, data]);
-
-  useEffect(() => {
-    if (!checkEmptyObject(playerData)) {
-      const newPropData = propDataToObject();
-      const newStatData = statDataToObject();
-      setPropData(newPropData);
-      setStatData(newStatData);
-      setIsLoading(false);
-    }
-  }, [playerData, propDataToObject, statDataToObject]);
-
-  useEffect(() => {
-    if (
-      !checkEmptyObject(playerData) &&
-      !checkEmptyObject(propData) &&
-      !checkEmptyObject(statData)
-    ) {
-      setIsLoading(false);
-    }
-  }, [playerData, propData, statData]);
 
   if (isLoading) {
     return (
@@ -85,33 +62,39 @@ const PlayerInfo = ({ id }: { id: number }) => {
           <h3 className="mb-4 text-sm font-semibold">{`${
             playerData.careerStatistics[0].seasons[0].name
           } ${t('STATS')}`}</h3>
-          {renderStat(
-            t('Games Played'),
-            playerData.careerStatistics[0].seasons[0].matches
-          )}
-          {renderStat(t('Minutes Played'), statData['Minutes played'])}
-          {renderStat(t('Starting XI'), statData['Matches started'])}
-          {renderStat(t('Goals'), statData.Goals)}
-          {renderStat(t('Assists'), statData.Assists)}
+          <PlayerStat
+            title={t('Games Played')}
+            data={playerData.careerStatistics[0].seasons[0].matches}
+          />
+          <PlayerStat
+            title={t('Minutes Played')}
+            data={statData['Minutes played']}
+          />
+          <PlayerStat
+            title={t('Starting XI')}
+            data={statData['Matches started']}
+          />
+          <PlayerStat title={t('Goals')} data={statData.Goals} />
+          <PlayerStat title={t('Assists')} data={statData.Assists} />
           <Row className="mt-6 justify-between">
-            {renderCircular(
-              statData.conversion,
-              statData.conversion,
-              t('Conversion'),
-              teamColor
-            )}
-            {renderCircular(
-              statData.dribbles,
-              statData.dribbles,
-              t('Dribbles'),
-              teamColor
-            )}
-            {renderCircular(
-              statData.tackles,
-              statData.tackles,
-              t('Tackles'),
-              teamColor
-            )}
+            <CircularStat
+              value={statData.conversion}
+              text={statData.conversion}
+              title={t('Conversion')}
+              teamColor={teamColor}
+            />
+            <CircularStat
+              value={statData.dribbles}
+              text={statData.dribbles}
+              title={t('Dribbles')}
+              teamColor={teamColor}
+            />
+            <CircularStat
+              value={statData.tackles}
+              text={statData.tackles}
+              title={t('Tackles')}
+              teamColor={teamColor}
+            />
           </Row>
         </Col>
       ) : (
@@ -129,7 +112,7 @@ const PlayerInfo = ({ id }: { id: number }) => {
 
 export default PlayerInfo;
 
-const renderStat = (title: string, data: number) => {
+const PlayerStat = ({ title, data }: { title: string; data: number }) => {
   return (
     <>
       <div className="flex justify-between" key={title}>
@@ -141,12 +124,17 @@ const renderStat = (title: string, data: number) => {
   );
 };
 
-const renderCircular = (
-  value: number,
-  text: number,
-  title: string,
-  teamColor: string
-) => {
+const CircularStat = ({
+  value,
+  text,
+  title,
+  teamColor,
+}: {
+  value: number;
+  text: number;
+  title: string;
+  teamColor: string;
+}) => {
   return (
     <Col className="text-center" xs={4} md={6}>
       <CircularProgressbar
