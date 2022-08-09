@@ -30,7 +30,7 @@ export function renderNewsBox(
       key={index}
     >
       <div
-        className="flex h-60 max-h-[280px] w-full items-end bg-gradient-to-r from-[rgba(0,0,0,0.5)_50vw] to-[rgba(0,0,0,0.3)_100%] py-[5%] px-[10%] md:h-[22vw]"
+        className="flex h-60 max-h-[280px] w-full items-end bg-gradient-to-r from-[rgba(0,0,0,0.5)_50vw] to-[rgba(0,0,0,0.3)_100%] px-[10%] pt-[5%] md:h-[22vw]"
         onClick={
           sourceTitle[0] === 'FotMob'
             ? () =>
@@ -38,7 +38,7 @@ export function renderNewsBox(
             : () => window.open(news.page.url, '_ blank')
         }
       >
-        <Col style={{ lineHeight: '1.2' }}>
+        <Col style={{ lineHeight: '1.2' }} className="mb-2">
           <h5 className="mb-1 text-[10px] text-[#ffc659]">
             {sourceTitle[0] === 'YouTube' ? t('VIDEO') : t('MEDIA WATCH')}
           </h5>
@@ -86,7 +86,7 @@ const LatestNews = ({ newsList, teamId }: PropTypes) => {
     <div className="relative bg-black p-[4vw] md:p-7 md:pr-0">
       <Col>
         <BlockTitle title="LATEST NEWS" link="news" theme="dark" />
-        <Row className="py-[4vw] md:pt-7 md:pl-20">
+        <Row className="pt-[4vw] md:pt-7 md:pl-20">
           {newsList
             ? newsList
                 ?.slice(1, 5)
