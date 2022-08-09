@@ -80,16 +80,18 @@ export type ITopPlayersDataTypes = {
 };
 
 export type ITableDataTypes = {
-  ccode: string;
-  composite: boolean;
-  leagueId: number;
-  leagueName: string;
-  legend: any[];
-  nextOpponent: object;
-  pageUrl: string;
-  table: { all: any[]; home: any[]; away: any[] };
-  tableHeader: { staticTableHeaders: any[]; dynamicTableHeaders: any[] };
-  teamForm: object;
+  data: {
+    ccode: string;
+    composite: boolean;
+    leagueId: number;
+    leagueName: string;
+    legend: any[];
+    nextOpponent: object;
+    pageUrl: string;
+    table: { all: any[]; home: any[]; away: any[] };
+    tableHeader: { staticTableHeaders: any[]; dynamicTableHeaders: any[] };
+    teamForm: object;
+  };
 }[];
 
 export type IStatPlayer = {

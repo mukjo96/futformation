@@ -18,7 +18,8 @@ type PropTypes = {
 const PlayerStats = ({ statList }: PropTypes) => {
   const statData = statList && statList[0];
   const tableData = statList && statList[1];
-  const allTable = tableData && tableData[0]?.table && tableData[0]?.table?.all;
+  const allTable =
+    tableData && tableData[0]?.data?.table && tableData[0]?.data?.table?.all;
 
   const team = useRecoilValue(teamState);
   const { teamColor, teamId } = team;
@@ -50,7 +51,7 @@ const PlayerStats = ({ statList }: PropTypes) => {
       assists: null,
     };
     return (
-      <Col className="pt-4 md:pl-8" xs={24} md={6}>
+      <Col className="pt-4" xs={24} md={6}>
         <Link href={`/players/${id}`} passHref>
           <Row justify="space-between" className="cursor-pointer">
             <Col>
@@ -132,6 +133,7 @@ const PlayerStats = ({ statList }: PropTypes) => {
       ? allTable.length
       : teamRank + 3
     : 0;
+
   return (
     <>
       <div className="p-[4vw] md:p-7">
@@ -142,19 +144,18 @@ const PlayerStats = ({ statList }: PropTypes) => {
           theme="light"
         />
 
-        <Row>
+        <Row gutter={16}>
           {statData.byRating.players.length +
-            statData.byGoals.players.length +
-            statData.byAssists.players.length !==
-          0 ? (
+          statData.byGoals.players.length +
+          statData.byAssists.players.length ? (
             <>
-              {statData.byRating.players.length !== 0
+              {statData.byRating.players.length
                 ? renderStatList(statData.byRating.players, 'Ratings')
                 : renderBlankStatList('Ratings')}
-              {statData.byGoals.players.length !== 0
+              {statData.byGoals.players.length
                 ? renderStatList(statData.byGoals.players, 'Goals')
                 : renderBlankStatList('Goals')}
-              {statData.byAssists.players.length !== 0
+              {statData.byAssists.players.length
                 ? renderStatList(statData.byAssists.players, 'Assists')
                 : renderBlankStatList('Assists')}
             </>
