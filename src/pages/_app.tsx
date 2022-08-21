@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { RecoilRoot } from 'recoil';
 
+import Footer from '@/components/footer/footer';
 import NavBar from '@/components/header/navBar';
 
 import '../styles/global.css';
@@ -17,6 +18,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <div>
         <NavBar />
         <Component {...pageProps} />
+        <Footer />
       </div>
     </RecoilRoot>
     <ReactQueryDevtools initialIsOpen={false} />

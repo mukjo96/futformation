@@ -5,11 +5,10 @@ import { Avatar, Dropdown, Menu, Row } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import Hamburger from 'hamburger-react';
 import { useRouter } from 'next/dist/client/router';
-import { useRecoilState } from 'recoil';
 
 import { TextLogo } from '@/components/common/logo/Logo';
 import { teamList } from '@/constants/teamList';
-import { teamState } from '@/store/team';
+import { useTeamRecoilState } from '@/hooks/useTeamRecoil';
 import { ITeam } from '@/types/teamTypes';
 
 import LocaleDropdown from './localeDropdown';
@@ -17,7 +16,7 @@ import NaviLinks from './naviLinks';
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
-  const [team, setTeam] = useRecoilState(teamState);
+  const [team, setTeam] = useTeamRecoilState();
   const router = useRouter();
   const handleChangeTeam = (teamInfo: ITeam) => {
     setTeam(teamInfo);
@@ -81,11 +80,13 @@ const NavBar = () => {
               {team.teamId === 0 ? (
                 <TextLogo />
               ) : (
-                <img
-                  src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
-                  alt="team_logo"
-                  width={50}
-                />
+                team.teamId && (
+                  <img
+                    src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.teamId}.png`}
+                    alt="team_logo"
+                    width={50}
+                  />
+                )
               )}
               <DownOutlined
                 style={{

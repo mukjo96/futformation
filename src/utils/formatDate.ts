@@ -11,6 +11,9 @@ export const translateShortDateToKorean = (dateString: string) => {
   if (dateString === 'Today') {
     return '오늘';
   }
+  if (dateString === 'Yesterday') {
+    return '어제';
+  }
 
   const date = dayjs(dateString.trim());
 

@@ -173,30 +173,30 @@ const PlayerStats = ({ statList }: PropTypes) => {
                 fontSize: '12px',
               }}
             >
-              <List.Item className="p-2">
-                <Col span={2}>#</Col>
+              <List.Item style={{ padding: '8px' }}>
+                <Col span={1}>#</Col>
                 <Col span={11}>{t('TEAM')}</Col>
                 <Col span={2}>{t('W')}</Col>
                 <Col span={2}>{t('D')}</Col>
                 <Col span={2}>{t('L')}</Col>
-                <Col span={3}>{t('PT')}</Col>
+                <Col span={4}>{t('PT')}</Col>
               </List.Item>
               {allTable?.slice(tableStart, tableEnd).map((tableTeam) => (
                 <List.Item
                   key={tableTeam.id}
-                  className="p-2"
                   style={{
                     backgroundColor:
                       tableTeam.id === teamId ? `${teamColor}19` : '',
+                    padding: '8px',
                   }}
                 >
-                  <Col span={2}>{tableTeam.idx}</Col>
+                  <Col span={1}>{tableTeam.idx}</Col>
                   <Col span={11}>{tableTeam.name}</Col>
 
                   <Col span={2}>{tableTeam.wins}</Col>
                   <Col span={2}>{tableTeam.draws}</Col>
                   <Col span={2}>{tableTeam.losses}</Col>
-                  <Col span={3}>
+                  <Col span={4}>
                     <strong>{tableTeam.pts}</strong>
                   </Col>
                 </List.Item>

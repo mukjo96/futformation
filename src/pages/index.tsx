@@ -51,7 +51,7 @@ const Index = () => {
         <LatestNews newsList={newsData?.news?.data} teamId={teamId} />
         <TeamPlayers players={squadData?.squad} />
         <PlayerStats statList={[statData?.topPlayers, statData?.table]} />
-        <div className="h-[400px]" />
+        <div className="h-[100px]" />
       </div>
     </>
   );
