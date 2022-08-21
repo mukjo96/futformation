@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
-
-import { teamState } from '@/store/team';
+import { useTeamRecoilValue } from './useTeamRecoil';
 
 export const useTeamTableData = (allTable: any[] | undefined) => {
-  const { teamId } = useRecoilValue(teamState);
+  const { teamId } = useTeamRecoilValue();
 
   const [teamRank, setTeamRank] = useState(-1);
 

@@ -1,13 +1,11 @@
 import React from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
-import { useRecoilValue } from 'recoil';
 
-import { teamState } from '@/store/team';
+import { useTeamRecoilValue } from '@/hooks/useTeamRecoil';
 
 const LoadingSpinner = () => {
-  const team = useRecoilValue(teamState);
-
+  const team = useTeamRecoilValue();
   return (
     <div className="flex w-full items-center justify-center">
       <LoadingOutlined

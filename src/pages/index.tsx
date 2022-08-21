@@ -1,7 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
-import { useRecoilValue } from 'recoil';
 
 import { useGetTeamQuery } from '@/api/getTeamData';
 import LatestNews from '@/components/home/latestNews';
@@ -9,10 +8,10 @@ import MatchSchedule from '@/components/home/matchSchedule';
 import NewsBanner from '@/components/home/newsBanner';
 import PlayerStats from '@/components/home/playerStats';
 import TeamPlayers from '@/components/home/teamPlayers';
-import { teamState } from '@/store/team';
+import { useTeamRecoilValue } from '@/hooks/useTeamRecoil';
 
 const Index = () => {
-  const team = useRecoilValue(teamState);
+  const team = useTeamRecoilValue();
   const { teamId } = team;
 
   const { data: newsData } = useGetTeamQuery({
@@ -37,7 +36,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>FUTFORMATION football information website</title>
+        <title>Home | FUTFORMATION</title>
       </Head>
       <div className="m-auto flex w-full max-w-[1280px] flex-col ">
         <NewsBanner

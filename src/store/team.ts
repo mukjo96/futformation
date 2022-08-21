@@ -22,3 +22,8 @@ export const teamState = atom({
   default: DEFAULT_TEAM_STATE,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const initialLoading = atom({
+  key: 'initialLoading',
+  default: true,
+});

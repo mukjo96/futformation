@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilState } from 'recoil';
-
-import { teamState } from '@/store/team';
 import { IPlayerListDataTypes } from '@/types/apiTypes';
 import { IPlayerTypes } from '@/types/playerTypes';
 
+import { useTeamRecoilValue } from './useTeamRecoil';
+
 export const useTeamPlayers = (players: IPlayerListDataTypes[]) => {
-  const [team] = useRecoilState(teamState);
+  const team = useTeamRecoilValue();
 
   const [selectedId, setSelectedId] = useState(0);
 

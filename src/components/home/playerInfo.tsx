@@ -4,11 +4,10 @@ import { Col, Avatar, Result, Row, Divider } from 'antd';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import { useRecoilValue } from 'recoil';
 
 import { useGetPlayerDataQuery } from '@/api/getTeamData';
 import { usePlayerInfoData } from '@/hooks/usePlayerInfoLoading';
-import { teamState } from '@/store/team';
+import { useTeamRecoilValue } from '@/hooks/useTeamRecoil';
 
 import MoreButton from '../common/button/moreButton';
 import LoadingSpinner from '../common/loadingSpinner';
@@ -16,7 +15,7 @@ import LoadingSpinner from '../common/loadingSpinner';
 const PlayerInfo = ({ id }: { id: number }) => {
   const [playerData, setPlayerData] = useState<Record<string, any>>({});
 
-  const team = useRecoilValue(teamState);
+  const team = useTeamRecoilValue();
   const { teamColor } = team;
 
   const { t } = useTranslation('common');

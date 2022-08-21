@@ -3,10 +3,9 @@ import React, { Fragment } from 'react';
 import { Row, Col, Avatar, List, Empty, Skeleton, Divider } from 'antd';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
 
+import { useTeamRecoilValue } from '@/hooks/useTeamRecoil';
 import { useTeamTableData } from '@/hooks/useTeamTableData';
-import { teamState } from '@/store/team';
 import { IPlayerStatDataTypes, IStatPlayer } from '@/types/apiTypes';
 
 import BlockTitle from '../common/Title/blockTitle';
@@ -21,7 +20,7 @@ const PlayerStats = ({ statList }: PropTypes) => {
   const allTable =
     tableData && tableData[0]?.data?.table && tableData[0]?.data?.table?.all;
 
-  const team = useRecoilValue(teamState);
+  const team = useTeamRecoilValue();
   const { teamColor, teamId } = team;
   const { t } = useTranslation('common');
 
@@ -83,7 +82,9 @@ const PlayerStats = ({ statList }: PropTypes) => {
                   <span className={`text-xs hover:text-[${teamColor}]`}>
                     {player.name}
                   </span>
-                  <span className={`text-sm font-bold text-[${teamColor}]`}>
+                  <span
+                    className={`text-sm font-bold text-[${teamColor}] w-[70px] text-center`}
+                  >
                     {category === 'Ratings'
                       ? player.rating
                       : category === 'Goals'
